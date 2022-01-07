@@ -1,0 +1,6 @@
+import("//drivers/adapter/khdf/liteos_m/hdf.gni")
+
+module_group("components") {
+  modules = [
+  ]
+}

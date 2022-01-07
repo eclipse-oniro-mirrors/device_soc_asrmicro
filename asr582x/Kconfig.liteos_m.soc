@@ -1,0 +1,8 @@
+choice
+    prompt "ASR582X series SoC"
+    depends on SOC_SERIES_ASR582X
+
+config SOC_ASR5822S
+    bool "SoC ASR5822S"
+
+endchoice

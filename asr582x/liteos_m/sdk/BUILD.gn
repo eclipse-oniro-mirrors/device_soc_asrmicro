@@ -1,0 +1,231 @@
+import("//kernel/liteos_m/liteos.gni")
+
+lib_path = rebase_path("drivers/libs/Cortex-M4")
+#hilink_lib_path = rebase_path("//vendor/hilink/debug")
+
+config("public") {
+  include_dirs = [
+    ".",
+    "hal/inc",
+  ]
+  ldflags = [
+    "-nostartfiles",
+    "-Wl,-T" + rebase_path("gcc.ld"),
+    "-Wl,-R" + rebase_path("tools/ble_rom_symbol/asr_ble_rom_symbol_v20200507204845.txt"),
+    "-nostdlib",
+  ]
+  libs = [
+    "nosys",
+    "gcc",
+    "$lib_path/libasr_combo.a",
+    "$lib_path/libasr_lwip.a",
+    "$lib_path/libwolfssl.a",
+  ]
+
+  if (defined(LOSCFG_LIBC_NEWLIB)) {
+    ldflags -= [ "-nostdlib" ]
+    libs -= [ "nosys" ]
+    libs += [
+      "c",
+      "m",
+    ]
+  }
+
+  foreach(xts_item, xts_list) {
+      xts_enable = xts_item.enable
+      if(xts_enable == "true")
+      {
+        defines = [ "CFG_HARMONY_SUPPORT" ]
+        ldflags += [
+        "-Llibs",
+        "-Wl,--whole-archive",
+        "-lhctest",
+        "-lbootstrap",
+        "-lbroadcast",
+        ]
+        foreach(xts_module, xts_item.xts_modules) {
+        ldflags += [ "-lmodule_${xts_module}" ]
+        }
+        ldflags += [ "-Wl,--no-whole-archive" ]
+      }
+  }
+}
+
+kernel_module("bsp_config") {
+    sources = [
+#patch            
+        "rtos/liteos_patch.c",
+        "startup/startup.c",
+        "startup/board.c",
+        "startup/startup_cm4.S",
+        "config/partition_conf.c",
+        "drivers/platform/system/printf-stdarg.c",
+        "drivers/platform/system/printf_uart.c",
+        "drivers/platform/system/sysCalls.c",
+        "drivers/platform/system/system_cm4.c",
+        "drivers/platform/system/panic_mpu.c",
+        "rtos/lega_rtos.c",
+        "drivers/common/lega_mac_addr.c",
+#at cmd
+        "drivers/at_cmd/atcmd_user.c",
+        "drivers/at_cmd/atcmdplus_ble.c",
+#at cmd end
+#        "drivers/common/lega_dbg.c",
+        "hal/src/hw.c",
+        "hal/src/uart.c",
+        "hal/src/flash.c",
+        "hal/src/wdg.c",
+        "hal/src/rng.c",
+        "hal/src/wifi_adapter.c",
+#iot hardware adapter
+        "adapter/hals/iot_hardware/wifiiot_lite/hal_iot_flash.c",
+        "adapter/hals/iot_hardware/wifiiot_lite/hal_iot_gpio.c",
+        "adapter/hals/iot_hardware/wifiiot_lite/hal_iot_i2c.c",
+        "adapter/hals/iot_hardware/wifiiot_lite/hal_iot_pwm.c",
+        "adapter/hals/iot_hardware/wifiiot_lite/hal_iot_uart.c",
+        "adapter/hals/iot_hardware/wifiiot_lite/hal_iot_watchdog.c",
+        "adapter/hals/iot_hardware/wifiiot_lite/hal_lowpower.c",
+        "adapter/hals/iot_hardware/wifiiot_lite/hal_reset.c",
+#iot hardware adapter end
+        "drivers/driver/src/duet_flash_alg.c",
+        "drivers/driver/src/duet_efuse.c",
+        "drivers/driver/src/duet_board.c",
+        "drivers/driver/src/duet_flash.c",
+        "drivers/driver/src/duet_gpio.c",
+        "drivers/driver/src/duet_uart.c",
+        "drivers/driver/src/duet_wdg.c",
+        "drivers/driver/src/duet_rtc.c",
+        "drivers/driver/src/duet_rf_spi.c",
+        "drivers/driver/src/duet_pinmux.c",
+        "drivers/driver/src/duet_timer.c",
+        "drivers/driver/src/duet_dma.c",
+        "drivers/driver/src/duet_boot.c",
+        "drivers/driver/src/duet_i2c.c",
+        "drivers/driver/src/duet_pwm.c",
+        "drivers/ble_src/app.c",
+        "drivers/ble_src/at_ble.c",
+        "drivers/ble_src/harmony_ble_adpter.c",
+        "drivers/rfota/rfota_wifi.c",
+        "drivers/rfota/rfota_ble.c",
+        "drivers/security/src/lega_hw_common.c",
+        "drivers/security/src/lega_aes.c",
+        "drivers/security/src/lega_ccm.c",
+        "drivers/security/src/lega_ecc.c",
+        "drivers/security/src/lega_hash.c",
+        "drivers/security/src/lega_hmac.c",
+        "drivers/security/src/lega_rnd.c",
+        "drivers/security/src/lega_rsa.c",
+        "drivers/iperf/lwip_iperf.c",
+        "drivers/iperf/rxperf.c",
+        "drivers/iperf/txperf.c",
+        "drivers/iperf/urxperf.c",
+        "drivers/iperf/utxperf.c",
+    ]
+
+    include_dirs = [
+        "config/",
+        "drivers/include/",
+        "drivers/platform/system/include/",
+        "drivers/driver/inc/",
+        "drivers/platform/CMSIS/Include/",
+        "startup/",
+        "drivers/common/",
+#at cmd
+        "drivers/at_cmd/",
+#at cmd end
+        "drivers/kv/include",
+        "rtos/",
+        "drivers/common",
+        "drivers/platform/misc",
+        "hal/inc",
+        "drivers/security/inc",
+#        "security_test",
+        "drivers/iperf",
+        "drivers/ble_inc",
+        "drivers/ota",
+        "//foundation/communication/wifi_lite/interfaces/wifiservice/",
+        "//base/iot_hardware/peripheral/interfaces/kits",
+        "lwip/include/",
+        "lwip/port/include/",
+        "lwip/include/lwip/",
+        "lwip/include/lwip/prot/",
+        "lwip/include/netif/",
+#        "security/mbedtls/include/",
+        "//third_party/mbedtls/include/mbedtls",
+        "//third_party/mbedtls/include",
+    ]
+
+    defines = [
+#        "HARMONYOS_TEMP",
+        "WIFI_BLE_INIT_ENABLE",
+#        "LWIP_IGNORE",
+        "HARMONYOS_SUPPORT",
+        "SYSTEM_SUPPORT_OS",
+        "_SPI_FLASH_ENABLE_",
+        "DUET_FLASH_KV_SUPPORT",
+        "STAR_MPU_ENABLE",   
+#at cmd
+         "AT_USER_DEBUG",
+#at cmd end
+        "DUET_CM4",
+        "ASR_LIB_COMPILE",
+        "WIFI_DEVICE",
+        "DCDC_PFMMODE_CLOSE",
+        "LWIP_APP_IPERF",
+        "PLAT_TODO",
+        "CFG_BATX=1",
+        "CFG_BARX=1",
+        "CFG_REORD_BUF=4",
+        "CFG_SPC=4",
+        "CFG_TXDESC0=4",
+        "CFG_TXDESC1=4",
+        "CFG_TXDESC2=4",
+        "CFG_TXDESC3=4",
+        "CFG_TXDESC4=4",
+        "CFG_CMON",
+        "CFG_MDM_VER_V21",
+        "CFG_SOFTAP_SUPPORT",
+        "CFG_SNIFFER_SUPPORT",
+        "LEGA_FPGA",
+        "CFG_WF_DBG=2",
+        "__FPU_PRESENT=1",
+        "DX_CC_TEE",
+        "HASH_SHA_512_SUPPORTED",
+        "CC_HW_VERSION=0xF0",
+        "DLLI_MAX_BUFF_SIZE=0x10000",
+        "SSI_CONFIG_TRNG_MODE=0",
+        "CFG_DATA_ELEM_N",
+        "TX_STATS_ENABLE_N",
+        "FILTER_DUP_INTERRUPT_N",
+        "SYSTEM_COREDUMP",
+        "SECURITY_ENGINE_INIT",
+        "CFG_RTC_INDEPENDENT",
+        "DUET_RF_SLEEP", 
+        "FAST_DHCP", 
+#        "CFG_MRFOTA_TEST", 
+        "CFG_RFOTA_BLE",
+        "CFG_TMMT_DETECT", 
+        "SOFTAP_OTHER_CHAN_TX_N",    
+        "CFG_VIRTEX7",
+        "ETH_PHY=1",
+        "_SPI_FLASH_240MHz_",  
+        "PS_CLOSE_APLL_N", 
+        "XO_FREQ_BIAS_CONFIG",
+        "CFG_SOFTAP_PROBERSP_OFFLOAD",
+        "CFG_APP_PRF",
+        "CFG_NVDS", 
+        "CFG_APP", 
+        "CFG_APP_SEC", 
+        "CFG_SEG", 
+        "CFG_PLF_DUET", 
+        "SONATA_RTOS_SUPPORT", 
+        "CFG_HOST", 
+        "CFG_BLE", 
+        "DUET_BLE_NO_BLOCK",
+        "LEGA_A0V2",
+        "CFG_NAN_CONFIG",
+        "CFG_NAN_OPTIMIZE_EN",
+    ]
+    cflags =[
+    ]
+}

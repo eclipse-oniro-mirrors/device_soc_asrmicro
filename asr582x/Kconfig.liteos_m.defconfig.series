@@ -1,0 +1,10 @@
+if SOC_SERIES_ASR582X
+
+rsource "Kconfig.liteos_m.defconfig.asr5822s"
+
+config SOC_SERIES
+    string
+    default "asr582x"
+
+endif
+

@@ -1,0 +1,4 @@
+config SOC
+    string
+    default "asr5822s"
+    depends on SOC_ASR5822S

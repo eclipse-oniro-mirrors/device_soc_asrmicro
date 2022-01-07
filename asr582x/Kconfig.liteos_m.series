@@ -1,0 +1,8 @@
+config SOC_SERIES_ASR582X
+    bool "ASR582X Series"
+    select ARM
+    select SOC_COMPANY_ASRMICRO
+    select CPU_CORTEX_M4
+    help
+        Enable support for ASR582X series
+

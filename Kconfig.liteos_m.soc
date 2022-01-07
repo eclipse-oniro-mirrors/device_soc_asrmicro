@@ -1,0 +1,9 @@
+config SOC_COMPANY_ASRMICRO
+    bool
+
+if SOC_COMPANY_ASRMICRO
+config SOC_COMPANY
+    default "asrmicro"
+
+rsource "*/Kconfig.liteos_m.soc"
+endif # SOC_COMPANY_ASRMICRO
