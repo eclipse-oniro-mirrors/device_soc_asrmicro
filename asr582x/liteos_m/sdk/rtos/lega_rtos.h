@@ -1,6 +1,18 @@
 /*
- * Copyright (C) 2015-2018 ASR Group Holding Limited
+ * Copyright (c) 2022 ASR Microelectronics (Shanghai) Co., Ltd. All rights reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
+
 #ifndef __LEGARTOS_H__
 #define __LEGARTOS_H__
 // #include <k_api.h>
@@ -14,6 +26,47 @@
 #define LEGA_NEVER_TIMEOUT   (0xFFFFFFFF)
 #define LEGA_WAIT_FOREVER    (0xFFFFFFFF)
 #define LEGA_NO_WAIT         (0)
+
+#define LEGA_TASK_CONFIG_MAX            32
+#define LEGA_TASK_CONFIG_WPA3_AUTH      0
+#define LEGA_TASK_CONFIG_LWIFI          1
+#define LEGA_TASK_CONFIG_UWIFI_RX       2
+#define LEGA_TASK_CONFIG_UWIFI          3
+#define LEGA_TASK_CONFIG_DHCPS          4
+#define LEGA_TASK_CONFIG_BLE            5
+
+#define     LEGA_LWIP_DHCP_TASK_PRIORITY             (29)
+
+#ifdef ALIOS_SUPPORT
+#define     LEGA_WPA3_AUTH_TASK_PRIORITY             (16)
+#define     LEGA_LWIFI_TASK_PRIORITY                 (17)
+#define     LEGA_UWIFI_RX_TASK_PRIORITY              (15)
+#define     LEGA_UWIFI_TASK_PRIORITY                 (20)
+#define     LEGA_BLE_SCHEDULER_PRIORITY              (13) // for testing
+
+#elif defined(HARMONYOS_SUPPORT)
+#define     LEGA_WPA3_AUTH_TASK_PRIORITY             (36 - 5)
+#define     LEGA_LWIFI_TASK_PRIORITY                 (35 - 5)
+#define     LEGA_UWIFI_RX_TASK_PRIORITY              (37 - 5)
+#define     LEGA_UWIFI_TASK_PRIORITY                 (33 - 5)
+#define     LEGA_BLE_SCHEDULER_PRIORITY              (38 - 5) // for testing
+#else
+#define     LEGA_WPA3_AUTH_TASK_PRIORITY             (28)
+#define     LEGA_LWIFI_TASK_PRIORITY                 (27)
+#define     LEGA_UWIFI_RX_TASK_PRIORITY              (28)
+#define     LEGA_UWIFI_TASK_PRIORITY                 (26)
+#define     LEGA_BLE_SCHEDULER_PRIORITY              (29) // for testing
+#endif //ALIOS_SUPPORT
+
+#ifdef ALIOS_SUPPORT
+#define CONFIG_KV_BUFFER_SIZE KV_CONFIG_TOTAL_SIZE
+#elif defined(HARMONYOS_SUPPORT)
+#define CONFIG_KV_BUFFER_SIZE 0x8000
+#else
+#define CONFIG_KV_BUFFER_SIZE 0
+#endif //ALIOS_SUPPORT
+
+#define lega_cpsr_t UINTPTR
 
 typedef enum
 {
@@ -47,6 +100,18 @@ typedef struct
     uint8_t*        name;
 }lega_timer_t;
 
+typedef struct
+{
+    uint8_t        task_priority;
+    uint32_t       stack_size;
+} lega_task_config_t;
+
+typedef struct {
+    uint32_t stackTop;
+    uint32_t stackBottom;
+    // add more info here
+} lega_threadinfo_t;
+
 typedef uint32_t lega_thread_arg_t;
 typedef void (*lega_thread_function_t)( lega_thread_arg_t arg );
 
@@ -76,6 +141,31 @@ typedef void (*lega_thread_function_t)( lega_thread_arg_t arg );
  */
  OSBool lega_rtos_is_in_interrupt_context(void);
 
+#define lega_rtos_declare_critical() lega_cpsr_t critical_cpsr
+//void lega_rtos_declare_critical(void);
+
+/** @brief Enter a critical session, all interrupts are disabled
+  *
+  * @return    none
+  */
+lega_cpsr_t _lega_rtos_enter_critical( void );
+#define lega_rtos_enter_critical()           \
+    do {                                     \
+        critical_cpsr = _lega_rtos_enter_critical();  \
+    } while (0)
+/** @brief Exit a critical session, all interrupts are enabled
+  *
+  * @return    none
+  */
+//void lega_rtos_exit_critical( void );
+void _lega_rtos_exit_critical( lega_cpsr_t cpsr_store);
+#define lega_rtos_exit_critical()        \
+    do {                                 \
+         _lega_rtos_exit_critical(critical_cpsr); \
+    } while (0)
+/**
+  * @}
+  */
 
 /** @brief Creates and starts a new thread
   *
@@ -429,14 +519,13 @@ void lega_system_reset();
  *  @return    system version
  */
 const char *lega_rtos_get_system_version(void);
-
-UINT32 HalHwiCreate(HWI_HANDLE_T hwiNum,
-                    HWI_PRIOR_T hwiPrio,
-                    HWI_MODE_T mode,
-                    HWI_PROC_FUNC handler,
-                    HWI_ARG_T arg);
-UINT32 HalIntLock(VOID);
-VOID HalIntRestore(UINT32 intSave);
-UINT32 HalIntUnLock(VOID);
+void lega_intrpt_enter();
+void lega_intrpt_exit();
+uint32_t lega_rtos_get_system_ticks(void);
+uint32_t lega_rtos_int_disable( void );
+void lega_rtos_int_enable( uint32_t int_mask );
+void lega_rtos_systick_reconfig(void);
+int lega_rtos_running(void);
+OSStatus lega_rtos_get_threadinfo(lega_thread_t* thread, lega_threadinfo_t * info);
 
 #endif //__LEGARTOS_H__

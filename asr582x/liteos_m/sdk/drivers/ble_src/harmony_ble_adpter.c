@@ -1,24 +1,25 @@
-
-
 /*
- * Copyright (c) 2021 - 2029 IoT Company of ASR .
+ * Copyright (c) 2022 ASR Microelectronics (Shanghai) Co., Ltd. All rights reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * File Name         :
- * Description        : hal ble
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Version            : v0.0.1
- * Author            : heh
- * Date                : 2021/03/23  new
- * History            :
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
+
 #include "string.h"
-#include "gapm_task.h"
 #include "lega_wlan_api.h"
-#include "co_error.h"
 #include "sonata_ble_api.h"
 #include "app.h"
 #include "sonata_utils_api.h"
 #include "sonata_gap_api.h"
+#include "sonata_gap.h"
 
 #include "ohos_bt_gatt.h"
 #include "ohos_bt_gatt_server.h"
@@ -176,25 +177,25 @@ static uint8_t sec_auth_req_h2a(BleAuthReqMode mode)
    switch(mode)
    {
       case OHOS_BLE_AUTH_NO_BOND:
-        auth_req_temp = GAP_AUTH_REQ_NO_MITM_NO_BOND;
+        auth_req_temp = SONATA_GAP_AUTH_REQ_NO_MITM_NO_BOND;
         break;
       case OHOS_BLE_AUTH_BOND:
-          auth_req_temp = GAP_AUTH_BOND;
+          auth_req_temp = SONATA_GAP_AUTH_BOND;
         break;
       case OHOS_BLE_AUTH_REQ_MITM:
-          auth_req_temp = GAP_AUTH_MITM;
+          auth_req_temp = SONATA_GAP_AUTH_MITM;
         break;
       case OHOS_BLE_AUTH_REQ_SC_ONLY:
-          auth_req_temp = GAP_AUTH_SEC_CON;
+          auth_req_temp = SONATA_GAP_AUTH_SEC_CON;
         break;
       case OHOS_BLE_AUTH_REQ_SC_BOND:
-          auth_req_temp = GAP_AUTH_REQ_SEC_CON_BOND ;
+          auth_req_temp = SONATA_GAP_AUTH_REQ_SEC_CON_BOND ;
         break;
       case OHOS_BLE_AUTH_REQ_SC_MITM:
-          auth_req_temp = GAP_AUTH_REQ_SEC_CON_NO_BOND;
+          auth_req_temp = SONATA_GAP_AUTH_REQ_SEC_CON_NO_BOND;
         break;
       case OHOS_BLE_AUTH_REQ_SC_MITM_BOND:
-          auth_req_temp = GAP_AUTH_REQ_SEC_CON_BOND;
+          auth_req_temp = SONATA_GAP_AUTH_REQ_SEC_CON_BOND;
         break;
    }
    return auth_req_temp;
@@ -300,8 +301,8 @@ ble_gatt_att_reg_t *  ble_ohos_add_service(ble_gatt_att_reg_t * dst_attr,BleGatt
      {
          print_log("[Harmony]service  %x %x %x %x\r\n",service_attr->uuid[0],service_attr->uuid[1],service_attr->uuid[2],service_attr->uuid[3]);
          memmove(dst_attr->att_desc.uuid,service_attr->uuid,16);
-         PERM_SET(dst_attr->att_desc.ext_perm, UUID_LEN,2);
-         PERM_SET(dst_attr->att_desc.perm, SVC_UUID_LEN,2);
+         SONATA_PERM_SET(dst_attr->att_desc.ext_perm, UUID_LEN,2);
+         SONATA_PERM_SET(dst_attr->att_desc.perm, SVC_UUID_LEN,2);
      }
      else if(service_attr->uuidType == OHOS_UUID_TYPE_16_BIT)
      {
@@ -333,7 +334,7 @@ ble_gatt_att_reg_t * ble_ohos_add_char(ble_gatt_att_reg_t * dst_attr,BleGattAttr
      if(char_attr->uuidType == OHOS_UUID_TYPE_128_BIT)
      {
          memmove(dst_attr->att_desc.uuid,char_attr->uuid,16);
-         PERM_SET(dst_attr->att_desc.ext_perm, UUID_LEN,2);
+         SONATA_PERM_SET(dst_attr->att_desc.ext_perm, UUID_LEN,2);
      }
      else if(char_attr->uuidType == OHOS_UUID_TYPE_16_BIT)
      {
@@ -653,8 +654,8 @@ int BleStartAdvEx(int *advId, const StartAdvRawData rawData, BleAdvParams advPar
      param.adv_intv_min = advParam.minInterval;
      param.adv_intv_max = advParam.maxInterval;
      param.chnl_map = advParam.channelMap;
-     param.phy = GAP_PHY_LE_1MBPS;
-     memmove(param.addr.addr,&advParam.peerAddr,BD_ADDR_LEN);
+     param.phy = SONATA_GAP_PHY_LE_1MBPS;
+     memmove(param.addr.addr,&advParam.peerAddr,SONATA_GAP_BD_ADDR_LEN);
      if(advParam.advType == OHOS_BLE_ADV_IND)
      {
          param.prop = SONATA_GAP_ADV_PROP_UNDIR_CONN_MASK;
@@ -693,11 +694,11 @@ static uint8_t sec_enc_req_h2a(BleSecAct secAct)
         case OHOS_BLE_SEC_NONE:
              return 0;
         case OHOS_BLE_SEC_ENCRYPT:
-            return GAP_AUTH_BOND;
+            return SONATA_GAP_AUTH_BOND;
         case OHOS_BLE_SEC_ENCRYPT_NO_MITM:
-            return  GAP_AUTH_SEC_CON |GAP_AUTH_BOND;
+            return  SONATA_GAP_AUTH_SEC_CON |SONATA_GAP_AUTH_BOND;
         case OHOS_BLE_SEC_ENCRYPT_MITM:
-            return  GAP_AUTH_MITM | GAP_AUTH_BOND| GAP_AUTH_MITM;
+            return  SONATA_GAP_AUTH_MITM | SONATA_GAP_AUTH_BOND| SONATA_GAP_AUTH_MITM;
          default:
             return 0;
     }

@@ -1,12 +1,24 @@
+/*
+ * Copyright (c) 2022 ASR Microelectronics (Shanghai) Co., Ltd. All rights reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 /**
  ****************************************************************************************
  *
  * @file sonata_gatt_api.h
  *
  * @brief header file - gatt application interface
- *
- * Copyright (C) ASR 2020 - 2029
- *
  *
  ****************************************************************************************
  */
@@ -21,13 +33,13 @@
  * INCLUDE FILES
  ****************************************************************************************
  */
-#include "rwip_config.h"
+#include "sonata_config.h"
 ///@cond
-#if BLE_HOST_PRESENT
+#if defined(STACK_BLE_HOST_PRESENT) || defined(BLE_HOST_PRESENT)
 ///@endcond
 
 #include "sonata_utils_api.h"
-#include "att.h"
+#include "sonata_att.h"
 
 /**
  * @defgroup SONATA_GATT_API GATT_API
@@ -40,38 +52,38 @@
  */
 
 /// GATT read perm auth     (0x0202)
-#define PRD_AU   (PERM(RD, ENABLE)        | PERM(RP, AUTH))
+#define PRD_AU   (SONATA_PERM(RD, ENABLE)        | SONATA_PERM(RP, AUTH))
 /// GATT write perm  auth   (0x0808)
-#define PWR_AU   (PERM(WRITE_REQ, ENABLE) | PERM(WP, AUTH))
+#define PWR_AU   (SONATA_PERM(WRITE_REQ, ENABLE) | SONATA_PERM(WP, AUTH))
 /// GATT ind perm  auth(    0X2020)
-#define PIND_AU  (PERM(IND, ENABLE)       | PERM(IP, AUTH))
+#define PIND_AU  (SONATA_PERM(IND, ENABLE)       | SONATA_PERM(IP, AUTH))
 /// GATT notify perm  auth  (0x1080)
-#define PNTF_AU  (PERM(NTF, ENABLE)       | PERM(NP, AUTH))
+#define PNTF_AU  (SONATA_PERM(NTF, ENABLE)       | SONATA_PERM(NP, AUTH))
 
 /// GATT read perm unauth   (0x0201)
-#define PRD_UA   (PERM(RD, ENABLE)        | PERM(RP, UNAUTH))
+#define PRD_UA   (SONATA_PERM(RD, ENABLE)        | SONATA_PERM(RP, UNAUTH))
 /// GATT write perm unauth  (0x0804)
-#define PWR_UA   (PERM(WRITE_REQ, ENABLE) | PERM(WP, UNAUTH))
+#define PWR_UA   (SONATA_PERM(WRITE_REQ, ENABLE) | SONATA_PERM(WP, UNAUTH))
 /// GATT ind perm  unauth   (0X2010)
-#define PIND_UA  (PERM(IND, ENABLE)       | PERM(IP, UNAUTH))
+#define PIND_UA  (SONATA_PERM(IND, ENABLE)       | SONATA_PERM(IP, UNAUTH))
 /// GATT notify perm unauth (0x1040)
-#define PNTF_UA  (PERM(NTF, ENABLE)       | PERM(NP, UNAUTH))
+#define PNTF_UA  (SONATA_PERM(NTF, ENABLE)       | SONATA_PERM(NP, UNAUTH))
 
 /// GATT read perm no auth  (0x0200)
-#define PRD_NA   (PERM(RD, ENABLE)        | PERM(RP, NO_AUTH))
+#define PRD_NA   (SONATA_PERM(RD, ENABLE)        | SONATA_PERM(RP, NO_AUTH))
 /// GATT write perm no auth (0x0800)
-#define PWR_NA   (PERM(WRITE_REQ, ENABLE) | PERM(WP, NO_AUTH))
+#define PWR_NA   (SONATA_PERM(WRITE_REQ, ENABLE) | SONATA_PERM(WP, NO_AUTH))
 /// GATT ind perm  no auth  (0X2000)
-#define PIND_NA  (PERM(IND, ENABLE)       | PERM(IP, NO_AUTH))
+#define PIND_NA  (SONATA_PERM(IND, ENABLE)       | SONATA_PERM(IP, NO_AUTH))
 /// GATT notify perm no auth(0x1000)
-#define PNTF_NA  (PERM(NTF, ENABLE)       | PERM(NP, NO_AUTH))
+#define PNTF_NA  (SONATA_PERM(NTF, ENABLE)       | SONATA_PERM(NP, NO_AUTH))
 
 /// extended Descriptor Present (0X8000)
-#define PEXT     (PERM(EXT,ENABLE))
+#define PEXT     (SONATA_PERM(EXT,ENABLE))
 /// enable Read Indication (1 = Value not present in Database) (0x8000)
-#define PRI      (PERM(RI, ENABLE))
+#define PRI      (SONATA_PERM(RI, ENABLE))
 
-#define PWC_NA (PERM(WRITE_COMMAND, ENABLE) | PERM(WP, NO_AUTH))
+#define PWC_NA (SONATA_PERM(WRITE_COMMAND, ENABLE) | SONATA_PERM(WP, NO_AUTH))
 
 
 /*
@@ -208,7 +220,7 @@ typedef enum {
 typedef struct sonata_gatt_att_desc
 {
     /** Attribute UUID (LSB First) */
-    uint8_t uuid[ATT_UUID_128_LEN];
+    uint8_t uuid[SONATA_ATT_UUID_128_LEN];
 
     /**
      *  Attribute Permission (@see attm_perm_mask)

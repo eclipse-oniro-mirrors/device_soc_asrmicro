@@ -1,11 +1,24 @@
+/*
+ * Copyright (c) 2022 ASR Microelectronics (Shanghai) Co., Ltd. All rights reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 /**
  ****************************************************************************************
  *
  * @file app.h
  *
  * @brief Application entry point
- *
- * Copyright (C) ASR 2020-2029
  *
  ****************************************************************************************
  */
@@ -30,7 +43,7 @@
  */
 #include "sonata_ble_hook.h"
 #include "msm_ble_api.h"
-#include "gap.h"
+#include "sonata_gap.h"
 
 
 
@@ -73,7 +86,7 @@
 #define APP_GAP_RAND_NB_LEN              (0x08)
 #define APP_BD_ADDR_LEN                  (6)
 #define APP_UUID_LEN                     (16)
-
+#define KEY_LEN                          0x10
 
 
 enum app_connect_state
@@ -253,7 +266,7 @@ typedef struct actives_t{
     uint8_t assign_id ;
     uint8_t type;//A0:Adv  A1:Scan  A2:Peer
     bool runing;
-    uint8_t peer[GAP_BD_ADDR_LEN];
+    uint8_t peer[SONATA_GAP_BD_ADDR_LEN];
     uint8_t name[20];
 }actives;
 typedef struct app_env_t{

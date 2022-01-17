@@ -1,12 +1,24 @@
+/*
+ * Copyright (c) 2022 ASR Microelectronics (Shanghai) Co., Ltd. All rights reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 /**
  ****************************************************************************************
  *
  * @file sonata_api_task.h
  *
  * @brief header file - asr api task
- *
- * Copyright (C) ASR 2020 - 2029
- *
  *
  ****************************************************************************************
  */
@@ -19,11 +31,10 @@
  * INCLUDE FILES
  ****************************************************************************************
  */
-#include "rwip_config.h"
-#include "rwip_task.h"
-#include "ke_task.h"
+
 #include "sonata_utils_api.h"
 
+#include "sonata_config.h"
 /*
  * MACRO DEFINITIONS
  ****************************************************************************************
@@ -57,10 +68,12 @@ typedef enum
     SONATA_API_TASK_STATE_MAX
 } sonata_api_task_state_t;
 
+
+
 /// asr api task messages
 typedef enum
 {
-    SONATA_API_DUMMY_MSG = TASK_FIRST_MSG(TASK_ID_APP),
+    SONATA_API_DUMMY_MSG = STACK_TASK_FIRST_MSG(SONATA_TASK_ID_APP),
     /// message from application
     SONATA_API_APP_MSG,
 

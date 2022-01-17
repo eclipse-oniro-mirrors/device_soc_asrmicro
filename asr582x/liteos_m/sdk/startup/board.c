@@ -1,3 +1,18 @@
+/*
+ * Copyright (c) 2022 ASR Microelectronics (Shanghai) Co., Ltd. All rights reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 #include <stdio.h>
 #include "board.h"
 #include "duet_cm4.h"
@@ -62,19 +77,36 @@ void NVIC_init()
     NVIC_SetPriority(PLF_WAKEUP_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
     NVIC_SetPriority(RW_BLE_IRQn, configLIBRARY_NORMAL_INTERRUPT_PRIORITY-1);
 */
-    HalHwiCreate(CEVA_RW_IP_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY,0,intc_irq,0);
-    HalHwiCreate(D_APLL_UNLOCK_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY,0,D_APLL_UNLOCK_IRQHandler,0);
-    HalHwiCreate(D_SX_UNLOCK_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY,0,D_SX_UNLOCK_IRQHandler,0);
-    HalHwiCreate(SLEEP_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY,0,SLEEP_IRQHandler,0);
-    HalHwiCreate(UART0_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY,0,UART0_IRQHandler,0);
-    HalHwiCreate(UART1_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY,0,UART1_IRQHandler,0);
-    HalHwiCreate(UART2_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY,0,UART2_IRQHandler,0);
-    HalHwiCreate(WDG_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY,0,WDG_IRQHandler,0);
-    HalHwiCreate(TIMER_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY,0,TIMER_IRQHandler,0);
-    HalHwiCreate(DMA_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY,0,DMA_IRQHandler,0);
-    HalHwiCreate(RW_BLE_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY-1,0,BLE_IRQHandler,0);
+    ArchHwiCreate(CEVA_RW_IP_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY,0,intc_irq,0);
+    ArchHwiCreate(D_APLL_UNLOCK_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY,0,D_APLL_UNLOCK_IRQHandler,0);
+    ArchHwiCreate(D_SX_UNLOCK_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY,0,D_SX_UNLOCK_IRQHandler,0);
+    ArchHwiCreate(SLEEP_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY,0,SLEEP_IRQHandler,0);
+    ArchHwiCreate(UART0_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY,0,UART0_IRQHandler,0);
+    ArchHwiCreate(UART1_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY,0,UART1_IRQHandler,0);
+    ArchHwiCreate(UART2_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY,0,UART2_IRQHandler,0);
+    ArchHwiCreate(WDG_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY,0,WDG_IRQHandler,0);
+    ArchHwiCreate(TIMER_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY,0,TIMER_IRQHandler,0);
+    ArchHwiCreate(DMA_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY,0,DMA_IRQHandler,0);
+    ArchHwiCreate(RW_BLE_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY-1,0,BLE_IRQHandler,0);
     NVIC_DisableIRQ(RW_BLE_IRQn);
 }
+
+void NVIC_deinit(void)
+{
+    //disable NVIC irq before kernel reloc IRQ interface
+    NVIC_DisableIRQ(CEVA_RW_IP_IRQn);
+    NVIC_DisableIRQ(D_APLL_UNLOCK_IRQn);
+    NVIC_DisableIRQ(D_SX_UNLOCK_IRQn);
+    NVIC_DisableIRQ(SLEEP_IRQn);
+    NVIC_DisableIRQ(UART0_IRQn);
+    NVIC_DisableIRQ(UART1_IRQn);
+    NVIC_DisableIRQ(UART2_IRQn);
+    NVIC_DisableIRQ(WDG_IRQn);
+    NVIC_DisableIRQ(TIMER_IRQn);
+    NVIC_DisableIRQ(DMA_IRQn);
+    NVIC_DisableIRQ(RW_BLE_IRQn);
+}
+
 
 void os_post_init_hook(void)
 {

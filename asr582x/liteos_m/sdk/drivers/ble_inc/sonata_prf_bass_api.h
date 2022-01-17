@@ -1,12 +1,24 @@
+/*
+ * Copyright (c) 2022 ASR Microelectronics (Shanghai) Co., Ltd. All rights reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 /**
  ****************************************************************************************
  *
  * @file sonata_prf_bass_api.h
  *
  * @brief header file - Battery service server api
- *
- * Copyright (C) ASR 2020 - 2029
- *
  *
  ****************************************************************************************
  */
@@ -24,7 +36,6 @@
  ****************************************************************************************
  */
 
-#include "rwip_config.h"     // SW configuration
 
 //#if (BLE_APP_BATT)
 
@@ -60,7 +71,7 @@ typedef struct prf_bas_callback
 typedef enum
 {
     /// Start the Battery Server - at connection used to restore bond data
-    SONATA_PRF_BASS_ENABLE_REQ = SONATA_TASK_FIRST_MSG(TASK_ID_BASS),
+    SONATA_PRF_BASS_ENABLE_REQ = SONATA_TASK_FIRST_MSG(SONATA_TASK_ID_BASS),
     /// Confirmation of the Battery Server start
     SONATA_PRF_BASS_ENABLE_RSP,
     /// Battery Level Value Update Request
@@ -90,8 +101,7 @@ void sonata_prf_bass_init(void);
 /*!
  * @brief Add a Battery Service instance in the DB
  */
-void sonata_prf_bas_add_bass(uint8_t bas_number);
-
+void sonata_prf_bas_add_bass(uint8_t bas_number, bool support_ntf);
 
  /*!
   * @brief Enable the Battery Service

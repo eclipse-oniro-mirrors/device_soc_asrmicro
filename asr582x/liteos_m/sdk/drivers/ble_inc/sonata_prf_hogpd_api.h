@@ -1,12 +1,24 @@
+/*
+ * Copyright (c) 2022 ASR Microelectronics (Shanghai) Co., Ltd. All rights reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 /**
  ****************************************************************************************
  *
- * @file sonata_prf_hid_api.h
+ * @file sonata_prf_hogpd_api.h
  *
- * @brief header file - device information service server api
- *
- * Copyright (C) ASR 2020 - 2029
- *
+ * @brief header file - HOGPD service server api
  *
  ****************************************************************************************
  */
@@ -21,12 +33,13 @@
  * INCLUDE FILES
  ****************************************************************************************
  */
-
+#include "sonata_config.h"
+///@cond
 #if BLE_HOST_PRESENT
+///@endcond
 #include "sonata_utils_api.h"
 #include "gapc_task.h"
-#include "hogp_common.h"
-#include "hogpd_task.h"
+#include "sonata_api_task.h"
 #include "sonata_multi_keypad.h"
 
 /*
@@ -48,12 +61,6 @@
 /// Maximal number of Report Char. that can be added in the DB for one HIDS - Up to 11
 #define SONATA_HOGPD_NB_REPORT_INST_MAX            (5)
 
-/// Length of the HID Mouse Report
-#define SONATA_HOGP_MOUSE_REPORT_LEN       (6)
-/// Length of the HID Keyboard Report
-#define SONATA_HOGP_KEYBOARD_REPORT_LEN    (7)
-/// Length of the HID Keyboard Report
-#define SONATA_HOGP_CONSUMER_CONTROL_REPORT_LEN  (4)
 /// Length of the HID Keyboard vendor-defined Report
 #define SONATA_HOGP_VENDOR_DEFINED_REPORT_LEN  (19)
 
@@ -78,7 +85,7 @@
 //#define HID_REPORT_ID_VENDOR_DEFINED_INDEX    (3)
 #define HID_REPORT_ID_VOICE                   (3)
 #define HID_REPORT_ID_VOICE_INDEX             (2)
-
+#define SONATA_ATT_ERR_INSUFF_AUTHEN          (0x05)
 /*
  * Keyboard Keycode
  */
@@ -251,6 +258,8 @@ typedef enum
     SONATA_TAG_MOUSE_TIMEOUT,
     /// Peer Device BD Address
     SONATA_TAG_PEER_BD_ADDRESS,
+    /// Peer 2.4G BD Address
+    SONATA_TAG_PEER_2_4G_BD_ADDRESS,
     /// EDIV (2bytes), RAND NB (8bytes),  LTK (16 bytes), Key Size (1 byte)
     SONATA_TAG_LTK,
     /// app_ltk_key_in
@@ -259,6 +268,12 @@ typedef enum
     SONATA_TAG_IRK_ADDR,
     /// app irk
     SONATA_TAG_IRK,
+    /// device address
+    SONATA_TAG_BD_ADDRESS,
+    /// bonded dev info
+    SONATA_TAG_BONDED_DEV_INFO,
+    /// start pair on boot
+    SONATA_TAG_PAIR_ON_BOOT,
 }sonata_app_nvds_tag;
 
 /*!
@@ -273,15 +288,23 @@ typedef enum
     /// Mouse Timeout value len
     SONATA_LEN_MOUSE_TIMEOUT              = 2,
     /// Peer Device BD Address len
-    SONATA_LEN_PEER_BD_ADDRESS            = 7,
+    SONATA_LEN_PEER_BD_ADDRESS            = 6,
+    /// Peer 2.4G BD Address len
+    SONATA_LEN_PEER_2_4G_BD_ADDRESS       = 6,
     /// EDIV (2bytes), RAND NB (8bytes),  LTK (16 bytes), Key Size (1 byte)
-    SONATA_LEN_LTK                        = 28,
+    SONATA_LEN_LTK                        = 27,
     /// app_ltk_key_in len
     SONATA_LEN_LTK_IN                     = 16,
     /// app irk addr len
     SONATA_LEN_IRK_ADDR                   = 6,
     /// app irk len
     SONATA_LEN_IRK                        = 16,
+    /// device address
+    SONATA_LEN_BD_ADDRESS                 = 6,
+    /// bonded dev info len
+    SONATA_LEN_BONDED_DEV_INFO            = 218, //218: 3, 290:4,
+    /// start pair on boot
+    SONATA_LEN_PAIR_ON_BOOT               = 1,
 }sonata_app_nvds_len;
 
 /// Features Flag Values
@@ -312,17 +335,23 @@ typedef enum
  */
 typedef enum {
     //up
-    MOTION_UP = 1,
+    MOTION_UP = 'U',
     //down
-    MOTION_DOWN,
+    MOTION_DOWN = 'D',
     //left
-    MOTION_LEFT,
+    MOTION_LEFT = 'L',
     //right
-    MOTION_RIGHT,
+    MOTION_RIGHT = 'R',
     //diagonal
-    MOTION_DIAGONAL,
+    MOTION_DIAGONAL = 'I',
+    //wheel
+    MOTION_WHEEL = 'W',
+    //button
+    BUTTON_EVENT = 'B',
+    //multiple motion
+    MOTION_MULTIPLE = 'M',
     //ADC
-    MOTION_ADC
+    MOTION_ADC = 'A',
 }sonata_mouse_motion;
 
 
@@ -368,11 +397,45 @@ typedef enum
     SONATA_HOGPD_OP_PROT_UPDATE,
 }sonata_hogpd_op;
 
+
+/// Messages for HID Over GATT Profile Device Role
+/*@TRACE*/
+enum sonata_hogpd_msg_id
+{
+    /// Restore bond data the HID Over GATT Profile Device Role Task
+    SONATA_HOGPD_ENABLE_REQ = STACK_TASK_FIRST_MSG(SONATA_TASK_ID_HOGPD),
+    /// Response of enabled request
+    SONATA_HOGPD_ENABLE_RSP,
+
+    /// Request sending of a report to the host - notification
+    SONATA_HOGPD_REPORT_UPD_REQ,
+    /// Response sending of a report to the host
+    SONATA_HOGPD_REPORT_UPD_RSP,
+
+
+    /// Request from peer device to Read or update a report value
+    SONATA_HOGPD_REPORT_REQ_IND,
+    /// Confirmation for peer device for Reading or Updating a report value
+    SONATA_HOGPD_REPORT_CFM,
+
+    /// Inform Device APP that Protocol Mode Characteristic Value has been written on Device
+    SONATA_HOGPD_PROTO_MODE_REQ_IND,
+    /// Confirm if the new protocol mode value
+    SONATA_HOGPD_PROTO_MODE_CFM,
+
+    /// Inform Device APP that a Client Characteristic Configuration has been modified
+    SONATA_HOGPD_NTF_CFG_IND,
+    /// Inform APP that HID Control Point Characteristic Value has been written on Device
+    SONATA_HOGPD_CTNL_PT_IND,
+
+    SONATA_APP_HID_MOUSE_TIMEOUT_TIMER,
+};
+
 /// Messages for HID Over GATT Profile Device Role
 typedef enum
 {
-    SONATA_HOGPD_MOUSE_TIMEOUT_TIMER = APP_HID_MOUSE_TIMEOUT_TIMER,
-	SONATA_HOGPD_KEYBOARD_TIMEOUT_TIMER,
+    SONATA_HOGPD_MOUSE_TIMEOUT_TIMER = SONATA_APP_HID_MOUSE_TIMEOUT_TIMER,
+    SONATA_HOGPD_KEYBOARD_TIMEOUT_TIMER,
 }app_hogpd_msg_id;
 
 typedef enum
@@ -385,10 +448,20 @@ typedef enum
 
 typedef enum
 {
-	DIR_BROADCAST_NO_NEED,
+    DIR_BROADCAST_NO_NEED,
     DIR_BROADCAST_NEEDED,
-	DIR_BROADCAST_ALREADY_SEND,
-}derected_broadcast_state;
+    DIR_BROADCAST_ALREADY_SEND,
+}directed_broadcast_state;
+
+
+/// HID Information bit values
+typedef enum
+{
+    /// Device capable of providing wake-up signal to a HID host
+    SONATA_HIDS_REMOTE_WAKE_CAPABLE           = 0x01,
+    /// Normally connectable support bit
+    SONATA_HIDS_NORM_CONNECTABLE              = 0x02,
+}hogp_info_bit;
 
 /*
  * Type Definition
@@ -407,20 +480,30 @@ typedef struct sonata_hogpd_ext_ref
     uint16_t rep_ref_uuid;
 }sonata_hogpd_ext_ref_t;
 
+/// HID Information structure
+typedef struct sonata_hids_hid_info
+{
+    /// bcdHID
+    uint16_t bcdHID;
+    /// bCountryCode
+    uint8_t  bCountryCode;
+    /// Flags
+    uint8_t  flags;
+}sonata_hids_hid_info_t;
 
 /// Database Creation Service Instance Configuration structure
 typedef struct sonata_hogpd_hids_cfg
 {
-    /// Service Features (@see enum hogpd_cfg)
+    /// Service Features (@see enum sonata_hogpd_cfg)
     uint8_t svc_features;
     /// Number of Report Char. instances to add in the database
     uint8_t report_nb;
-    /// Report Char. Configuration (@see enum hogpd_report_cfg)
+    /// Report Char. Configuration (@see enum sonata_hogpd_report_cfg)
     uint8_t report_char_cfg[SONATA_HOGPD_NB_REPORT_INST_MAX];
     /// Report id number
     uint8_t report_id[SONATA_HOGPD_NB_REPORT_INST_MAX];
     /// HID Information Char. Values
-    struct hids_hid_info hid_info;
+    sonata_hids_hid_info_t hid_info;
     /// External Report Reference
     struct sonata_hogpd_ext_ref ext_ref;
 
@@ -441,10 +524,12 @@ typedef  struct sonata_hogpd_db_cfg
  */
 typedef struct
 {
-    uint16_t (*hogpd_report_request)(uint8_t conidx, uint8_t operation, uint8_t report_type, uint8_t hid_idx, uint8_t length, uint8_t idx, uint8_t *value);
+    uint16_t (*hogpd_report_request)(uint8_t conidx, uint8_t operation, uint16_t handle, uint8_t report_type, uint8_t hid_idx, uint8_t length, uint8_t idx, uint8_t *value);
     uint16_t (*hogpd_protocol_mode_request)(uint8_t conidx, uint8_t operation, uint8_t proto_mode);
     uint16_t (*hogpd_control_point_write)(uint8_t conidx, uint8_t hid_idx);
-    uint16_t (*hogpd_enable_response)(uint8_t enable_state);
+    uint16_t (*hogpd_enable_response)(uint8_t conidx, uint8_t enable_state);
+    uint16_t (*hogpd_report_update_response)(uint8_t conidx, uint8_t status);
+    uint16_t (*hogpd_ntf_config)(uint8_t conidx, uint8_t ntf_len, uint16_t * ntf_cfg);
 }prf_hogpd_callback;
 
 
@@ -460,10 +545,8 @@ typedef struct
  */
 typedef struct ps_mouse_report
 {
-    int8_t    button;
-    int8_t    repWheel;//Wheel of the mouse
-    int16_t   repY;    //x-axis of the mouse
-    int16_t   repX;    //y-axis of the mouse
+    int16_t   repX;    //x-quaddec of the mouse
+    int16_t   repY;    //y-quaddec of the mouse
 }ps_mouse_report_t;
 
 
@@ -599,9 +682,27 @@ uint16_t sonata_prf_hogpd_proto_mode_req(uint8_t conidx, uint8_t operation, uint
  */
 uint16_t sonata_prf_hogpd_control_point_req(uint8_t conidx, uint8_t hid_idx);
 
+/*!
+ * @brief sonata_prf_hogpd_updata_conn_params
+ * @param intv_min
+ * @param intv_max
+ * @param latency
+ * @param time_out
+ */
+void sonata_prf_hogpd_updata_conn_params(uint16_t intv_min, uint16_t intv_max, uint16_t latency, uint16_t time_out);
 
+extern const sonata_api_subtask_handlers_t prf_hogpd_api_ke_msg_handlers;
+/*!
+ * @brief sonata_prf_hogpd_reset
+ */
+void sonata_prf_hogpd_reset();
+void sonata_hogpd_send_error_code(uint8_t conidx, uint8_t operation, uint8_t hid_idx, uint8_t report_type, uint8_t report_idx, uint8_t error_code);
 
+/** @}*/
+
+///@cond
 #endif // BLE_HOST_PRESENT
+///@endcond
 
 #endif //_SONATA_PRF_HOGPD_API_H_
 

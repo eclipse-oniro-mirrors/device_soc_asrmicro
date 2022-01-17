@@ -1,7 +1,23 @@
+# Copyright (c) 2022 ASR Microelectronics (Shanghai) Co., Ltd. All rights reserved.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import("//kernel/liteos_m/liteos.gni")
 
 lib_path = rebase_path("drivers/libs/Cortex-M4")
 #hilink_lib_path = rebase_path("//vendor/hilink/debug")
+
+asr582x_release_type = "release"
+# debug/release
 
 config("public") {
   include_dirs = [
@@ -19,7 +35,6 @@ config("public") {
     "gcc",
     "$lib_path/libasr_combo.a",
     "$lib_path/libasr_lwip.a",
-    "$lib_path/libwolfssl.a",
   ]
 
   if (defined(LOSCFG_LIBC_NEWLIB)) {
@@ -31,6 +46,12 @@ config("public") {
     ]
   }
 
+if(asr582x_release_type == "debug"){
+    libs -= [
+      "$lib_path/libasr_combo.a",
+    ]
+}
+ 
   foreach(xts_item, xts_list) {
       xts_enable = xts_item.enable
       if(xts_enable == "true")
@@ -107,19 +128,7 @@ kernel_module("bsp_config") {
         "drivers/ble_src/harmony_ble_adpter.c",
         "drivers/rfota/rfota_wifi.c",
         "drivers/rfota/rfota_ble.c",
-        "drivers/security/src/lega_hw_common.c",
-        "drivers/security/src/lega_aes.c",
-        "drivers/security/src/lega_ccm.c",
-        "drivers/security/src/lega_ecc.c",
-        "drivers/security/src/lega_hash.c",
-        "drivers/security/src/lega_hmac.c",
-        "drivers/security/src/lega_rnd.c",
-        "drivers/security/src/lega_rsa.c",
         "drivers/iperf/lwip_iperf.c",
-        "drivers/iperf/rxperf.c",
-        "drivers/iperf/txperf.c",
-        "drivers/iperf/urxperf.c",
-        "drivers/iperf/utxperf.c",
     ]
 
     include_dirs = [
@@ -136,7 +145,6 @@ kernel_module("bsp_config") {
         "drivers/kv/include",
         "rtos/",
         "drivers/common",
-        "drivers/platform/misc",
         "hal/inc",
         "drivers/security/inc",
 #        "security_test",
@@ -225,7 +233,14 @@ kernel_module("bsp_config") {
         "LEGA_A0V2",
         "CFG_NAN_CONFIG",
         "CFG_NAN_OPTIMIZE_EN",
+        "LEGAOS_SUPPORT",
+#        "BLE_APP_AT_CMD",
     ]
-    cflags =[
+    cflags = [
     ]
+    if(asr582x_release_type == "debug"){
+      deps = [
+        "//device/soc/asrmicro/asr582x/liteos_m/sdk/lib:asr_combo",
+      ]
+    }
 }

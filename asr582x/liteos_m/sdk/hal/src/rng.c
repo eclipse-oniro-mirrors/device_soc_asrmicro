@@ -1,8 +1,22 @@
+/*
+ * Copyright (c) 2022 ASR Microelectronics (Shanghai) Co., Ltd. All rights reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
-#include "crys_rnd.h"
 #include "lega_rnd.h"
 #include "lega_hw_common.h"
 #ifdef ALIOS_SUPPORT
@@ -22,19 +36,19 @@ int32_t hal_random_num_read(void *random, void *buf, int32_t bytes)
     memset(rand_dat_ptr, 0, bytes);
     lega_rnd_init();
     ret = lega_RND_AddAdditionalInput(rndContext_ptr, rndTest_AddInputData, sizeof(rndTest_AddInputData));
-    if (ret != SA_SILIB_RET_OK)
+    if (ret != LEGA_HW_OK)
     {
         ret = -1;
         goto RAND_NUM_READ_FAIL;
     }
     ret = lega_RND_Reseeding(rndContext_ptr, rndWorkBuff_ptr);
-    if (ret != SA_SILIB_RET_OK)
+    if (ret != LEGA_HW_OK)
     {
         ret = -1;
         goto RAND_NUM_READ_FAIL;
     }
-    ret = lega_RND_GenerateVector(&rndContext_ptr->rndState, bytes, rand_dat_ptr);
-    if (ret != SA_SILIB_RET_OK)
+    ret = lega_RND_GenerateVector(rndContext_ptr, bytes, rand_dat_ptr);
+    if (ret != LEGA_HW_OK)
         ret = -1;
 RAND_NUM_READ_FAIL:
     lega_rnd_deinit();

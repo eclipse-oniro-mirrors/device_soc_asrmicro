@@ -1,12 +1,24 @@
+/*
+ * Copyright (c) 2022 ASR Microelectronics (Shanghai) Co., Ltd. All rights reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 /**
  ****************************************************************************************
  *
  * @file sonata_ble_api.h
  *
  * @brief header file - ble common operation
- *
- * Copyright (C) ASR 2020 - 2029
- *
  *
  ****************************************************************************************
  */
@@ -19,10 +31,7 @@
  * INCLUDE FILES
  ****************************************************************************************
  */
-#include "rwip_config.h"
 #include "sonata_utils_api.h"
-#include "co_bt_defines.h"
-#include "gap.h"
 #include "sonata_gatt_api.h"
 #include "sonata_gap_api.h"
 #include "sonata_prf_diss_api.h"
@@ -73,13 +82,6 @@ enum sonata_ble_sleep_state
     SONATA_BLE_DEEP_SLEEP,
 };
 
-
-/// Definition of the bits preventing the system from sleeping
-typedef enum
-{
-    /// Flag indicating that the ble app is WAKE
-    SONATA_BLE_APP_WAKE                    = 0x2000,
-}sonata_ble_prevent_sleep_bit;
 /*
  * Type Definition
  ****************************************************************************************
@@ -110,7 +112,7 @@ void sonata_ble_init(sonata_ble_hook_t hook);
  * @brief Set a bit in the prevent sleep bit field, in order to prevent the system from  going to sleep
  * @param prv_slp_bit Bit to be set in the prevent sleep bit field
  */
-void sonata_ble_prevent_sleep_set(sonata_ble_prevent_sleep_bit prv_slp_bit);
+void sonata_ble_prevent_sleep_set(uint16_t prv_slp_bit);
 
 
 /*!
@@ -118,7 +120,7 @@ void sonata_ble_prevent_sleep_set(sonata_ble_prevent_sleep_bit prv_slp_bit);
  *        going to sleep
  * @param prv_slp_bit Bit to be cleared in the prevent sleep bit field
  */
-void sonata_ble_prevent_sleep_clear(sonata_ble_prevent_sleep_bit prv_slp_bit);
+void sonata_ble_prevent_sleep_clear(uint16_t prv_slp_bit);
 
 /*!
  * @brief Reset ble module

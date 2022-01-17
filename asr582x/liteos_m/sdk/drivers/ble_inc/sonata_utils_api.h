@@ -1,12 +1,24 @@
+/*
+ * Copyright (c) 2022 ASR Microelectronics (Shanghai) Co., Ltd. All rights reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 /**
  ****************************************************************************************
  *
  * @file sonata_utils_api.h
  *
  * @brief header file - asr utilities
- *
- * Copyright (C) ASR 2020 - 2029
- *
  *
  ****************************************************************************************
  */
@@ -19,9 +31,9 @@
  * INCLUDE FILES
  ****************************************************************************************
  */
-#include "co_int.h"
 #include "sonata_error_api.h"
 #include "sonata_ble_hook.h"
+#include "compiler.h"      // for __INLINE
 
 /**
  * @defgroup SONATA_UTILS_API UTILS_API
@@ -52,6 +64,10 @@
 /// file system bluetooth device address tag length
 #define SONATA_FS_TAG_BD_ADDR_LEN            6
 
+#define PWR_ON_RST               0x00
+#define HARDWARE_PIN_RST         0x01
+#define SOFTWARE_RST             0x02
+#define UNKNOWN_RST              0xFF
 
 /*
  * ENUM DEFINITIONS
@@ -98,6 +114,16 @@
 typedef uint8_t sonata_fs_len_t;
 typedef uint8_t sonata_fs_tag_t;
 
+/*!
+* @brief ble addr priority return result
+*/
+typedef enum
+{
+    ///efuse > nvds
+    SONATA_MAC_USE_EFUSE,
+    ///nvds > efuse
+    SONATA_MAC_USE_NVDS,
+}SONATA_MAC_PRIORITY;
 
 
 
@@ -127,6 +153,22 @@ typedef struct sonata_api_app_ke_msg
     void    *p_param;
 }sonata_api_app_ke_msg_t;
 
+/// Ble bt addr priority callback
+typedef struct
+{
+    SONATA_MAC_PRIORITY (*ble_addr_priority)(void);
+
+}ble_addr_callback_t;
+/**
+ ****************************************************************************************
+ * @brief Call back definition of the function that can handle result of an AES based algorithm
+ *
+ * @param[in] status       Execution status
+ * @param[in] aes_res      16 bytes block result
+ * @param[in] src_info     Information provided by requester
+ ****************************************************************************************
+ */
+typedef void (*aes_func_result_cb) (uint8_t status, const uint8_t* aes_res, uint32_t src_info);
 
 
 /*
@@ -267,6 +309,7 @@ uint8_t sonata_fs_erase(sonata_fs_tag_t tag);
  */
 uint8_t * sonata_get_bt_address();
 
+
 /**
 ***************************************************************************************
 * @brief sonata set bd addr
@@ -280,6 +323,44 @@ uint8_t * sonata_get_bt_address();
 */
 void sonata_set_bt_address(uint8_t * bd_addr,uint8_t length);
 
+/**
+***************************************************************************************
+* @brief sonata set bd addr but no save
+* @param[in] uint8_t* bd_addr : bd_addr value
+*             uint8_t  length: addr length
+*
+*
+*
+* @return void
+****************************************************************************************
+*/
+void sonata_set_bt_address_no_save(uint8_t * bd_addr,uint8_t length);
+
+/**
+ ****************************************************************************************
+ * @brief Perform an AES encryption form app - result within callback
+ * @param[in] key      Key used for the encryption
+ * @param[in] val      Value to encrypt using AES
+ * @param[in] res_cb   Function that will handle the AES based result (16 bytes)
+ * @param[in] src_info Information used retrieve requester
+ *
+ * @return  bool : true for encryption is ongoing, false for some error
+ ****************************************************************************************
+ */
+bool sonata_aes_app_encrypt(uint8_t* key, uint8_t *val, aes_func_result_cb res_cb, uint32_t src_info);
+
+/**
+ ****************************************************************************************
+ * @brief Perform an AES decryption form app - result within callback
+ * @param[in] key      Key used for the decryption
+ * @param[in] val      Value to decrypt using AES
+ * @param[in] res_cb   Function that will handle the AES based result (16 bytes)
+ * @param[in] src_info Information used retrieve requester
+ *
+ * @return  bool : true for decryption is ongoing, false for some error
+ ****************************************************************************************
+ */
+bool sonata_aes_app_decrypt(uint8_t* key, uint8_t *val, aes_func_result_cb res_cb, uint32_t src_info);
 
 /*!
  * @brief change pin code to byte
@@ -295,6 +376,97 @@ void sonata_passkey_pincode_to_byte(uint32_t pin_code, uint8_t * bytes, uint8_t 
  * @return
  */
 uint32_t sonata_passkey_byte_to_pincode(uint8_t * bytes);
+
+/*!
+ * @brief Get information form advertising report
+ * @param type [in] GAP advertising flags, for example GAP_AD_TYPE_COMPLETE_NAME is the device's name in advertising report.
+ * @param info [in]  save return value
+ * @param info_length [in]  length of the info buffer
+ * @param report  [in] advertising report data
+ * @param report_length  [in] advertising report data length
+ * @param rel_length  [out] for target information
+ * @return TRUE for target fond, FALSE for not found
+ */
+bool sonata_get_adv_report_info(uint8_t type, uint8_t *info, uint16_t info_length, uint8_t *report, uint16_t report_length, uint16_t *rel_length);
+
+/*!
+ * @brief Get system tick value
+ * @return System tick
+ */
+uint32_t sonata_get_sys_time();
+
+
+/*!
+ * @brief Reset BLE stack
+ * @return
+ */
+void sonata_ble_stack_reset();
+
+/*!
+ * @brief  Get boot type value
+ * @note   in low power mode, if use this API should enable the peri_clk of RET_HCLK_EN
+ * @return 0x00: PWR_ON_RST, 0x01: HARDWARE_PIN_RST, 0x02: SOFTWARE_RST, 0xFF: UNKNOWN_RST
+ */
+uint32_t sonata_get_boot_rst_type(void);
+
+/*!
+ * @brief  Get sonata rom version
+ * @return rom version
+ */
+const char *sonata_get_rom_version(void);
+
+/*!
+ * @brief Ble addr priority callback
+ */
+void sonata_ble_register_bt_addr_callback(ble_addr_callback_t *cb);
+
+
+
+
+
+
+extern int rand (void);
+
+__INLINE uint8_t util_rand_byte(void)
+{
+    return (uint8_t)(rand() & 0xFF);
+}
+__INLINE uint32_t util_rand_word(void)
+{
+    return (uint32_t)rand();
+}
+
+__INLINE uint32_t util_min(uint32_t a, uint32_t b)
+{
+    return a < b ? a : b;
+}
+
+__INLINE void util_write16p(void const *ptr16, uint16_t value)
+{
+    uint8_t *ptr=(uint8_t*)ptr16;
+
+    *ptr++ = value&0xff;
+    *ptr = (value&0xff00)>>8;
+}
+
+__INLINE uint16_t util_read16p(void const *ptr16)
+{
+    uint16_t value = ((uint8_t *)ptr16)[0] | ((uint8_t *)ptr16)[1] << 8;
+    return value;
+}
+
+__INLINE uint32_t util_read32p(void const *ptr32)
+{
+    uint16_t addr_l, addr_h;
+    addr_l = util_read16p((uint16_t *)ptr32);
+    addr_h = util_read16p((uint16_t *)ptr32 + 1);
+    return ((uint32_t)addr_l | (uint32_t)addr_h << 16);
+}
+
+void sonata_platform_reset();
+
+
+
 
 /** @}*/
 #endif //_SONATA_UTILS_API_H_

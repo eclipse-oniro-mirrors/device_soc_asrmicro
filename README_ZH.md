@@ -91,7 +91,7 @@ repo forall -c 'git lfs pull'
    sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.8 1
    sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 1
    ```
-5. 安装并升级Python包管理工具（pip3），任选如下一种方式。
+5. 安装并升级Python包管理工具（pip3）。
 
      ```
      sudo apt-get install python3-setuptools python3-pip -y
@@ -146,24 +146,25 @@ repo forall -c 'git lfs pull'
 2. 下载[arm-none-eabi-gcc 编译工具下载](https://armkeil.blob.core.windows.net/developer//sitecore/shell/-/media/Files/downloads/gnu-rm/5_4-2016q3/gcc-arm-none-eabi-5_4-2016q3-20160926-linux,-d-,tar.bz2)
 
 
-3. 解压 [gcc-arm-none-eabi-5_4-2016q3-20160926-linux.tar.bz2](https://armkeil.blob.core.windows.net/developer//sitecore/shell/-/media/Files/downloads/gnu-rm/5_4-2016q3/gcc-arm-none-eabi-5_4-2016q3-20160926-linux,-d-,tar.bz2) 安装包至 openharmony/device/soc/asrmicro/gcc路径下。
+3. 解压 [gcc-arm-none-eabi-5_4-2016q3-20160926-linux.tar.bz2](https://armkeil.blob.core.windows.net/developer//sitecore/shell/-/media/Files/downloads/gnu-rm/5_4-2016q3/gcc-arm-none-eabi-5_4-2016q3-20160926-linux,-d-,tar.bz2) 安装包至 openharmony/device/soc/asrmicro/gcc/gcc-arm-none-eabi/Linux64 路径下。
 
    ```
    device/soc/asrmicro/gcc
    └── gcc-arm-none-eabi
       └── Linux64
          ├── bin
-         └── ...
+         ├── lib
+         ├── share
+         └── arm-none-eabi
    ```
-   也可放置其它目录，需注意修改 openharmony/device/soc/asrmicro/asr582x/liteos_m/config.gni中的 board_toolchain_path
+   也可放置其它目录，需注意修改 openharmony/device/board/lango/dev_wifi_a/liteos_m/config.gni中的 board_toolchain_path
 
 ### 编译流程
 
 [编译构建使用指南](https://gitee.com/openharmony/docs/blob/master/zh-cn/device-dev/subsystems/subsys-build-mini-lite.md)
 
 ```shell
-hb set -root .
-hb set -p
+hb set
 
 asrmicro
  > wifi_demo

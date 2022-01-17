@@ -1,11 +1,23 @@
+/*
+ * Copyright (c) 2022 ASR Microelectronics (Shanghai) Co., Ltd. All rights reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 /**
  ****************************************************************************************
  * @file sonata_mesh_api.h
  *
  * @brief header file - mesh api
- *
- * Copyright (C) ASR 2020 - 2029
- *
  *
  ****************************************************************************************
  */
@@ -87,6 +99,7 @@
 #define MESH_MODEL_NUM_MAX         (10)
 ///Invalid Mesh Model Local Index
 #define MESH_MODEL_INVALID_LID     (0xFF)
+#define MESH_VENDOR_MODEL_NUM_MAX   (2)
 
 
 /****************** Model IDs *******************/
@@ -134,7 +147,10 @@
 
 ///Ali Vendor Sever Model ID
 #define MESH_MODELID_VENDOR_ALI        (0x01A80000)
-
+///asr vendor sever model ID
+#define MESH_MODELID_VENS_ASR          (0x09170002)
+///asr vendor client model ID
+#define MESH_MODELID_VENC_ASR          (0x09170001)
 
 /*********** MESSAGE LENGTH******************/
 
@@ -319,6 +335,8 @@ typedef enum
   MESH_PROVISIONER_APPKEY,
    /// Addr Pool Used By Provisioner
   MESH_PROVISIONER_ADDR_POOL,
+  /// mesh model replay number
+  MESH_NUMBER_REPLAY,
 }mesh_param_opr_types_t;
 
 /**
@@ -383,6 +401,26 @@ typedef enum
   MESH_ADDR_SET_CMP,
     /// Indicate Self Addr Alloced By Provisioner
   MESH_SELF_ADDR_IND,
+  ///Indicate run time
+  MESH_GET_RUN_TIME,
+    /// Indicate Publish Addr Update
+  MESH_PUB_UPDATE,
+    /// Indicate Sub Addrs Update
+  MESH_SUBS_UPDATE,
+    /// Indicate Self Dev Key
+  MESH_SELF_DEV_KEY_IND,
+      /// Indicate Self Dev Key
+  MESH_SELF_IV_SEQ_IND,
+   /// Indicate Friend Offer
+  MESH_FRIEND_OFFER_IND,
+   /// Indicate lowpower Node Status
+  MESH_LPN_STATUS_IND,
+   /// Indicate  Lowpower Start CmdCompelete
+  MESH_LOWPOWER_START_CMP,
+  /// Indicate  Lowpower Stop Cmd Compelete
+  MESH_LOWPOWER_STOP_CMP,
+      /// Indicate  Lowpower Select Friend Cmd Compelete
+  MESH_LOWPOWER_SELECT_FRIEND_CMP,
 }mesh_core_evt_ind_t;
 /** @} */
 
@@ -458,6 +496,20 @@ typedef enum
   MESH_SET_LOCAL_PUBLISH_PARAM,
   /// Setting Local Sub Param
  MESH_SET_LOCAL_SUBS_PARAM,
+   /// Setting Local dev key
+ MESH_SET_LOCAL_DEV_KEY,
+   /// Setting Local primary addr
+ MESH_SET_LOCAL_PRIM_ADDR,
+   /// Setting Local iv index and seq no
+ MESH_SET_LOCAL_IV_SEQ,
+   /// App Start Node LPN, Stack Will Send Friend Request
+ MESH_LOWPOWER_NODE_START,
+     /// App Stop Node LPN, Clean Up Friendship
+ MESH_LOWPOWER_NODE_STOP,
+     /// App Select Friend
+ MESH_LOWPOWER_SELECT_FRIEND,
+     /// App Set Friend State
+ MESH_SET_LOCAL_FRIEND_STATE,
 }mesh_core_evt_cb_t;
 
 
@@ -646,6 +698,15 @@ typedef enum
     MESH_STATE_LIGHT_XYL_XY_RANGE
 }mesh_state_type_t;
 
+/// Mesh Scan Opr Module Define,
+typedef enum
+{
+    USER_APP_INVALID_MODULE_ID ,
+    USER_APP_MODULE_ID                   ,
+    USER_WF_MODULE_ID                    ,
+    USER_AT_MODULE_ID,
+    USER_MAX_MODULE_ID
+}mesh_scan_opr_module_id_t;
 
 
 /*
@@ -874,6 +935,8 @@ typedef union
     mesh_provisioner_appkey_t appkey;
     ///provisioner addr pool struct
     mesh_provisioner_addr_pool_t addr_pool;
+    ///mesh model repaly number
+    uint8_t replay_number;
 }mesh_set_params_t;
 /**@}*/
 
@@ -1379,6 +1442,8 @@ typedef struct mesh_appkey_update_ind
 {
     /// AppKey index
     uint16_t appkey_index;
+    /// AppKey
+    uint8_t  key[MESH_KEYS_LEN];
     /// Added (> 0) or deleted (= 0)
     uint8_t added;
 }mesh_appkey_update_ind_t;
@@ -1402,8 +1467,99 @@ typedef struct mesh_self_addr_ind
     uint16_t addr;
 }mesh_self_addr_ind_t;
 
-///Mesh Provisioner Set Local Subcribtion
-typedef struct mesh_provisioner_set_local_subs
+/// Structure For get run time Ind
+typedef struct mesh_get_run_time_ind
+{
+    /// Addr
+    uint32_t clock_ms;
+    uint16_t nb_wrap;
+
+}mesh_get_run_time_ind_t;
+
+/// Structure For Dev Key Ind
+typedef struct mesh_dev_key_ind
+{
+    uint8_t key[MESH_KEYS_LEN];
+}mesh_dev_key_ind_t;
+
+
+
+
+
+/// Structure For pulish addr  Ind
+typedef struct mesh_publish_addr_ind
+{
+    uint16_t element_addr;
+    /// Model ID
+    uint32_t model_id;
+    /// Publication address
+    uint16_t addr;
+    /// AppKey ID
+    uint16_t appkey_index;
+    /// TTL
+    uint8_t  ttl;
+    /// Period
+    uint8_t  period;
+    /// Retransmission parameters
+    uint8_t  retx_params;
+    /// Friend credentials
+    uint8_t  friend_cred;
+    /// Label UUID
+    uint8_t  label_uuid[MESH_UUID_LEN];
+}mesh_publish_addr_ind_t;
+
+
+/// Structure For sub addr  Ind
+typedef struct mesh_sub_addr_ind
+{
+    uint16_t element_addr;
+    /// Sub address
+    uint16_t addr;
+    /// Model ID
+    uint32_t model_id;
+    /// Label UUID
+    uint8_t  label_uuid[MESH_UUID_LEN];
+    /// Add (> 0) or deleted (= 0)
+    uint8_t  addOrDel;
+}mesh_sub_addr_ind_t;
+
+/// Structure For iv seq Ind
+typedef struct mesh_iv_seq_ind
+{
+    /// IV Index
+    uint32_t iv;
+    /// Seq NO
+    uint32_t seq;
+}mesh_iv_seq_ind_t;
+
+
+/// Structure For Friend Offer Ind
+typedef struct mesh_friend_offer_ind
+{
+    uint16_t friend_addr;
+    uint8_t  rx_window;
+    uint8_t  queue_size;
+    uint8_t  subs_list_size;
+    int8_t   rssi;
+}mesh_friend_offer_ind_t;
+
+/// Structure For Friend Offer Ind
+typedef struct mesh_lowper_status_ind
+{
+    uint16_t friend_addr;
+    uint16_t  status;
+}mesh_lowper_status_ind_t;
+
+
+/// Structure For Friend Offer Ind
+typedef struct mesh_cmp_status_ind
+{
+    uint16_t status;
+}mesh_cmp_status_ind_t;
+
+
+///Mesh  Set Local Subcribtion
+typedef struct mesh_set_local_subs
 {
     /// Add (> 0) or deleted (= 0)
     uint8_t  addOrDel;
@@ -1413,7 +1569,54 @@ typedef struct mesh_provisioner_set_local_subs
     uint16_t sub_addr;
     ///Model Identifier
     uint32_t  model_id;
-}mesh_provisioner_set_local_subs_t;
+}mesh_set_local_subs_t;
+
+///Mesh Provisioner Set Primary Addr
+typedef struct mesh_set_local_prim_addr
+{
+    uint16_t addr;
+}mesh_set_local_prim_addr_t;
+
+
+///Mesh  Set Local Dev key
+typedef struct mesh_set_local_dev_key
+{
+    uint8_t dev_key[MESH_KEYS_LEN];
+}mesh_set_local_dev_key_t;
+
+///Mesh  Set Local Iv Index And Seq NO
+typedef struct mesh_set_local_iv_seq
+{
+    uint32_t iv;
+    uint32_t seq;
+}mesh_set_local_iv_seq_t;
+
+///Mesh  start lpn
+typedef struct mesh_start_lpn_param
+{
+    uint32_t poll_timeout_100ms;
+    uint32_t poll_intv_ms;
+    uint16_t prev_addr;
+    uint8_t  rx_delay;
+    uint8_t  rssi_factor;
+    uint8_t  rx_window_factor;
+    uint8_t  min_queue_size_log;
+}mesh_start_lpn_param_t;
+
+
+///Mesh  select friend
+typedef struct mesh_select_friend_param
+{
+    uint16_t addr;
+}mesh_select_friend_param_t;
+
+///Mesh  Set friend state
+typedef struct mesh_set_friend_state
+{
+    uint32_t state;
+}mesh_set_friend_state_t;
+
+
 
 ///Mesh Core Event indicate parameters structure
 typedef union
@@ -1430,6 +1633,18 @@ typedef union
     mesh_netkey_update_ind_t   netkey_updata_ind;
     /// Structure For Self Addr Ind
     mesh_self_addr_ind_t       self_addr_ind;
+    ///structture for get run time
+    mesh_get_run_time_ind_t    run_time_ind;
+    ///structure for dev key
+    mesh_dev_key_ind_t    dev_key;
+    ///structure for iv index  and seq no
+    mesh_iv_seq_ind_t iv_seq;
+    ///structure for friend offer info
+    mesh_friend_offer_ind_t friend_offer;
+    ///structure for status ind
+    mesh_cmp_status_ind_t status_ind;
+    ///structure for lowpower node status ind
+    mesh_lowper_status_ind_t lpn_status;
 }mesh_core_evt_ind_params_t;
 
 ///Mesh Core Event callback parameter structure
@@ -1443,8 +1658,20 @@ typedef union
     mesh_set_local_model_app_bind_t      local_model_app_bind;
     ///Mesh Model Local Publication set structure
     mesh_local_pub_set_t                 local_pub_set;
-    ///Mesh Provisioner Set Local Subcribtion
-    mesh_provisioner_set_local_subs_t    local_sub_set;
+    ///Mesh  Set Local Subcribtion
+    mesh_set_local_subs_t    local_sub_set;
+    ///Mesh  Set Local Primary addr
+    mesh_set_local_prim_addr_t prim_addr;
+    ///Mesh  Set Local Dev key
+    mesh_set_local_dev_key_t   local_dev_key;
+    ///Mesh  Set Local iv and seq
+    mesh_set_local_iv_seq_t    local_iv_seq;
+    ///Mesh  Start lpn
+    mesh_start_lpn_param_t     lpn_param;
+    ///Mesh  Select Friend
+    mesh_select_friend_param_t  friend_param;
+    ///structure for local friend state
+    mesh_set_friend_state_t friend_state;
 }mesh_core_evt_cb_params_t;
 
 ///Provision Get Composition Structure
@@ -1685,6 +1912,12 @@ typedef  void (* sig_model_state_cb)(mesh_state_ind_t * p_state ) ;
 
 ///Mesh Start Complete fuc
 typedef  void (* mesh_start_complete)(void) ;
+
+///Mesh Pause Scan Complete fuc
+typedef  void (* mesh_scan_pasuse_cb)(void) ;
+
+///Mesh Resume Scan Complete fuc
+typedef  void (* mesh_scan_resume_cb)(void) ;
 
 
 /*
@@ -2002,6 +2235,131 @@ uint16_t sonata_mesh_rand_hword(void);
  ************************************************************
 */
 uint16_t sonata_mesh_get_src_addr();
+/**
+ ****************************************************************************************
+ * @brief Get device run time
+ *
+ ****************************************************************************************
+ */
+void app_mesh_api_get_run_time(void);
+
+/**
+ ***********************************************************
+ * @brief Func  pause mesh scan
+ *
+ * @param[in]  module      module id defined @see mesh_scan_opr_module_id
+ * @param[in]  cb          mesh scan pause complete callback
+ *
+ * @return void pause mesh scan
+ ************************************************************
+*/
+void sonata_mesh_scan_pause(mesh_scan_opr_module_id_t module, mesh_scan_pasuse_cb cb);
+
+/**
+ ***********************************************************
+ * @brief Func  resume mesh scan
+ *
+ * @param[in]  module      module id defined @see mesh_scan_opr_module_id
+ * @param[in]  cb          mesh scan resume complete callback
+ *
+ * @return void
+ ************************************************************
+*/
+void sonata_mesh_scan_resume(mesh_scan_opr_module_id_t module, mesh_scan_resume_cb cb);
+
+/**
+ ***********************************************************
+ * @brief Func  get netkey after system is running
+ * @param[in]  key_index        netkey global index
+ * @param[in]  key          key storage
+ *
+ * @retval MESH_ERROR_NO_ERROR         No Error/Success
+ * @retval MESH_ERROR_INVALID_PARAM    Not Found/Fail
+ ************************************************************
+*/
+STATUS sonata_mesh_get_netkey(uint16_t key_index, uint8_t *key);
+
+
+/**
+ ***********************************************************
+ * @brief Func  get appkey after system is running
+ * @param[in]  key_index        appkey global index
+ * @param[in]  key          key storage
+ *
+ * @retval MESH_ERROR_NO_ERROR         No error/Success
+ * @retval MESH_ERROR_INVALID_PARAM    Not Found/Fail
+ ************************************************************
+*/
+STATUS sonata_mesh_get_appkey(uint16_t key_index, uint8_t *key);
+
+/**
+ ***********************************************************
+ * @brief Func  get node first addr
+ *
+ * @
+ *
+ * @retval uint16_t         addr
+
+ ************************************************************
+*/
+uint16_t  sonata_mesh_get_prim_addr(void);
+
+/**
+ ***********************************************************
+ * @brief Func  get devkey after system is running
+ * @param[in]  key          key storage
+ *
+ * @retval void
+ ************************************************************
+*/
+void sonata_mesh_get_dev_key(uint8_t *key);
+
+
+/**
+ ***********************************************************
+ * @brief Func  get iv index and seq no
+ * @param[in]  iv          porter to iv index
+ * @param[in]  seq         porter to seq no
+ *
+ * @retval void
+ ************************************************************
+*/
+void sonata_mesh_get_iv_seq(uint32_t *iv, uint32_t *seq);
+
+
+/**
+ ***********************************************************
+ * @brief Func  get subscribe list size
+ * @param[in]  unicast_addr          element addr
+ * @param[in]  model_id         model ID
+ *
+ * @retval uint16_t           size
+ ************************************************************
+*/
+uint16_t sonata_mesh_get_subs_size(uint16_t unicast_addr, uint32_t model_id);
+
+/**
+ ***********************************************************
+ * @brief Func  start adv unprov beacon
+ *
+ *
+ *
+ * @retval void
+ ************************************************************
+*/
+void sonata_mesh_start_unprov_beacon(void);
+
+/**
+ ***********************************************************
+ * @brief Func  stop adv unprov beacon
+ *
+ *
+ *
+ * @retval void
+ ************************************************************
+*/
+void sonata_mesh_stop_unprov_beacon(void);
+
 /** @}*/
 
 /** @}*/

@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2022 ASR Microelectronics (Shanghai) Co., Ltd. All rights reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 #include <string.h>
 #include <stdlib.h>
@@ -19,6 +33,20 @@
 
 #define COMPRESS_LEN(x) (sizeof(size_t))
 
+lega_task_config_t task_cfg[LEGA_TASK_CONFIG_MAX] = {
+#ifdef USE_SMALL_STACK
+    {LEGA_WPA3_AUTH_TASK_PRIORITY, 2560},
+    {LEGA_LWIFI_TASK_PRIORITY, 2560},
+#else
+    {LEGA_WPA3_AUTH_TASK_PRIORITY, 13312},
+    {LEGA_LWIFI_TASK_PRIORITY, 2048},
+#endif
+    {LEGA_UWIFI_RX_TASK_PRIORITY, 4096},
+    {LEGA_UWIFI_TASK_PRIORITY, 7168},
+    {LEGA_LWIP_DHCP_TASK_PRIORITY, 1536},
+    {LEGA_BLE_SCHEDULER_PRIORITY, 4096},
+};
+
 ///////////////////////
 OSBool lega_rtos_is_in_interrupt_context(void)
 {
@@ -31,6 +59,27 @@ OSBool lega_rtos_is_in_interrupt_context(void)
     return  FALSE;
 }
 
+void lega_vector_table_reloc(void)
+{
+
+}
+/*******************************************************************
+* Name: lega_task_cfg_init
+* Description: this api get wifi task config
+* input param: task index defined in lega_rtos.h
+* output param: config data of wifi task
+* return: OSSatus value
+*******************************************************************/
+OSStatus lega_rtos_task_cfg_get(uint32_t index, lega_task_config_t *cfg)
+{
+    if (!cfg || (index >= LEGA_TASK_CONFIG_MAX)) {
+        return kGeneralErr;
+    }
+    cfg->task_priority = task_cfg[index].task_priority;
+    cfg->stack_size = task_cfg[index].stack_size;
+
+    return kNoErr;
+}
 /*******************************************************************
 * Name: lega_rtos_create_thread
 * Description: this api call freeRTOS function "xTaskCreate" to create task
@@ -56,9 +105,10 @@ OSStatus lega_rtos_create_thread( lega_thread_t* thread, uint8_t priority, const
     attr.cb_size = 0U;
     attr.stack_mem = NULL;
     attr.stack_size = stack_size;
-    attr.priority  = priority -5 ;
+    //attr.priority  = priority -5 ;
     // attr.priority = priority - 8;//application 32 means harmo adaptor 24, liteos prio 15.
     //here should add bound check!
+    attr.priority = priority;
     if (autorun == 1) {
         threadId = osThreadNew((osThreadFunc_t)function, (void *)arg, &attr);
         if (threadId == 0) {
@@ -93,7 +143,9 @@ OSStatus lega_rtos_delete_thread( lega_thread_t* thread )
         return kGeneralErr;
     }
 
-    *(unsigned int *)thread = 0;
+    if (thread != NULL) {
+        *(unsigned int *)thread = 0;
+    }
     return kNoErr;
 }
 //////////////////////////////  semaphore  //////////////////////////////////////
@@ -445,12 +497,12 @@ OSStatus lega_rtos_reload_timer( lega_timer_t* timer )
         return kGeneralErr;
     }
     if (KalTimerStop((KalTimerId)(timer->handle)) != KAL_OK) {
-        printf("rtos_stop_timer\r\n");
+        printf("rtos_reload_timer err1\r\n");
         return kGeneralErr;
     }
 
     if (KalTimerStart((KalTimerId)(timer->handle)) != KAL_OK) {
-        printf("rtos_start_timer\r\n");
+        printf("rtos_reload_timer err2\r\n");
         return kGeneralErr;
     }
 
@@ -601,21 +653,42 @@ void vPortFree( void *pv )
     lega_rtos_free(pv);
 }
 
-UINT32 HalHwiCreate(HWI_HANDLE_T hwiNum,
-                    HWI_PRIOR_T hwiPrio,
-                    HWI_MODE_T mode,
-                    HWI_PROC_FUNC handler,
-                    HWI_ARG_T arg)
+/*******************************************************************
+* Name:lega_rtos_enter_critical
+* Description: get system into critical area where there is no context switch
+* input param: none
+* output param: none
+* return:none
+*******************************************************************/
+lega_cpsr_t _lega_rtos_enter_critical( void )
 {
-    return ArchHwiCreate(hwiNum,hwiPrio,mode,handler,arg);
+    lega_cpsr_t cpsr_save = LOS_IntLock();
+    return cpsr_save;
 }
 
-UINT32 HalIntLock(VOID)
+/*******************************************************************
+* Name:lega_rtos_exit_critical
+* Description: get system out of critical area
+* input param: none
+* output param:none
+* return:none
+*******************************************************************/
+void _lega_rtos_exit_critical( lega_cpsr_t cpsr_store)
 {
-    return ArchIntLock();
+    LOS_IntRestore( cpsr_store );
 }
 
-VOID HalIntRestore(UINT32 intSave)
+void lega_intrpt_enter()
 {
-    ArchIntRestore(intSave);
+}
+
+/*******************************************************************
+* Name:lega_intrpt_exit
+* Description: exit interrupt
+* input param: none
+* output param:none
+* return:none
+*******************************************************************/
+void lega_intrpt_exit()
+{
 }
