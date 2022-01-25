@@ -1,0 +1,947 @@
+OPEN SOURCE SOFTWARE NOTICE
+
+Please note we provide an open source software notice for the third party open source software along with this software and/or this software component (in the following just “this SOFTWARE”). The open source software licenses are granted by the respective right holders.
+
+Warranty Disclaimer
+THE OPEN SOURCE SOFTWARE IN THIS PRODUCT IS DISTRIBUTED IN THE HOPE THAT IT WILL BE USEFUL, BUT WITHOUT ANY WARRANTY, WITHOUT EVEN THE IMPLIED WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. SEE THE APPLICABLE LICENSES FOR MORE DETAILS.
+
+Copyright Notice and License Texts
+
+----------------------------------------------------------------------
+Software: mbed TLS 2.16.6
+
+Copyright notice:
+Copyright (C) 2006-2015, ARM Limited, All Rights Reserved
+Copyright (C) 2016, ARM Limited, All Rights Reserved
+Copyright (C) 2006-2016, ARM Limited, All Rights Reserved
+Copyright (c) 2014-2017, ARM Limited, All Rights Reserved
+Copyright (c) 2016, ARM Limited, All Rights Reserved
+Copyright (c) 2018, Arm Limited, All Rights Reserved
+Copyright (c) 2018, ARM Limited, All Rights Reserved
+Copyright (c) 2015-2019, ARM Limited, All Rights Reserved
+Copyright (C) 2018, Arm Limited, All Rights Reserved
+Copyright (C) 2018, ARM Limited, All Rights Reserved
+Copyright (c) 2017, ARM Limited, All Rights Reserved
+Copyright (C) 2006-2017, ARM Limited, All Rights Reserved
+Copyright (C) 2016-2018, ARM Limited, All Rights Reserved
+Copyright (C) 2018, Arm Limited (or its affiliates), All Rights Reserved
+Copyright (C) 2019, ARM Limited, All Rights Reserved
+Copyright (c) 2012-2016, ARM Limited, All Rights Reserved
+Copyright (c) 2015-2016, ARM Limited, All Rights Reserved
+Copyright (C) 2006-2018, Arm Limited (or its affiliates), All Rights Reserved.
+Copyright (C) 2006-2018, ARM Limited, All Rights Reserved
+Copyright (C) 2006-2018, Arm Limited (or its affiliates), All Rights Reserved
+Copyright (C) 2015-2018, Arm Limited (or its affiliates), All Rights Reserved
+Copyright (C) 2006-2019, Arm Limited (or its affiliates), All Rights Reserved
+Copyright (C) 2016-2019, ARM Limited, All Rights Reserved
+Copyright (C) 2006-2019, ARM Limited, All Rights Reserved
+
+License: Apache License V2.0
+Unless specifically indicated otherwise in a file, files are licensed
+under the Apache 2.0 license, as can be found in: apache-2.0.txt
+
+----------------------------------------------------------------------
+Software: musl 1.2.0
+
+Copyright notice:
+Copyright © 2005-2020 Rich Felker, et al.
+Copyright © 1993,2004 Sun Microsystems or
+Copyright © 2003-2011 David Schultz or
+Copyright © 2003-2009 Steven G. Kargl or
+Copyright © 2003-2009 Bruce D. Evans or
+Copyright © 2008 Stephen L. Moshier or
+Copyright © 2017-2018 Arm Limited
+Copyright © 1994 David Burren.
+Copyright (c) 2008 Stephen L. Moshier <steve@moshier.net>
+Copyright (c) 2005 Bruce D. Evans and Steven G. Kargl
+Copyright (c) 2011 David Schultz <das@FreeBSD.ORG>
+Copyright (c) 2007 David Schultz <das@FreeBSD.ORG>
+Copyright (c) 2011 David Schultz
+Copyright (c) 1998-2012 Solar Designer
+Copyright (c) 1994 David Burren
+Copyright (c) 2000,2002,2010,2012 Solar Designer
+Copyright (C) 1993 by Sun Microsystems, Inc. All rights reserved.
+Copyright (c) 2009-2011, Bruce D. Evans, Steven G. Kargl, David Schultz.
+Copyright (c) 2018, Arm Limited.
+Copyright (c) 2017-2018, Arm Limited.
+Copyright (c) 2005-2008 David Schultz <das@FreeBSD.ORG>
+Copyright (c) 2005-2011 David Schultz <das@FreeBSD.ORG>
+Copyright (c) 2008 Steven G. Kargl, David Schultz, Bruce D. Evans.
+Copyright 2004 Sun Microsystems, Inc.  All Rights Reserved.
+Copyright (c) 2001-2009 Ville Laurikari <vl@iki.fi>
+Copyright (C) 2011 by Valentin Ochs
+
+License: BSD 2-Clause License
+musl as a whole is licensed under the following standard MIT license:
+
+Copyright © 2005-2020 Rich Felker, et al.
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Authors/contributors include:
+
+A. Wilcox
+Ada Worcester
+Alex Dowad
+Alex Suykov
+Alexander Monakov
+Andre McCurdy
+Andrew Kelley
+Anthony G. Basile
+Aric Belsito
+Arvid Picciani
+Bartosz Brachaczek
+Benjamin Peterson
+Bobby Bingham
+Boris Brezillon
+Brent Cook
+Chris Spiegel
+Clément Vasseur
+Daniel Micay
+Daniel Sabogal
+Daurnimator
+David Carlier
+David Edelsohn
+Denys Vlasenko
+Dmitry Ivanov
+Dmitry V. Levin
+Drew DeVault
+Emil Renner Berthing
+Fangrui Song
+Felix Fietkau
+Felix Janda
+Gianluca Anzolin
+Hauke Mehrtens
+He X
+Hiltjo Posthuma
+Isaac Dunham
+Jaydeep Patil
+Jens Gustedt
+Jeremy Huntwork
+Jo-Philipp Wich
+Joakim Sindholt
+John Spencer
+Julien Ramseier
+Justin Cormack
+Kaarle Ritvanen
+Khem Raj
+Kylie McClain
+Leah Neukirchen
+Luca Barbato
+Luka Perkov
+M Farkas-Dyck (Strake)
+Mahesh Bodapati
+Markus Wichmann
+Masanori Ogino
+Michael Clark
+Michael Forney
+Mikhail Kremnyov
+Natanael Copa
+Nicholas J. Kain
+orc
+Pascal Cuoq
+Patrick Oppenlander
+Petr Hosek
+Petr Skocik
+Pierre Carrier
+Reini Urban
+Rich Felker
+Richard Pennington
+Ryan Fairfax
+Samuel Holland
+Segev Finer
+Shiz
+sin
+Solar Designer
+Stefan Kristiansson
+Stefan O'Rear
+Szabolcs Nagy
+Timo Teräs
+Trutz Behn
+Valentin Ochs
+Will Dietz
+William Haddon
+William Pitcock
+
+Portions of this software are derived from third-party works licensed
+under terms compatible with the above MIT license:
+
+The TRE regular expression implementation (src/regex/reg* and
+src/regex/tre*) is Copyright © 2001-2008 Ville Laurikari and licensed
+under a 2-clause BSD license (license text in the source files). The
+included version has been heavily modified by Rich Felker in 2012, in
+the interests of size, simplicity, and namespace cleanliness.
+
+Much of the math library code (src/math/* and src/complex/*) is
+Copyright © 1993,2004 Sun Microsystems or
+Copyright © 2003-2011 David Schultz or
+Copyright © 2003-2009 Steven G. Kargl or
+Copyright © 2003-2009 Bruce D. Evans or
+Copyright © 2008 Stephen L. Moshier or
+Copyright © 2017-2018 Arm Limited
+and labelled as such in comments in the individual source files. All
+have been licensed under extremely permissive terms.
+
+The ARM memcpy code (src/string/arm/memcpy_el.S) is Copyright © 2008
+The Android Open Source Project and is licensed under a two-clause BSD
+license. It was taken from Bionic libc, used on Android.
+
+The implementation of DES for crypt (src/crypt/crypt_des.c) is
+Copyright © 1994 David Burren. It is licensed under a BSD license.
+
+The implementation of blowfish crypt (src/crypt/crypt_blowfish.c) was
+originally written by Solar Designer and placed into the public
+domain. The code also comes with a fallback permissive license for use
+in jurisdictions that may not recognize the public domain.
+
+The smoothsort implementation (src/stdlib/qsort.c) is Copyright © 2011
+Valentin Ochs and is licensed under an MIT-style license.
+
+The x86_64 port was written by Nicholas J. Kain and is licensed under
+the standard MIT terms.
+
+The mips and microblaze ports were originally written by Richard
+Pennington for use in the ellcc project. The original code was adapted
+by Rich Felker for build system and code conventions during upstream
+integration. It is licensed under the standard MIT terms.
+
+The mips64 port was contributed by Imagination Technologies and is
+licensed under the standard MIT terms.
+
+The powerpc port was also originally written by Richard Pennington,
+and later supplemented and integrated by John Spencer. It is licensed
+under the standard MIT terms.
+
+All other files which have no copyright comments are original works
+produced specifically for use as part of this library, written either
+by Rich Felker, the main author of the library, or by one or more
+contibutors listed above. Details on authorship of individual files
+can be found in the git version control history of the project. The
+omission of copyright and license comments in each file is in the
+interest of source tree size.
+
+In addition, permission is hereby granted for all public header files
+(include/* and arch/*/bits/*) and crt files intended to be linked into
+applications (crt/*, ldso/dlstart.c, and arch/*/crt_arch.h) to omit
+the copyright notice and permission notice otherwise required by the
+license, and to use these files without any requirement of
+attribution. These files include substantial contributions from:
+
+Bobby Bingham
+John Spencer
+Nicholas J. Kain
+Rich Felker
+Richard Pennington
+Stefan Kristiansson
+Szabolcs Nagy
+
+all of whom have explicitly granted such permission.
+
+This file previously contained text expressing a belief that most of
+the files covered by the above exception were sufficiently trivial not
+to be subject to copyright, resulting in confusion over whether it
+negated the permissions granted in the license. In the spirit of
+permissive licensing, and of not having licensing issues being an
+obstacle to adoption, that text has been removed.
+----------------------------------------------------------------------
+Software:WPA supplicant 2.9
+
+Copyright notice:
+Copyright (c) 2002-2013, Jouni Malinen <j@w1.fi>
+Copyright (c) 2002-2015, Jouni Malinen <j@w1.fi>
+Copyright (c) 2002-2009, Jouni Malinen <j@w1.fi>
+Copyright (c) 2000-2003 Intel Corporation
+Copyright (c) 2006-2007 Sony Corporation
+Copyright (c) 2008-2009 Atheros Communications
+Copyright (c) 2009, Jouni Malinen <j@w1.fi>
+Copyright 2008 Atheros Communications
+Copyright (c) 2009-2012, Masashi Honma <masashi.honma@gmail.com>
+Copyright (c) 2007-2009, Jouni Malinen <j@w1.fi>
+Copyright (c) 2007-2016, Jouni Malinen <j@w1.fi>
+Copyright (c) 2008-2016, Jouni Malinen <j@w1.fi>
+Copyright (c) 2008, Jouni Malinen <j@w1.fi>
+Copyright (c) 2008-2012, Jouni Malinen <j@w1.fi>
+Copyright (c) 2009-2013, Jouni Malinen <j@w1.fi>
+Copyright (c) 2014, Jouni Malinen <j@w1.fi>
+Copyright (c) 2009-2010, Jouni Malinen <j@w1.fi>
+Copyright 2008 Atheros Communications.
+Copyright (c) 2006-2007 Sony Corporation. All Rights Reserved.
+Copyright (c) 2010, Atheros Communications, Inc.
+Copyright (c) 2006-2014, Jouni Malinen <j@w1.fi>
+Copyright (c) 2006, Jouni Malinen <j@w1.fi>
+Copyright (c) 2006-2009, Jouni Malinen <j@w1.fi>
+Copyright (c) 2009-2015, Jouni Malinen <j@w1.fi>
+Copyright (c) 2006-2019, Jouni Malinen <j@w1.fi>
+Copyright (c) 2006-2011, Jouni Malinen <j@w1.fi>
+Copyright (c) 2015, Jouni Malinen <j@w1.fi>
+Copyright (c) 2006-2015, Jouni Malinen <j@w1.fi>
+Copyright (c) 2006-2007, Jouni Malinen <j@w1.fi>
+Copyright (c) 2005-2019, Jouni Malinen <j@w1.fi>
+Copyright (c) 2005, Jouni Malinen <j@w1.fi>
+Copyright (c) 2013, Jouni Malinen <j@w1.fi>
+Copyright (c) 2013, Qualcomm Atheros, Inc.
+Copyright (c) 2005-2006, Jouni Malinen <j@w1.fi>
+Copyright (c) 2002-2019, Jouni Malinen <j@w1.fi>
+Copyright (c) 2002-2007, Jouni Malinen <j@w1.fi>
+Copyright (c) 2019, The Linux Foundation
+Copyright (c) 2010, Jouni Malinen <j@w1.fi>
+Copyright (c) 2010-2011, Jouni Malinen <j@w1.fi>
+Copyright (c) 2002-2006, Jouni Malinen <j@w1.fi>
+Copyright (c) 2012, Jouni Malinen <j@w1.fi>
+Copyright (c) 2012-2013, Qualcomm Atheros, Inc.
+Copyright (c) 2012-2014, Qualcomm Atheros, Inc.
+Copyright (c) 2003-2006, Jouni Malinen <j@w1.fi>
+Copyright (c) 2017, Qualcomm Atheros, Inc.
+Copyright (c) 2009-2019, Jouni Malinen <j@w1.fi>
+Copyright (c) 2014-2015, Jouni Malinen <j@w1.fi>
+Copyright (c) 2005-2009, Jouni Malinen <j@w1.fi>
+Copyright (c) 2004-2007, 2012, Jouni Malinen <j@w1.fi>
+Copyright (c) 2004-2006, 2012, Jouni Malinen <j@w1.fi>
+Copyright 2007		Andy Green <andy@warmcat.com>
+Copyright 2009		Johannes Berg <johannes@sipsolutions.net>
+Copyright (c) 2003, 2004 David Young.  All rights reserved.
+Copyright (c) 2002-2005, Jouni Malinen <j@w1.fi>
+Copyright (c) 2007-2012, Jouni Malinen <j@w1.fi>
+Copyright (c) 2002-2009, 2011-2015, Jouni Malinen <j@w1.fi>
+Copyright (c) 2002-2009, 2012, 2014-2015, Jouni Malinen <j@w1.fi>
+Copyright (c) 2012-2013, Jouni Malinen <j@w1.fi>
+Copyright (c) 2005-2009, 2011-2019, Jouni Malinen <j@w1.fi>
+Copyright (c) 2005-2009, 2011, Jouni Malinen <j@w1.fi>
+Copyright (c) 2004-2016, Jouni Malinen <j@w1.fi>
+Copyright (c) 2004-2016, Roshan Pius <rpius@google.com>
+Copyright (C) 2004, 2006 The Linux Foundation and its contributors.
+(c) The contribution was provided directly to me by some other
+person who certified (a), (b) or (c) and I have not modified
+Copyright (c) 2002-2019, Jouni Malinen <j@w1.fi> and contributors
+Copyright (c) 2013-2014, Qualcomm Atheros, Inc.
+Copyright (c) 2003-2017, Jouni Malinen <j@w1.fi>
+Copyright (c) 2004-2005, Jouni Malinen <j@w1.fi>
+Copyright (c) 2004, Sam Leffler <sam@errno.com>
+Copyright (c) 2004, Video54 Technologies
+Copyright (c) 2005-2007, Jouni Malinen <j@w1.fi>
+Copyright (c) 2009, Atheros Communications
+Copyright (c) 2004, 2Wire, Inc
+Copyright (c) 2003-2005, Jouni Malinen <j@w1.fi>
+Copyright (c) 2016, Sabrina Dubroca <sd@queasysnail.net> and Red Hat, Inc.
+Copyright (c) 2004, Gunter Burchardt <tira@isx.de>
+Copyright (c) 2004-2007, Jouni Malinen <j@w1.fi>
+Copyright (c) 2004-2006, Jouni Malinen <j@w1.fi>
+Copyright (c) 2003-2004, Instant802 Networks, Inc.
+Copyright (c) 2005-2006, Devicescape Software, Inc.
+Copyright (c) 2007, Johannes Berg <johannes@sipsolutions.net>
+Copyright (c) 2009-2010, Atheros Communications
+Copyright (c) 2002-2014, Jouni Malinen <j@w1.fi>
+Copyright (c) 2002-2017, Jouni Malinen <j@w1.fi>
+Copyright(c) 2015 Intel Deutschland GmbH
+Copyright (c) 2008, Atheros Communications
+Copyright (c) 2013, Mark Kettenis
+Copyright (c) 2008-2012 Jouke Witteveen
+Copyright (c) 2003-2015, Jouni Malinen <j@w1.fi>
+Copyright (c) 2002-2010, Jouni Malinen <j@w1.fi>
+Copyright (c) 2003-2011, Jouni Malinen <j@w1.fi>
+Copyright 2006-2010 Johannes Berg <johannes@sipsolutions.net>
+Copyright 2008 Michael Wu <flamingice@sourmilk.net>
+Copyright 2008 Luis Carlos Cobo <luisca@cozybit.com>
+Copyright 2008 Michael Buesch <m@bues.ch>
+Copyright 2008, 2009 Luis R. Rodriguez <lrodriguez@atheros.com>
+Copyright 2008 Jouni Malinen <jouni.malinen@atheros.com>
+Copyright 2008 Colin McCabe <colin@cozybit.com>
+Copyright 2015-2017	Intel Deutschland GmbH
+Copyright (C) 2018-2019 Intel Corporation
+Copyright (c) 2010, Atheros Communications
+Copyright (c) 2004-2014, Jouni Malinen <j@w1.fi>
+Copyright (c) 2004-2012, Jouni Malinen <j@w1.fi>
+Copyright (c) 2003-2013, Jouni Malinen <j@w1.fi>
+Copyright (c) 2004-2015, Jouni Malinen <j@w1.fi>
+Copyright (c) 2007-2014, Jouni Malinen <j@w1.fi>
+Copyright (c) 2004-2008, Jouni Malinen <j@w1.fi>
+Copyright (c) 2005-2008, Jouni Malinen <j@w1.fi>
+Copyright (c) 2004-2019, Jouni Malinen <j@w1.fi>
+Copyright (c) 2011-2013 Qualcomm Atheros, Inc.
+Copyright (c) 2013 Qualcomm Atheros, Inc.
+Copyright (c) 2010, Dan Harkins <dharkins@lounge.org>
+Copyright (c) 2004-2008, 2012-2015, Jouni Malinen <j@w1.fi>
+Copyright (c) 2004-2009, 2012, Jouni Malinen <j@w1.fi>
+Copyright (c) 2007, Jouni Malinen <j@w1.fi>
+Copyright (c) 2005-2015, Jouni Malinen <j@w1.fi>
+Copyright (c) 2007-2009, 2012, Jouni Malinen <j@w1.fi>
+Copyright (c) 2003-2007, Jouni Malinen <j@w1.fi>
+Copyright (c) 2010-2012, Jouni Malinen <j@w1.fi>
+Copyright (c) 2003-2012, Jouni Malinen <j@w1.fi>
+Copyright (c) 2013 Cozybit, Inc.
+Copyright (c) 2004-2017, Jouni Malinen <j@w1.fi>
+Copyright (c) 2017, Jouni Malinen <j@w1.fi>
+Copyright (c) 2009, 2012, Jouni Malinen <j@w1.fi>
+Copyright (c) 2003-2009, Jouni Malinen <j@w1.fi>
+Copyright (c) 2006-2007 <j@w1.fi>
+Copyright (c) 2004-2009, Jouni Malinen <j@w1.fi>
+Copyright (c) 2014-2017, Jouni Malinen <j@w1.fi>
+Copyright (c) 2003-2016, Jouni Malinen <j@w1.fi>
+Copyright (c) 2011, Jouni Malinen <j@w1.fi>
+Copyright (c) 2015, Pali Roh��r <pali.rohar@gmail.com>
+Copyright (c) 2015-2017, Jouni Malinen <j@w1.fi>
+Copyright (c) 2003-2018, Jouni Malinen <j@w1.fi>
+Copyright (c) 2004-2013, Jouni Malinen <j@w1.fi>
+Copyright (c) 2014, Qualcomm Atheros, Inc.
+Copyright (c) 2012, Intel Corporation. All rights reserved.
+Copyright 2015	Intel Deutschland GmbH
+Copyright (c) 2003-2008, Jouni Malinen <j@w1.fi>
+Copyright (c) 2018-2019, The Linux Foundation
+Copyright (c) 2003-2019, Jouni Malinen <j@w1.fi>
+Copyright (c) 2011-2014, Qualcomm Atheros, Inc.
+Copyright (c) 2011-2014, Jouni Malinen <j@w1.fi>
+Copyright (c) 2011, Qualcomm Atheros
+Copyright (c) 2009, Atheros Communications, Inc.
+Copyright (c) 2011-2013, Qualcomm Atheros, Inc.
+Copyright (c) 2011-2012, Qualcomm Atheros
+Copyright (c) 2013-2014, cozybit, Inc.  All rights reserved.
+Copyright (c) 2010-2014, Jouni Malinen <j@w1.fi>
+Copyright (c) 2003-2019, Jouni Malinen <j@w1.fi> and contributors
+Copyright (c) 2003-2009, Jouni Malinen <j@w1.fi> and contributors
+Copyright (c) 2003-2014, Jouni Malinen <j@w1.fi>
+Copyright (c) 2009-2014, Jouni Malinen <j@w1.fi>
+Copyright (c) 2011, Atheros Communications, Inc.
+Copyright (c) 2011-2012, Qualcomm Atheros, Inc.
+Copyright(c) 2014, Intel Mobile Communication GmbH.
+Copyright(c) 2014, Intel Corporation. All rights reserved.
+Copyright (C) 2010 The Android Open Source Project
+Copyright (c) 2008-2014, Jouni Malinen <j@w1.fi>
+Copyright (c) 2012, Intel Corporation
+Copyright (c) 2008 Bernard Gray <bernard.gray@gmail.com>
+Copyright (c) 2014-2019, Jouni Malinen <j@w1.fi>
+Copyright (c) 2015, Qualcomm Atheros, Inc.
+Copyright (c) 2004-2018, Jouni Malinen <j@w1.fi>
+Copyright (c) 2014-2017, Qualcomm Atheros, Inc.
+Copyright (c) 2012-2016, Jouni Malinen <j@w1.fi>
+Copyright (c) 2007-2008 Intel Corporation
+Copyright (c) 2016, Jouni Malinen <j@w1.fi>
+Copyright (c) 2018, Mathy Vanhoef
+Copyright (c) 2002-2018, Jouni Malinen <j@w1.fi>
+Copyright (c) 2010-2011, Atheros Communications, Inc.
+Copyright (c) 2002-2009, 2012-2015, Jouni Malinen <j@w1.fi>
+Copyright (c) 2011, Atheros Communications
+Copyright (c) 2018-2019, Toke H?iland-J?rgensen <toke@toke.dk>
+Copyright (c) 2006, Devicescape Software, Inc.
+Copyright (c) 2002-2003, Jouni Malinen <j@w1.fi>
+Copyright 2003-2006, Jouni Malinen <j@w1.fi>
+Copyright 2003-2004, Instant802 Networks, Inc.
+Copyright 2005-2006, Devicescape Software, Inc.
+Copyright 2003, Jouni Malinen <j@w1.fi>
+Copyright (c) 2002-2004, Instant802 Networks, Inc.
+Copyright (c) 2013-2017, Qualcomm Atheros, Inc.
+Copyright (c) 2011-2017, Qualcomm Atheros, Inc.
+Copyright (c) 2011-2017, Qualcomm Atheros
+Copyright 2002-2003, Instant802 Networks, Inc.
+Copyright (c) 2008-2011, Jouni Malinen <j@w1.fi>
+Copyright (c) 2016-2017, Qualcomm Atheros, Inc.
+Copyright (c) 2019 John Crispin <john@phrozen.org>
+Copyright (c) 2007-2008, Intel Corporation
+Copyright (c) 2002-2012, Jouni Malinen <j@w1.fi>
+Copyright (c) 2016, Qualcomm Atheros, Inc.
+Copyright(c) 2013 - 2016 Intel Mobile Communications GmbH.
+Copyright(c) 2011 - 2016 Intel Corporation. All rights reserved.
+Copyright (c) 2004-2008, 2012, Jouni Malinen <j@w1.fi>
+Copyright (c) 2016-2017, Jouni Malinen <j@w1.fi>
+Copyright (c) 2015 Google, Inc.
+Copyright 2003, Instant802 Networks, Inc.
+Copyright 2005, Devicescape Software, Inc.
+Copyright (c) 2012, Michael Braun <michael-dev@fami-braun.de>
+Copyright (c) 2011-2013, Jouni Malinen <j@w1.fi>
+Copyright (c) 2009, Dan Harkins <dharkins@lounge.org>
+Copyright (c) 2008-2019, Jouni Malinen <j@w1.fi>
+Copyright (c) 2005, Sam Leffler <sam@errno.com>
+Copyright (c) 2004-2009, 2011-2015, Jouni Malinen <j@w1.fi>
+Copyright (c) 2003-2009, 2011-2012, Jouni Malinen <j@w1.fi>
+Copyright (c) 2010-2011, Atheros Communications
+Copyright (c) 2006-2018, Jouni Malinen <j@w1.fi>
+Copyright (c) 2015, Adrian Nowicki <adinowicki@gmail.com>
+Copyright (c) 2011, Kel Modderman <kel@otaku42.de>
+Copyright (c) 2005-2011, Jouni Malinen <j@w1.fi>
+Copyright (c) 2006, Dan Williams <dcbw@redhat.com> and Red Hat, Inc.
+Copyright (c) 2009, Witold Sowa <witold.sowa@gmail.com>
+Copyright (c) 2009-2010, Witold Sowa <witold.sowa@gmail.com>
+Copyright (c) 2011-2012, Intel Corporation
+Copyright (c) 2005-2012, Jouni Malinen <j@w1.fi>
+Copyright (c) 2007-2010, Jouni Malinen <j@w1.fi>
+Copyright (c) 2004-2011, Jouni Malinen <j@w1.fi>
+Copyright (c) 2007-2008, Jouni Malinen <j@w1.fi>
+Copyright (c) 2005-2010, 2012, Jouni Malinen <j@w1.fi>
+Copyright (c) 2005-2008, 2012, Jouni Malinen <j@w1.fi>
+
+License: BSD License
+Copyright (c) <YEAR>, <OWNER>
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+----------------------------------------------------------------------
+Software:lwip 2.1.2
+
+Copyright notice:
+Copyright (c) 2016 Elias Oenal.
+Copyright (c) 2016 Elias Oenal and Dirk Ziegelmeier.
+Copyright (c) 2006 Axon Digital Design B.V., The Netherlands.
+Copyright (c) 2001-2004 Swedish Institute of Computer Science.
+Copyright (c) 2007 Dominik Spies <kontakt@dspies.de>
+Copyright (c) 2001-2004 Leon Woestenberg <leon.woestenberg@gmx.net>
+Copyright (c) 2001-2004 Axon Digital Design B.V., The Netherlands.
+Copyright (c) 2017 Simon Goldschmidt <goldsimon@gmx.de>
+uIP version Copyright (c) 2002-2003, Adam Dunkels.
+Copyright (c) 2017 Dirk Ziegelmeier.
+Copyright (c) 2015 Verisure Innovation AB
+Copyright (c) 2018 Simon Goldschmidt
+Copyright (c) 2001-2003 Swedish Institute of Computer Science.
+Copyright (c) 2018 Simon Goldschmidt <goldsimon@gmx.de>
+Copyright (c) 1994-2002 Paul Mackerras. All rights reserved.
+Copyright (c) 2003 Paul Mackerras. All rights reserved.
+Copyright (c) 1995 Eric Rosenquist.  All rights reserved.
+Copyright (c) 2001 by Sun Microsystems, Inc.
+Copyright (c) 2002 Google, Inc.
+Copyright (c) 1999 Tommi Komulainen.  All rights reserved.
+Copyright (c) 1984-2000 Carnegie Mellon University. All rights reserved.
+Copyright (c) 1995, 1996, 1997 Francis.Dupont@inria.fr, INRIA Rocquencourt,
+Alain.Durand@imag.fr, IMAG,
+Jean-Luc.Richier@imag.fr, IMAG-LSR.
+Copyright (c) 1998, 1999 Francis.Dupont@inria.fr, GIE DYADE,
+Copyright (c) 2003 by Marc Boucher, Services Informatiques (MBSI) inc.
+Copyright (c) 1998 Global Election Systems Inc.
+Copyright (c) 2008 Paul Mackerras. All rights reserved.
+portions Copyright (c) 1997 Global Election Systems Inc.
+portions Copyright (c) 1998 Global Election Systems Inc.
+portions Copyright (c) 2001 by Cognizant Pty Ltd.
+Copyright (c) 2006 by Marc Boucher, Services Informatiques (MBSI) inc.
+Copyright (c) 2002 The NetBSD Foundation, Inc.
+Copyright (c) 1989 Regents of the University of California.
+Copyright (c) Deltatee Enterprises Ltd. 2013
+Copyright (c) 1993-2002 Paul Mackerras. All rights reserved.
+Copyright (c) 2002 Google, Inc.  All rights reserved.
+Copyright (c) 1996-2002 Paul Mackerras. All rights reserved.
+Copyright (c) 1998 by Global Election Systems Inc.
+Copyright (c) 2002,2003,2004 Google, Inc.
+Copyright (c) 2000-2002 Paul Mackerras. All rights reserved.
+portions Copyright (c) 1997 by Global Election Systems Inc.
+Copyright (c) 1994 The Australian National University.
+Copyright (c) 1989 Carnegie Mellon University.
+Copyright (c) 1999-2002 Paul Mackerras. All rights reserved.
+Copyright (c) 2017 Simon Goldschmidt.
+Copyright (c) 2003-2004 Leon Woestenberg <leon.woestenberg@axon.tv>
+Copyright (c) 2003-2004 Axon Digital Design B.V., The Netherlands.
+Copyright (c) 2015 Inico Technologies Ltd.
+Copyright (c) 2017 Benjamin Aigner
+Copyright (c) 2015 Inico Technologies Ltd. , Author: Ivan Delamer <delamer@inicotech.com>
+Copyright (c) 2007-2009 Frédéric Bernon, Simon Goldschmidt
+Copyright (c) 2017 Simon Goldschmidt
+Copyright (c) 2013-2017, tinydir authors:
+- Cong Xu
+- Lautis Sun
+- Baudouin Feildel
+- Andargor <andargor@yahoo.com>
+All rights reserved.
+Copyright (c) 2014 Simon Goldschmidt
+Copyright (c) 2016 Erik Andersson <erian747@gmail.com>
+Copyright (c) 2017 Joel Cunningham, Garmin International, Inc. <joel.cunningham@garmin.com>
+Copyright (c) 2016 Erik Andersson
+Copyright (c) 2001, 2002 Leon Woestenberg <leon.woestenberg@axon.tv>
+Copyright (c) 2001, 2002 Axon Digital Design B.V., The Netherlands.
+Copyright (c) 2015 Dirk Ziegelmeier
+ported from uIP resolv.c Copyright (c) 2002-2003, Adam Dunkels.
+Copyright (c) 2010 Inico Technologies Ltd.
+Copyright (c) 2002 CITEL Technologies Ltd.
+Copyright (c) 2017 The MINIX 3 Project.
+Copyright (c) 2018 Swedish Institute of Computer Science.
+Copyright (c) 2018 Simon Goldschmidt.
+Based on XySSL: Copyright (C) 2006-2008  Christophe Devine
+Copyright (C) 2009  Paul Bakker <polarsslmaintainer at polarssl dot org>
+Copyright (c) 2001, Swedish Institute of Computer Science.
+Copyright (c) 2001, 2002 Swedish Institute of Computer Science.
+
+License:BSD 3-Clause License
+Copyright (c) <YEAR>, <OWNER>
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+----------------------------------------------------------------------
+Software:libcoap 4.2.1
+
+Copyright notice:
+Copyright (C) 2010-2011,2015-2016 Olaf Bergmann <bergmann@tzi.org>
+Copyright (C) 2010-2011 Olaf Bergmann <bergmann@tzi.org>
+Copyright (C) 2010-2012,2014-2015 Olaf Bergmann <bergmann@tzi.org>
+Copyright (C) 2010-2011,2014 Olaf Bergmann <bergmann@tzi.org>
+Copyright (C) 2016 Olaf Bergmann <bergmann@tzi.org>
+Copyright (C) 2017 Jean-Claude Michelou <jcm@spinetix.com>
+Copyright (C) 2012-2013 Olaf Bergmann <bergmann@tzi.org>
+Copyright (C) 2017 Jean-Claue Michelou <jcm@spinetix.com>
+Copyright (C) 2010-2019 Olaf Bergmann <bergmann@tzi.org>
+Copyright (C) 2010-2012 Olaf Bergmann <bergmann@tzi.org>
+Copyright (C) 2015 Carsten Schoenert <c.schoenert@t-online.de>
+Copyright (C) 2010-2011,2014-2015 Olaf Bergmann <bergmann@tzi.org>
+Copyright (C) 2010-2015 Olaf Bergmann <bergmann@tzi.org>
+Copyright (C) 2010-2013 Olaf Bergmann <bergmann@tzi.org>
+Copyright (C) 2010-2014 Olaf Bergmann <bergmann@tzi.org>
+Copyright (C) 2010,2011,2014,2015 Olaf Bergmann <bergmann@tzi.org>
+Copyright (C) 2010-2011,2016 Olaf Bergmann <bergmann@tzi.org>
+Copyright (c) 2003-2017, Troy D. Hanson     http:troydhanson.github.com/uthash/
+Copyright (c) 2007-2017, Troy D. Hanson   http:troydhanson.github.com/uthash/
+Copyright (C) 2011,2015,2018-2019 Olaf Bergmann <bergmann@tzi.org> and others
+Copyright (C) 2011 Olaf Bergmann <bergmann@tzi.org>
+Copyright (c) 2010--2019, Olaf Bergmann and others
+Copyright (C) 2010—2019 by Olaf Bergmann <bergmann@tzi.org> and others
+Copyright (c) 2001-2003 Swedish Institute of Computer Science.
+Copyright (C) 2019 Olaf Bergmann <bergmann@tzi.org>
+Copyright (C) 2013,2015 Olaf Bergmann <bergmann@tzi.org>
+Copyright (C) 2013 Olaf Bergmann <bergmann@tzi.org>
+Copyright (C) 2012,2015 Olaf Bergmann <bergmann@tzi.org>
+Copyright (C) 2012 Olaf Bergmann <bergmann@tzi.org>
+Copyright (C) 2013,2015-2018 Olaf Bergmann <bergmann@tzi.org>
+Copyright (C) 2018 Olaf Bergmann <bergmann@tzi.org>
+Copyright (C) 2013--2015 Olaf Bergmann <bergmann@tzi.org>
+Copyright (C) 2010--2019 Olaf Bergmann <bergmann@tzi.org> and others
+Copyright (C) 2010--2015 Olaf Bergmann <bergmann@tzi.org>
+Copyright (C) 2010,2011,2015 Olaf Bergmann <bergmann@tzi.org>
+Copyright (C) 2012--2013 Olaf Bergmann <bergmann@tzi.org>
+Copyright (C) 2010,2011 Olaf Bergmann <bergmann@tzi.org>
+Copyright (C) 2015-2016,2019 Olaf Bergmann <bergmann@tzi.org>
+Copyright (C) 2010--2012,2015-2019 Olaf Bergmann <bergmann@tzi.org> and others
+Copyright (C) 2010--2012,2014--2019 Olaf Bergmann <bergmann@tzi.org> and others
+Copyright (C) 2017 Dag Bjorklund <dag.bjorklund@comsel.fi>
+Copyright (C) 2012,2014,2016-2019 Olaf Bergmann <bergmann@tzi.org> and others
+Copyright (C) 2012,2014 Olaf Bergmann <bergmann@tzi.org>
+2014 chrysn <chrysn@fsfe.org>
+Copyright (C) 2015 Olaf Bergmann <bergmann@tzi.org>
+Copyright (C) 2014--2015 Olaf Bergmann <bergmann@tzi.org>
+Copyright (C) 2010--2019 Olaf Bergmann <bergmann@tzi.org>
+Copyright (C) 2010--2016 Olaf Bergmann <bergmann@tzi.org>
+Copyright (C) 2010--2012,2015-2016 Olaf Bergmann <bergmann@tzi.org>
+
+License: BSD 3-Clause License
+Copyright (c) <YEAR>, <OWNER>
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+----------------------------------------------------------------------
+Software:paho.mqtt.c 1.3.1
+
+Copyright notice:
+Copyright (c) 2015 logi.cals GmbH
+Copyright (c) 2013, 2018 IBM Corp.
+Copyright (c) 2013, 2014 IBM Corp.
+Copyright (c) 2009, 2018 IBM Corp.
+Copyright (c) 2012, 2018 IBM Corp.
+Copyright (c) 2009, 2014 IBM Corp.
+Copyright (c) 2009, 2019 IBM Corp.
+Copyright (c) 2012, 2019 IBM Corp.
+Copyright (c) 2011, 2014 IBM Corp.
+Copyright (c) 2012, 2017 IBM Corp.
+Copyright (c) 2018 Wind River Systems, Inc. All Rights Reserved.
+Copyright (c) 2009, 2013 IBM Corp.
+Copyright (c) 2015, 2018 logi.cals GmbH and others
+&copy; Copyright IBM Corp. 2009, 2018
+Copyright (c) 2009, 2012 IBM Corp.
+Copyright (c) 2017, 2019 IBM Corp.
+Copyright (c) 2009, 2017 IBM Corp.
+Copyright (c) 2017, 2018 IBM Corp.
+Copyright (c) 2018 IBM Corp.
+Copyright (c) 2016, 2017 logi.cals GmbH
+Copyright (c) 2018, 2019 Wind River Systems, Inc. and others. All Rights Reserved.
+Copyright (c) 2015, 2019 logi.cals GmbH and others
+Copyright (c) 2015, 2017 logi.cals GmbH and others
+Copyright (c) 2012, 2018 IBM Corp., and others
+Copyright (c) 2012, 2019 IBM Corp., and others
+
+License: Eclipse Public License(EPL) V1.0
+THE ACCOMPANYING PROGRAM IS PROVIDED UNDER THE TERMS OF THIS ECLIPSE PUBLIC LICENSE ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THE PROGRAM CONSTITUTES RECIPIENT’S ACCEPTANCE OF THIS AGREEMENT.
+
+1. DEFINITIONS
+
+"Contribution" means:
+
+a) in the case of the initial Contributor, the initial code and documentation distributed under this Agreement, and
+b) in the case of each subsequent Contributor:
+
+i)changes to the Program, and
+ii)additions to the Program;
+where such changes and/or additions to the Program originate from and are distributed by that particular Contributor. A Contribution 'originates' from a Contributor if it was added to the Program by such Contributor itself or anyone acting on such Contributor’s behalf. Contributions do not include additions to the Program which: (i) are separate modules of software distributed in conjunction with the Program under their own license agreement, and (ii) are not derivative works of the Program.
+
+"Contributor" means any person or entity that distributes the Program.
+
+"Licensed Patents " mean patent claims licensable by a Contributor which are necessarily infringed by the use or sale of its Contribution alone or when combined with the Program.
+
+"Program" means the Contributions distributed in accordance with this Agreement.
+
+"Recipient" means anyone who receives the Program under this Agreement, including all Contributors.
+
+2. GRANT OF RIGHTS
+
+a) Subject to the terms of this Agreement, each Contributor hereby grants Recipient a non-exclusive, worldwide, royalty-free copyright license to reproduce, prepare derivative works of, publicly display, publicly perform, distribute and sublicense the Contribution of such Contributor, if any, and such derivative works, in source code and object code form.
+
+b) Subject to the terms of this Agreement, each Contributor hereby grants Recipient a non-exclusive, worldwide, royalty-free patent license under Licensed Patents to make, use, sell, offer to sell, import and otherwise transfer the Contribution of such Contributor, if any, in source code and object code form. This patent license shall apply to the combination of the Contribution and the Program if, at the time the Contribution is added by the Contributor, such addition of the Contribution causes such combination to be covered by the Licensed Patents. The patent license shall not apply to any other combinations which include the Contribution. No hardware per se is licensed hereunder.
+
+c) Recipient understands that although each Contributor grants the licenses to its Contributions set forth herein, no assurances are provided by any Contributor that the Program does not infringe the patent or other intellectual property rights of any other entity. Each Contributor disclaims any liability to Recipient for claims brought by any other entity based on infringement of intellectual property rights or otherwise. As a condition to exercising the rights and licenses granted hereunder, each Recipient hereby assumes sole responsibility to secure any other intellectual property rights needed, if any. For example, if a third party patent license is required to allow Recipient to distribute the Program, it is Recipient’s responsibility to acquire that license before distributing the Program.
+
+d) Each Contributor represents that to its knowledge it has sufficient copyright rights in its Contribution, if any, to grant the copyright license set forth in this Agreement.
+
+3. REQUIREMENTS
+
+A Contributor may choose to distribute the Program in object code form under its own license agreement, provided that:
+
+a) it complies with the terms and conditions of this Agreement; and
+
+b) its license agreement:
+
+i) effectively disclaims on behalf of all Contributors all warranties and conditions, express and implied, including warranties or conditions of title and non-infringement, and implied warranties or conditions of merchantability and fitness for a particular purpose;
+
+ii) effectively excludes on behalf of all Contributors all liability for damages, including direct, indirect, special, incidental and consequential damages, such as lost profits;
+
+iii) states that any provisions which differ from this Agreement are offered by that Contributor alone and not by any other party; and
+
+iv) states that source code for the Program is available from such Contributor, and informs licensees how to obtain it in a reasonable manner on or through a medium customarily used for software exchange.
+
+When the Program is made available in source code form:
+
+a) it must be made available under this Agreement; and
+
+b) a copy of this Agreement must be included with each copy of the Program.
+
+Contributors may not remove or alter any copyright notices contained within the Program.
+
+Each Contributor must identify itself as the originator of its Contribution, if any, in a manner that reasonably allows subsequent Recipients to identify the originator of the Contribution.
+
+4. COMMERCIAL DISTRIBUTION
+
+Commercial distributors of software may accept certain responsibilities with respect to end users, business partners and the like. While this license is intended to facilitate the commercial use of the Program, the Contributor who includes the Program in a commercial product offering should do so in a manner which does not create potential liability for other Contributors. Therefore, if a Contributor includes the Program in a commercial product offering, such Contributor ("Commercial Contributor") hereby agrees to defend and indemnify every other Contributor ("Indemnified Contributor") against any losses, damages and costs (collectively "Losses") arising from claims, lawsuits and other legal actions brought by a third party against the Indemnified Contributor to the extent caused by the acts or omissions of such Commercial Contributor in connection with its distribution of the Program in a commercial product offering. The obligations in this section do not apply to any claims or Losses relating to any actual or alleged intellectual property infringement. In order to qualify, an Indemnified Contributor must: a) promptly notify the Commercial Contributor in writing of such claim, and b) allow the Commercial Contributor to control, and cooperate with the Commercial Contributor in, the defense and any related settlement negotiations. The Indemnified Contributor may participate in any such claim at its own expense.
+
+For example, a Contributor might include the Program in a commercial product offering, Product X. That Contributor is then a Commercial Contributor. If that Commercial Contributor then makes performance claims, or offers warranties related to Product X, those performance claims and warranties are such Commercial Contributor’s responsibility alone. Under this section, the Commercial Contributor would have to defend claims against the other Contributors related to those performance claims and warranties, and if a court requires any other Contributor to pay any damages as a result, the Commercial Contributor must pay those damages.
+
+5. NO WARRANTY
+
+EXCEPT AS EXPRESSLY SET FORTH IN THIS AGREEMENT, THE PROGRAM IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED INCLUDING, WITHOUT LIMITATION, ANY WARRANTIES OR CONDITIONS OF TITLE, NON-INFRINGEMENT, MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. Each Recipient is solely responsible for determining the appropriateness of using and distributing the Program and assumes all risks associated with its exercise of rights under this Agreement , including but not limited to the risks and costs of program errors, compliance with applicable laws, damage to or loss of data, programs or equipment, and unavailability or interruption of operations.
+
+6. DISCLAIMER OF LIABILITY
+
+EXCEPT AS EXPRESSLY SET FORTH IN THIS AGREEMENT, NEITHER RECIPIENT NOR ANY CONTRIBUTORS SHALL HAVE ANY LIABILITY FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING WITHOUT LIMITATION LOST PROFITS), HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OR DISTRIBUTION OF THE PROGRAM OR THE EXERCISE OF ANY RIGHTS GRANTED HEREUNDER, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+7. GENERAL
+
+If any provision of this Agreement is invalid or unenforceable under applicable law, it shall not affect the validity or enforceability of the remainder of the terms of this Agreement, and without further action by the parties hereto, such provision shall be reformed to the minimum extent necessary to make such provision valid and enforceable.
+
+If Recipient institutes patent litigation against any entity (including a cross-claim or counterclaim in a lawsuit) alleging that the Program itself (excluding combinations of the Program with other software or hardware) infringes such Recipient’s patent(s), then such Recipient’s rights granted under Section 2(b) shall terminate as of the date such litigation is filed.
+
+All Recipient’s rights under this Agreement shall terminate if it fails to comply with any of the material terms or conditions of this Agreement and does not cure such failure in a reasonable period of time after becoming aware of such noncompliance. If all Recipient’s rights under this Agreement terminate, Recipient agrees to cease use and distribution of the Program as soon as reasonably practicable. However, Recipient’s obligations under this Agreement and any licenses granted by Recipient relating to the Program shall continue and survive.
+
+Everyone is permitted to copy and distribute copies of this Agreement, but in order to avoid inconsistency the Agreement is copyrighted and may only be modified in the following manner. The Agreement Steward reserves the right to publish new versions (including revisions) of this Agreement from time to time. No one other than the Agreement Steward has the right to modify this Agreement. The Eclipse Foundation is the initial Agreement Steward. The Eclipse Foundation may assign the responsibility to serve as the Agreement Steward to a suitable separate entity. Each new version of the Agreement will be given a distinguishing version number. The Program (including Contributions) may always be distributed subject to the version of the Agreement under which it was received. In addition, after a new version of the Agreement is published, Contributor may elect to distribute the Program (including its Contributions) under the new version. Except as expressly stated in Sections 2(a) and 2(b) above, Recipient receives no rights or licenses to the intellectual property of any Contributor under this Agreement, whether expressly, by implication, estoppel or otherwise. All rights in the Program not expressly granted under this Agreement are reserved.
+
+This Agreement is governed by the laws of the State of New York and the intellectual property laws of the United States of America. No party to this Agreement will bring a legal action under this Agreement more than one year after the cause of action arose. Each party waives its rights to a jury trial in any resulting litigation.
+
+----------------------------------------------------------------------
+Software:cJSON 1.7.13
+
+Copyright notice:
+Copyright (c) 2007-14 Mike Karlesky, Mark VanderVoord, Greg Williams
+Copyright (c) 2009-2017 Dave Gamble and cJSON contributors
+Copyright (c) 2009-2019 Dave Gamble and cJSON contributors
+Copyright (c) 2010 James Grenning and Contributed to Unity Project
+Copyright (c) 2007 Mike Karlesky, Mark VanderVoord, Greg Williams
+Copyright (c) 2007 - 2017 Unity Project by Mike Karlesky, Mark VanderVoord, and Greg Williams
+Copyright 2014 The Authors
+Copyright (c) 2015 Alexander Mueller / XelaRellum@web.de
+Copyright (c) 2009-2017 Dave Gamble and cJSON contributors
+
+License: The MIT License
+The MIT License
+
+Copyright (c) <year> <copyright holders>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+----------------------------------------------------------------------
+Software:bounds_checking_function
+
+Copyright notice:
+Copyright (c) Huawei Technologies Co., Ltd. 2014-2020. All rights reserved.
+
+License: Mulan Permissive Software License，Version 2
+木兰宽松许可证, 第2版
+木兰宽松许可证， 第2版
+
+2020年1月 http://license.coscl.org.cn/MulanPSL2
+
+您对“软件”的复制、使用、修改及分发受木兰宽松许可证，第2版（“本许可证”）的如下条款的约束：
+
+0.   定义
+
+“软件” 是指由“贡献”构成的许可在“本许可证”下的程序和相关文档的集合。
+
+“贡献” 是指由任一“贡献者”许可在“本许可证”下的受版权法保护的作品。
+
+“贡献者” 是指将受版权法保护的作品许可在“本许可证”下的自然人或“法人实体”。
+
+“法人实体” 是指提交贡献的机构及其“关联实体”。
+
+“关联实体” 是指，对“本许可证”下的行为方而言，控制、受控制或与其共同受控制的机构，此处的控制是指有受控方或共同受控方至少50%直接或间接的投票权、资金或其他有价证券。
+
+1.   授予版权许可
+
+每个“贡献者”根据“本许可证”授予您永久性的、全球性的、免费的、非独占的、不可撤销的版权许可，您可以复制、使用、修改、分发其“贡献”，不论修改与否。
+
+2.   授予专利许可
+
+每个“贡献者”根据“本许可证”授予您永久性的、全球性的、免费的、非独占的、不可撤销的（根据本条规定撤销除外）专利许可，供您制造、委托制造、使用、许诺销售、销售、进口其“贡献”或以其他方式转移其“贡献”。前述专利许可仅限于“贡献者”现在或将来拥有或控制的其“贡献”本身或其“贡献”与许可“贡献”时的“软件”结合而将必然会侵犯的专利权利要求，不包括对“贡献”的修改或包含“贡献”的其他结合。如果您或您的“关联实体”直接或间接地，就“软件”或其中的“贡献”对任何人发起专利侵权诉讼（包括反诉或交叉诉讼）或其他专利维权行动，指控其侵犯专利权，则“本许可证”授予您对“软件”的专利许可自您提起诉讼或发起维权行动之日终止。
+
+3.   无商标许可
+
+“本许可证”不提供对“贡献者”的商品名称、商标、服务标志或产品名称的商标许可，但您为满足第4条规定的声明义务而必须使用除外。
+
+4.   分发限制
+
+您可以在任何媒介中将“软件”以源程序形式或可执行形式重新分发，不论修改与否，但您必须向接收者提供“本许可证”的副本，并保留“软件”中的版权、商标、专利及免责声明。
+
+5.   免责声明与责任限制
+
+“软件”及其中的“贡献”在提供时不带任何明示或默示的担保。在任何情况下，“贡献者”或版权所有者不对任何人因使用“软件”或其中的“贡献”而引发的任何直接或间接损失承担责任，不论因何种原因导致或者基于何种法律理论，即使其曾被建议有此种损失的可能性。
+
+6.   语言
+
+“本许可证”以中英文双语表述，中英文版本具有同等法律效力。如果中英文版本存在任何冲突不一致，以中文版为准。
+
+条款结束
+
+如何将木兰宽松许可证，第2版，应用到您的软件
+
+如果您希望将木兰宽松许可证，第2版，应用到您的新软件，为了方便接收者查阅，建议您完成如下三步：
+
+1， 请您补充如下声明中的空白，包括软件名、软件的首次发表年份以及您作为版权人的名字；
+
+2， 请您在软件包的一级目录下创建以“LICENSE”为名的文件，将整个许可证文本放入该文件中；
+
+3， 请将如下声明文本放入每个源文件的头部注释中。
+
+Copyright (c) [Year] [name of copyright holder]
+[Software Name] is licensed under Mulan PSL v2.
+You can use this software according to the terms and conditions of the Mulan PSL v2.
+You may obtain a copy of Mulan PSL v2 at:
+         http://license.coscl.org.cn/MulanPSL2
+THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND,
+EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT,
+MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
+See the Mulan PSL v2 for more details.
+Mulan Permissive Software License，Version 2
+Mulan Permissive Software License，Version 2 (Mulan PSL v2)
+
+January 2020 http://license.coscl.org.cn/MulanPSL2
+
+Your reproduction, use, modification and distribution of the Software shall be subject to Mulan PSL v2 (this License) with the following terms and conditions:
+
+0. Definition
+
+Software means the program and related documents which are licensed under this License and comprise all Contribution(s).
+
+Contribution means the copyrightable work licensed by a particular Contributor under this License.
+
+Contributor means the Individual or Legal Entity who licenses its copyrightable work under this License.
+
+Legal Entity means the entity making a Contribution and all its Affiliates.
+
+Affiliates means entities that control, are controlled by, or are under common control with the acting entity under this License, ‘control’ means direct or indirect ownership of at least fifty percent (50%) of the voting power, capital or other securities of controlled or commonly controlled entity.
+
+1. Grant of Copyright License
+
+Subject to the terms and conditions of this License, each Contributor hereby grants to you a perpetual, worldwide, royalty-free, non-exclusive, irrevocable copyright license to reproduce, use, modify, or distribute its Contribution, with modification or not.
+
+2. Grant of Patent License
+
+Subject to the terms and conditions of this License, each Contributor hereby grants to you a perpetual, worldwide, royalty-free, non-exclusive, irrevocable (except for revocation under this Section) patent license to make, have made, use, offer for sale, sell, import or otherwise transfer its Contribution, where such patent license is only limited to the patent claims owned or controlled by such Contributor now or in future which will be necessarily infringed by its Contribution alone, or by combination of the Contribution with the Software to which the Contribution was contributed. The patent license shall not apply to any modification of the Contribution, and any other combination which includes the Contribution. If you or your Affiliates directly or indirectly institute patent litigation (including a cross claim or counterclaim in a litigation) or other patent enforcement activities against any individual or entity by alleging that the Software or any Contribution in it infringes patents, then any patent license granted to you under this License for the Software shall terminate as of the date such litigation or activity is filed or taken.
+
+3. No Trademark License
+
+No trademark license is granted to use the trade names, trademarks, service marks, or product names of Contributor, except as required to fulfill notice requirements in section 4.
+
+4. Distribution Restriction
+
+You may distribute the Software in any medium with or without modification, whether in source or executable forms, provided that you provide recipients with a copy of this License and retain copyright, patent, trademark and disclaimer statements in the Software.
+
+5. Disclaimer of Warranty and Limitation of Liability
+
+THE SOFTWARE AND CONTRIBUTION IN IT ARE PROVIDED WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED. IN NO EVENT SHALL ANY CONTRIBUTOR OR COPYRIGHT HOLDER BE LIABLE TO YOU FOR ANY DAMAGES, INCLUDING, BUT NOT LIMITED TO ANY DIRECT, OR INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING FROM YOUR USE OR INABILITY TO USE THE SOFTWARE OR THE CONTRIBUTION IN IT, NO MATTER HOW IT’S CAUSED OR BASED ON WHICH LEGAL THEORY, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+6. Language
+
+THIS LICENSE IS WRITTEN IN BOTH CHINESE AND ENGLISH, AND THE CHINESE VERSION AND ENGLISH VERSION SHALL HAVE THE SAME LEGAL EFFECT. IN THE CASE OF DIVERGENCE BETWEEN THE CHINESE AND ENGLISH VERSIONS, THE CHINESE VERSION SHALL PREVAIL.
+
+END OF THE TERMS AND CONDITIONS
+
+How to Apply the Mulan Permissive Software License，Version 2 (Mulan PSL v2) to Your Software
+
+To apply the Mulan PSL v2 to your work, for easy identification by recipients, you are suggested to complete following three steps:
+
+Fill in the blanks in following statement, including insert your software name, the year of the first publication of your software, and your name identified as the copyright owner;
+Create a file named "LICENSE" which contains the whole context of this License in the first directory of your software package;
+Attach the statement to the appropriate annotated syntax at the beginning of each source file.
+Copyright (c) [Year] [name of copyright holder]
+[Software Name] is licensed under Mulan PSL v2.
+You can use this software according to the terms and conditions of the Mulan PSL v2.
+You may obtain a copy of Mulan PSL v2 at:
+         http://license.coscl.org.cn/MulanPSL2
+THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND,
+EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT,
+MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
+See the Mulan PSL v2 for more details.
+
