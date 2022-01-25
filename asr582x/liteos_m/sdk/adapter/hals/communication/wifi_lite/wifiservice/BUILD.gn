@@ -18,7 +18,6 @@ static_library("wifiservice") {
     "source/wifi_hotspot.c",
   ]
   include_dirs = [
-    "//device/hisilicon/hispark_pegasus/sdk_liteos/include",
     "//foundation/communication/wifi_lite/interfaces/wifiservice",
     "//kernel/liteos_m/kal",
     "//foundation/distributedschedule/samgr_lite/interfaces/kits/samgr",

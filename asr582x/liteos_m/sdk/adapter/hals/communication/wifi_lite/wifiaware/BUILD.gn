@@ -16,8 +16,6 @@ import("//build/lite/config/component/lite_component.gni")
 static_library("hal_wifiaware") {
   sources = [ "source/hal_wifiaware.c" ]
   include_dirs = [
-    "//device/hisilicon/hispark_pegasus/sdk_liteos/include",
-    "//device/hisilicon/hispark_pegasus/sdk_liteos/third_party/mbedtls-2.16.2/include",
     "//foundation/communication/wifi_aware/interfaces/kits",
   ]
 }

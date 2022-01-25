@@ -18,6 +18,5 @@ static_library("hal_update_static") {
   include_dirs = [
     "//base/update/ota_lite/hals",
     "//base/update/ota_lite/interfaces/kits",
-    "//device/hisilicon/hispark_pegasus/sdk_liteos/include",
   ]
 }
