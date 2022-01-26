@@ -133,8 +133,6 @@ extern unsigned char __los_heap_addr_end__[];
 
 #define LOSCFG_BACKTRACE_TYPE                               1
 
-#define LOSCFG_DEBUG_HOOK                                   0
-
 #define LOSCFG_KERNEL_PM                                    1
 
 #define LOSCFG_KERNEL_PM_DEBUG                              1
