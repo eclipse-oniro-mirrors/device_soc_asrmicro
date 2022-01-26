@@ -187,14 +187,26 @@ image 文件。
 ![](tools/figure/dogo1.png "Dogo选择")
 
 5. 点击“确认”关闭小窗口，勾选“only image”
-6. 将 ASR582X 设置为 Uart boot 模式
+6. 将 ASR582X 设置为 Uart boot 模式  
+[朗国开发板设置为"Uart boot"模式 操作参考](https://gitee.com/openharmony-sig/device_board_lango#3-%E8%BF%9B%E5%85%A5%E7%83%A7%E5%BD%95%E6%A8%A1%E5%BC%8F-uart-boot-%E6%A8%A1%E5%BC%8F)  
 7. Demo 板接通电源后，按下复位键，待出现“1F2E3D00”后点击“烧录”
 
 **图 2**  Dogo烧录
 ![](tools/figure/dogo2.png "Dogo烧录")
 
-8. 烧录完成后， 将 ASR582X 设置为 Flash boot 模式，按下复位键，DOGO 串口接收窗口中即可以看到程序正常运行
+8. 烧录完成后， 将 ASR582X 设置为 Flash boot 模式，按下复位键，DOGO 串口接收窗口中即可以看到程序正常运行  
+[朗国开发板设置"Flash boot"模式 操作参考](https://gitee.com/openharmony-sig/device_board_lango#5-%E9%80%80%E5%87%BA%E7%83%A7%E5%BD%95%E6%A8%A1%E5%BC%8F-%E8%BF%9B%E5%85%A5flash-boot-%E6%A8%A1%E5%BC%8F)
 
 # 相关仓
 
-* [device/asrmicro](https://gitee.com/openharmony-sig/device_asrmicro)
+* [device/soc/asrmicro](https://gitee.com/openharmony-sig/device_soc_asrmicro)  
+* [device/board/lango](https://gitee.com/openharmony-sig/device_board_lango)
+
+# 常见错误与处理
+### 1、Ubuntu 20.04.3 LTS 下编译报错  
+   编译出现如错误：
+   ```-bash: ./arm-none-eabi-gcc: No such file or directory```  
+   ![](https://images.gitee.com/uploads/images/2022/0126/000048_12ac75f9_5416512.png)
+   解决方案：执行 ```sudo apt-get install gcc-multilib```
+   ![](https://images.gitee.com/uploads/images/2022/0126/000143_1bfb1e31_5416512.png)  
+
