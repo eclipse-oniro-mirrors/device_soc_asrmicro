@@ -170,9 +170,13 @@ asrmicro
  > wifi_demo
  > xts_demo
 
-选择wifi_demo
+选择: wifi_demo
 
 hb build -f
+
+或选择: xts_demo
+
+hb build -f  --gn-args build_xts=true
 ```
 
 ### 烧录流程
