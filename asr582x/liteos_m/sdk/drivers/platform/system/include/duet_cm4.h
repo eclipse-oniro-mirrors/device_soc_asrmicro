@@ -83,6 +83,7 @@ typedef enum IRQn
 
 #ifdef DUET_CM4
 #include "core_cm4.h"
+#include "cachel1_armv7.h"
 #endif
 
 #include <stdint.h>
