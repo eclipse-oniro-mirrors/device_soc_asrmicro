@@ -146,19 +146,21 @@ repo forall -c 'git lfs pull'
 2. 下载[arm-none-eabi-gcc 编译工具下载](https://armkeil.blob.core.windows.net/developer//sitecore/shell/-/media/Files/downloads/gnu-rm/5_4-2016q3/gcc-arm-none-eabi-5_4-2016q3-20160926-linux,-d-,tar.bz2)
 
 
-3. 解压 [gcc-arm-none-eabi-5_4-2016q3-20160926-linux.tar.bz2](https://armkeil.blob.core.windows.net/developer//sitecore/shell/-/media/Files/downloads/gnu-rm/5_4-2016q3/gcc-arm-none-eabi-5_4-2016q3-20160926-linux,-d-,tar.bz2) 安装包至 openharmony/device/soc/asrmicro/gcc/gcc-arm-none-eabi/Linux64 路径下。
+3. 解压 [gcc-arm-none-eabi-5_4-2016q3-20160926-linux.tar.bz2](https://armkeil.blob.core.windows.net/developer//sitecore/shell/-/media/Files/downloads/gnu-rm/5_4-2016q3/gcc-arm-none-eabi-5_4-2016q3-20160926-linux,-d-,tar.bz2) 安装包至 /tmp/asr 路径下。
 
    ```
-   device/soc/asrmicro/gcc
-   └── gcc-arm-none-eabi
-      └── Linux64
-         ├── bin
-         ├── lib
-         ├── share
-         └── arm-none-eabi
+   /tmp/asr/gcc-arm-none-eabi-5_4-2016q3
+   ├── bin
+   ├── lib
+   ├── share
+   └── arm-none-eabi
    ```
-   也可放置其它目录，需注意修改 openharmony/device/board/lango/dev_wifi_a/liteos_m/config.gni中的 board_toolchain_path
-
+   然后添加gcc路径到环境变量
+   ```
+   echo 'export PATH=/tmp/asr/gcc-arm-none-eabi-5_4-2016q3/bin:$PATH'  >> ~/.bashrc
+   source ~/.bashrc
+   ```
+   
 ### 编译流程
 
 [编译构建使用指南](https://gitee.com/openharmony/docs/blob/master/zh-cn/device-dev/subsystems/subsys-build-mini-lite.md)
@@ -181,7 +183,7 @@ hb build -f  --gn-args build_xts=true
 
 ### 烧录流程
 
-1. 将 tools\DOGO_VP2.0.3.7Z 拷贝到windows 环境下解压，并双击 DOGO_VP2.0.3.exe
+1. 下载 [DOGO_VP2.0.3.7Z](https://gitee.com/lango-tech_0/tools/blob/master/DOGO_VP2.0.3.7z) 到windows 环境下解压，并双击 DOGO_VP2.0.3.exe
 2. 串口连接 PC 和 demo board，点击“检测串口”按键，在串口选择一栏选择对应的端口号并点击 “打开串口”
 3. 选择 “ChipType ”类型为 582X
 4. 点击“路径设置”，待弹出小窗口后点击 bootload 对应的“browser”进入目录选择待烧录的
