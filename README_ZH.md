@@ -1,9 +1,15 @@
 # device asrmicro
 ## 介绍
 
-该仓库托管翱捷科技开发的样例代码
+本仓库托管翱捷科技开发的样例代码，包含hal模块、wifi库文件、ble库文件等。内容共分为如下几部分：
+* 目录结构
+* 编译环境搭建
+* 编译流程
+* 烧录流程
+* 相关仓库
+* 常见错误与处理
 
-## 目录
+## 代码目录
 ```
 device/soc/asrmicro
 ├── asr582x                                  # ASR芯片名称
@@ -16,22 +22,20 @@ device/soc/asrmicro
 ├── Kconfig.liteos_m.defconfig               # kconfig 默认配置宏
 ├── Kconfig.liteos_m.series                  # 系列soc配置宏
 ├── Kconfig.liteos_m.soc                     # soc kconfig配置宏
-└── tools                                    # 烧录工具包目录
+└── tools                                    # 烧录工具文档目录
 ```
 ## 编译环境搭建
 
-系统要求： Ubuntu18.04 64位系统版本。
+系统要求： [Ubuntu18.04 64位系统版本](https://releases.ubuntu.com/18.04/)。
 
 编译环境搭建包含如下几步：
 
-1. 安装库和工具
-2. 安装repo
-3. 获取源码
-4. 安装python3
-5. 安装hb
-6. 安装arm-none-eabi-gcc
-7. 编译流程
-8. 烧录流程
+* 安装库和工具
+* 安装repo
+* 获取源码
+* 安装python3
+* 安装hb
+* 安装arm-none-eabi-gcc
 
 ### 安装库和工具
 
@@ -40,7 +44,7 @@ device/soc/asrmicro
 sudo apt-get update && sudo apt-get install build-essential gcc g++ make zlib* libffi-dev e2fsprogs pkg-config flex bison perl bc openssl libssl-dev libelf-dev libc6-dev-amd64 binutils binutils-dev libdwarf-dev u-boot-tools mtd-utils gcc-arm-linux-gnueabi cpio device-tree-compiler git git-lfs
 ```
 ### 安装repo
-1.  配置git用户信息。
+1.  配置git用户信息：
 
     ```
     git config --global user.name "yourname"
@@ -48,7 +52,7 @@ sudo apt-get update && sudo apt-get install build-essential gcc g++ make zlib* l
     git config --global credential.helper store
     ```
 
-2.  安装码云repo工具，可以执行如下命令。
+2.  安装码云repo工具：
 
     ```
     curl -s https://gitee.com/oschina/repo/raw/fork_flow/repo-py3 > /usr/local/bin/repo  #如果没有权限，可下载至其他目录，并将其配置到环境变量中
@@ -72,8 +76,7 @@ repo forall -c 'git lfs pull'
 
 ### 安装Python3
 
-1. 打开Linux编译服务器终端。
-2. 输入如下命令，查看python版本号：
+1. 打开Linux编译服务器终端，输入如下命令，查看python版本号：
 
    ```
    python3 --version
@@ -81,17 +84,17 @@ repo forall -c 'git lfs pull'
 
    如果低于python3.7版本，不建议直接升级，请按照如下步骤重新安装。
 
-3. 运行如下命令安装python 3.8。
+2. 运行如下命令安装python 3.8。
 
    ```
    sudo apt-get install python3.8
    ```
-4. 设置python和python3软链接为python3.8。
+3. 设置python和python3软链接为python3.8。
    ```
    sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.8 1
    sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 1
    ```
-5. 安装并升级Python包管理工具（pip3）。
+4. 安装并升级Python包管理工具（pip3）：
 
      ```
      sudo apt-get install python3-setuptools python3-pip -y
@@ -100,12 +103,12 @@ repo forall -c 'git lfs pull'
 
 ### 安装hb
 
-1. 运行如下命令安装hb
+1. 运行如下命令安装hb：
 
    ```
    pip3 install build/lite
    ```
-2. 设置环境变量
+2. 设置环境变量：
 
    ```
    vim ~/.bashrc
@@ -143,7 +146,7 @@ repo forall -c 'git lfs pull'
 ### 安装arm-none-eabi-gcc
 
 1. 打开Linux编译服务器终端。
-2. 下载[arm-none-eabi-gcc 编译工具下载](https://armkeil.blob.core.windows.net/developer//sitecore/shell/-/media/Files/downloads/gnu-rm/5_4-2016q3/gcc-arm-none-eabi-5_4-2016q3-20160926-linux,-d-,tar.bz2)
+2. 下载[arm-none-eabi-gcc 编译工具下载](https://armkeil.blob.core.windows.net/developer//sitecore/shell/-/media/Files/downloads/gnu-rm/5_4-2016q3/gcc-arm-none-eabi-5_4-2016q3-20160926-linux,-d-,tar.bz2)。
 
 
 3. 解压 [gcc-arm-none-eabi-5_4-2016q3-20160926-linux.tar.bz2](https://armkeil.blob.core.windows.net/developer//sitecore/shell/-/media/Files/downloads/gnu-rm/5_4-2016q3/gcc-arm-none-eabi-5_4-2016q3-20160926-linux,-d-,tar.bz2) 安装包至 /tmp/asr 路径下。
@@ -155,61 +158,61 @@ repo forall -c 'git lfs pull'
    ├── share
    └── arm-none-eabi
    ```
-   然后添加gcc路径到环境变量
+   然后添加gcc路径到环境变量：
    ```
    echo 'export PATH=/tmp/asr/gcc-arm-none-eabi-5_4-2016q3/bin:$PATH'  >> ~/.bashrc
    source ~/.bashrc
    ```
    
-### 编译流程
+## 编译流程
 
 [编译构建使用指南](https://gitee.com/openharmony/docs/blob/master/zh-cn/device-dev/subsystems/subsys-build-mini-lite.md)
 
+在OpenHarmony代码根目录执行以下命令：
 ```shell
 hb set
-
+使用键盘方向键进行板卡demo选择：
 asrmicro
  > wifi_demo
  > xts_demo
 
-选择: wifi_demo
+如果选择: wifi_demo，则执行以下编译命令：
 
 hb build -f
 
-或选择: xts_demo
+如果选择: xts_demo，则执行以下编译命令：
 
 hb build -f  --gn-args build_xts=true
 ```
 
-### 烧录流程
+## 烧录流程
 
-1. 下载 [DOGO_VP2.0.3.7Z](https://gitee.com/lango-tech_0/tools/blob/master/DOGO_VP2.0.3.7z) 到windows 环境下解压，并双击 DOGO_VP2.0.3.exe
-2. 串口连接 PC 和 demo board，点击“检测串口”按键，在串口选择一栏选择对应的端口号并点击 “打开串口”
-3. 选择 “ChipType ”类型为 582X
-4. 点击“路径设置”，待弹出小窗口后点击 bootload 对应的“browser”进入目录选择待烧录的
-image 文件。
+1. 下载 [DOGO_VP2.0.3.7Z](https://gitee.com/lango-tech_0/tools/blob/master/DOGO_VP2.0.3.7z) 到windows 环境下解压，并双击 DOGO_VP2.0.3.exe。
+2. 串口连接 PC 和 demo board，开发板接通电源后，点击“检测串口”按键，在串口选择一栏选择对应的端口号并点击 “打开串口”。
+3. 选择 “ChipType ”类型为 582X。
+4. 点击“路径设置”，待弹出小窗口后点击 bootload 对应的“browser”进入目录选择待烧录的image 文件，bootloader的bin文件位于device/soc/asrmicro/asrxx/liteos_m/sdk/tools目录，app的bin文件位于out/dev_wifi_a/xx_demo目录。
 
 **图 1**  Dogo选择 
 ![](tools/figure/dogo1.png "Dogo选择")
 
-5. 点击“确认”关闭小窗口，勾选“only image”
-6. 将 ASR582X 设置为 Uart boot 模式  
+5. 点击“确认”关闭小窗口，bootloader烧录一次即可，再次烧录可勾选“only image”只烧录app文件。
+6. 将 ASR582X 设置为 Uart boot 模式。
 [朗国开发板设置为"Uart boot"模式 操作参考](https://gitee.com/openharmony-sig/device_board_lango#3-%E8%BF%9B%E5%85%A5%E7%83%A7%E5%BD%95%E6%A8%A1%E5%BC%8F-uart-boot-%E6%A8%A1%E5%BC%8F)  
-7. Demo 板接通电源后，按下复位键，待出现“1F2E3D00”后点击“烧录”
+7. Demo 板接通电源后，按下复位键，待出现“1F2E3D00”后点击“烧录”。
 
 **图 2**  Dogo烧录
 ![](tools/figure/dogo2.png "Dogo烧录")
 
-8. 烧录完成后， 将 ASR582X 设置为 Flash boot 模式，按下复位键，DOGO 串口接收窗口中即可以看到程序正常运行  
+8. 烧录完成后， 将 ASR582X 设置为 Flash boot 模式，按下复位键，DOGO 串口接收窗口中即可以看到程序正常运行。 
 [朗国开发板设置"Flash boot"模式 操作参考](https://gitee.com/openharmony-sig/device_board_lango#5-%E9%80%80%E5%87%BA%E7%83%A7%E5%BD%95%E6%A8%A1%E5%BC%8F-%E8%BF%9B%E5%85%A5flash-boot-%E6%A8%A1%E5%BC%8F)
 
-# 相关仓
+## 相关仓库
 
 * [device/soc/asrmicro](https://gitee.com/openharmony-sig/device_soc_asrmicro)  
 * [device/board/lango](https://gitee.com/openharmony-sig/device_board_lango)
 
-# 常见错误与处理
-### 1、Ubuntu 20.04.3 LTS 下编译报错  
+## 常见错误与处理
+### 1. Ubuntu 20.04.3 LTS 下编译报错  
    编译出现如错误：
    ```-bash: ./arm-none-eabi-gcc: No such file or directory```  
    ![](https://images.gitee.com/uploads/images/2022/0126/000048_12ac75f9_5416512.png)
