@@ -1,0 +1,163 @@
+# Copyright (c) 2022 ASR Microelectronics (Shanghai) Co., Ltd. All rights reserved.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//kernel/liteos_m/liteos.gni")
+
+lib_path = rebase_path("../drivers/libs/Cortex-M4")
+
+asr582x_release_type = "release"
+# debug/release
+
+config("public") {
+  include_dirs = [
+    "../",
+    ".",
+    "../drivers/include/",
+    "../drivers/platform/system/include/",
+    "../drivers/driver/inc/",
+    "../drivers/platform/CMSIS/Include/",
+    "../startup/",
+    "../drivers/common/",
+#at cmd
+    "../drivers/at_cmd/",
+#at cmd end
+    "../drivers/kv/include",
+    "../rtos/",
+    "../drivers/common",
+    "../hal/inc",
+    "../drivers/security/inc",
+#        "security_test",
+    "../drivers/iperf",
+    "../drivers/ble_inc",
+    "../drivers/ota",
+    "//foundation/communication/wifi_lite/interfaces/wifiservice/",
+    "//base/iot_hardware/peripheral/interfaces/kits",
+#        "security/mbedtls/include/",
+    "//third_party/mbedtls/include/mbedtls",
+    "//third_party/mbedtls/include",
+  ]
+  ldflags = [
+    "-nostartfiles",
+    "-Wl,-T" + rebase_path("../gcc.ld"),
+    "-Wl,-R" + rebase_path("../tools/ble_rom_symbol/asr_ble_rom_symbol_v20200507204845.txt"),
+    "-nostdlib",
+  ]
+  libs = [
+    "nosys",
+    "gcc",
+    "$lib_path/libasr_combo.a",
+  ]
+
+  if (defined(LOSCFG_LIBC_NEWLIB)) {
+    ldflags -= [ "-nostdlib" ]
+    libs -= [ "nosys" ]
+    libs += [
+      "c",
+      "m",
+    ]
+  }
+
+if(asr582x_release_type == "debug"){
+    libs -= [
+      "$lib_path/libasr_combo.a",
+    ]
+}
+  ldflags += [
+  "-Llibs",
+  "-Wl,--whole-archive",
+  "-lbootstrap",
+  "-lbroadcast",
+  ]
+
+  defines = []
+
+  foreach(xts_item, xts_list) {
+      xts_enable = xts_item.enable
+      if(xts_enable == "true")
+      {
+        defines += [ "CFG_HARMONY_SUPPORT" ]
+        ldflags += [
+        "-lhctest"
+        ]
+        foreach(xts_module, xts_item.xts_modules) {
+        ldflags += [ "-lmodule_${xts_module}" ]
+        }
+      }
+  }
+
+  foreach(test_item, tests_list) {
+      test_enable = test_item.enable
+      if(test_enable == "true")
+      {
+        defines += [ "CFG_HARMONY_TESTS" ]
+        ldflags += [
+        "-lhilog_static"
+        ]
+        foreach(test_module, test_item.test_modules) {
+        ldflags += [ "-l${test_module}" ]
+        }
+      }
+  }
+
+  ldflags += [ "-Wl,--no-whole-archive" ]
+
+  defines += [
+      "WIFI_BLE_INIT_ENABLE",
+      "HARMONYOS_SUPPORT",
+      "SYSTEM_SUPPORT_OS",
+      "_SPI_FLASH_ENABLE_",
+      "DUET_FLASH_KV_SUPPORT",
+      "STAR_MPU_ENABLE",
+        "AT_USER_DEBUG",
+      "DUET_CM4",
+      "DCDC_PFMMODE_CLOSE",
+#      "LWIP_APP_IPERF",
+      "__FPU_PRESENT=1",
+      "SYSTEM_COREDUMP",
+      "SECURITY_ENGINE_INIT",
+      "CFG_RTC_INDEPENDENT",
+      "DUET_RF_SLEEP",
+      "FAST_DHCP",
+#        "CFG_MRFOTA_TEST",
+      "CFG_RFOTA_BLE",
+      "CFG_TMMT_DETECT",
+      "_SPI_FLASH_240MHz_",
+      "XO_FREQ_BIAS_CONFIG",
+      "CFG_NVDS",
+      "CFG_APP",
+      "CFG_APP_SEC",
+      "CFG_SEG",
+      "CFG_PLF_DUET",
+      "SONATA_RTOS_SUPPORT",
+      "CFG_HOST",
+      "CFG_BLE",
+      "DUET_BLE_NO_BLOCK",
+      "LEGA_A0V2",
+      "CFG_NAN_CONFIG",
+      "CFG_NAN_OPTIMIZE_EN",
+      "LEGAOS_SUPPORT",
+#        "BLE_APP_AT_CMD",
+  ]
+}
+
+
+kernel_module("asr_config") {
+  sources = [
+    "partition_conf.c",
+  ]
+  if(asr582x_release_type == "debug"){
+    deps = [
+      "//device/soc/asrmicro/asr582x/liteos_m/sdk/lib:asr_combo",
+    ]
+  }
+}

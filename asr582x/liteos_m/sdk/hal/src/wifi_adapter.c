@@ -576,6 +576,12 @@ WifiErrorCode GetDeviceMacAddress(unsigned char* result)
     }
 }
 
+static int is_wifi_connected = 0;
+int lega_wlan_get_connected_status()
+{
+    return is_wifi_connected;
+}
+
 WifiEvent *lega_wifi_event_ptr = 0;
 #ifdef AOS_COMP_MSMART
 extern void wlan_service_event(lega_wlan_event_e event);
@@ -612,6 +618,7 @@ void wifi_event_cb(lega_wlan_event_e evt, void* info)
             lega_wifi_event_ptr->OnWifiScanStateChanged(1, 0);
             break;
         case WLAN_EVENT_ASSOCIATED:
+            is_wifi_connected = 0;
             break;
         case WLAN_EVENT_CONNECTED:
             if ((lega_wifi_event_ptr == NULL) || (lega_wifi_event_ptr->OnWifiScanStateChanged == NULL))
@@ -630,6 +637,7 @@ void wifi_event_cb(lega_wlan_event_e evt, void* info)
                 lega_wlan_dataelem_start(0);
 #endif
                 wlan_service_event(WLAN_EVENT_IP_GOT);
+                is_wifi_connected = 1;
             }
             break;
         case WLAN_EVENT_DISCONNECTED:
@@ -638,6 +646,7 @@ void wifi_event_cb(lega_wlan_event_e evt, void* info)
                 lega_wifi_event_ptr->OnWifiScanStateChanged(0, 0);
             }
             wlan_service_event(WLAN_EVENT_DISCONNECTED);
+            is_wifi_connected = 0;
             break;
         case WLAN_EVENT_AP_UP:
             if ((lega_wifi_event_ptr) && (lega_wifi_event_ptr->OnHotspotStateChanged))

@@ -31,6 +31,7 @@
 #include "lega_at_api.h"
 #endif
 #include "los_exc_info.h"
+#include "devmgr_service_start.h"
 
 /*
 main task stask size(byte)
@@ -39,6 +40,11 @@ main task stask size(byte)
 
 osThreadAttr_t g_main_task={"main_task",0,NULL,0,NULL,OS_MAIN_TASK_STACK,15,0,0};
 
+#ifdef CFG_HARMONY_TESTS
+osThreadAttr_t harmony_test_task={"test_task",0,NULL,0,NULL,OS_MAIN_TASK_STACK,15,0,0};
+#endif
+
+static int sys_init_done = 0;
 extern void HalPendSV(void);
 extern void os_post_init_hook(void);
 void PendSV_Handler(void)
@@ -71,9 +77,7 @@ static void sys_init(void)
     //lega_at_init(AT_TASK_NAME,AT_TASK_PRIORITY,AT_TASK_STACK_SIZE);
     //lega_at_cmd_register_all();
     lega_at_user_cmd_register();
-#ifdef LWIP_APP_IPERF
-    lega_wifi_iperf_init();
-#endif
+
 #ifdef BLE_APP_AT_CMD
     atcmdplus_ble_register();
 #endif
@@ -84,8 +88,23 @@ static void sys_init(void)
  //   extern void lega_rfota_ble_test_at_init(void);
    // lega_rfota_ble_test_at_init();
 #endif
+	DeviceManagerStart();
     printf("sys_init running...\n");
+    sys_init_done = 1;
 }
+
+#ifdef CFG_HARMONY_TESTS
+static void harmony_test(void)
+{
+    while (sys_init_done == 0)
+    {
+        osDelay(500);
+    }
+    osDelay(500);
+    extern void  OHOS_SystemInit(void);
+    OHOS_SystemInit();
+}
+#endif
 
 int main(void)
 {
@@ -100,11 +119,13 @@ int main(void)
     ret = osKernelInitialize();
     
     if(ret == osOK)
-    {
+    {		
         threadId = osThreadNew((osThreadFunc_t)sys_init,NULL,&g_main_task);
+#ifdef CFG_HARMONY_TESTS
+        threadId = osThreadNew((osThreadFunc_t)harmony_test,NULL,&harmony_test_task);
+#endif
         if(threadId!=NULL)
         {
-            
             osKernelStart();
         }
     }   

@@ -15,5 +15,6 @@ import("//drivers/adapter/khdf/liteos_m/hdf.gni")
 
 module_group("components") {
   modules = [
+    "net/lwip-2.1"
   ]
 }
