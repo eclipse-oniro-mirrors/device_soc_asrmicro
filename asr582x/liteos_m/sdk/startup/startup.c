@@ -122,7 +122,7 @@ int main(void)
     {		
         threadId = osThreadNew((osThreadFunc_t)sys_init,NULL,&g_main_task);
 #ifdef CFG_HARMONY_TESTS
-        threadId = osThreadNew((osThreadFunc_t)harmony_test,NULL,&harmony_test_task);
+        osThreadNew((osThreadFunc_t)harmony_test,NULL,&harmony_test_task);
 #endif
         if(threadId!=NULL)
         {

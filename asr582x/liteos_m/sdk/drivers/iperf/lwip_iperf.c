@@ -47,7 +47,6 @@ void iperf_value_format(char* format_value,int format_value_len,u64_t value)
     u64_t gv=value/(1000000000ULL);
     u64_t mv=value/(1000000ULL);
     u64_t kv=value/(1000ULL);
-    if(value<0) return;
 
     lega_rtos_declare_critical();
     lega_rtos_enter_critical();

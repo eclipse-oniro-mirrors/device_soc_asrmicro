@@ -152,6 +152,7 @@ extern uint8_t* lega_ble_rf_get_txcali_from_efuse(uint8_t *test);
 void lega_devInit()
 {
     int ret = 0;
+    (void)ret;
 #if defined ALIOS_SUPPORT || defined HARMONYOS_SUPPORT
     ota_roll_back_pro();
 #endif

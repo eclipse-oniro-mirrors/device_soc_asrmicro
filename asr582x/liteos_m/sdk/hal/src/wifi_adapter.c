@@ -442,18 +442,18 @@ WifiErrorCode RemoveDevice(int networkId)
 
     return WIFI_SUCCESS;
 }
-
+#if 0
 void lalala_sta_device_config_set(void)
 {
     WifiDeviceConfig config;
     int result = 1;
-    memcpy(config.ssid, "AP2311", 32);
-    memcpy(config.preSharedKey, "12345678", 64);
+    memcpy(config.ssid, "AP2311", sizeof("AP2311"));
+    memcpy(config.preSharedKey, "12345678", sizeof("12345678"));
     RemoveDevice(result);
     AddDeviceConfig(&config, &result);
     RemoveDevice(result);
 }
-
+#endif
 WifiErrorCode ConnectTo(int networkId)
 {
     lega_wlan_init_type_t init_param = {0};
@@ -730,7 +730,7 @@ WifiErrorCode UnRegisterWifiEvent(const WifiEvent* event)
     }
     else
     {
-        printf("%s fail 0x%x 0x%x\r\n",__func__,lega_wifi_event_ptr,event);
+        printf("%s fail 0x%x 0x%x\r\n", __func__, (unsigned int)lega_wifi_event_ptr, (unsigned int)event);
     }
 
     return WIFI_SUCCESS;
