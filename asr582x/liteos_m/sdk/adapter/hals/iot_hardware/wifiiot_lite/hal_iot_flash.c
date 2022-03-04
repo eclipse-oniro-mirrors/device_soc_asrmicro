@@ -17,6 +17,7 @@
 #include "iot_flash.h"
 #include "duet_flash.h"
 #include "duet_common.h"
+#include "lega_rtos.h"
 
 static int param_part = PARTITION_PARAMETER_2;
 unsigned int IoTFlashRead(unsigned int flashOffset, unsigned int size, unsigned char *ramData)

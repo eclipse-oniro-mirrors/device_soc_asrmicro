@@ -47,7 +47,6 @@ void iperf_value_format(char* format_value,int format_value_len,u64_t value)
     u64_t gv=value/(1000000000ULL);
     u64_t mv=value/(1000000ULL);
     u64_t kv=value/(1000ULL);
-    if(value<0) return;
 
     lega_rtos_declare_critical();
     lega_rtos_enter_critical();
@@ -280,7 +279,7 @@ void lega_wifi_iperf_client_start()
                     while(iperf_tcp_client_status<IPERF_TCP_CLIENT_STARTING){ //wait for tcp connect
                         lega_rtos_delay_milliseconds(100);
                         if(++count>100){
-                            iperf_printf("iperf connect to %s:%d fail!\n",inet_ntoa(iperf_config.ipaddr),iperf_config.port);
+                            iperf_printf("iperf connect to %s:%d fail!\n",ip4addr_ntoa((const ip4_addr_t*)&(iperf_config.ipaddr)),iperf_config.port);
                             break;
                         }
                     }

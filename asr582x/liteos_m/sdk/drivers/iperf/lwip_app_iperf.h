@@ -89,7 +89,7 @@ struct lwip_iperf_config_t{
     IPERF_MODE mode;
     IPERF_PROTOCOL protocol;
     int port;
-    ip_addr_t ipaddr;
+    ip4_addr_t ipaddr;
     u8_t tx_delay_ms;
 };
 extern struct lwip_iperf_config_t iperf_config;
@@ -107,9 +107,9 @@ void urxperf_init();
 void utxperf_init();
 void txperf_output();
 
-int start_txperf_application(ip_addr_t *ipaddr,int port);
+int start_txperf_application(ip4_addr_t *ipaddr,int port);
 int transfer_txperf_data();
-int start_utxperf_application(ip_addr_t *ipaddr,int port);
+int start_utxperf_application(ip4_addr_t *ipaddr,int port);
 int transfer_utxperf_data();
 int start_rxperf_application(int port);
 int start_urxperf_application(int port);

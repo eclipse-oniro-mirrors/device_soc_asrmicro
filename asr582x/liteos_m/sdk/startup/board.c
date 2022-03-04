@@ -34,6 +34,7 @@
 #include "uart.h"
 #include "board.h"
 #include "los_arch_interrupt.h"
+#include "lega_rtos.h"
 
 /***********************************************************
 * init IRQ, set priority and enable IRQ
@@ -51,6 +52,7 @@ extern void DMA_IRQHandler(void);
 extern void UART0_IRQHandler(void);
 extern void UART1_IRQHandler(void);
 extern void UART2_IRQHandler();
+extern void GPIO_IRQHandler(void);
 void NVIC_init()
 {
     //set irq priority, default set configLIBRARY_NORMAL_INTERRUPT_PRIORITY
@@ -88,6 +90,7 @@ void NVIC_init()
     ArchHwiCreate(TIMER_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY,0,TIMER_IRQHandler,0);
     ArchHwiCreate(DMA_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY,0,DMA_IRQHandler,0);
     ArchHwiCreate(RW_BLE_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY-1,0,BLE_IRQHandler,0);
+    ArchHwiCreate(GPIO_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY,0,GPIO_IRQHandler,0);
     NVIC_DisableIRQ(RW_BLE_IRQn);
 }
 
@@ -149,6 +152,7 @@ extern uint8_t* lega_ble_rf_get_txcali_from_efuse(uint8_t *test);
 void lega_devInit()
 {
     int ret = 0;
+    (void)ret;
 #if defined ALIOS_SUPPORT || defined HARMONYOS_SUPPORT
     ota_roll_back_pro();
 #endif
