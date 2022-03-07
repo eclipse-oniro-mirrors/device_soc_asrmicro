@@ -29,6 +29,7 @@
                 <policyitem type="copyright" name="Copyright (c) 2021 Huawei Device Co., Ltd." path=".*" desc="asrmicro use Huawei copyright"/>
                 <policyitem type="copyright" name="Copyright (c) 2020-2021 Huawei Device Co., Ltd. All rights reserved." path=".*" desc="asrmicro use Huawei copyright"/>
                 <policyitem type="copyright" name="Copyright (c) 2013-2019 Huawei Technologies Co., Ltd. All rights reserved." path=".*" desc="asrmicro use Huawei copyright"/>
+                <policyitem type="copyright" name="Copyright (c) 2009-2020 Arm Limited., Ltd. All rights reserved." path=".*" desc="asrmicro use Huawei copyright"/>
                 <policyitem type="license" name="Apache" path=".*" desc="asrmicro use apache 2.0 license"/>
                 <policyitem type="license" name="BSD-3-Clause" path=".*" desc="asrmicro use BSD-3-Clause license"/>
                 <policyitem type="license" name="MIT" path=".*" desc="asrmicro use MIT license"/>
@@ -37,6 +38,7 @@
         <filefilterlist>
             <filefilter name="defaultFilter" desc="asrmicro using MIT files, but invalid copyright">
                 <filteritem type="filepath" name="asr582x/liteos_m/sdk/drivers/platform/system/printf-stdarg.c" desc="asrmicro using MIT files, but invalid copyright"/>
+                <filteritem type="filepath" name="asr582x/liteos_m/sdk/End User License Agreement.md" desc="asrmicro using MIT files, but invalid copyright"/>
             </filefilter>
             <filefilter name="defaultFilter" desc="ARM Limited appache2">
                 <filteritem type="filepath" name="asr582x/liteos_m/sdk/drivers/platform/CMSIS/Include/*" desc="ARM limits license"/>
@@ -49,6 +51,7 @@
             </filefilter>
             <filefilter name="copyrightPolicyFilter" desc="Filters for copyright header policies" >
                 <filteritem type="filepath" name="asr582x/liteos_m/sdk/lwip/.*" desc="Describe the reason for filtering scan results"/>
+                <filteritem type="filepath" name="asr582x/liteos_m/components/mbedtls/config/config_liteos_m.h" desc="asrmicro use apache 2.0 license"/>
             </filefilter>
             <filefilter name="defaultPolicyFilter" desc="Filters for compatibility，license header policies">
                 <filteritem type="filepath" name="asr582x/liteos_m/sdk/lwip/.*" desc="Describe the reason for filtering scan results"/>
