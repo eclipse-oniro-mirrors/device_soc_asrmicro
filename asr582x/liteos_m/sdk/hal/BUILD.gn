@@ -19,11 +19,6 @@ config("public") {
 
 kernel_module("asr_hal") {
   sources = [
-    "src/hw.c",
-    "src/uart.c",
-    "src/flash.c",
-    "src/wdg.c",
-    "src/rng.c",
     "src/wifi_adapter.c",
   ]
 }

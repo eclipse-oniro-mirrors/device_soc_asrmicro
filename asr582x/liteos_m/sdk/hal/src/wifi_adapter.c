@@ -442,7 +442,7 @@ WifiErrorCode RemoveDevice(int networkId)
 
     return WIFI_SUCCESS;
 }
-#if 0
+
 void lalala_sta_device_config_set(void)
 {
     WifiDeviceConfig config;
@@ -453,7 +453,7 @@ void lalala_sta_device_config_set(void)
     AddDeviceConfig(&config, &result);
     RemoveDevice(result);
 }
-#endif
+
 WifiErrorCode ConnectTo(int networkId)
 {
     lega_wlan_init_type_t init_param = {0};
