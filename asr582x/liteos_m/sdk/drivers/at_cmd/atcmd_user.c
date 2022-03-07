@@ -20,12 +20,13 @@
 #include <string.h>
 #include "target_config.h"
 #if (LOSCFG_USE_SHELL == 1)
-#include "shell.h" 
+#include "shell.h"
 #include "shcmd.h"
 #endif
 #include "duet_flash_kv.h"
 #include "flash.h"
 #include "duet_flash.h"
+#include "lega_rtos.h"
 /*
  ************************************************************
  *                    USER AT CMD START
@@ -61,7 +62,11 @@ int at_hilink_start(int argc, char **argv)
 
 int at_kv_clear(int argc, char **argv)
 {
-    hal_flash_erase(PARTITION_PARAMETER_2, 0, KV_MAX_SIZE);
+    lega_rtos_declare_critical();
+    lega_enter_critical_expble();
+    duet_flash_erase(PARTITION_PARAMETER_2, 0, KV_MAX_SIZE);
+    lega_exit_critical_expble();
+
     printf("kv clear done\r\n");
     delay(1000);
     NVIC_SystemReset();

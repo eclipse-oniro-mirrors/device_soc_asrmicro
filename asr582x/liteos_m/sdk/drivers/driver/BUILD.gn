@@ -26,7 +26,7 @@ kernel_module("asr_drivers") {
         "src/duet_gpio.c",
         "src/duet_uart.c",
         "src/duet_wdg.c",
-        "src/duet_rtc.c",
+#        "src/duet_rtc.c",
         "src/duet_rf_spi.c",
         "src/duet_pinmux.c",
         "src/duet_timer.c",
