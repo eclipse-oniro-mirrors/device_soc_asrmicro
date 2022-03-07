@@ -38,7 +38,7 @@
         <filefilterlist>
             <filefilter name="defaultFilter" desc="asrmicro using MIT files, but invalid copyright">
                 <filteritem type="filepath" name="asr582x/liteos_m/sdk/drivers/platform/system/printf-stdarg.c" desc="asrmicro using MIT files, but invalid copyright"/>
-                <filteritem type="filepath" name="asr582x/liteos_m/sdk/End User License Agreement.md" desc="asrmicro using MIT files, but invalid copyright"/>
+                <filteritem type="filepath" name="asr582x/liteos_m/sdk/EULA" desc="asrmicro using MIT files, but invalid copyright"/>
             </filefilter>
             <filefilter name="defaultFilter" desc="ARM Limited appache2">
                 <filteritem type="filepath" name="asr582x/liteos_m/sdk/drivers/platform/CMSIS/Include/*" desc="ARM limits license"/>
