@@ -67,7 +67,7 @@ mkdir openharmony
 
 cd openharmony
 
-repo init -u https://gitee.com/openharmony-sig/manifest.git -m devboard_asrmicro.xml --no-repo-verify
+repo init -u https://gitee.com/openharmony/manifest.git -m default.xml --no-repo-verify
 
 repo sync -c
 
@@ -197,19 +197,19 @@ hb build -f  --gn-args build_xts=true
 
 5. 点击“确认”关闭小窗口，bootloader烧录一次即可，再次烧录可勾选“only image”只烧录app文件。
 6. 将 ASR582X 设置为 Uart boot 模式。
-[朗国开发板设置为"Uart boot"模式 操作参考](https://gitee.com/openharmony-sig/device_board_lango#3-%E8%BF%9B%E5%85%A5%E7%83%A7%E5%BD%95%E6%A8%A1%E5%BC%8F-uart-boot-%E6%A8%A1%E5%BC%8F)  
+[朗国开发板设置为"Uart boot"模式 操作参考](https://gitee.com/openharmony/device_board_lango#3-%E8%BF%9B%E5%85%A5%E7%83%A7%E5%BD%95%E6%A8%A1%E5%BC%8F-uart-boot-%E6%A8%A1%E5%BC%8F)
 7. Demo 板接通电源后，按下复位键，待出现“1F2E3D00”后点击“烧录”。
 
 **图 2**  Dogo烧录
 ![](tools/figure/dogo2.png "Dogo烧录")
 
 8. 烧录完成后， 将 ASR582X 设置为 Flash boot 模式，按下复位键，DOGO 串口接收窗口中即可以看到程序正常运行。 
-[朗国开发板设置"Flash boot"模式 操作参考](https://gitee.com/openharmony-sig/device_board_lango#5-%E9%80%80%E5%87%BA%E7%83%A7%E5%BD%95%E6%A8%A1%E5%BC%8F-%E8%BF%9B%E5%85%A5flash-boot-%E6%A8%A1%E5%BC%8F)
+[朗国开发板设置"Flash boot"模式 操作参考](https://gitee.com/openharmony/device_board_lango#5-%E9%80%80%E5%87%BA%E7%83%A7%E5%BD%95%E6%A8%A1%E5%BC%8F-%E8%BF%9B%E5%85%A5flash-boot-%E6%A8%A1%E5%BC%8F)
 
 ## 相关仓库
 
-* [device/soc/asrmicro](https://gitee.com/openharmony-sig/device_soc_asrmicro)  
-* [device/board/lango](https://gitee.com/openharmony-sig/device_board_lango)
+* [device/soc/asrmicro](https://gitee.com/openharmony/device_soc_asrmicro)
+* [device/board/lango](https://gitee.com/openharmony/device_board_lango)
 
 ## 常见错误与处理
 ### 1. Ubuntu 20.04.3 LTS 下编译报错  
