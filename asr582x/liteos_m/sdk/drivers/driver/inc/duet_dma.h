@@ -16,11 +16,11 @@
 #ifndef __DUET_DMA_H
 #define __DUET_DMA_H
 
-#ifdef __cplusplus
-extern "C"{
-#endif
-
 #include "duet.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define DMA_SRC_DATA_WIDTH_BYTE       (0)
 #define DMA_SRC_DATA_WIDTH_HALFWORD   (1)
@@ -63,8 +63,7 @@ extern "C"{
 #define DMA_N_1_MAX                     (1024)
 
 #define DMA_MAX_CHAN_NUM                (32)  //nums of primary channels
-typedef enum
-{
+typedef enum {
     DMA_CH_UART0_TX = 0,
     DMA_CH_UART0_RX,
     DMA_CH_UART1_TX,
@@ -81,27 +80,25 @@ typedef enum
     DMA_CH_I2C0_TX,
     DMA_CH_I2C1_RX,
     DMA_CH_I2C1_TX,
-}DMA_CHANNEL;
+} DMA_CHANNEL;
 
 typedef void (*duet_dma_callback_func)(uint32_t);
 
-typedef struct
-{
-    uint32_t cycle_ctl:3;
-    uint32_t next_useburst:1;
-    uint32_t n_minus_1:10;
-    uint32_t R_pow:4;
-    uint32_t src_prot:3;
-    uint32_t dest_prot:3;
-    uint32_t src_size:2;
-    uint32_t src_inc:2;
-    uint32_t dst_size:2;
-    uint32_t dst_inc:2;
+typedef struct {
+    uint32_t cycle_ctl: 3;
+    uint32_t next_useburst: 1;
+    uint32_t n_minus_1: 10;
+    uint32_t R_pow: 4;
+    uint32_t src_prot: 3;
+    uint32_t dest_prot: 3;
+    uint32_t src_size: 2;
+    uint32_t src_inc: 2;
+    uint32_t dst_size: 2;
+    uint32_t dst_inc: 2;
 
-}Chan_Ctl_Data_TypeDef;
+} Chan_Ctl_Data_TypeDef;
 
-typedef struct
-{
+typedef struct {
     uint32_t SrcEndPtr;
     uint32_t DstEndPtr;
     uint32_t n_minus1;
@@ -115,30 +112,29 @@ typedef struct
     uint32_t DstAddrInc;
     uint8_t interrupt_en;
     uint8_t use_pri_only;
-}DMA_Init_Struct_Type;
+} DMA_Init_Struct_Type;
 
 
-typedef struct
-{
+typedef struct {
     uint32_t chan_src_end_ptr;
     uint32_t chan_dst_end_ptr;
     Chan_Ctl_Data_TypeDef chan_ctr;
     uint32_t resv;
-}Chan_Cfg_TypeDef;
+} Chan_Cfg_TypeDef;
 
 
-Chan_Cfg_TypeDef * duet_dma_ctrl_block_init(void);
+Chan_Cfg_TypeDef *duet_dma_ctrl_block_init(void);
 void duet_dma_init(void);
 void duet_dma_interrupt_clear(uint32_t chan_idx);
 ITstatus duet_dma_get_interrupt_status(uint32_t chan_idx);
 void duet_dma_interrupt_config(uint32_t chan_idx, uint8_t new_state);
 void duet_dma_channel_cmd(uint32_t chan_idx, uint8_t new_state);
 void duet_dma_generate_sw_req(uint32_t chan_idx);
-void duet_dma_mem2mem(uint8_t chan_num,uint8_t *mem_src,uint8_t *mem_dst,uint16_t len);
-void duet_dma_uart_rx(uint8_t uart_idx,uint8_t *data,uint16_t len);
-void duet_dma_uart_tx(uint8_t uart_idx,uint8_t *data,uint16_t len);
-void duet_dma_spi_rx(uint8_t ssp_idx,uint8_t *data,uint16_t len);
-void duet_dma_spi_tx(uint8_t ssp_idx,uint8_t *data,uint16_t len);
-void duet_dma_callback_register(uint8_t chn_idx,duet_dma_callback_func func);
+void duet_dma_mem2mem(uint8_t chan_num, uint8_t *mem_src, uint8_t *mem_dst, uint16_t len);
+void duet_dma_uart_rx(uint8_t uart_idx, uint8_t *data, uint16_t len);
+void duet_dma_uart_tx(uint8_t uart_idx, uint8_t *data, uint16_t len);
+void duet_dma_spi_rx(uint8_t ssp_idx, uint8_t *data, uint16_t len);
+void duet_dma_spi_tx(uint8_t ssp_idx, uint8_t *data, uint16_t len);
+void duet_dma_callback_register(uint8_t chn_idx, duet_dma_callback_func func);
 
 #endif //__DUET_DMA_H

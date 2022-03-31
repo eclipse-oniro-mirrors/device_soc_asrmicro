@@ -29,32 +29,28 @@
 //    __asm("LDR PC, [R0, #4]");
 //}
 
-void duet_memset(char *buf,int value, int size)
+void duet_memset(char *buf, int value, int size)
 {
-    if(NULL == buf)
-    {
+    if (NULL == buf) {
         return;
     }
 
-    while(size--)
-    {
+    while (size--) {
         *buf++ = value;
     }
 }
 
 void duet_memcpy(char *dst, char *src, int size)
 {
-    while(size--)
-    {
+    while (size--) {
         *dst++ = *src++;
     }
 }
 
 FLASH_COMMON2_SEG void delay(unsigned int cycles)
 {
-    unsigned int us2cycles = (cycles*52)/4;
-    while(us2cycles > 0)
-    {
+    unsigned int us2cycles = (cycles * 52) / 4;
+    while (us2cycles > 0) {
         us2cycles--;
         asm("nop");
     }
@@ -64,11 +60,10 @@ FLASH_COMMON2_SEG void delay(unsigned int cycles)
 otherwise, it is not accurate*/
 void udelay_pl(unsigned int us)
 {
-    unsigned int us2cycles = us * (SYSTEM_CLOCK/1000000) / 9;
+    unsigned int us2cycles = us * (SYSTEM_CLOCK / 1000000) / 9;
     us2cycles = (us2cycles >= 6) ? (us2cycles - 6) : 0;
     /*9 clock cycles*/
-    while(us2cycles > 0)
-    {
+    while (us2cycles > 0) {
         us2cycles--;
         asm("nop");
     }
@@ -92,8 +87,7 @@ int convert_str_to_int(char *str)
     int result = 0;
     char *stop;
     result = strtol(str, &stop, 0);
-    if(*stop != '\0')
-    {
+    if (*stop != '\0') {
         return DUET_STR_TO_INT_ERR;
     }
     return result;
@@ -101,49 +95,36 @@ int convert_str_to_int(char *str)
 #else
 int convert_str_to_int(char *str)
 {
-    int val=0, size=0;
-    char *p=str;
+    int val = 0, size = 0;
+    char *p = str;
 
-    if(NULL == p)
-    {
+    if (NULL == p) {
         return -1;
     }
 
-    if(*p=='0' && (*(p+1)=='x' || *(p+1)=='X'))  // it is a hex value
-    {
-        p+=2;  // pass '0x'
+    if (*p == '0' && (*(p + 1) == 'x' || *(p + 1) == 'X')) { // it is a hex value
+        p += 2; // pass '0x'
 
-        while(size<8)
-        {
-            if('0'<=*p && *p<='9')
-            {
-                val = val * 16 + (*p-'0');
+        while (size < 8) {
+            if ('0' <= *p && *p <= '9') {
+                val = val * 16 + (*p - '0');
                 size++;
-            }
-            else if('a'<=*p && *p<='f')
-            {
-                val = val* 16 + (*p-'a'+10);  // 'a' is 97
+            } else if ('a' <= *p && *p <= 'f') {
+                val = val * 16 + (*p - 'a' + 10); // 'a' is 97
                 size++;
 
-            }
-            else if('A'<=*p && *p<='F')
-            {
-                val = val*16 + (*p-'A'+10);  // 'A' is 65
+            } else if ('A' <= *p && *p <= 'F') {
+                val = val * 16 + (*p - 'A' + 10); // 'A' is 65
                 size++;
-            }
-            else
-            {
+            } else {
                 break;
             }
             p++;
 
         }
-    }
-    else  // it is a dec. value
-    {
-        while('0'<=*p && *p<='9')
-        {
-            val = val*10+ (*p - '0');
+    } else { // it is a dec. value
+        while ('0' <= *p && *p <= '9') {
+            val = val * 10 + (*p - '0');
             p++;
         }
     }
@@ -155,72 +136,61 @@ int convert_str_to_int(char *str)
 //type = 4, val is uint32
 void convert_int_to_str(unsigned int val, unsigned int type, char *ch)
 {
-    int i=0, tempVal;
+    int i = 0, tempVal;
 
-    if(ch==0)
-    {
+    if (ch == 0) {
         return;
     }
 
-    while(i < (type<<1))
-    {
-        tempVal = (val >> (((type<<1)-i-1)<<2)) & 0xF;
+    while (i < (type << 1)) {
+        tempVal = (val >> (((type << 1) - i - 1) << 2)) & 0xF;
 
-        if(tempVal>=0x0 && tempVal<=0x9)
-        {
-            ch[i]= tempVal+'0'; // 0 to 9
-        }
-        else if((tempVal>=0xA && tempVal<=0xF))
-        {
-            ch[i]= tempVal-0xA+'A';  // a to f
+        if (tempVal >= 0x0 && tempVal <= 0x9) {
+            ch[i] = tempVal + '0'; // 0 to 9
+        } else if ((tempVal >= 0xA && tempVal <= 0xF)) {
+            ch[i] = tempVal - 0xA + 'A'; // a to f
         }
         i++;
     }
-    ch[i]='\0';
+    ch[i] = '\0';
 }
 
 void duet_write32_bit(uint32_t reg, uint8_t start_bit, uint8_t len, uint32_t src_val)
 {
-    uint32_t tmp,mask,val;
+    uint32_t tmp, mask, val;
 
-    if((start_bit < 32)&&(len <= 32)&&(src_val<=((1<<len)-1)))
-    {
+    if ((start_bit < 32) && (len <= 32) && (src_val <= ((1 << len) - 1))) {
         tmp = REG_RD(reg);
 
-        mask = (1<<len)-1;          //eg: len=4, mask = 0xf, 1111
-        mask = ~(mask<<start_bit);
+        mask = (1 << len) - 1;      //eg: len=4, mask = 0xf, 1111
+        mask = ~(mask << start_bit);
 
         val = tmp & mask;
 
         src_val = (src_val << start_bit);
         val = val | src_val;
 
-        REG_WR(reg,val);
-    }
-    else
-    {
+        REG_WR(reg, val);
+    } else {
         printf("write32_bit input parms not support \r\n");
     }
 }
 
 uint32_t duet_read32_bit(uint32_t reg, uint8_t start_bit, uint8_t len)
 {
-    uint32_t mask,val;
+    uint32_t mask, val;
 
-    if((start_bit < 32)&&(len <= 32))
-    {
+    if ((start_bit < 32) && (len <= 32)) {
         val = REG_RD(reg);
 
-        mask = (1<<len)-1;          //eg: len =4, 0xf,1111
+        mask = (1 << len) - 1;      //eg: len =4, 0xf,1111
         mask = mask << start_bit;
         val = val & mask;
 
         val = (val >> start_bit);
 
         return val;
-    }
-    else
-    {
+    } else {
         printf("read32_bit input parms not support \r\n");
         return -1;
     }

@@ -21,6 +21,7 @@
 #include "duet_pinmux.h"
 #include "lega_at_api.h"
 #include "arch.h"
+#include "board.h"
 #ifdef _SPI_FLASH_ENABLE_
 #include "duet_flash_alg.h"
 #include "duet_flash.h"
@@ -32,7 +33,6 @@
 #include "los_interrupt.h"
 #include "target_config.h"
 #include "uart.h"
-#include "board.h"
 #include "los_arch_interrupt.h"
 #include "lega_rtos.h"
 
@@ -51,46 +51,46 @@ extern void TIMER_IRQHandler(void);
 extern void DMA_IRQHandler(void);
 extern void UART0_IRQHandler(void);
 extern void UART1_IRQHandler(void);
-extern void UART2_IRQHandler();
+extern void UART2_IRQHandler(void);
 extern void GPIO_IRQHandler(void);
-void NVIC_init()
+void NVIC_init(void)
 {
     //set irq priority, default set configLIBRARY_NORMAL_INTERRUPT_PRIORITY
-/*
-    NVIC_SetPriority(UART0_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
-    NVIC_SetPriority(UART1_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
-    NVIC_SetPriority(UART2_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
-    NVIC_SetPriority(CEVA_RW_IP_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
-    NVIC_SetPriority(D_APLL_UNLOCK_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
-    NVIC_SetPriority(D_SX_UNLOCK_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
-    NVIC_SetPriority(SLEEP_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
-    NVIC_SetPriority(WDG_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
-    NVIC_SetPriority(FLASH_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
-    NVIC_SetPriority(GPIO_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
-    NVIC_SetPriority(TIMER_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
-    NVIC_SetPriority(CRYPTOCELL310_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
-    NVIC_SetPriority(DMA_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
-    NVIC_SetPriority(SPI0_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
-    NVIC_SetPriority(SPI1_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
-    NVIC_SetPriority(SPI2_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
-    NVIC_SetPriority(I2C0_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
-    NVIC_SetPriority(I2C1_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
-    NVIC_SetPriority(SDIO_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
-    NVIC_SetPriority(PLF_WAKEUP_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
-    NVIC_SetPriority(RW_BLE_IRQn, configLIBRARY_NORMAL_INTERRUPT_PRIORITY-1);
-*/
-    ArchHwiCreate(CEVA_RW_IP_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY,0,intc_irq,0);
-    ArchHwiCreate(D_APLL_UNLOCK_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY,0,D_APLL_UNLOCK_IRQHandler,0);
-    ArchHwiCreate(D_SX_UNLOCK_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY,0,D_SX_UNLOCK_IRQHandler,0);
-    ArchHwiCreate(SLEEP_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY,0,SLEEP_IRQHandler,0);
-    ArchHwiCreate(UART0_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY,0,UART0_IRQHandler,0);
-    ArchHwiCreate(UART1_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY,0,UART1_IRQHandler,0);
-    ArchHwiCreate(UART2_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY,0,UART2_IRQHandler,0);
-    ArchHwiCreate(WDG_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY,0,WDG_IRQHandler,0);
-    ArchHwiCreate(TIMER_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY,0,TIMER_IRQHandler,0);
-    ArchHwiCreate(DMA_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY,0,DMA_IRQHandler,0);
-    ArchHwiCreate(RW_BLE_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY-1,0,BLE_IRQHandler,0);
-    ArchHwiCreate(GPIO_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY,0,GPIO_IRQHandler,0);
+    /*
+        NVIC_SetPriority(UART0_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
+        NVIC_SetPriority(UART1_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
+        NVIC_SetPriority(UART2_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
+        NVIC_SetPriority(CEVA_RW_IP_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
+        NVIC_SetPriority(D_APLL_UNLOCK_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
+        NVIC_SetPriority(D_SX_UNLOCK_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
+        NVIC_SetPriority(SLEEP_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
+        NVIC_SetPriority(WDG_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
+        NVIC_SetPriority(FLASH_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
+        NVIC_SetPriority(GPIO_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
+        NVIC_SetPriority(TIMER_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
+        NVIC_SetPriority(CRYPTOCELL310_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
+        NVIC_SetPriority(DMA_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
+        NVIC_SetPriority(SPI0_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
+        NVIC_SetPriority(SPI1_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
+        NVIC_SetPriority(SPI2_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
+        NVIC_SetPriority(I2C0_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
+        NVIC_SetPriority(I2C1_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
+        NVIC_SetPriority(SDIO_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
+        NVIC_SetPriority(PLF_WAKEUP_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
+        NVIC_SetPriority(RW_BLE_IRQn, configLIBRARY_NORMAL_INTERRUPT_PRIORITY-1);
+    */
+    ArchHwiCreate(CEVA_RW_IP_IRQn, configLIBRARY_NORMAL_INTERRUPT_PRIORITY, 0, intc_irq, 0);
+    ArchHwiCreate(D_APLL_UNLOCK_IRQn, configLIBRARY_NORMAL_INTERRUPT_PRIORITY, 0, D_APLL_UNLOCK_IRQHandler, 0);
+    ArchHwiCreate(D_SX_UNLOCK_IRQn, configLIBRARY_NORMAL_INTERRUPT_PRIORITY, 0, D_SX_UNLOCK_IRQHandler, 0);
+    ArchHwiCreate(SLEEP_IRQn, configLIBRARY_NORMAL_INTERRUPT_PRIORITY, 0, SLEEP_IRQHandler, 0);
+    ArchHwiCreate(UART0_IRQn, configLIBRARY_NORMAL_INTERRUPT_PRIORITY, 0, UART0_IRQHandler, 0);
+    ArchHwiCreate(UART1_IRQn, configLIBRARY_NORMAL_INTERRUPT_PRIORITY, 0, UART1_IRQHandler, 0);
+    ArchHwiCreate(UART2_IRQn, configLIBRARY_NORMAL_INTERRUPT_PRIORITY, 0, UART2_IRQHandler, 0);
+    ArchHwiCreate(WDG_IRQn, configLIBRARY_NORMAL_INTERRUPT_PRIORITY, 0, WDG_IRQHandler, 0);
+    ArchHwiCreate(TIMER_IRQn, configLIBRARY_NORMAL_INTERRUPT_PRIORITY, 0, TIMER_IRQHandler, 0);
+    ArchHwiCreate(DMA_IRQn, configLIBRARY_NORMAL_INTERRUPT_PRIORITY, 0, DMA_IRQHandler, 0);
+    ArchHwiCreate(RW_BLE_IRQn, configLIBRARY_NORMAL_INTERRUPT_PRIORITY - 1, 0, BLE_IRQHandler, 0);
+    ArchHwiCreate(GPIO_IRQn, configLIBRARY_NORMAL_INTERRUPT_PRIORITY, 0, GPIO_IRQHandler, 0);
     NVIC_DisableIRQ(RW_BLE_IRQn);
 }
 
@@ -125,7 +125,7 @@ void board_uart_init(void)
 {
 #if (LOSCFG_USE_SHELL == 1)
     uart_0.port = PORT_UART_STD;  /*logic port*/
-    uart_0.config.baud_rate=UART_BAUDRATE_115200;
+    uart_0.config.baud_rate = UART_BAUDRATE_115200;
     uart_0.config.data_width = DATA_8BIT;
     uart_0.config.flow_control = FLOW_CTRL_DISABLED;
     uart_0.config.parity = PARITY_NO;
@@ -133,22 +133,22 @@ void board_uart_init(void)
     uart_0.config.mode = TX_RX_MODE;
     hal_uart_init(&uart_0);
 #else
-    duet_pinmux_config(PAD2,PF_UART1);
-    duet_pinmux_config(PAD3,PF_UART1);
+    duet_pinmux_config(PAD2, PF_UART1);
+    duet_pinmux_config(PAD3, PF_UART1);
 
     duet_uart_struct_init(&uart_config_struct);
     uart_config_struct.port = UART1_INDEX;
     uart_config_struct.priv = at_handle_uartirq;
-//set user define config
+    //set user define config
     uart_config_struct.config.baud_rate = UART_BAUDRATE_115200;
     uart_config_struct.config.flow_control = FLOW_CTRL_DISABLED;
-//make config take effect
+    //make config take effect
     duet_uart_init(&uart_config_struct);
 #endif
     printf_uart_register(UART1_INDEX);
 }
 
-extern uint8_t* lega_ble_rf_get_txcali_from_efuse(uint8_t *test);
+extern uint8_t *lega_ble_rf_get_txcali_from_efuse(uint8_t *test);
 void lega_devInit()
 {
     int ret = 0;

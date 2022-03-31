@@ -31,37 +31,37 @@ typedef unsigned long long   u64_t;
 extern char iperf_send_buf[SEND_BUFSIZE];
 extern lega_timer_t iperf_output_timer;
 typedef enum {
-    IPERF_MODE_UNINIT=0,
+    IPERF_MODE_UNINIT = 0,
     IPERF_MODE_SERVER,
     IPERF_MODE_CLIENT
 } IPERF_MODE;
 
-typedef enum{
-    IPERF_PROTOCOL_TCP=0,
+typedef enum {
+    IPERF_PROTOCOL_TCP = 0,
     IPERF_PROTOCOL_UDP
 } IPERF_PROTOCOL;
 
-typedef enum{
-    IPERF_TCP_SERVER_UNINIT=0,
+typedef enum {
+    IPERF_TCP_SERVER_UNINIT = 0,
     IPERF_TCP_SERVER_INIT,
     IPERF_TCP_SERVER_LISTENING,
     IPERF_TCP_SERVER_RXRUNNING
 } IPERF_TCP_SERVER_STATUS;
-typedef enum{
-    IPERF_UDP_SERVER_UNINIT=0,
+typedef enum {
+    IPERF_UDP_SERVER_UNINIT = 0,
     IPERF_UDP_SERVER_INIT,
     IPERF_UDP_SERVER_RXRUNNING
 } IPERF_UDP_SERVER_STATUS;
 typedef enum {
-    IPERF_TCP_CLINET_UNINIT=0,
+    IPERF_TCP_CLINET_UNINIT = 0,
     IPERF_TCP_CLIENT_INIT,
     IPERF_TCP_CLIENT_CONNECTING,
     IPERF_TCP_CLIENT_CONNECTED,
     IPERF_TCP_CLIENT_STARTING,
     IPERF_TCP_CLIENT_TXRUNNING,
 } IPERF_TCP_CLINET_STATUS;
-typedef enum{
-    IPERF_UDP_CLIENT_UNINIT=0,
+typedef enum {
+    IPERF_UDP_CLIENT_UNINIT = 0,
     IPERF_UDP_CLIENT_INIT,
     IPERF_UDP_CLIENT_START,
     IPERF_UDP_CLIENT_TXRUNNING
@@ -77,14 +77,14 @@ extern volatile IPERF_UDP_CLIENT_STATUS iperf_udp_client_status;
 //extern volatile int iperf_udp_client_term;
 
 
-struct lwip_iperf_outputInfo{
+struct lwip_iperf_outputInfo {
     int seconds; //start time
     u64_t lastByte;
     u64_t currentByte;
     u64_t lastPacketNum;
     u64_t currentPacketNum;
 };
-struct lwip_iperf_config_t{
+struct lwip_iperf_config_t {
     int termFlag;
     IPERF_MODE mode;
     IPERF_PROTOCOL protocol;
@@ -107,9 +107,9 @@ void urxperf_init();
 void utxperf_init();
 void txperf_output();
 
-int start_txperf_application(ip4_addr_t *ipaddr,int port);
+int start_txperf_application(ip4_addr_t *ipaddr, int port);
 int transfer_txperf_data();
-int start_utxperf_application(ip4_addr_t *ipaddr,int port);
+int start_utxperf_application(ip4_addr_t *ipaddr, int port);
 int transfer_utxperf_data();
 int start_rxperf_application(int port);
 int start_urxperf_application(int port);
@@ -117,6 +117,6 @@ void clear_rxperf();
 void disconnect_txperf();
 void clear_urxperf();
 void disconnect_utxperf();
-void do_iperf_terminate_timer(char* mode,struct lwip_iperf_outputInfo* outputInfo);
+void do_iperf_terminate_timer(char *mode, struct lwip_iperf_outputInfo *outputInfo);
 #endif
 #endif

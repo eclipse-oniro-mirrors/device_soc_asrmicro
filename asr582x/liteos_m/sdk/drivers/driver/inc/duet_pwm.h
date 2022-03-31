@@ -16,7 +16,6 @@
 #ifndef _DUET_PWM_H_
 #define _DUET_PWM_H_
 #include <stdint.h>
-#include <errno.h>
 
 #define PWM_OUTPUT_CH0 0
 #define PWM_OUTPUT_CH1 1

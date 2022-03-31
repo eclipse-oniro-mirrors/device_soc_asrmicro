@@ -164,7 +164,7 @@ int32_t duet_gpio_input_get(duet_gpio_dev_t *gpio, uint32_t *value);
  * @return  0 : on success, EIO : if an error occurred with any step
  */
 int32_t duet_gpio_enable_irq(duet_gpio_dev_t *gpio, duet_gpio_irq_trigger_t trigger,
-                            duet_gpio_irq_handler_t handler, void *arg);
+                             duet_gpio_irq_handler_t handler, void *arg);
 
 /**
  * Disables an interrupt trigger for an input GPIO pin.

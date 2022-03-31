@@ -17,19 +17,19 @@
 #define __DUET_I2S_H
 
 #ifdef __cplusplus
-extern "c"{
+extern "c" {
 #endif
 
-#include "duet.h"
 #include <errno.h>
+#include "duet.h"
 
-/* Interrupt status register fields */
+    /* Interrupt status register fields */
 #define I2S_INTERRUPT_TXFO    (1 << 5)
 #define I2S_INTERRUPT_TXFE    (1 << 4)
 #define I2S_INTERRUPT_RXFO    (1 << 1)
 #define I2S_INTERRUPT_RXDA    (1 << 0)
 
-/* I2S protocal mode */
+    /* I2S protocal mode */
 #define I2S_MODE_LEFT_ALIGN   (0)
 #define I2S_MODE_RIGHT_ALIGN  (1)
 #define I2S_MODE_PHILIPS      (2)
@@ -72,7 +72,7 @@ extern "c"{
 #define I2S_HW_SHIFT_PADDING_1         (1<<4)
 #define I2S_HW_SHIFT_PADDING_0         (0)
 
-/* I2S module parameters */
+    /* I2S module parameters */
 #define    I2S_WORDSIZE_DONT_CARE (0)
 #define    I2S_WORDSIZE_12bit       (1)
 #define    I2S_WORDSIZE_16bit       (2)
@@ -101,43 +101,43 @@ extern "c"{
 #define I2S_SAMPLE_RATE_16K     (16000)
 #define I2S_SAMPLE_RATE_8K      (8000)
 
-typedef void (*duet_i2s_callback_func)(uint32_t,uint32_t);
-extern duet_i2s_callback_func g_duet_i2s_callback_handler;
+    typedef void (*duet_i2s_callback_func)(uint32_t, uint32_t);
+    extern duet_i2s_callback_func g_duet_i2s_callback_handler;
 
-typedef struct
-{
-    uint32_t i2s_sample_rate;
-    uint32_t i2s_mclk_src;
-    uint32_t i2s_ws;
-    uint8_t i2s_role;
-    uint8_t i2s_word_size;
-    uint8_t i2s_tx_en;
-    uint8_t i2s_rx_en;
-    uint8_t i2s_fifo_threshold;
-    uint8_t i2s_mode;
-}duet_i2s_dev_t;
+    typedef struct
+    {
+        uint32_t i2s_sample_rate;
+        uint32_t i2s_mclk_src;
+        uint32_t i2s_ws;
+        uint8_t i2s_role;
+        uint8_t i2s_word_size;
+        uint8_t i2s_tx_en;
+        uint8_t i2s_rx_en;
+        uint8_t i2s_fifo_threshold;
+        uint8_t i2s_mode;
+    } duet_i2s_dev_t;
 
 
-__STATIC_INLINE ITstatus i2s_get_interrupt_status(I2S_TypeDef * I2Sx, uint32_t i2s_interrupt)
-{
-    return (I2Sx->ISR & i2s_interrupt) ? SET : RESET;
-}
+    __STATIC_INLINE ITstatus i2s_get_interrupt_status(I2S_TypeDef * I2Sx, uint32_t i2s_interrupt)
+    {
+        return (I2Sx->ISR & i2s_interrupt) ? SET : RESET;
+    }
 
-void duet_i2s_send_data(I2S_TypeDef * I2Sx, uint32_t * left_chan_data, uint32_t * right_chan_data, uint32_t len);
+    void duet_i2s_send_data(I2S_TypeDef * I2Sx, uint32_t *left_chan_data, uint32_t *right_chan_data, uint32_t len);
 
-void duet_i2s_struct_init(duet_i2s_dev_t * pI2S_struct);
+    void duet_i2s_struct_init(duet_i2s_dev_t *pI2S_struct);
 
-void duet_i2s_interrupt_config(I2S_TypeDef * I2Sx, uint32_t i2s_interrupt, uint32_t new_state);
-void duet_i2s_interrupt_clear(I2S_TypeDef * I2Sx, uint32_t i2s_interrupt);
-void duet_i2s_cmd(I2S_TypeDef * I2Sx, uint32_t new_state);
+    void duet_i2s_interrupt_config(I2S_TypeDef * I2Sx, uint32_t i2s_interrupt, uint32_t new_state);
+    void duet_i2s_interrupt_clear(I2S_TypeDef * I2Sx, uint32_t i2s_interrupt);
+    void duet_i2s_cmd(I2S_TypeDef * I2Sx, uint32_t new_state);
 
-void duet_i2s_tx_block_cmd(I2S_TypeDef * I2Sx, uint32_t new_state);
-void duet_i2s_rx_block_cmd(I2S_TypeDef * I2Sx, uint32_t new_state);
-void duet_i2s_tx_channel_cmd(I2S_TypeDef * I2Sx, uint32_t new_state);
-void duet_i2s_rx_channel_cmd(I2S_TypeDef * I2Sx, uint32_t new_state);
-void duet_i2s_master_clock_cmd(I2S_TypeDef * I2Sx, uint32_t new_state);
-int  duet_i2s_init(I2S_TypeDef * I2Sx, duet_i2s_dev_t * pI2S_struct);
-uint32_t duet_i2s_receive_data(I2S_TypeDef * I2Sx, uint8_t lr);
+    void duet_i2s_tx_block_cmd(I2S_TypeDef * I2Sx, uint32_t new_state);
+    void duet_i2s_rx_block_cmd(I2S_TypeDef * I2Sx, uint32_t new_state);
+    void duet_i2s_tx_channel_cmd(I2S_TypeDef * I2Sx, uint32_t new_state);
+    void duet_i2s_rx_channel_cmd(I2S_TypeDef * I2Sx, uint32_t new_state);
+    void duet_i2s_master_clock_cmd(I2S_TypeDef * I2Sx, uint32_t new_state);
+    int  duet_i2s_init(I2S_TypeDef * I2Sx, duet_i2s_dev_t *pI2S_struct);
+    uint32_t duet_i2s_receive_data(I2S_TypeDef * I2Sx, uint8_t lr);
 
 #ifdef __cplusplus
 }

@@ -20,13 +20,12 @@
 #define ADC_ENABLE
 
 #if defined ADC_ENABLE
-typedef enum
-{
-  ADC_SAMPLE_1M,
-  ADC_SAMPLE_500K,
-  ADC_SAMPLE_250K,
-  ADC_SAMPLE_125K
-}AUX_ADC_SMP_RATE;
+typedef enum {
+    ADC_SAMPLE_1M,
+    ADC_SAMPLE_500K,
+    ADC_SAMPLE_250K,
+    ADC_SAMPLE_125K
+} AUX_ADC_SMP_RATE;
 
 #define  AUX_ADC_CLK  (1<<12)
 #define  ADC_SAMPLE_SEL ADC_SAMPLE_125K
@@ -45,18 +44,15 @@ typedef enum
 #define SYS_REG_BASE_AUXADC           ((SYS_REG_BASE + 0x89000))
 typedef void (*duet_adc_callback_func)(void *arg);
 
-typedef struct
-{
-    union
-    {
-        struct
-        {
+typedef struct {
+    union {
+        struct {
             __IO uint32_t adc_resv : 24;
             __IO uint32_t adc_int_mode : 1;
             __IO uint32_t adc_int_en : 1;
             __IO uint32_t adc_int_clr : 1;
             __IO uint32_t adc_resv1 : 5;
-        }BITS_ADC_CTRL;
+        } BITS_ADC_CTRL;
         __IO uint32_t ADC_CTRL; /* adc control */
     };
     __IO uint32_t ADC_DATA;
@@ -67,8 +63,7 @@ typedef struct
 #define MDM_CLKGATEFCTRL0_ADDR          0x60C00874
 
 
-typedef enum
-{
+typedef enum {
     ADC_CHANNEL_NUM0,
     ADC_CHANNEL_NUM1,
     ADC_CHANNEL_NUM2,
@@ -79,20 +74,17 @@ typedef enum
     ADC_CHANNEL_NUM7,
     ADC_CHANNEL_TEMN,
     ADC_CHANNEL_TEMP
-}duet_adc_channel_t;
+} duet_adc_channel_t;
 
-typedef struct
-{
+typedef struct {
     uint32_t sampling_cycle;  /* sampling period in number of ADC clock cycles */
-}duet_adc_config_t;
-typedef enum
-{
+} duet_adc_config_t;
+typedef enum {
     MOD_TRIG,
     MOD_CNT10
-}AUX_ADC_MOD;
+} AUX_ADC_MOD;
 
-typedef struct
-{
+typedef struct {
     uint8_t           port;   /* adc port */
     duet_adc_config_t config; /* adc config */
     void              *priv;   /* priv data */

@@ -16,17 +16,17 @@
 #ifndef __DUET_UART_H
 #define __DUET_UART_H
 
-#ifdef __cplusplus
-extern "C"{
-#endif
-
 #include <stdint.h>
 #include "stdbool.h"
+#include <errno.h>
 #include "duet_cm4.h"
 #include "system_cm4.h"
 #include "duet_uart_index.h"
 #include "duet.h"
-#include <errno.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define DUET_UART0_INDEX    0
 #define DUET_UART1_INDEX    1
@@ -134,7 +134,7 @@ typedef enum {
 typedef enum {
     FIFO_1_8_FULL = 0, //1/8
     FIFO_1_4_FULL = 1, //1/4
-    FIFO_HALF_FULL= 2, //1/2
+    FIFO_HALF_FULL = 2, //1/2
     FIFO_3_4_FULL = 3, //3/4
     FIFO_7_8_FULL = 4,  //7/8
     FIFO_NULL
@@ -159,10 +159,10 @@ typedef struct {
     void         *priv;    /* priv data */
 } duet_uart_dev_t;
 
-UART_TypeDef* getUartxViaIdx(uint8_t uart_idx);
+UART_TypeDef *getUartxViaIdx(uint8_t uart_idx);
 
-void duet_uart_struct_init(duet_uart_dev_t* UART_InitStruct);
-int32_t duet_uart_dma_config(duet_uart_dev_t* uart,uint8_t dma_tx_rx_sel,uint8_t new_state);
+void duet_uart_struct_init(duet_uart_dev_t *UART_InitStruct);
+int32_t duet_uart_dma_config(duet_uart_dev_t *uart, uint8_t dma_tx_rx_sel, uint8_t new_state);
 /**
  * Initialises a UART interface
  *
@@ -171,7 +171,7 @@ int32_t duet_uart_dma_config(duet_uart_dev_t* uart,uint8_t dma_tx_rx_sel,uint8_t
  *
  * @return  0 : on success, EIO : if an error occurred with any step
  */
-int32_t duet_uart_init(duet_uart_dev_t* uart);
+int32_t duet_uart_init(duet_uart_dev_t *uart);
 
 /**
  * Transmit data on a UART interface
@@ -193,12 +193,12 @@ int32_t duet_uart_send(duet_uart_dev_t *uart, const void *data, uint32_t size, u
  */
 int32_t duet_uart_finalize(duet_uart_dev_t *uart);
 
-void duet_uart_start(UART_TypeDef* UARTx);
+void duet_uart_start(UART_TypeDef *UARTx);
 
 
-void duet_uart_stop(UART_TypeDef* UARTx);
+void duet_uart_stop(UART_TypeDef *UARTx);
 
-void duet_uart_set_callback(uint8_t uart_idx,duet_uart_callback_func func);
+void duet_uart_set_callback(uint8_t uart_idx, duet_uart_callback_func func);
 
 /**
  * calculate integer divider & fractional divider
@@ -206,14 +206,14 @@ void duet_uart_set_callback(uint8_t uart_idx,duet_uart_callback_func func);
  */
 uint32_t duet_uart_calc_baud(uint32_t baud);
 
-void duet_uart_interrupt_config(UART_TypeDef* UARTx, uint32_t uart_int, bool new_state);
-uint8_t duet_uart_clear_interrupt(UART_TypeDef* UARTx, uint32_t uart_interrupt);
-ITstatus duet_uart_get_raw_interrupt_status(UART_TypeDef* UARTx, uint32_t uart_interrupt);
-ITstatus duet_uart_get_interrupt_status(UART_TypeDef* UARTx, uint32_t uart_interrupt);
-ITstatus duet_uart_get_flag_status(UART_TypeDef* UARTx, uint8_t uart_flag);
+void duet_uart_interrupt_config(UART_TypeDef *UARTx, uint32_t uart_int, bool new_state);
+uint8_t duet_uart_clear_interrupt(UART_TypeDef *UARTx, uint32_t uart_interrupt);
+ITstatus duet_uart_get_raw_interrupt_status(UART_TypeDef *UARTx, uint32_t uart_interrupt);
+ITstatus duet_uart_get_interrupt_status(UART_TypeDef *UARTx, uint32_t uart_interrupt);
+ITstatus duet_uart_get_flag_status(UART_TypeDef *UARTx, uint8_t uart_flag);
 
-void UART_SendData(UART_TypeDef* UARTx, unsigned char Data);
-uint8_t UART_ReceiveData(UART_TypeDef* UARTx);
+void UART_SendData(UART_TypeDef *UARTx, unsigned char Data);
+uint8_t UART_ReceiveData(UART_TypeDef *UARTx);
 
 
 #ifdef __cplusplus

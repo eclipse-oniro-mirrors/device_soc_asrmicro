@@ -42,7 +42,7 @@ void openharmony_init()
 #endif
 int at_test_1(int argc, char **argv)
 {
-    printf("%s...\n",__func__);
+    printf("%s...\n", __func__);
     return 0;
 }
 
@@ -56,7 +56,6 @@ int at_harmony_xts(int argc, char **argv)
 
 int at_hilink_start(int argc, char **argv)
 {
-   // hilink_main_wrap();
     return 0;
 }
 

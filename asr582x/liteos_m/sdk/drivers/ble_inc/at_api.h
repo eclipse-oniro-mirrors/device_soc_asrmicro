@@ -38,10 +38,9 @@ typedef struct _cmd_entry {
     char *name;
     int (*function)(int, char **);
     char *help;
-}cmd_entry;
+} cmd_entry;
 
-typedef struct
-{
+typedef struct {
     uint8_t  uart_echo;       /* echo uart input info log */
     uint8_t  max_txpwr;       /* max tx power for both sta and softap */
     uint8_t  flag_sap;        /* flag of user set softap ip config */
@@ -54,10 +53,9 @@ typedef struct
     char     ip[16];          /* Local IP address on the target wlan interface, ASCII*/
     char     gw[16];          /* Router IP address on the target wlan interface, ASCII */
     char     mask[16];        /* Netmask on the target wlan interface, ASCII*/
-}at_user_info_s;
+} at_user_info_s;
 
-typedef enum
-{
+typedef enum {
     CONFIG_OK,          /* indicate at cmd set success and response OK */
     PARAM_RANGE,        /* indicate some at cmd param is out of range */
     PARAM_MISS,         /* indicate at cmd param is less than needed count */
@@ -65,8 +63,8 @@ typedef enum
     CONN_TIMEOUT,       /* indicate connect timeout in station mode */
     CONN_EAPOL_FAIL,    /* indicate 4-way handshake failed in station mode */
     CONN_DHCP_FAIL,     /* indicate got ip by dhcp failed in station mode */
-    RSP_NULL=0xFF
-}at_rsp_status_t;
+    RSP_NULL = 0xFF
+} at_rsp_status_t;
 
 typedef struct {
     char *command;  /*at cmd string*/
@@ -85,7 +83,7 @@ void at_cmd_register( const cmd_entry *cmd);
  *  @return    0       : on success.
  *  @return    other   : error occurred
  */
-int lega_at_init(const char* task_name,uint8_t task_pri,uint32_t task_stack_size);
+int lega_at_init(const char *task_name, uint8_t task_pri, uint32_t task_stack_size);
 
 /** @brief  at deinit functin, user should call it when donot use at any more, to free resources
  *  @return    0       : on success.
@@ -99,7 +97,6 @@ void at_handle_uartirq(char ch);
 
 /** @brief  uart handle for receiving at command.
  */
-//extern lega_uart_dev_t lega_at_uart;
 
 /** @brief  at register init functin, register all support cmd and user register cmd
  */
@@ -115,7 +112,7 @@ void at_gattc_cmd_register(void);
 /** @brief  at response, OK indicate success, others indicate failed.
  */
 void at_response(at_rsp_status_t status);
-extern int at_printf(const char* format, ...);
+extern int at_printf(const char *format, ...);
 
 extern char at_dbgflg;
 

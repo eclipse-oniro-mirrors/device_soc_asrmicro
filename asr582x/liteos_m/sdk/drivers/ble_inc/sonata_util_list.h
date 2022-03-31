@@ -55,8 +55,7 @@
 
 /// structure of a list element header
 /*@TRACE*/
-struct util_list_hdr
-{
+struct util_list_hdr {
     /// Pointer to next util_list_hdr
     struct util_list_hdr *next;
 };
@@ -65,8 +64,7 @@ struct util_list_hdr
 typedef struct util_list_hdr util_list_hdr_t;
 
 /// structure of a list
-struct util_list
-{
+struct util_list {
     /// pointer to first element of the list
     struct util_list_hdr *first;
     /// pointer to the last element
@@ -90,7 +88,7 @@ typedef struct util_list util_list_t;
  ****************************************************************************************
  */
 /// pop a specific element from the list
-#define UTIL_LIST_POP_ELT(list, elt) util_list_extract(&(list), &(elt->hdr));
+#define UTIL_LIST_POP_ELT(list, elt) util_list_extract(&(list), &((elt)->hdr))
 
 /*
  * FUNCTION DECLARATIONS
@@ -116,9 +114,9 @@ void util_list_init(struct util_list *list);
  ****************************************************************************************
  */
 void util_list_pool_init(struct util_list *list,
-                       void *pool,
-                       size_t elmt_size,
-                       uint32_t elmt_cnt);
+                         void *pool,
+                         size_t elmt_size,
+                         uint32_t elmt_cnt);
 
 /**
  ****************************************************************************************
@@ -142,7 +140,8 @@ void util_list_push_back(struct util_list *list, struct util_list_hdr *list_hdr)
  * @param last_hdr       Pointer to the last element to append
  ****************************************************************************************
  */
-void util_list_push_back_sublist(struct util_list *list, struct util_list_hdr *first_hdr, struct util_list_hdr *last_hdr);
+void util_list_push_back_sublist(struct util_list *list, struct util_list_hdr *first_hdr,
+                                 struct util_list_hdr *last_hdr);
 
 /**
  ****************************************************************************************
@@ -186,7 +185,8 @@ bool util_list_extract(struct util_list *list, struct util_list_hdr *list_hdr);
  * @param elt_to_rem_hdr Pointer to the element to be extracted
  ****************************************************************************************
  */
-void util_list_extract_after(struct util_list *list, struct util_list_hdr *elt_ref_hdr, struct util_list_hdr *elt_to_rem_hdr);
+void util_list_extract_after(struct util_list *list, struct util_list_hdr *elt_ref_hdr,
+                             struct util_list_hdr *elt_to_rem_hdr);
 
 /**
  ****************************************************************************************
@@ -238,7 +238,7 @@ void util_list_merge(struct util_list *list1, struct util_list *list2);
  ****************************************************************************************
  */
 void util_list_insert_before(struct util_list *list,
-                        struct util_list_hdr *elt_ref_hdr, struct util_list_hdr *elt_to_add_hdr);
+                             struct util_list_hdr *elt_ref_hdr, struct util_list_hdr *elt_to_add_hdr);
 
 /**
  ****************************************************************************************
@@ -252,7 +252,7 @@ void util_list_insert_before(struct util_list *list,
  ****************************************************************************************
  */
 void util_list_insert_after(struct util_list *list,
-                        struct util_list_hdr *elt_ref_hdr, struct util_list_hdr *elt_to_add_hdr);
+                            struct util_list_hdr *elt_ref_hdr, struct util_list_hdr *elt_to_add_hdr);
 
 
 /**
@@ -291,7 +291,7 @@ __INLINE bool util_list_is_empty(const struct util_list *const list)
  */
 __INLINE struct util_list_hdr *util_list_pick(const struct util_list *const list)
 {
-    return(list->first);
+    return (list->first);
 }
 
 
@@ -306,7 +306,7 @@ __INLINE struct util_list_hdr *util_list_pick(const struct util_list *const list
  */
 __INLINE struct util_list_hdr *util_list_next(const struct util_list_hdr *const list_hdr)
 {
-    return(list_hdr->next);
+    return (list_hdr->next);
 }
 
 /// @} UTIL_LIST

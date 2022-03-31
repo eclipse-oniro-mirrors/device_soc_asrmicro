@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-#include "board.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "board.h"
 #include "duet_cm4.h"
 #include "duet_pinmux.h"
 #include "duet_uart.h"
@@ -38,10 +38,10 @@ main task stask size(byte)
 */
 #define OS_MAIN_TASK_STACK (4096)
 
-osThreadAttr_t g_main_task={"main_task",0,NULL,0,NULL,OS_MAIN_TASK_STACK,15,0,0};
+osThreadAttr_t g_main_task = {"main_task", 0, NULL, 0, NULL, OS_MAIN_TASK_STACK, 15, 0, 0};
 
 #ifdef CFG_HARMONY_TESTS
-osThreadAttr_t harmony_test_task={"test_task",0,NULL,0,NULL,OS_MAIN_TASK_STACK,15,0,0};
+osThreadAttr_t harmony_test_task = {"test_task", 0, NULL, 0, NULL, OS_MAIN_TASK_STACK, 15, 0, 0};
 #endif
 
 static int sys_init_done = 0;
@@ -71,7 +71,7 @@ static void sys_init(void)
 #endif
 
 #ifdef CFG_DUAL_AP
-    comm_wifi_command_register(0,NULL);
+    comm_wifi_command_register(0, NULL);
 #endif
 
     //lega_at_init(AT_TASK_NAME,AT_TASK_PRIORITY,AT_TASK_STACK_SIZE);
@@ -83,12 +83,12 @@ static void sys_init(void)
 #endif
 
 #ifdef CFG_MRFOTA_TEST
-  //  extern void lega_rfota_wifi_test_at_init(void);
-  //  lega_rfota_wifi_test_at_init();
- //   extern void lega_rfota_ble_test_at_init(void);
-   // lega_rfota_ble_test_at_init();
+    //  extern void lega_rfota_wifi_test_at_init(void);
+    //  lega_rfota_wifi_test_at_init();
+    //   extern void lega_rfota_ble_test_at_init(void);
+    // lega_rfota_ble_test_at_init();
 #endif
-	DeviceManagerStart();
+    DeviceManagerStart();
     printf("sys_init running...\n");
     sys_init_done = 1;
 }
@@ -96,8 +96,7 @@ static void sys_init(void)
 #ifdef CFG_HARMONY_TESTS
 static void harmony_test(void)
 {
-    while (sys_init_done == 0)
-    {
+    while (sys_init_done == 0) {
         osDelay(500);
     }
     osDelay(500);
@@ -117,19 +116,17 @@ int main(void)
 
     NVIC_deinit();
     ret = osKernelInitialize();
-    
-    if(ret == osOK)
-    {		
-        threadId = osThreadNew((osThreadFunc_t)sys_init,NULL,&g_main_task);
+
+    if (ret == osOK) {
+        threadId = osThreadNew((osThreadFunc_t)sys_init, NULL, &g_main_task);
 #ifdef CFG_HARMONY_TESTS
-        osThreadNew((osThreadFunc_t)harmony_test,NULL,&harmony_test_task);
+        osThreadNew((osThreadFunc_t)harmony_test, NULL, &harmony_test_task);
 #endif
-        if(threadId!=NULL)
-        {
+        if (threadId != NULL) {
             osKernelStart();
         }
-    }   
+    }
 
-    while(1);    
+    while (1);
     return 0;
 }

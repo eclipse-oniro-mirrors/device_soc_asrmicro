@@ -21,7 +21,6 @@
 #include "sonata_gatt_api.h"
 
 #define BLE_APP_FRAME_DATA_MAX_LENGTH    300
-//#define ATT_UUID_128_LEN                 16
 
 
 /*
@@ -79,8 +78,7 @@
 
 #define MAX_SERVICE_NUM 10
 
-enum BLE_ADV_STATE
-{
+enum BLE_ADV_STATE {
     /// Advertising activity does not exists
     BLE_ADV_STATE_IDLE = 0,
     /// Creating advertising activity
@@ -99,28 +97,24 @@ enum BLE_ADV_STATE
     BLE_ADV_STATE_STOPPING,
 };
 
-typedef enum
-{
+typedef enum {
     BLE_ENABLE_ADV,
     BLE_DISABLE_ADV,
 } ble_adv_enable;
 
-typedef enum
-{
+typedef enum {
     BLE_GATTC_INDICATE,
     BLE_GATTC_NOTIFY,
 } ble_att_op_t;
 
-typedef enum
-{
+typedef enum {
     BLE_STATUS_SUCCESS,
     BLE_STATUS_INVALID_PARAM,
     BLE_STATUS_DISCONNETED,
     BLE_STATUS_FAILED,
 } ble_status_t;
 
-typedef struct BLE_ADV_PARAM_T
-{
+typedef struct BLE_ADV_PARAM_T {
     uint16_t advertising_interval_min;
     uint16_t advertising_interval_max;
     uint8_t advertising_type;
@@ -129,69 +123,61 @@ typedef struct BLE_ADV_PARAM_T
     uint8_t advertising_filter_policy;
 } ble_adv_param_t;
 
-typedef struct BLE_ADV_DATA_T
-{
-     uint8_t ble_advdata[32];     /*!< ??????*/
+typedef struct BLE_ADV_DATA_T {
+    uint8_t ble_advdata[32];     /*!< ??????*/
     uint8_t ble_advdataLen;     /*!< ??????*/
 
 } ble_adv_data_t;
 
-typedef struct BLE_SCAN_DATA_T
-{
+typedef struct BLE_SCAN_DATA_T {
     uint8_t ble_respdata[32];     /*!< ??????????*/
     uint8_t ble_respdataLen;     /*!< ??????????*/
 
 } ble_scan_data_t;
 
-typedef struct BLE_CMD_DISCONNECT_T
-{
+typedef struct BLE_CMD_DISCONNECT_T {
     uint8_t link_id;
     uint8_t reason;
 
 } ble_cmd_disconnect_t;
 
-typedef struct BLE_VALUE_NOTIFICATION_INDICATION_T
-{
+typedef struct BLE_VALUE_NOTIFICATION_INDICATION_T {
     uint8_t att_operation;
     uint16_t att_handle;
     uint16_t att_length;
     uint8_t  att_value[BLE_APP_FRAME_DATA_MAX_LENGTH];
-}ble_value_notification_indication_t;
+} ble_value_notification_indication_t;
 
-typedef struct BLE_ADV_ENABLE_T
-{
+typedef struct BLE_ADV_ENABLE_T {
     uint8_t advertising_enable;
 } ble_adv_enable_t;
 
 
-typedef enum MS_BLE_STACK_EVENT_T
-{
+typedef enum MS_BLE_STACK_EVENT_T {
     MS_BLE_STACK_EVENT_STACK_READY = 0,
     MS_BLE_STACK_EVENT_STACK_FAIL,
-    MS_BLE_STACK_EVENT_ADV_ON,                  /*!< ������رչ㲥ִ�гɹ�*/
-    MS_BLE_STACK_EVENT_ADV_OFF,                /*!< ������رչ㲥ִ�гɹ�*/
+    MS_BLE_STACK_EVENT_ADV_ON,                  /*!< ???????????г??*/
+    MS_BLE_STACK_EVENT_ADV_OFF,                /*!< ???????????г??*/
     MS_BLE_STACK_EVENT_DISCONNECT, /*!< ??????*/
     MS_BLE_STACK_EVENT_CONNECTED,  /*!< ??????*/
 } ms_ble_stack_event_t;
 
 
 typedef void (*ble_gatt_service_att_wirte_cb)(uint8_t *data, uint16_t size);
-typedef void (*ble_gatt_service_att_read_cb)(uint8_t *data,  uint16_t* size);
+typedef void (*ble_gatt_service_att_read_cb)(uint8_t *data,  uint16_t *size);
 typedef void (*ble_gatt_service_att_ind_cb)(uint8_t *data,  uint16_t size);
 
 
-typedef struct ble_gatt_att_opr
-{
+typedef struct ble_gatt_att_opr {
     ble_gatt_service_att_wirte_cb write_request;
     ble_gatt_service_att_read_cb  read_request;
     ble_gatt_service_att_ind_cb  ind_cb;
-}ble_gatt_att_opr_t;
+} ble_gatt_att_opr_t;
 
-typedef struct ble_gatt_att_reg
-{
+typedef struct ble_gatt_att_reg {
     sonata_gatt_att_desc_t att_desc;
     ble_gatt_att_opr_t  att_opr;
-}ble_gatt_att_reg_t;
+} ble_gatt_att_reg_t;
 
 
 typedef void (*cb_fun)(ms_ble_stack_event_t);
@@ -202,7 +188,7 @@ extern cb_fun ble_cb_fun;
 
 void ble_set_callback(cb_fun cb);
 int ble_gatt_add_svc_helper(uint16_t *start_hdl, uint8_t nb_att, ble_gatt_att_reg_t *atts);
-void ble_gatt_data_send(uint16_t local_handle,uint16_t idx, uint16_t length, uint8_t *p_value);
+void ble_gatt_data_send(uint16_t local_handle, uint16_t idx, uint16_t length, uint8_t *p_value);
 uint8_t ble_get_connect_status(void);
 uint8_t ble_disconnect_request(void);
 uint8_t ble_get_adv_status(void);
@@ -211,10 +197,10 @@ void ble_set_max_mtu(uint16_t mtu);
 uint16_t ble_get_mtu(void);
 void ble_stop_adv(void);
 void ble_gatt_add_srv_rsp(uint16_t handle);
-void ble_gatt_read_request_handler(uint8_t connection_id, uint16_t handle,uint16_t* p_length, uint8_t **p_value);
+void ble_gatt_read_request_handler(uint8_t connection_id, uint16_t handle, uint16_t *p_length, uint8_t **p_value);
 void ble_gatt_write_request_handler(uint8_t connection_id, uint16_t handle, uint16_t length, uint8_t *p_value);
 int ble_scan_start(app_ble_scan_callback_t cb);
 int ble_scan_stop(void);
-
+int ms_add_test_service(void);
 
 #endif

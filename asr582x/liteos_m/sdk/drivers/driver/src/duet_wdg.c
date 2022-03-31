@@ -14,6 +14,7 @@
  */
 
 #include <stdio.h>
+#include <errno.h>
 #include "duet_cm4.h"
 #include "duet.h"
 #include "duet_wdg.h"
@@ -53,7 +54,7 @@ void hw_watchdog_lock(void)
 }
 
 void hw_watchdog_disable(void)
-{  
+{
     hw_watchdog_unlock();
     WATCHDOG->CONTROL = 0x0;
     WATCHDOG->LOAD = 0xffffffff;
@@ -61,7 +62,7 @@ void hw_watchdog_disable(void)
 }
 
 void hw_watchdog_isr(unsigned int delay)
-{  
+{
     hw_watchdog_unlock();
     WATCHDOG->CONTROL = WDG_INTEN;
     WATCHDOG->LOAD = delay;
@@ -69,7 +70,7 @@ void hw_watchdog_isr(unsigned int delay)
 }
 
 void hw_watchdog_reset(unsigned int delay)
-{ 
+{
     hw_watchdog_unlock();
     WATCHDOG->CONTROL = WDG_RESEN | WDG_INTEN;
     WATCHDOG->LOAD = delay;
@@ -77,14 +78,14 @@ void hw_watchdog_reset(unsigned int delay)
 }
 
 void hw_watchdog_isr_clr(void)
-{  
+{
     hw_watchdog_unlock();
     WATCHDOG->INTCLR = 0x1;
     hw_watchdog_lock();
 }
 
 void WDG_IRQHandler(void)
-{ 
+{
     duet_intrpt_enter();
     NVIC_DisableIRQ(WDG_IRQn);
     duet_intrpt_exit();
@@ -98,29 +99,26 @@ void WDG_IRQHandler(void)
  * @return  0 : on success, EIO : if an error occurred with any step
  */
 int32_t duet_wdg_init(duet_wdg_dev_t *wdg)
-{  
+{
     uint32_t reg_value;
-    if(NULL == wdg)
-    {
+    if (NULL == wdg) {
         return EIO;
     }
-    if(0 == wdg->port)
-    {
+    if (0 == wdg->port) {
         //OPEN WDG CLOCK
         reg_value = REG_RD(PERI_CLK_EN_REG1) & (~WDG_BUS_CLK_BIT);
         REG_WR(PERI_CLK_EN_REG1, (reg_value | (WDG_BUS_CLK_BIT)));
         //WDG CLOCK DIV SET
         reg_value = REG_RD(WDG_APB_DIV_REG);
-        REG_WR(WDG_APB_DIV_REG,(reg_value | (WDG_APB_DIV<<4)));
-        hw_watchdog_reset(wdg->config.timeout * (SYSTEM_CLOCK /(WDG_APB_DIV+1)/1000 / 2)); //1000 for ms, 2 for watchdog feature
+        REG_WR(WDG_APB_DIV_REG, (reg_value | (WDG_APB_DIV << 4)));
+        hw_watchdog_reset(wdg->config.timeout * (SYSTEM_CLOCK / (WDG_APB_DIV + 1) / 1000 /
+                          2)); //1000 for ms, 2 for watchdog feature
         //ENABLE WDG IRQ
         reg_value = REG_RD(DUTE_IRQ_EN_REG) & (~WDG_IRQ_BIT);
         REG_WR(DUTE_IRQ_EN_REG, (reg_value | (WDG_IRQ_BIT)));
         NVIC_EnableIRQ(WDG_IRQn);
         return 0;
-    }
-    else
-    {
+    } else {
         return EIO;
     }
 }
@@ -131,14 +129,12 @@ int32_t duet_wdg_init(duet_wdg_dev_t *wdg)
  * @param[in]  wdg  the watch dog device
  */
 void duet_wdg_reload(duet_wdg_dev_t *wdg)
-{  
-    if(NULL == wdg)
-    {
+{
+    if (NULL == wdg) {
         return;
     }
-    if(0 == wdg->port)
-    {
-    	lega_rtos_declare_critical();
+    if (0 == wdg->port) {
+        lega_rtos_declare_critical();
         lega_rtos_enter_critical();
         hw_watchdog_isr_clr();
         NVIC_ClearPendingIRQ(WDG_IRQn);
@@ -155,14 +151,12 @@ void duet_wdg_reload(duet_wdg_dev_t *wdg)
  * @return  0 : on success, EIO : if an error occurred with any step
  */
 int32_t duet_wdg_finalize(duet_wdg_dev_t *wdg)
-{  
+{
     uint32_t reg_value;
-    if(NULL == wdg)
-    {
+    if (NULL == wdg) {
         return EIO;
     }
-    if(0 == wdg->port)
-    {
+    if (0 == wdg->port) {
         //DIS WDG IRQ
         reg_value = REG_RD(DUTE_IRQ_DIS_REG) & (~WDG_IRQ_BIT);
         REG_WR(DUTE_IRQ_DIS_REG, (reg_value | (WDG_IRQ_BIT)));
@@ -170,11 +164,9 @@ int32_t duet_wdg_finalize(duet_wdg_dev_t *wdg)
         hw_watchdog_disable();
         // Set WDG Clock Disable
         reg_value = REG_RD(PERI_CLK_DIS_REG1) & (~WDG_BUS_CLK_BIT);
-        REG_WR(PERI_CLK_DIS_REG1, (reg_value|(WDG_BUS_CLK_BIT)));
+        REG_WR(PERI_CLK_DIS_REG1, (reg_value | (WDG_BUS_CLK_BIT)));
         return 0;
-    }
-    else
-    {
+    } else {
         return EIO;
     }
 }

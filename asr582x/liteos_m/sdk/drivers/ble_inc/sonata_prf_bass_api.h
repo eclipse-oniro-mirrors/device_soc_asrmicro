@@ -57,8 +57,7 @@
 /*!
  * @brief Callback for diss value
  */
-typedef struct prf_bas_callback
-{
+typedef struct prf_bas_callback {
     /// Callback for battery level request, if config==1, app should send battery level value use sonata_prf_bas_send_battery_level()
     uint16_t (*prf_bass_value_req)(uint8_t conidx, uint8_t config);
     /// Callback for bass enabled
@@ -66,10 +65,9 @@ typedef struct prf_bas_callback
     /// Callback for battery level notifiyed
     uint16_t (*prf_bass_level_updated)(uint8_t status);
 
-}prf_bas_callback_t;
+} prf_bas_callback_t;
 
-typedef enum
-{
+typedef enum {
     /// Start the Battery Server - at connection used to restore bond data
     SONATA_PRF_BASS_ENABLE_REQ = SONATA_TASK_FIRST_MSG(SONATA_TASK_ID_BASS),
     /// Confirmation of the Battery Server start
@@ -80,7 +78,7 @@ typedef enum
     SONATA_PRF_BASS_BATT_LEVEL_UPD_RSP,
     /// Inform APP that Battery Level Notification Configuration has been changed - use to update bond data
     SONATA_PRF_BASS_BATT_LEVEL_NTF_CFG_IND,
-}sonata_bass_msg_id;
+} sonata_bass_msg_id;
 
 /*
  * GLOBAL VARIABLES DECLARATIONS
@@ -103,11 +101,11 @@ void sonata_prf_bass_init(void);
  */
 void sonata_prf_bas_add_bass(uint8_t bas_number, bool support_ntf);
 
- /*!
-  * @brief Enable the Battery Service
-  * @param conidx connection index
-  * @param batt_lvl battery level value
-  */
+/*!
+ * @brief Enable the Battery Service
+ * @param conidx connection index
+ * @param batt_lvl battery level value
+ */
 void sonata_prf_bas_enable_bass(uint8_t conidx, uint8_t batt_lvl);
 
 

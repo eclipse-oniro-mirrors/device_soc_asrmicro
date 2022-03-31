@@ -129,42 +129,42 @@ typedef struct {
 #define BLOCK64_ERASE_CMD   0x00025D8
 
 struct FlashSectors  {
-  unsigned long   szSector;    // Sector Size in Bytes
-  unsigned long AddrSector;    // Address of Sector
+    unsigned long   szSector;    // Sector Size in Bytes
+    unsigned long AddrSector;    // Address of Sector
 };
 
 #define SECTOR_END 0xFFFFFFFF, 0xFFFFFFFF
 
 struct FlashDevice  {
-   unsigned short     Vers;    // Version Number and Architecture
-   char       DevName[128];    // Device Name and Description
-   unsigned short  DevType;    // Device Type: ONCHIP, EXT8BIT, EXT16BIT, ...
-   unsigned long    DevAdr;    // Default Device Start Address
-   unsigned long     szDev;    // Total Size of Device
-   unsigned long    szPage;    // Programming Page Size
-   unsigned long     szSector;
-   unsigned long       Res;    // Reserved for future Extension
-   unsigned char  valEmpty;    // Content of Erased Memory
+    unsigned short     Vers;    // Version Number and Architecture
+    char       DevName[128];    // Device Name and Description
+    unsigned short  DevType;    // Device Type: ONCHIP, EXT8BIT, EXT16BIT, ...
+    unsigned long    DevAdr;    // Default Device Start Address
+    unsigned long     szDev;    // Total Size of Device
+    unsigned long    szPage;    // Programming Page Size
+    unsigned long     szSector;
+    unsigned long       Res;    // Reserved for future Extension
+    unsigned char  valEmpty;    // Content of Erased Memory
 
-   unsigned long    toProg;    // Time Out of Program Page Function
-   unsigned long   toErase;    // Time Out of Erase Sector Function
+    unsigned long    toProg;    // Time Out of Program Page Function
+    unsigned long   toErase;    // Time Out of Erase Sector Function
 
-   struct FlashSectors sectors[SECTOR_NUM];
+    struct FlashSectors sectors[SECTOR_NUM];
 };
 
 #define FLASH_DRV_VERS (0x0100+VERS)   // Driver Version, do not modify!
 
 #define FLASH_DRIVER_SEG __attribute__((section("seg_flash_driver")))
 
-          void duet_flash_alg_read_buf_clr(void);
-        //void duet_flash_alg_cache_bypass(void);
-          void duet_flash_alg_cache_enable(void);
-        //void duet_flash_alg_cache_flush(void);
-          int  duet_flash_alg_init (void);
-          int duet_flash_alg_erase(unsigned int cmd, unsigned long adr);
-          int  duet_flash_alg_programpage (unsigned long adr,   // Program Page Function
-                                  unsigned long sz,
-                                  unsigned char *buf);
+void duet_flash_alg_read_buf_clr(void);
+//void duet_flash_alg_cache_bypass(void);
+void duet_flash_alg_cache_enable(void);
+//void duet_flash_alg_cache_flush(void);
+int  duet_flash_alg_init (void);
+int duet_flash_alg_erase(unsigned int cmd, unsigned long adr);
+int  duet_flash_alg_programpage (unsigned long adr,   // Program Page Function
+                                 unsigned long sz,
+                                 unsigned char *buf);
 #ifdef _SPI_FLASH_240MHz_
 void duet_flash_alg_set_clk_240(unsigned char en_240m);
 #elif defined  _SPI_FLASH_120MHz_

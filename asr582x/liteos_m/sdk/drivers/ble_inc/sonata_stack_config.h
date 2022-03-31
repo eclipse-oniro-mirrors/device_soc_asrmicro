@@ -20,7 +20,6 @@
  ****************************************************************************************
  */
 #include "sonata_stack_user_config.h"
-#include "sonata_stack_fixed_config.h"
 
 
 /*

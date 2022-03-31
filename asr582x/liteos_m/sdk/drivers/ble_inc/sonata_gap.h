@@ -246,18 +246,17 @@
  */
 
 #define SONATA_GAP_AD_TYPE_SET_BIT(bitfield, adv_flag)                             \
-                bitfield[adv_flag / 8] |= CO_BIT(adv_flag % 8)
+    bitfield[(adv_flag) / 8] |= CO_BIT((adv_flag) % 8)
 
 #define SONATA_GAP_AD_TYPE_CHECK_BIT(bitfield, adv_flag)                           \
-                (bitfield[adv_flag / 8] & CO_BIT(adv_flag % 8))
+    (bitfield[(adv_flag) / 8] & CO_BIT((adv_flag) % 8))
 
 /*
  * Enumerations
  ****************************************************************************************
  */
 /// GAP Advertising Flags
-enum sonata_gap_ad_type
-{
+enum sonata_gap_ad_type {
     /// Flag
     SONATA_GAP_AD_TYPE_FLAGS                      = 0x01,//!< SONATA_GAP_AD_TYPE_FLAGS
     /// Use of more than 16 bits UUID
@@ -326,8 +325,7 @@ enum sonata_gap_ad_type
 };
 
 /// Boolean value set
-enum
-{
+enum {
     /// Disable
     SONATA_GAP_DISABLE = 0x00,
     /// Enable
@@ -337,8 +335,7 @@ enum
 
 /// GAP Attribute database handles
 /// Generic Access Profile Service
-enum
-{
+enum {
     SONATA_GAP_IDX_PRIM_SVC,
     SONATA_GAP_IDX_CHAR_DEVNAME,
     SONATA_GAP_IDX_DEVNAME,
@@ -357,8 +354,7 @@ enum
 
 
 /// IO Capability Values
-enum sonata_gap_io_cap
-{
+enum sonata_gap_io_cap {
     /// Display Only
     SONATA_GAP_IO_CAP_DISPLAY_ONLY = 0x00,
     /// Display Yes No
@@ -373,8 +369,7 @@ enum sonata_gap_io_cap
 };
 
 /// TK Type
-enum sonata_gap_tk_type
-{
+enum sonata_gap_tk_type {
     ///  TK get from out of band method
     SONATA_GAP_TK_OOB         = 0x00,
     /// TK generated and shall be displayed by local device
@@ -384,8 +379,7 @@ enum sonata_gap_tk_type
 };
 
 /// OOB Data Present Flag Values
-enum sonata_gap_oob_auth
-{
+enum sonata_gap_oob_auth {
     /// OOB Data not present
     SONATA_GAP_OOB_AUTH_DATA_NOT_PRESENT = 0x00,
     /// OOB data present
@@ -394,8 +388,7 @@ enum sonata_gap_oob_auth
 };
 
 /// Authentication mask
-enum sonata_gap_auth_mask
-{
+enum sonata_gap_auth_mask {
     /// No Flag set
     SONATA_GAP_AUTH_NONE    = 0,
     /// Bond authentication
@@ -409,8 +402,7 @@ enum sonata_gap_auth_mask
 };
 
 /// Security Link Level
-enum sonata_gap_lk_sec_lvl
-{
+enum sonata_gap_lk_sec_lvl {
     /// No authentication
     SONATA_GAP_LK_NO_AUTH             = 0,
     /// Unauthenticated link
@@ -422,8 +414,7 @@ enum sonata_gap_lk_sec_lvl
 };
 
 /// Authentication Requirements
-enum sonata_gap_auth
-{
+enum sonata_gap_auth {
     /// No MITM No Bonding
     SONATA_GAP_AUTH_REQ_NO_MITM_NO_BOND  = (SONATA_GAP_AUTH_NONE),
     /// No MITM Bonding
@@ -444,8 +435,7 @@ enum sonata_gap_auth
 };
 
 /// Key Distribution Flags
-enum sonata_gap_kdist
-{
+enum sonata_gap_kdist {
     /// No Keys to distribute
     SONATA_GAP_KDIST_NONE = 0x00,
     /// Encryption key in distribution
@@ -453,16 +443,15 @@ enum sonata_gap_kdist
     /// IRK (ID key)in distribution
     SONATA_GAP_KDIST_IDKEY  = (1 << 1),
     /// CSRK(Signature key) in distribution
-    SONATA_GAP_KDIST_SIGNKEY= (1 << 2),
+    SONATA_GAP_KDIST_SIGNKEY = (1 << 2),
     /// LTK in distribution
-    SONATA_GAP_KDIST_LINKKEY=   (1 << 3),
+    SONATA_GAP_KDIST_LINKKEY =   (1 << 3),
 
     SONATA_GAP_KDIST_LAST =   (1 << 4)
 };
 
 /// Security Defines
-enum sonata_gap_sec_req
-{
+enum sonata_gap_sec_req {
     /// No security (no authentication and encryption)
     SONATA_GAP_NO_SEC = 0x00,
     /// Unauthenticated pairing with encryption
@@ -478,8 +467,7 @@ enum sonata_gap_sec_req
 };
 
 /// Bit field use to select the preferred TX or RX LE PHY. 0 means no preferences
-enum sonata_gap_phy
-{
+enum sonata_gap_phy {
     /// No preferred PHY
     SONATA_GAP_PHY_ANY               = 0x00,
     /// LE 1M PHY preferred for an active link
@@ -491,8 +479,7 @@ enum sonata_gap_phy
 };
 
 /// Enumeration of TX/RX PHY values
-enum sonata_gap_phy_val
-{
+enum sonata_gap_phy_val {
     /// LE 1M PHY (TX or RX)
     SONATA_GAP_PHY_1MBPS        = 1,
     /// LE 2M PHY (TX or RX)
@@ -506,18 +493,14 @@ enum sonata_gap_phy_val
 };
 
 /// Modulation index
-enum sonata_gap_modulation_idx
-{
-    /// Assume transmitter will have a standard modulation index
+enum sonata_gap_modulation_idx { /// Assume transmitter will have a standard modulation index
     SONATA_GAP_MODULATION_STANDARD,
     /// Assume transmitter will have a stable modulation index
     SONATA_GAP_MODULATION_STABLE,
 };
 
 /// Packet Payload type for test mode
-enum sonata_gap_pkt_pld_type
-{
-    /// PRBS9 sequence "11111111100000111101..." (in transmission order)
+enum sonata_gap_pkt_pld_type { /// PRBS9 sequence "11111111100000111101..." (in transmission order)
     SONATA_GAP_PKT_PLD_PRBS9,
     /// Repeated "11110000" (in transmission order)
     SONATA_GAP_PKT_PLD_REPEATED_11110000,
@@ -539,8 +522,7 @@ enum sonata_gap_pkt_pld_type
 
 /// Device name
 /*@TRACE*/
-struct sonata_gap_dev_name
-{
+struct sonata_gap_dev_name {
     /// name length
     uint16_t length;
     /// name value
@@ -549,8 +531,7 @@ struct sonata_gap_dev_name
 
 /// Slave preferred connection parameters
 /*@TRACE*/
-struct sonata_gap_slv_pref
-{
+struct sonata_gap_slv_pref {
     /// Connection interval minimum
     uint16_t con_intv_min;
     /// Connection interval maximum
@@ -563,16 +544,14 @@ struct sonata_gap_slv_pref
 
 ///BD Address structure
 /*@TRACE*/
-typedef struct
-{
+typedef struct {
     ///6-byte array address value
     uint8_t  addr[SONATA_GAP_BD_ADDR_LEN];
 } sonata_bd_addr_t;
 
 ///Channel map structure
 /*@TRACE*/
-typedef struct
-{
+typedef struct {
     ///5-byte channel map array
     uint8_t map[SONATA_GAP_LE_CHNL_MAP_LEN];
 } sonata_le_chnl_map_t;
@@ -580,25 +559,14 @@ typedef struct
 
 ///Random number structure
 /*@TRACE*/
-typedef struct
-{
+typedef struct {
     ///8-byte array for random number
     uint8_t     nb[SONATA_GAP_RAND_NB_LEN];
 } sonata_rand_nb_t;
 
-/// P256 Public key data format
-//typedef struct
-//{
-//    /// X Coordinate of the key
-//    uint8_t x[SONATA_GAP_P256_KEY_LEN];
-//    /// X Coordinate of the key
-//    uint8_t y[SONATA_GAP_P256_KEY_LEN];
-//} sonata_public_key_t;
-
 /// Address information about a device address
 /*@TRACE*/
-struct sonata_gap_bdaddr
-{
+struct sonata_gap_bdaddr {
     /// BD Address of device
     sonata_bd_addr_t addr;
     /// Address type of the device 0=public/1=private random
@@ -607,8 +575,7 @@ struct sonata_gap_bdaddr
 
 /// Resolving list device information
 /*@TRACE*/
-struct sonata_gap_ral_dev_info
-{
+struct sonata_gap_ral_dev_info {
     /// Device identity
     struct sonata_gap_bdaddr addr;
     /// Privacy Mode
@@ -621,16 +588,14 @@ struct sonata_gap_ral_dev_info
 
 /// Generic Security key structure
 /*@TRACE*/
-struct sonata_gap_sec_key
-{
+struct sonata_gap_sec_key {
     /// Key value MSB -> LSB
     uint8_t key[SONATA_GAP_KEY_LEN];
 };
 
 /// I/Q sample
 /*@TRACE*/
-struct sonata_gap_iq_sample
-{
+struct sonata_gap_iq_sample {
     /// I sample
     int8_t i;
     /// Q sample

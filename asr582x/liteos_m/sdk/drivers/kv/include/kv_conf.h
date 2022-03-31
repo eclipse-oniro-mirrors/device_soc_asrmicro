@@ -18,7 +18,7 @@
 
 #include "duet_cm4.h"
 #include "cmsis_os2.h"
-//#define KV_CONFIG_TOTAL_SIZE 0x10000
+
 #define KV_CONFIG_TOTAL_SIZE 0x8000
 
 /* The totally storage size for key-value store */
@@ -29,7 +29,7 @@
 #endif
 
 #if KV_TOTAL_SIZE < 0x2000
-    #error KV TOTALSIZE ERROR
+#error KV TOTALSIZE ERROR
 #endif
 
 /* The physical parition for key-value store */

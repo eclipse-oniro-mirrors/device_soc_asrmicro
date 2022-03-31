@@ -16,11 +16,11 @@
 #ifndef HAL_FLASH_H
 #define HAL_FLASH_H
 
+#include <stdint.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include <stdint.h>
 
 #define PAR_OPT_READ_POS  ( 0 )
 #define PAR_OPT_WRITE_POS ( 1 )
@@ -117,7 +117,7 @@ int32_t hal_flash_write(hal_partition_t in_partition, uint32_t *off_set,
                         const void *in_buf, uint32_t in_buf_len);
 
 int32_t hal_flash_write_saved(hal_partition_t in_partition, uint32_t *off_set,
-                        const void *in_buf, uint32_t in_buf_len);
+                              const void *in_buf, uint32_t in_buf_len);
 /**
  * Write data to an area on a flash logical partition with erase first
  *

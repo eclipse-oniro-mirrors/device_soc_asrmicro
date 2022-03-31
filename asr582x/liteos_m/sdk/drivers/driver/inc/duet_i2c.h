@@ -128,41 +128,38 @@
 
 typedef void (*duet_i2c_slv_tx_callback_func)(void);
 typedef void (*duet_i2c_slv_rx_callback_func)(uint8_t);
-typedef struct
-{
+typedef struct {
     duet_i2c_slv_tx_callback_func tx_func;
     duet_i2c_slv_rx_callback_func rx_func;
 } duet_i2c_slv_callback_t;
 
-typedef struct
-{
+typedef struct {
     uint32_t address_width;
     uint32_t freq;
     uint8_t  mode;
     uint16_t dev_addr;
 } duet_i2c_config_t;
 
-typedef struct
-{
+typedef struct {
     uint8_t     speed_mode;
     uint8_t     fifo_mode;
     uint8_t     dma_mode;
     uint8_t     reserved;
 } duet_i2c_priv_cfg_t;
 
-typedef struct
-{
+typedef struct {
     uint8_t      port;    /* i2c port */
     duet_i2c_config_t config;  /* i2c config */
     void        *priv;    /* priv data */
 } duet_i2c_dev_t;
 
 int32_t duet_i2c_init(duet_i2c_dev_t *i2c);
-int32_t duet_i2c_master_send(duet_i2c_dev_t *i2c, uint16_t dev_addr, const uint8_t *data, uint16_t size, uint32_t timeout);
+int32_t duet_i2c_master_send(duet_i2c_dev_t *i2c, uint16_t dev_addr, const uint8_t *data, uint16_t size,
+                             uint32_t timeout);
 int32_t duet_i2c_master_recv(duet_i2c_dev_t *i2c, uint16_t dev_addr, uint8_t *data, uint16_t size, uint32_t timeout);
-int8_t duet_i2c_master_repeated_write_read(I2C_TypeDef * I2Cx, uint8_t slave_addr,
-                                            const uint8_t * pwdata, uint8_t * rdata,
-                                            uint32_t wlen, uint32_t rlen);
+int8_t duet_i2c_master_repeated_write_read(I2C_TypeDef *I2Cx, uint8_t slave_addr,
+        const uint8_t *pwdata, uint8_t *rdata,
+        uint32_t wlen, uint32_t rlen);
 int32_t duet_i2c_mem_write(duet_i2c_dev_t *i2c, uint16_t dev_addr, uint16_t mem_addr,
                            uint16_t mem_addr_size, const uint8_t *data, uint16_t len,
                            uint32_t timeout);
@@ -171,38 +168,40 @@ int32_t duet_i2c_mem_read(duet_i2c_dev_t *i2c, uint16_t dev_addr, uint16_t mem_a
                           uint16_t mem_addr_size, uint8_t *data, uint16_t len,
                           uint32_t timeout);
 int32_t duet_i2c_finalize(duet_i2c_dev_t *i2c);
-void duet_i2c_master_dma_send(uint8_t iic_idx,uint32_t *data,uint16_t len);
-void duet_i2c_master_dma_recv(uint8_t iic_idx,uint32_t *data,uint16_t len);
-__STATIC_INLINE void i2c_write_byte_cmd(I2C_TypeDef * I2Cx, uint8_t data)
+void duet_i2c_master_dma_send(uint8_t iic_idx, uint32_t *data, uint16_t len);
+void duet_i2c_master_dma_recv(uint8_t iic_idx, uint32_t *data, uint16_t len);
+__STATIC_INLINE void i2c_write_byte_cmd(I2C_TypeDef *I2Cx, uint8_t data)
 {
     I2Cx->WFIFO = data | I2C_WRITE | I2C_TB;
 }
 
-__STATIC_INLINE void i2c_read_byte_cmd(I2C_TypeDef * I2Cx)
+__STATIC_INLINE void i2c_read_byte_cmd(I2C_TypeDef *I2Cx)
 {
     I2Cx->WFIFO = I2C_TB;
 }
 
 /* read one byte from fifo or buffer register */
-__STATIC_INLINE uint8_t i2c_receive_byte(I2C_TypeDef * I2Cx)
+__STATIC_INLINE uint8_t i2c_receive_byte(I2C_TypeDef *I2Cx)
 {
-    if(I2Cx->CR & I2C_MST_FIFO_MODE_ENABLE)
+    if (I2Cx->CR & I2C_MST_FIFO_MODE_ENABLE) {
         return I2Cx->RFIFO;
-    else
+    } else {
         return I2Cx->DBR;
+    }
 }
 
 /* write one byte to fifo or buffer reigster */
-__STATIC_INLINE void i2c_write_byte(I2C_TypeDef * I2Cx, uint16_t data)
+__STATIC_INLINE void i2c_write_byte(I2C_TypeDef *I2Cx, uint16_t data)
 {
     // data = data_to_write | any_conrol_bit
-    if(I2Cx->CR & I2C_MST_FIFO_MODE_ENABLE)
+    if (I2Cx->CR & I2C_MST_FIFO_MODE_ENABLE) {
         I2Cx->WFIFO = data;
-    else
+    } else {
         I2Cx->DBR = data;
+    }
 }
 
-__STATIC_INLINE void i2c_clear_interrupt(I2C_TypeDef * I2Cx, uint32_t I2C_INTR)
+__STATIC_INLINE void i2c_clear_interrupt(I2C_TypeDef *I2Cx, uint32_t I2C_INTR)
 {
     I2Cx->SR |= I2C_INTR;
 }
@@ -210,7 +209,7 @@ __STATIC_INLINE void i2c_clear_interrupt(I2C_TypeDef * I2Cx, uint32_t I2C_INTR)
 /* I2C needs to set TB for transmitting and receiving a byte
    this function is mainly for when I2C is used as a slave
 */
-__STATIC_INLINE void i2c_set_tb(I2C_TypeDef * I2Cx)
+__STATIC_INLINE void i2c_set_tb(I2C_TypeDef *I2Cx)
 {
     I2Cx->CR |= I2C_CR_TB;
 }

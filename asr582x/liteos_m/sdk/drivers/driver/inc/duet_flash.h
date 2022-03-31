@@ -16,7 +16,6 @@
 #ifndef _DUET_FLASH_H_
 #define _DUET_FLASH_H_
 #include <stdint.h>
-#include <errno.h>
 
 #define LOW_LEVEL_FLASH_RW_SUPPORT 1
 
@@ -50,8 +49,8 @@ typedef enum {
     PARTITION_RECOVERY,
 #ifdef MS_CONFIG_OTA_SUPPORT
     PARTITION_OTA_MCU,
-	PARTITION_OTA_PARA,
-	PARTITION_OTA_HEAD_PARA,
+    PARTITION_OTA_PARA,
+    PARTITION_OTA_HEAD_PARA,
 #endif
     PARTITION_PARAMETER_5,
     PARTITION_MAX,
@@ -125,7 +124,7 @@ int32_t duet_flash_erase(duet_partition_t in_partition, uint32_t off_set, uint32
  * @return  0 : On success, EIO : If an error occurred with any step
  */
 int32_t duet_flash_write(duet_partition_t in_partition, uint32_t *off_set,
-                        const void *in_buf, uint32_t in_buf_len);
+                         const void *in_buf, uint32_t in_buf_len);
 
 /**
  * Write data to an area on a flash logical partition with erase first
@@ -141,7 +140,7 @@ int32_t duet_flash_write(duet_partition_t in_partition, uint32_t *off_set,
  * @return  0 : On success, EIO : If an error occurred with any step
  */
 int32_t duet_flash_erase_write(duet_partition_t in_partition, uint32_t *off_set,
-                              const void *in_buf, uint32_t in_buf_len);
+                               const void *in_buf, uint32_t in_buf_len);
 
 /**
  * Read data from an area on a Flash to data buffer in RAM
@@ -157,7 +156,7 @@ int32_t duet_flash_erase_write(duet_partition_t in_partition, uint32_t *off_set,
  * @return  0 : On success, EIO : If an error occurred with any step
  */
 int32_t duet_flash_read(duet_partition_t in_partition, uint32_t *off_set,
-                       void *out_buf, uint32_t in_buf_len);
+                        void *out_buf, uint32_t in_buf_len);
 
 /**  Erase internal flash
  *
@@ -214,19 +213,18 @@ int32_t duet_flash_dis_secure(duet_partition_t partition, uint32_t off_set, uint
 #define FLASH_MAC_ADDR_TOKEN      (0xACBDEFFE)
 #define FLASH_MAC_ADDR_TOKEN_LEN  (4)
 #define MAC_ADDR_LEN              (6)
-typedef struct
-{
+typedef struct {
     uint8_t   mac[MAC_ADDR_LEN];
     uint8_t   resv[2];
     uint32_t  token;
-}flash_mac_addr_t;
+} flash_mac_addr_t;
 /* *
  * * Wifi mac addr should use efuse value
  * * If efuse have no mac addr, use this value
  * * The mac addr saved in flash, use kv to store. if no kv, user should rewrite the read/write function
  * * Default set 0x8c59dc + radom value
  */
-int32_t duet_flash_get_wifi_mac(flash_mac_addr_t* addr);
-int32_t duet_flash_set_wifi_mac(flash_mac_addr_t* addr);
+int32_t duet_flash_get_wifi_mac(flash_mac_addr_t *addr);
+int32_t duet_flash_set_wifi_mac(flash_mac_addr_t *addr);
 #endif
 #endif //_LEGA_FLASH_H_

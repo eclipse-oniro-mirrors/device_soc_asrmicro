@@ -20,9 +20,9 @@
 #include "duet_uart.h"
 #include "sns_silib.h"
 #include "crys_rnd.h"
-#include "duet_rnd.h"
 #include "crys_error.h"
 #include "duet_hw_common.h"
+#include "duet_rnd.h"
 
 /*****************************************************************************/
 /**********************        Public Functions      *************************/
@@ -68,7 +68,7 @@ int duet_RND_AddAdditionalInput(CRYS_RND_Context_t *rndContext_ptr, uint8_t *add
 }
 
 int duet_RND_EnterKatMode(CRYS_RND_Context_t *rndContext_ptr, uint8_t *entrData_ptr, uint32_t entrSize, uint8_t
-                          *nonce_ptr,uint32_t nonceSize, CRYS_RND_WorkBuff_t *workBuff_ptr)
+                          *nonce_ptr, uint32_t nonceSize, CRYS_RND_WorkBuff_t *workBuff_ptr)
 {
     return CRYS_RND_EnterKatMode(rndContext_ptr, entrData_ptr, entrSize, nonce_ptr, nonceSize, workBuff_ptr);
 }

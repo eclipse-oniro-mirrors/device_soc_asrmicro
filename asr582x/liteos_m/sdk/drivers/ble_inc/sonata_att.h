@@ -146,7 +146,7 @@
 #define SONATA_ATT_OPCODE_AUTH_SIGNATURE_FLAG_POS      7
 
 #define SONATA_ATT_BT_UUID_128 {0xFB, 0x34, 0x9B, 0x5F, 0x80, 0x00, 0x00, 0x80, \
-                          0x00, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}
+        0x00, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}
 
 
 /// MAC length
@@ -873,8 +873,7 @@ enum {
 
 
 /// Client Characteristic Configuration Codes
-enum sonata_att_ccc_val
-{
+enum sonata_att_ccc_val {
     /// Stop notification/indication
     SONATA_ATT_CCC_STOP_NTFIND = 0x0000,
     /// Start notification
@@ -889,19 +888,16 @@ enum sonata_att_ccc_val
  */
 
 /// Attribute length type
-//typedef uint16_t att_size_t;
 
 
 /// UUID - 128-bit type
-struct sonata_att_uuid_128
-{
+struct sonata_att_uuid_128 {
     /// 128-bit UUID
     uint8_t uuid[SONATA_ATT_UUID_128_LEN];
 };
 
 /// UUID - 32-bit type
-struct sonata_att_uuid_32
-{
+struct sonata_att_uuid_32 {
     /// 32-bit UUID
     uint8_t uuid[SONATA_ATT_UUID_32_LEN];
 };
@@ -909,8 +905,7 @@ struct sonata_att_uuid_32
 
 
 /// Characteristic Value Descriptor
-struct sonata_att_char_desc
-{
+struct sonata_att_char_desc {
     /// properties
     uint8_t prop;
     /// attribute handle
@@ -920,8 +915,7 @@ struct sonata_att_char_desc
 };
 
 /// Characteristic Value Descriptor
-struct sonata_att_char128_desc
-{
+struct sonata_att_char128_desc {
     /// properties
     uint8_t prop;
     /// attribute handle
@@ -934,8 +928,7 @@ struct sonata_att_char128_desc
 typedef uint16_t att_svc_desc_t;
 
 /// include service entry element
-struct sonata_att_incl_desc
-{
+struct sonata_att_incl_desc {
     /// start handle value of included service
     uint16_t start_hdl;
     /// end handle value of included service
@@ -945,8 +938,7 @@ struct sonata_att_incl_desc
 };
 
 /// include service entry element
-struct sonata_att_incl128_desc
-{
+struct sonata_att_incl128_desc {
     /// start handle value of included service
     uint16_t start_hdl;
     /// end handle value of included service
@@ -958,11 +950,11 @@ struct sonata_att_incl128_desc
 
 /// Macro used to retrieve access permission rights
 #define SONATA_PERM_GET(perm, access)\
-        (((perm) & (SONATA_PERM_MASK_ ## access)) >> (SONATA_PERM_POS_ ## access))
+    (((perm) & (SONATA_PERM_MASK_ ## access)) >> (SONATA_PERM_POS_ ## access))
 
 /// Macro used to set a permission value
 #define SONATA_PERM_SET(perm, access, value)\
-    perm = ((perm & ~(SONATA_PERM_MASK_ ## access)) | ((value << (SONATA_PERM_POS_ ## access)) & (SONATA_PERM_MASK_ ## access)))
+    perm = (((perm) & ~(SONATA_PERM_MASK_ ## access)) | (((value) << (SONATA_PERM_POS_ ## access)) & (SONATA_PERM_MASK_ ## access)))
 
 /// Macro used to retrieve permission value from access and rights on attribute.
 #define SONATA_PERM(access, right) \
@@ -971,18 +963,15 @@ struct sonata_att_incl128_desc
 /// Macro used know if permission is set or not.
 #define SONATA_PERM_IS_SET(perm, access, right) \
     (((perm) & (((SONATA_PERM_RIGHT_ ## right) << (SONATA_PERM_POS_ ## access))) \
-                & (SONATA_PERM_MASK_ ## access)) == SONATA_PERM(access, right))
+      & (SONATA_PERM_MASK_ ## access)) == SONATA_PERM(access, right))
 
 /// Retrieve attribute security level from attribute right and service right
-//#define SONATA_ATT_GET_SEC_LVL(att_right, svc_right)
-//    soanta_co_max(((att_right) & PERM_RIGHT_AUTH), ((svc_right) & PERM_RIGHT_AUTH));
-//
 
 
 /// Retrieve UUID LEN from UUID Length Permission
-#define SONATA_ATT_UUID_LEN(uuid_len_perm) ((uuid_len_perm == 0) ? ATT_UUID_16_LEN : \
-        ((uuid_len_perm == 1) ? ATT_UUID_32_LEN  :                        \
-        ((uuid_len_perm == 2) ? ATT_UUID_128_LEN : 0)))
+#define SONATA_ATT_UUID_LEN(uuid_len_perm) (((uuid_len_perm) == 0) ? ATT_UUID_16_LEN : \
+        (((uuid_len_perm) == 1) ? ATT_UUID_32_LEN  :                        \
+         (((uuid_len_perm) == 2) ? ATT_UUID_128_LEN : 0)))
 
 /// Initialization of attribute element
 #define SONATA_ATT_ELEMT_INIT                                   {{NULL}, false}
@@ -1007,8 +996,7 @@ struct sonata_att_incl128_desc
  * Bit [14]   : Write Signed accepted
  * Bit [15]   : Extended properties present (only relevant for a characteristic value)
  */
-enum sonata_attm_perm_mask
-{
+enum sonata_attm_perm_mask {
     /// retrieve all permission info
     SONATA_PERM_MASK_ALL           = 0x0000,
     /// Read Permission Mask
@@ -1066,8 +1054,7 @@ enum sonata_attm_perm_mask
  * Bit [14-13]: UUID Length             (0 = 16 bits, 1 = 32 bits, 2 = 128 bits, 3 = RFU)
  * Bit [15]   : Trigger Read Indication (0 = Value present in Database, 1 = Value not present in Database)
  */
-enum sonata_attm_value_perm_mask
-{
+enum sonata_attm_value_perm_mask {
     /// Maximum Attribute Length
     SONATA_PERM_MASK_MAX_LEN     = 0x0FFF,
     SONATA_PERM_POS_MAX_LEN      = 0,
@@ -1101,8 +1088,7 @@ enum sonata_attm_value_perm_mask
  * Bit [5-6]: UUID Length             (0 = 16 bits, 1 = 32 bits, 2 = 128 bits, 3 = RFU)
  * Bit [7]  : Secondary Service       (0 = Primary Service, 1 = Secondary Service)
  */
-enum sonata_attm_svc_perm_mask
-{
+enum sonata_attm_svc_perm_mask {
     /// Task that manage service is multi-instantiated
     SONATA_PERM_MASK_SVC_MI        = 0x01,
     SONATA_PERM_POS_SVC_MI         = 0,
@@ -1125,8 +1111,7 @@ enum sonata_attm_svc_perm_mask
 
 
 /// Attribute & Service access mode
-enum
-{
+enum {
     /// Disable access
     SONATA_PERM_RIGHT_DISABLE  = 0,
     /// Enable access
@@ -1134,8 +1119,7 @@ enum
 };
 
 /// Attribute & Service access rights
-enum
-{
+enum {
     /// No Authentication
     SONATA_PERM_RIGHT_NO_AUTH  = 0,
     /// Access Requires Unauthenticated link
@@ -1147,8 +1131,7 @@ enum
 };
 
 /// Attribute & Service UUID Length
-enum
-{
+enum {
     /// 16  bits UUID
     SONATA_PERM_UUID_16         = 0,
     SONATA_PERM_RIGHT_UUID_16   = 0,
@@ -1163,8 +1146,7 @@ enum
 };
 
 /// execute flags
-enum
-{
+enum {
     /// Cancel All the Reliable Writes
     SONATA_ATT_CANCEL_ALL_PREPARED_WRITES = 0x00,
     /// Write All the Reliable Writes

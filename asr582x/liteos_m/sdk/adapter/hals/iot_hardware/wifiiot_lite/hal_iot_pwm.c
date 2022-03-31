@@ -22,8 +22,9 @@ static duet_pwm_dev_t duet_pwm[DUET_PWM_CH_NUM];
 
 unsigned int IoTPwmInit(unsigned int port)
 {
-    if (port >= DUET_PWM_CH_NUM)
+    if (port >= DUET_PWM_CH_NUM) {
         return IOT_FAILURE;
+    }
 
     duet_pwm[port].port = port;
     return duet_pwm_init(&duet_pwm[port]);
@@ -31,16 +32,18 @@ unsigned int IoTPwmInit(unsigned int port)
 
 unsigned int IoTPwmDeinit(unsigned int port)
 {
-    if (port >= DUET_PWM_CH_NUM)
+    if (port >= DUET_PWM_CH_NUM) {
         return IOT_FAILURE;
+    }
 
     return duet_pwm_finalize(&duet_pwm[port]);
 }
 
 unsigned int IoTPwmStart(unsigned int port, unsigned short duty, unsigned int freq)
 {
-    if (port >= DUET_PWM_CH_NUM)
+    if (port >= DUET_PWM_CH_NUM) {
         return IOT_FAILURE;
+    }
 
     duet_pwm[port].config.freq = freq;
     duet_pwm[port].config.duty_cycle = duty;
@@ -49,8 +52,9 @@ unsigned int IoTPwmStart(unsigned int port, unsigned short duty, unsigned int fr
 
 unsigned int IoTPwmStop(unsigned int port)
 {
-    if (port >= DUET_PWM_CH_NUM)
+    if (port >= DUET_PWM_CH_NUM) {
         return IOT_FAILURE;
+    }
 
     return duet_pwm_stop(&duet_pwm[port]);
 }

@@ -24,24 +24,27 @@ static duet_i2c_dev_t g_duet_i2c[DUET_I2C_NUM];
 
 unsigned int IoTI2cWrite(unsigned int id, unsigned short deviceAddr, const unsigned char *data, unsigned int dataLen)
 {
-    if (id >= DUET_I2C_NUM)
+    if (id >= DUET_I2C_NUM) {
         return IOT_FAILURE;
+    }
 
     return duet_i2c_master_send(&g_duet_i2c[id], deviceAddr, data, dataLen, I2C_TIMEOUT);
 }
 
 unsigned int IoTI2cRead(unsigned int id, unsigned short deviceAddr, unsigned char *data, unsigned int dataLen)
 {
-    if (id >= DUET_I2C_NUM)
+    if (id >= DUET_I2C_NUM) {
         return IOT_FAILURE;
+    }
 
     return duet_i2c_master_recv(&g_duet_i2c[id], deviceAddr, data, dataLen, I2C_TIMEOUT);
 }
 
 unsigned int IoTI2cInit(unsigned int id, unsigned int baudrate)
 {
-    if (id >= DUET_I2C_NUM)
+    if (id >= DUET_I2C_NUM) {
         return IOT_FAILURE;
+    }
 
     g_duet_i2c[id].port = id;
     g_duet_i2c[id].config.mode = I2C_MASTER;
@@ -52,23 +55,26 @@ unsigned int IoTI2cInit(unsigned int id, unsigned int baudrate)
 
 unsigned int IoTI2cDeinit(unsigned int id)
 {
-    if (id >= DUET_I2C_NUM)
+    if (id >= DUET_I2C_NUM) {
         return IOT_FAILURE;
+    }
 
     return  duet_i2c_finalize(&g_duet_i2c[id]);
 }
 
 unsigned int IoTI2cSetBaudrate(unsigned int id, unsigned int baudrate)
 {
-    if (id >= DUET_I2C_NUM)
+    if (id >= DUET_I2C_NUM) {
         return IOT_FAILURE;
+    }
 
-    if(baudrate >= 1700000)
+    if (baudrate >= 1700000) {
         g_duet_i2c[id].config.freq = I2C_HIGH_SPEED;
-    else if(baudrate <= 100000)
+    } else if (baudrate <= 100000) {
         g_duet_i2c[id].config.freq = I2C_STANDARD_SPEED;
-    else
+    } else {
         g_duet_i2c[id].config.freq = I2C_FAST_SPEED;
+    }
 
     return IOT_SUCCESS;
 }

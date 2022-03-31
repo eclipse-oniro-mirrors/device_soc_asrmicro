@@ -36,73 +36,64 @@ extern uint8_t rfota_ble_test;
 
 static void lega_at_ble_start(char *pwbuf, int blen, int argc, char **argv)
 {
-    if(rfota_wifi_open > 0)
-    {
+    if (rfota_wifi_open > 0) {
         printf("please close wifi before test ble!");
         return;
     }
 
-    if(rfota_ble_open == 0)
-    {
+    if (rfota_ble_open == 0) {
         lega_rtos_delay_milliseconds(1000);
         extern void hci_uart_deinit(void);
         hci_uart_deinit();
         init_ble_task();
         rfota_ble_open = 0x1;
-    }
-    else
+    } else {
         printf("ble is alread open!\n");
+    }
     return 0;
 
 }
 #ifdef ALIOS_SUPPORT
-static struct cli_command rfota_ble_start =
-{
-   .name     = "rfota_ble_start",
-   .help     = "rfota_ble_start",
-   .function = lega_at_ble_start,
+static struct cli_command rfota_ble_start = {
+    .name     = "rfota_ble_start",
+    .help     = "rfota_ble_start",
+    .function = lega_at_ble_start,
 };
 #endif
 static void lega_at_ble_stop(char *pwbuf, int blen, int argc, char **argv)
 {
-    if(rfota_ble_open == 0x1)
-    {
+    if (rfota_ble_open == 0x1) {
         rfota_ble_open = 0;
         ble_close();
-    }
-    else if(rfota_ble_open == 0)
+    } else if (rfota_ble_open == 0) {
         printf("ble don't need close!\n");
+    }
 
     return 0;
 }
 #ifdef ALIOS_SUPPORT
-static struct cli_command rfota_ble_stop =
-{
-  .name     = "rfota_ble_stop",
-  .help     = "rfota_ble_stop for hci test",
-  .function = lega_at_ble_stop,
+static struct cli_command rfota_ble_stop = {
+    .name     = "rfota_ble_stop",
+    .help     = "rfota_ble_stop for hci test",
+    .function = lega_at_ble_stop,
 };
 #endif
 static void lega_enable_rfota_ble_test(char *pwbuf, int blen, int argc, char **argv)
 {
-    int c=1;
-    if(strcmp(argv[c],"on")==0)
-    {
+    int c = 1;
+    if (strcmp(argv[c], "on") == 0) {
         rfota_ble_test = 1;
         printf("rfota ble test begin\n");
-    }
-    else if(strcmp(argv[c],"off")==0)
-    {
+    } else if (strcmp(argv[c], "off") == 0) {
         rfota_ble_test = 0;
         printf("rfota ble test end\n");
     }
 }
 #ifdef ALIOS_SUPPORT
-static struct cli_command rfota_ble_cmd =
-{
-   .name     = "rfota_ble_test",
-   .help     = "rfota_ble_test on/off",
-   .function = lega_enable_rfota_ble_test,
+static struct cli_command rfota_ble_cmd = {
+    .name     = "rfota_ble_test",
+    .help     = "rfota_ble_test on/off",
+    .function = lega_enable_rfota_ble_test,
 };
 
 

@@ -23,22 +23,26 @@
 /* not support file system yet, use kv to get/set */
 /* just for param xts */
 
-char* duet_kv_key;
-int HalFileOpen(const char* path, int oflag, int mode)
+char *duet_kv_key;
+int HalFileRead(int fd, char *buf, unsigned int len);
+
+int HalFileOpen(const char *path, int oflag, int mode)
 {
     (void)mode;
     int32_t retval = 0;
     char temp[128] = {0};
     duet_kv_key = path;
 
-    if(oflag & O_CREAT_FS)
-        return 0; //new item
+    if (oflag & O_CREAT_FS) {
+        return 0;    //new item
+    }
 
     retval = HalFileRead(0, temp, 128);
-    if(retval < 0)
+    if (retval < 0) {
         return -1;
-    else
+    } else {
         return 0;
+    }
 }
 
 int HalFileClose(int fd)
@@ -49,15 +53,15 @@ int HalFileClose(int fd)
 int HalFileRead(int fd, char *buf, unsigned int len)
 {
     int32_t retval = 0;
-    int templen = len+1;
-    retval = duet_flash_kv_get(duet_kv_key, (void *)buf, (int32_t*)&templen);
-    if(retval == KV_ERR_INVALID_PARAM || len<=1)
-    {
+    int templen = len + 1;
+    retval = duet_flash_kv_get(duet_kv_key, (void *)buf, (int32_t *)&templen);
+    if (retval == KV_ERR_INVALID_PARAM || len <= 1) {
         printf("KV_ERR_INVALID_PARAM \n");
         return EC_INVALID;
     }
-    if(retval == KV_OK)
-        return (templen-1);
+    if (retval == KV_OK) {
+        return (templen - 1);
+    }
     //printf("kv error %d\n",retval);
     return EC_FAILURE;
 }
@@ -65,20 +69,21 @@ int HalFileRead(int fd, char *buf, unsigned int len)
 int HalFileWrite(int fd, const char *buf, unsigned int len)
 {
     int32_t retval = 0;
-    int32_t buflen = strlen(buf)+1;
+    int32_t buflen = strlen(buf) + 1;
 
-    retval = duet_flash_kv_set(duet_kv_key,(void*)buf,buflen,1);
-    if(retval == KV_ERR_INVALID_PARAM)
-    {
+    retval = duet_flash_kv_set(duet_kv_key, (void *)buf, buflen, 1);
+    if (retval == KV_ERR_INVALID_PARAM) {
         printf("KV_ERR_INVALID_PARAM \n");
         return EC_INVALID;
     }
-    if(retval == KV_OK)
+    if (retval == KV_OK) {
         return 0;
-    if(retval == KV_ERR_NO_SPACE)
+    }
+    if (retval == KV_ERR_NO_SPACE) {
         printf("KV_ERR_NO_SPACE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
- //       return EC_NOSPACE;
-    printf("kv error %d\n",retval);
+    }
+    //       return EC_NOSPACE;
+    printf("kv error %d\n", retval);
     return EC_FAILURE;
 }
 
@@ -87,13 +92,13 @@ int HalFileDelete(const char *path)
     int32_t retval = 0;
 
     retval = duet_flash_kv_del(path);
-    if(retval == KV_ERR_INVALID_PARAM)
-    {
+    if (retval == KV_ERR_INVALID_PARAM) {
         printf("KV_ERR_INVALID_PARAM \n");
         return EC_INVALID;
     }
-    if(retval == KV_OK)
+    if (retval == KV_OK) {
         return 0;
+    }
     // printf("kv error %d\n",retval);
     return EC_FAILURE;
 }
@@ -105,15 +110,15 @@ int HalFileStat(const char *path, unsigned int *fileSize)
 
     int32_t retval = 0;
 
-    retval = duet_flash_kv_get(path, (void *)temp, (int32_t*)&len);
-    if(retval == KV_ERR_INVALID_PARAM || len<=1)
-    {
-       printf("kv error %d\n",retval);
-       *fileSize = 0;
+    retval = duet_flash_kv_get(path, (void *)temp, (int32_t *)&len);
+    if (retval == KV_ERR_INVALID_PARAM || len <= 1) {
+        printf("kv error %d\n", retval);
+        *fileSize = 0;
     }
 
-    if(retval == KV_OK)
-        *fileSize = (len-1);
+    if (retval == KV_OK) {
+        *fileSize = (len - 1);
+    }
 
     return 0;
 }

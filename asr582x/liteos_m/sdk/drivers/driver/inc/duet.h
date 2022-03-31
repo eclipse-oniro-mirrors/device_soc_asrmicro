@@ -23,8 +23,7 @@ typedef enum { DISABLE = 0, ENABLE = !DISABLE } State;
 
 
 
-typedef enum IRQn
-{
+typedef enum IRQn {
     /**************   Processor Exceptions Numbers ******************************************/
     NonMaskableInt_IRQn           = -14,      /*!< 2 Non Maskable Interrupt                         */
     MemoryManagement_IRQn         = -12,      /*!< 4 Cortex-M3 Memory Management Interrupt          */
@@ -71,24 +70,22 @@ typedef enum IRQn
 /*
     system control register definition
 */
-typedef struct Sys_Con_Block
-{
-    union
-    {
+typedef struct Sys_Con_Block {
+    union {
         struct
 
         {
-            __IO uint32_t hclk_src_sel:2;
-            __IO uint32_t pclk_div_sel:3;
-            __IO uint32_t kp_sclk_sel:1;
-            __IO uint32_t timer1_sclk_sel:1;
-            __IO uint32_t timer2_sclk_sel:1;
-            __IO uint32_t timer3_sclk_sel:1;
-            __IO uint32_t timer4_sclk_sel:1;
-            __IO uint32_t rw_mst_clk_freq_sel:6;
-            __I  uint32_t rsv0:1;
-            __IO uint32_t pwm_pclk_sel:1;
-            __I  uint32_t rsv1:14;
+            __IO uint32_t hclk_src_sel: 2;
+            __IO uint32_t pclk_div_sel: 3;
+            __IO uint32_t kp_sclk_sel: 1;
+            __IO uint32_t timer1_sclk_sel: 1;
+            __IO uint32_t timer2_sclk_sel: 1;
+            __IO uint32_t timer3_sclk_sel: 1;
+            __IO uint32_t timer4_sclk_sel: 1;
+            __IO uint32_t rw_mst_clk_freq_sel: 6;
+            __I  uint32_t rsv0: 1;
+            __IO uint32_t pwm_pclk_sel: 1;
+            __I  uint32_t rsv1: 14;
         } BITS_CLK_SEL;
         __IO uint32_t REG_00;
     };
@@ -100,14 +97,12 @@ typedef struct Sys_Con_Block
     __IO uint32_t REG_18;
     __IO uint32_t REG_1C;
     /* I2S clock divider */
-    union
-    {
-        struct
-        {
-            __IO uint32_t i2s_ws_div:8;
-            __IO uint32_t i2s_sclk_div:8;
-            __IO uint32_t i2s_mclk_div:8;
-            __IO uint32_t RESV3:8;
+    union {
+        struct {
+            __IO uint32_t i2s_ws_div: 8;
+            __IO uint32_t i2s_sclk_div: 8;
+            __IO uint32_t i2s_mclk_div: 8;
+            __IO uint32_t RESV3: 8;
         } BITS_REG_20;
         __IO uint32_t REG_20;
     };
@@ -128,63 +123,55 @@ typedef struct Sys_Con_Block
     __IO uint32_t REG_5C;
     __IO uint32_t REG_60;
     __IO uint32_t REG_64;
-    union
-    {
-        struct
-        {
-            __IO uint32_t zr_gp0_sel:4;
-            __IO uint32_t zr_gp1_sel:4;
-            __IO uint32_t zr_gp2_sel:4;
-            __IO uint32_t zr_gp3_sel:4;
-            __IO uint32_t zr_gp4_sel:4;
-            __IO uint32_t zr_gp5_sel:4;
-            __IO uint32_t zr_gp6_sel:4;
-            __IO uint32_t zr_gp7_sel:4;
+    union {
+        struct {
+            __IO uint32_t zr_gp0_sel: 4;
+            __IO uint32_t zr_gp1_sel: 4;
+            __IO uint32_t zr_gp2_sel: 4;
+            __IO uint32_t zr_gp3_sel: 4;
+            __IO uint32_t zr_gp4_sel: 4;
+            __IO uint32_t zr_gp5_sel: 4;
+            __IO uint32_t zr_gp6_sel: 4;
+            __IO uint32_t zr_gp7_sel: 4;
         } BITS_REG_68;
         __IO uint32_t REG_68;    /* pinmux control */
     };
-    union
-    {
-        struct
-        {
-            __IO uint32_t zr_gp8_sel:4;
-            __IO uint32_t zr_gp9_sel:4;
-            __IO uint32_t zr_gp10_sel:4;
-            __IO uint32_t zr_gp11_sel:4;
-            __IO uint32_t zr_gp12_sel:4;
-            __IO uint32_t zr_gp13_sel:4;
-            __IO uint32_t zr_gp14_sel:4;
-            __IO uint32_t zr_gp15_sel:4;
+    union {
+        struct {
+            __IO uint32_t zr_gp8_sel: 4;
+            __IO uint32_t zr_gp9_sel: 4;
+            __IO uint32_t zr_gp10_sel: 4;
+            __IO uint32_t zr_gp11_sel: 4;
+            __IO uint32_t zr_gp12_sel: 4;
+            __IO uint32_t zr_gp13_sel: 4;
+            __IO uint32_t zr_gp14_sel: 4;
+            __IO uint32_t zr_gp15_sel: 4;
         } BITS_REG_6C;
         __IO uint32_t REG_6C;    /* pinmux control */
     };
-    union
-    {
-        struct
-        {
-            __IO uint32_t zr_gp16_sel:4;
-            __IO uint32_t zr_gp17_sel:4;
-            __IO uint32_t zr_gp18_sel:4;
-            __IO uint32_t zr_gp19_sel:4;
-            __IO uint32_t zr_gp20_sel:4;
-            __IO uint32_t zr_gp21_sel:4;
-            __IO uint32_t zr_gp22_sel:4;
-            __IO uint32_t zr_gp23_sel:4;
+    union {
+        struct {
+            __IO uint32_t zr_gp16_sel: 4;
+            __IO uint32_t zr_gp17_sel: 4;
+            __IO uint32_t zr_gp18_sel: 4;
+            __IO uint32_t zr_gp19_sel: 4;
+            __IO uint32_t zr_gp20_sel: 4;
+            __IO uint32_t zr_gp21_sel: 4;
+            __IO uint32_t zr_gp22_sel: 4;
+            __IO uint32_t zr_gp23_sel: 4;
         } BITS_REG_70;
         __IO uint32_t REG_70;    /* pinmux control */
     };
-    union
-    {
-        struct
-        {
-            __IO uint32_t zr_gp24_sel:4;
-            __IO uint32_t zr_gp25_sel:4;
-            __IO uint32_t zr_gp26_sel:4;
-            __IO uint32_t zr_gp27_sel:4;
-            __IO uint32_t zr_gp28_sel:4;
-            __IO uint32_t zr_gp29_sel:4;
-            __IO uint32_t zr_gp30_sel:4;
-            __I  uint32_t rsv7:4;
+    union {
+        struct {
+            __IO uint32_t zr_gp24_sel: 4;
+            __IO uint32_t zr_gp25_sel: 4;
+            __IO uint32_t zr_gp26_sel: 4;
+            __IO uint32_t zr_gp27_sel: 4;
+            __IO uint32_t zr_gp28_sel: 4;
+            __IO uint32_t zr_gp29_sel: 4;
+            __IO uint32_t zr_gp30_sel: 4;
+            __I  uint32_t rsv7: 4;
         } BITS_REG_74;
         __IO uint32_t REG_74;    /* pinmux control */
     };
@@ -241,8 +228,7 @@ typedef struct Sys_Con_Block
 #define DMA_BUFFER_REG         (0X4000C000)
 
 /* pinmux definitions */
-enum PINMUX_FUNC
-{
+enum PINMUX_FUNC {
     GPIO_FUNC,
     UART_FUNC,
     SPI_FUNC,
@@ -258,8 +244,7 @@ enum PINMUX_FUNC
 */
 #define DMA_REG_BASE   (0x40004000)
 
-typedef struct __DMACR
-{
+typedef struct __DMACR {
     __I uint32_t STAT;
     __O uint32_t CFG;
     __IO uint32_t CTL_BASE_PTR;
@@ -301,8 +286,7 @@ typedef struct __DMACR
 /*
    DUET I2S definition
 */
-typedef struct __I2S
-{
+typedef struct __I2S {
     /* channel-common registers */
     __IO uint32_t IER;   // 0x00
     __IO uint32_t IRER;  // 0x04
@@ -349,14 +333,13 @@ typedef struct __I2S
 #define I2S         ((I2S_TypeDef *)I2S_BASE)
 
 /* I2S clock divider */
-typedef struct
-{
-    __IO uint32_t i2s_lrclk_divider:9;
-    __IO uint32_t i2s_lrclk_delay_sel:1;
-    __IO uint32_t i2s_sclk_divider:10;
-    __IO uint32_t i2s_mclk_divider:10;
-    __IO uint32_t i2s_slave_mode:1;
-    __IO uint32_t reserved:1;
+typedef struct {
+    __IO uint32_t i2s_lrclk_divider: 9;
+    __IO uint32_t i2s_lrclk_delay_sel: 1;
+    __IO uint32_t i2s_sclk_divider: 10;
+    __IO uint32_t i2s_mclk_divider: 10;
+    __IO uint32_t i2s_slave_mode: 1;
+    __IO uint32_t reserved: 1;
 } I2S_CLK_DIV_TypeDef;
 
 #define I2S_CLK_DIV         ((I2S_CLK_DIV_TypeDef *)0x40000810 )
@@ -366,8 +349,7 @@ typedef struct
 */
 
 /* SPI register block */
-typedef struct __SPI
-{
+typedef struct __SPI {
     __IO  uint32_t   CR0   ;/* 0x0  */
     __IO  uint32_t   CR1   ;/* 0x4  */
     __IO  uint32_t   DR    ;/* 0x8  */
@@ -407,8 +389,7 @@ typedef struct __SPI
 /*
     DUET KEYPAD definitions
 */
-typedef struct __KEYPAD
-{
+typedef struct __KEYPAD {
     __IO  uint32_t CR;               /* 0x00 */
     __I   uint32_t RESV0[7];          /* 0x04-0x1C */
     __I   uint32_t SR;                /* 0x20 */
@@ -431,8 +412,7 @@ typedef struct __KEYPAD
 /*
     DUET GPIO definitons
 */
-typedef struct __GPIO
-{
+typedef struct __GPIO {
     __IO uint32_t DATA;
     __IO uint32_t DATAOUT;
     __I  uint32_t DUMMY0[2];
@@ -465,8 +445,7 @@ typedef struct __GPIO
 /*
     DUET I2C BEGIN
 */
-typedef struct  __I2C
-{
+typedef struct  __I2C {
     __IO uint32_t  CR; //0x00
     __IO uint32_t  SR;
     __IO uint32_t  SAR; //0x08
@@ -543,8 +522,7 @@ typedef struct  __I2C
 /*
     DUET RTC BEGIN
 */
-typedef struct __RTC
-{
+typedef struct __RTC {
     __IO uint32_t CTRL;
     __IO uint32_t CNT_TICK;
     __IO uint32_t CNT_DATE;
@@ -603,8 +581,7 @@ typedef struct __RTC
 /*
     RETENTION SRAM BEGIN
 */
-struct DUET_RETENTION_SRAM
-{
+struct DUET_RETENTION_SRAM {
     __IO uint8_t RTC_DATE[16];
     __IO uint32_t BOOT_CFG;
     __IO uint32_t BOOT_TYPE;
@@ -635,8 +612,7 @@ struct DUET_RETENTION_SRAM
 */
 
 /* DUET UART register block */
-typedef struct __UART
-{
+typedef struct __UART {
     __IO      uint32_t  DR              ;/* 0x0  */
     __IO      uint32_t  RSC_ECR     ;/* 0x4  */
     __I       uint32_t  RSV0[4]     ;/* 0x8~0x14  */
@@ -684,8 +660,7 @@ typedef struct __UART
 /*
     DUET WDG BEGIN
 */
-struct DUET_WDOG
-{
+struct DUET_WDOG {
     __IO uint32_t LOAD;
     __I  uint32_t VALUE;
     __IO uint32_t CONTROL;
@@ -726,8 +701,7 @@ struct DUET_WDOG
 /*
     DUET TIMER BEGIN
 */
-struct DUET_TIMER
-{
+struct DUET_TIMER {
     __IO uint32_t LOAD;
     __I  uint32_t VALUE;
     __IO uint32_t CONTROL;
@@ -770,8 +744,7 @@ struct DUET_TIMER
 /*
     DUET PWM BEGIN
 */
-struct DUET_PWM
-{
+struct DUET_PWM {
     __IO uint32_t PWMCFG;
     __IO uint32_t PWMINVERTTRIG;
     __IO uint32_t PWM01TRIG;
@@ -864,8 +837,7 @@ struct DUET_PWM
 /*
     DUET EFUDE BEGIN
 */
-struct DUET_EFUSE
-{
+struct DUET_EFUSE {
     __IO uint32_t CFG_TYPE; //0x00
     __IO uint32_t WR_TYPE;
     __IO uint32_t START;

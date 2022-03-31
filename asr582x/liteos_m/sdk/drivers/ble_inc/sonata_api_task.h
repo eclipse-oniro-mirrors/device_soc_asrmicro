@@ -55,8 +55,7 @@
  ****************************************************************************************
  */
 /// states of asr api task
-typedef enum
-{
+typedef enum {
     /// initialization state
     SONATA_API_TASK_INIT,
     /// idle state
@@ -71,8 +70,7 @@ typedef enum
 
 
 /// asr api task messages
-typedef enum
-{
+typedef enum {
     SONATA_API_DUMMY_MSG = STACK_TASK_FIRST_MSG(SONATA_TASK_ID_APP),
     /// message from application
     SONATA_API_APP_MSG,
@@ -86,19 +84,17 @@ typedef enum
  ****************************************************************************************
  */
 /// Structure containing information about the handlers for an application subtask
-typedef struct sonata_api_subtask_handlers
-{
+typedef struct sonata_api_subtask_handlers {
     /// Pointer to the message handler table
     const struct ke_msg_handler *p_msg_handler_tab;
     /// Number of messages handled
     uint16_t msg_cnt;
 } sonata_api_subtask_handlers_t;
 
-typedef struct sonata_app_timer_callback
-{
+typedef struct sonata_app_timer_callback {
     uint8_t (*timeout)(uint16_t id);
 
-}sonata_app_timer_callback_t;
+} sonata_app_timer_callback_t;
 /*
  * FUNCTION DECLARATIONS
  ****************************************************************************************

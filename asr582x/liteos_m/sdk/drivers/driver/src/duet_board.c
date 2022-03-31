@@ -18,8 +18,7 @@
 #include "duet_flash_alg.h"
 
 /* Logic partition on flash devices */
-const duet_logic_partition_t duet_partitions[] =
-{
+const duet_logic_partition_t duet_partitions[] = {
     [PARTITION_BOOTLOADER] =
     {
         .partition_owner            = FLASH_EMBEDDED,
@@ -85,29 +84,29 @@ const duet_logic_partition_t duet_partitions[] =
         .partition_options         = PAR_OPT_READ_EN | PAR_OPT_WRITE_EN,
     },
 #ifdef MS_CONFIG_OTA_SUPPORT
-	[PARTITION_OTA_MCU] =
-	{
-		.partition_owner		   = FLASH_EMBEDDED,
-		.partition_description	   = "OTA MCU",
-		.partition_start_addr	   = OTA_MCU_FLASH_START_ADDR,
-		.partition_length		   = OTA_MCU_MAX_SIZE, //192k bytes
-		.partition_options		   = PAR_OPT_READ_EN | PAR_OPT_WRITE_EN,
-	},
-	[PARTITION_OTA_PARA] =
-	{
-		.partition_owner		   = FLASH_EMBEDDED,
-		.partition_description	   = "OTA PARA",
-		.partition_start_addr	   = OTA_PARA_START_ADDR,
-		.partition_length		   = OTA_PARA_MAX_SIZE, //4k bytes
-		.partition_options		   = PAR_OPT_READ_EN | PAR_OPT_WRITE_EN,
-	},
-	[PARTITION_OTA_HEAD_PARA] =
-	{
-		.partition_owner		   = FLASH_EMBEDDED,
-		.partition_description	   = "OTA HEAD PARA",
-		.partition_start_addr	   = OTA_HEAD_PARA_START_ADDR,
-		.partition_length		   = OTA_HEAD_PARA_MAX_SIZE, //4k bytes
-		.partition_options		   = PAR_OPT_READ_EN | PAR_OPT_WRITE_EN,
+    [PARTITION_OTA_MCU] =
+    {
+        .partition_owner           = FLASH_EMBEDDED,
+        .partition_description     = "OTA MCU",
+        .partition_start_addr      = OTA_MCU_FLASH_START_ADDR,
+        .partition_length          = OTA_MCU_MAX_SIZE, //192k bytes
+        .partition_options         = PAR_OPT_READ_EN | PAR_OPT_WRITE_EN,
+    },
+    [PARTITION_OTA_PARA] =
+    {
+        .partition_owner           = FLASH_EMBEDDED,
+        .partition_description     = "OTA PARA",
+        .partition_start_addr      = OTA_PARA_START_ADDR,
+        .partition_length          = OTA_PARA_MAX_SIZE, //4k bytes
+        .partition_options         = PAR_OPT_READ_EN | PAR_OPT_WRITE_EN,
+    },
+    [PARTITION_OTA_HEAD_PARA] =
+    {
+        .partition_owner           = FLASH_EMBEDDED,
+        .partition_description     = "OTA HEAD PARA",
+        .partition_start_addr      = OTA_HEAD_PARA_START_ADDR,
+        .partition_length          = OTA_HEAD_PARA_MAX_SIZE, //4k bytes
+        .partition_options         = PAR_OPT_READ_EN | PAR_OPT_WRITE_EN,
     },
 #endif
     [PARTITION_PARAMETER_5] =
@@ -120,16 +119,16 @@ const duet_logic_partition_t duet_partitions[] =
     },
 };
 #ifdef LOW_LEVEL_FLASH_RW_SUPPORT
-int32_t duet_flash_get_wifi_mac(flash_mac_addr_t* addr)
+int32_t duet_flash_get_wifi_mac(flash_mac_addr_t *addr)
 {
     int32_t inBufLen = sizeof(flash_mac_addr_t);
-    duet_flash_kv_get(FLASH_MAC_ADDR_TOKEN_NAME,addr,&inBufLen);
-//    printf("%s:%d addr=%02x %02x %02x %02x %02x %02x token=0x%x\n",__FUNCTION__,__LINE__,addr->mac[0],addr->mac[1],addr->mac[2],addr->mac[3],addr->mac[4],addr->mac[5],addr->token);
+    duet_flash_kv_get(FLASH_MAC_ADDR_TOKEN_NAME, addr, &inBufLen);
+    //    printf("%s:%d addr=%02x %02x %02x %02x %02x %02x token=0x%x\n",__FUNCTION__,__LINE__,addr->mac[0],addr->mac[1],addr->mac[2],addr->mac[3],addr->mac[4],addr->mac[5],addr->token);
     return 0;
 }
-int32_t duet_flash_set_wifi_mac(flash_mac_addr_t* addr)
+int32_t duet_flash_set_wifi_mac(flash_mac_addr_t *addr)
 {
-//    printf("%s:%d addr=%02x %02x %02x %02x %02x %02x token=0x%x\n",__FUNCTION__,__LINE__,addr->mac[0],addr->mac[1],addr->mac[2],addr->mac[3],addr->mac[4],addr->mac[5],addr->mac,addr->token);
-    return duet_flash_kv_set(FLASH_MAC_ADDR_TOKEN_NAME,addr,sizeof(flash_mac_addr_t),0);
+    //    printf("%s:%d addr=%02x %02x %02x %02x %02x %02x token=0x%x\n",__FUNCTION__,__LINE__,addr->mac[0],addr->mac[1],addr->mac[2],addr->mac[3],addr->mac[4],addr->mac[5],addr->mac,addr->token);
+    return duet_flash_kv_set(FLASH_MAC_ADDR_TOKEN_NAME, addr, sizeof(flash_mac_addr_t), 0);
 }
 #endif

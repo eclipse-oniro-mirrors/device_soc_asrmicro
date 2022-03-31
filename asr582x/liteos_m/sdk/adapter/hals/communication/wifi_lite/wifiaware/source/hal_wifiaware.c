@@ -18,7 +18,7 @@
 #include "hi_wifi_sdp_api.h"
 #include "wifiaware.h"
 
-int HalWifiSdpInit(const char* ifname)
+int HalWifiSdpInit(const char *ifname)
 {
     if (hi_wifi_sdp_init(ifname) != HISI_OK) {
         return -1;
@@ -26,7 +26,7 @@ int HalWifiSdpInit(const char* ifname)
     return 0;
 }
 
-unsigned int HalCipherHashSha256(const char* input, unsigned int inputLen, unsigned char* hash, unsigned hashLen)
+unsigned int HalCipherHashSha256(const char *input, unsigned int inputLen, unsigned char *hash, unsigned hashLen)
 {
     if (hi_cipher_hash_sha256((uintptr_t)input, inputLen, hash, hashLen) != HISI_OK) {
         return -1;
@@ -34,7 +34,7 @@ unsigned int HalCipherHashSha256(const char* input, unsigned int inputLen, unsig
     return 0;
 }
 
-int HalWifiSdpStartService(const char* svcName, unsigned char localHandle, RecvCallback recvCB, unsigned char role)
+int HalWifiSdpStartService(const char *svcName, unsigned char localHandle, RecvCallback recvCB, unsigned char role)
 {
     if (hi_wifi_sdp_start_service(svcName, localHandle, (hi_wifi_sdp_recv_cb)recvCB, role) != HISI_OK) {
         return -1;
@@ -42,8 +42,8 @@ int HalWifiSdpStartService(const char* svcName, unsigned char localHandle, RecvC
     return 0;
 }
 
-int HalWifiSdpSend(unsigned char* macAddr, unsigned char peerHandle, unsigned char localHandle,
-    unsigned char* msg, int len)
+int HalWifiSdpSend(unsigned char *macAddr, unsigned char peerHandle, unsigned char localHandle,
+                   unsigned char *msg, int len)
 {
     if (hi_wifi_sdp_send(macAddr, peerHandle, localHandle, msg, len) != HISI_OK) {
         return -1;

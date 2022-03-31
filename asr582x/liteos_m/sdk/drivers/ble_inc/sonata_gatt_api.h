@@ -93,8 +93,7 @@
 /*!
  * @brief request operation type - application interface
  */
-typedef enum
-{
+typedef enum {
     /*              Attribute Client Flags              */
     /* No Operation (if nothing has been requested)     */
     /* ************************************************ */
@@ -178,7 +177,7 @@ typedef enum
     /* ************************************************ */
     /// Send a service changed indication
     SONATA_GATT_SVC_CHANGED                              = 0x40,
-}sonata_gatt_operation;
+} sonata_gatt_operation;
 
 ///GATT response type
 typedef enum {
@@ -206,7 +205,7 @@ typedef enum {
     SONATA_GATT_SVC_VISIBILITY_SET_RSP        = 0x0B16,
     /// Compute hash value of the attribute database response
     SONATA_GATT_ATT_DB_HASH_COMP_RSP          = 0x0B21,
-}sonata_ble_response_type;
+} sonata_ble_response_type;
 
 /*
  * Type Definition
@@ -217,8 +216,7 @@ typedef enum {
  * Attribute Description
  */
 /*@TRACE*/
-typedef struct sonata_gatt_att_desc
-{
+typedef struct sonata_gatt_att_desc {
     /** Attribute UUID (LSB First) */
     uint8_t uuid[SONATA_ATT_UUID_128_LEN];
 
@@ -258,12 +256,11 @@ typedef struct sonata_gatt_att_desc
      * Bit [15]   : Trigger Read Indication (0 = Value present in Database, 1 = Value not present in Database)
      */
     uint16_t ext_perm;
-}sonata_gatt_att_desc_t;
+} sonata_gatt_att_desc_t;
 
 /// Service information
 /*@TRACE*/
-typedef struct sonata_gatt_svc_info
-{
+typedef struct sonata_gatt_svc_info {
     /// Service start handle
     uint16_t start_hdl;
     /// Service end handle
@@ -272,11 +269,10 @@ typedef struct sonata_gatt_svc_info
     uint16_t task_id;
     /// Service permission
     uint8_t perm;
-}sonata_gatt_svc_info_t;
+} sonata_gatt_svc_info_t;
 
 /// @brief Callbacks for GATT module
-typedef struct
-{
+typedef struct {
     /*************** GATT Controller  ***************/
     ///@deprecated use @see ble_complete_callback
     void (*gatt_disc_all_svc_complete)(uint8_t conidx, uint16_t status);
@@ -287,13 +283,16 @@ typedef struct
     uint16_t (*gatt_disc_svc)(uint8_t conidx, uint16_t start_hdl, uint16_t end_hdl, uint8_t uuid_len, uint8_t *uuid);
 
     /// Callback when discover all inclued service complete
-    uint16_t (*gatt_disc_svc_incl)(uint8_t conidx, uint16_t attr_hdl, uint16_t start_hdl, uint16_t end_hdl, uint8_t uuid_len, uint8_t *uuid);
+    uint16_t (*gatt_disc_svc_incl)(uint8_t conidx, uint16_t attr_hdl, uint16_t start_hdl, uint16_t end_hdl,
+                                   uint8_t uuid_len, uint8_t *uuid);
 
     /// Callback for discover characteristic
-    uint16_t (*gatt_disc_char)(uint8_t conidx, uint16_t attr_hdl, uint16_t pointer_hdl, uint8_t prop, uint8_t uuid_len, uint8_t *uuid);    /*void(*gatt_disc_char_desc)(void);*/
+    uint16_t (*gatt_disc_char)(uint8_t conidx, uint16_t attr_hdl, uint16_t pointer_hdl, uint8_t prop, uint8_t uuid_len,
+                               uint8_t *uuid);    /*void(*gatt_disc_char_desc)(void);*/
 
     /// Callback for discover characteristic description
-    uint16_t (*gatt_disc_char_desc)(uint8_t conidx, uint16_t attr_hdl, uint8_t uuid_len, uint8_t *uuid);    /*void(*gatt_disc_char_desc)(void);*/
+    uint16_t (*gatt_disc_char_desc)(uint8_t conidx, uint16_t attr_hdl, uint8_t uuid_len,
+                                    uint8_t *uuid);    /*void(*gatt_disc_char_desc)(void);*/
 
     /// Callback for GATT read complete
     uint16_t (*gatt_read)(uint8_t conidx, uint16_t handle, uint16_t offset, uint16_t length, uint8_t *value);
@@ -318,7 +317,8 @@ typedef struct
     uint16_t (*gatt_service_change_req)(uint8_t conidx, uint16_t start_handle, uint16_t end_handle);
 
     /// Callback for connection information(about GATT for current connection that can be reuse on another connection)
-    uint16_t (*gatt_connection_info)(uint8_t conidx, uint16_t gatt_start_handle, uint16_t gatt_end_handle, uint16_t svc_chg_handle,
+    uint16_t (*gatt_connection_info)(uint8_t conidx, uint16_t gatt_start_handle, uint16_t gatt_end_handle,
+                                     uint16_t svc_chg_handle,
                                      uint8_t cli_info, uint8_t cli_feat);
 
     /*************** GATT Manager  ***************/
@@ -352,7 +352,8 @@ uint16_t sonata_ble_gatt_disc_all_svc(uint8_t conidx);
 * @param uuid UUID
 * @return API_SUCCESS
  */
-uint16_t sonata_ble_gatt_disc_svc_by_uuid(uint8_t conidx, uint16_t start_hdl, uint16_t end_hdl, uint8_t uuid_len, uint8_t *uuid);
+uint16_t sonata_ble_gatt_disc_svc_by_uuid(uint8_t conidx, uint16_t start_hdl, uint16_t end_hdl, uint8_t uuid_len,
+        uint8_t *uuid);
 
 /*!
  * @brief Disc included servcie
@@ -380,7 +381,8 @@ uint16_t sonata_ble_gatt_disc_all_characteristic(uint8_t conidx, uint16_t start_
 * @param uuid UUID
 * @return API_SUCCESS
  */
-uint16_t sonata_ble_gatt_disc_characteristic_by_uuid(uint8_t conidx, uint16_t start_hdl, uint16_t end_hdl, uint8_t uuid_len, uint8_t *uuid);
+uint16_t sonata_ble_gatt_disc_characteristic_by_uuid(uint8_t conidx, uint16_t start_hdl, uint16_t end_hdl,
+        uint8_t uuid_len, uint8_t *uuid);
 /*!
  * @brief Discover All desc
  * @param conidx connecting index, used for multiple connection. for single connection, set it to 0.
@@ -448,10 +450,10 @@ uint16_t sonata_ble_gatt_gatt_read_long(uint8_t conidx, uint16_t handle, uint16_
 * @param uuid UUID
 * @return API_SUCCESS
  */
-uint16_t sonata_ble_gatt_read_by_uuid(uint8_t conidx, uint16_t seq_num, uint16_t start_hdl, uint16_t end_hdl, uint8_t uuid_len, uint8_t *uuid);
+uint16_t sonata_ble_gatt_read_by_uuid(uint8_t conidx, uint16_t seq_num, uint16_t start_hdl, uint16_t end_hdl,
+                                      uint8_t uuid_len, uint8_t *uuid);
 
 
-//uint16_t sonata_ble_gatt_read_multiple(uint8_t conidx, struct sonata_gattc_read_multiple_cmd *cmd);
 
 /*!
  * @brief Gatt write
@@ -463,7 +465,8 @@ uint16_t sonata_ble_gatt_read_by_uuid(uint8_t conidx, uint16_t seq_num, uint16_t
  * @param value Value to write
  * @return API_SUCCESS
  */
-uint16_t sonata_ble_gatt_write(uint8_t conidx, uint16_t handle, uint16_t offset, uint16_t cursor, uint16_t length,uint8_t *value);
+uint16_t sonata_ble_gatt_write(uint8_t conidx, uint16_t handle, uint16_t offset, uint16_t cursor, uint16_t length,
+                               uint8_t *value);
 
 /*!
  * @brief Gatt write no response
@@ -475,7 +478,8 @@ uint16_t sonata_ble_gatt_write(uint8_t conidx, uint16_t handle, uint16_t offset,
  * @param value Value to write
  * @return API_SUCCESS
  */
-uint16_t sonata_ble_gatt_write_no_response(uint8_t conidx,  uint16_t handle, uint16_t offset, uint16_t cursor, uint16_t length, uint8_t *value);
+uint16_t sonata_ble_gatt_write_no_response(uint8_t conidx,  uint16_t handle, uint16_t offset, uint16_t cursor,
+        uint16_t length, uint8_t *value);
 
 /*!
  * @brief Gatt write signed
@@ -487,7 +491,8 @@ uint16_t sonata_ble_gatt_write_no_response(uint8_t conidx,  uint16_t handle, uin
  * @param value Value to write
  * @return API_SUCCESS
  */
-uint16_t sonata_ble_gatt_write_signed(uint8_t conidx, uint16_t handle, uint16_t offset, uint16_t cursor, uint16_t length,uint8_t *value);
+uint16_t sonata_ble_gatt_write_signed(uint8_t conidx, uint16_t handle, uint16_t offset, uint16_t cursor,
+                                      uint16_t length, uint8_t *value);
 
 /*!
  * @brief Gatt excute write
@@ -524,7 +529,8 @@ uint16_t sonata_ble_gatt_unregister_to_peer_device_event(uint8_t conidx, uint16_
 * @param uuid UUID
 * @return API_SUCCESS
  */
-uint16_t sonata_ble_gatt_sdp_discovery_service(uint8_t conidx, uint16_t start_hdl, uint16_t end_hdl, uint8_t uuid_len,uint8_t *uuid);
+uint16_t sonata_ble_gatt_sdp_discovery_service(uint8_t conidx, uint16_t start_hdl, uint16_t end_hdl, uint8_t uuid_len,
+        uint8_t *uuid);
 
 /*!
  * @brief Gatt sdp cancel discovery
@@ -542,7 +548,8 @@ uint16_t sonata_ble_gatt_sdp_cancel_discovery(uint8_t conidx);
  * @param uuid UUID
  * @return API_SUCCESS
  */
-uint16_t sonata_ble_gatt_sdp_discovery_all_service(uint8_t conidx, uint16_t start_hdl, uint16_t end_hdl, uint8_t uuid_len, uint8_t *uuid);
+uint16_t sonata_ble_gatt_sdp_discovery_all_service(uint8_t conidx, uint16_t start_hdl, uint16_t end_hdl,
+        uint8_t uuid_len, uint8_t *uuid);
 
 /*!
  * @brief Gatt enable robust database cache
@@ -566,7 +573,8 @@ uint16_t sonata_ble_gatt_read_db_hash_cmd_handler(uint8_t conidx);
  * @param end_handle End handle
  * @return API_SUCCESS
  */
-uint16_t sonata_ble_gatt_send_service_changed_event(uint8_t conidx, uint16_t handle, uint16_t start_handle, uint16_t end_handle);
+uint16_t sonata_ble_gatt_send_service_changed_event(uint8_t conidx, uint16_t handle, uint16_t start_handle,
+        uint16_t end_handle);
 
 /*!
  * @brief Gatt send event confirm message
@@ -608,7 +616,7 @@ uint16_t sonata_ble_gatt_add_service(uint16_t start_hdl, uint8_t perm, uint8_t *
 
 ///@deprecated use sonata_ble_gatt_add_service()
 uint16_t sonata_ble_gatt_add_service_request(uint16_t start_hdl, uint8_t perm, uint8_t *uuid,
-                                             uint8_t nb_att, sonata_gatt_att_desc_t *atts);
+        uint8_t nb_att, sonata_gatt_att_desc_t *atts);
 
 /*!
  * @brief Gatt get value
@@ -656,7 +664,7 @@ uint16_t sonata_ble_gatt_set_service_visibility(uint16_t handle, bool visible);
  * @brief Gatt get database hash
  * @return API_SUCCESS
  */
-uint16_t sonata_ble_gatt_att_compute_db_hash();
+uint16_t sonata_ble_gatt_att_compute_db_hash(void);
 /*!
  * @brief GATT send read confirm message
  * @param conidx connecting index, used for multiple connection. for single connection, set it to 0.
@@ -666,7 +674,8 @@ uint16_t sonata_ble_gatt_att_compute_db_hash();
  * @param value value array
  * @return API_SUCCESS
  */
-uint16_t sonata_ble_gatt_send_read_confirm(uint8_t conidx, uint16_t handle, uint8_t status, uint16_t length, uint8_t *value);
+uint16_t sonata_ble_gatt_send_read_confirm(uint8_t conidx, uint16_t handle, uint8_t status, uint16_t length,
+        uint8_t *value);
 
 /*!
  * @brief GATT send write confirm message

@@ -31,11 +31,11 @@
 
 static int g_wifiStaStatus = WIFI_STA_NOT_ACTIVE;
 static WifiDeviceConfig g_wifiConfigs[WIFI_MAX_CONFIG_SIZE] = {{{0}, {0}, {0}, 0, WIFI_CONFIG_INVALID, 0, 0}};
-static WifiEvent* g_wifiEvents[WIFI_MAX_EVENT_SIZE] = {0};
+static WifiEvent *g_wifiEvents[WIFI_MAX_EVENT_SIZE] = {0};
 static int g_connectState = WIFI_STATE_NOT_AVALIABLE;
 
-static void DispatchScanStateChangeEvent(const hi_wifi_event* hisiEvent,
-    const WifiEvent* hosEvent, WifiEventState event)
+static void DispatchScanStateChangeEvent(const hi_wifi_event *hisiEvent,
+        const WifiEvent *hosEvent, WifiEventState event)
 {
     if (hosEvent->OnWifiScanStateChanged == NULL) {
         return;
@@ -53,7 +53,7 @@ static void DispatchScanStateChangeEvent(const hi_wifi_event* hisiEvent,
     }
 }
 
-static void DispatchConnectEvent(const hi_wifi_event* hisiEvent, const WifiEvent* hosEvent)
+static void DispatchConnectEvent(const hi_wifi_event *hisiEvent, const WifiEvent *hosEvent)
 {
     if (hosEvent->OnWifiConnectionChanged == NULL) {
         return;
@@ -65,14 +65,14 @@ static void DispatchConnectEvent(const hi_wifi_event* hisiEvent, const WifiEvent
     if (hisiEvent->event == HI_WIFI_EVT_CONNECTED) {
         g_connectState = WIFI_STATE_AVALIABLE;
         cpyErr = memcpy_s(&info.ssid, WIFI_MAX_SSID_LEN,
-            hisiEvent->info.wifi_connected.ssid, HI_WIFI_MAX_SSID_LEN + 1);
+                          hisiEvent->info.wifi_connected.ssid, HI_WIFI_MAX_SSID_LEN + 1);
         if (cpyErr != EOK) {
             printf("[wifi_service]:DispatchConnectEvent memcpy failed, err = %d\n", cpyErr);
             return;
         }
 
         cpyErr = memcpy_s(&info.bssid, WIFI_MAC_LEN,
-            hisiEvent->info.wifi_connected.bssid, HI_WIFI_MAC_LEN);
+                          hisiEvent->info.wifi_connected.bssid, HI_WIFI_MAC_LEN);
         if (cpyErr != EOK) {
             printf("[wifi_service]:DispatchConnectEvent memcpy failed, err = %d\n", cpyErr);
             return;
@@ -90,7 +90,7 @@ static void DispatchConnectEvent(const hi_wifi_event* hisiEvent, const WifiEvent
 
     if (hisiEvent->event == HI_WIFI_EVT_DISCONNECTED) {
         cpyErr = memcpy_s(&info.bssid, WIFI_MAC_LEN,
-            hisiEvent->info.wifi_disconnected.bssid, HI_WIFI_MAC_LEN);
+                          hisiEvent->info.wifi_disconnected.bssid, HI_WIFI_MAC_LEN);
         if (cpyErr != EOK) {
             printf("[wifi_service]:DispatchConnectEvent memcpy failed, err = %d\n", cpyErr);
             return;
@@ -101,7 +101,7 @@ static void DispatchConnectEvent(const hi_wifi_event* hisiEvent, const WifiEvent
     hosEvent->OnWifiConnectionChanged(WIFI_STATE_NOT_AVALIABLE, &info);
 }
 
-static void DispatchStaConnectEvent(const hi_wifi_event* hisiEvent, const WifiEvent* hosEvent)
+static void DispatchStaConnectEvent(const hi_wifi_event *hisiEvent, const WifiEvent *hosEvent)
 {
     int cpyErr;
     StationInfo info = {0};
@@ -111,7 +111,7 @@ static void DispatchStaConnectEvent(const hi_wifi_event* hisiEvent, const WifiEv
         }
 
         cpyErr = memcpy_s(&info.macAddress, WIFI_MAC_LEN,
-            hisiEvent->info.ap_sta_connected.addr, HI_WIFI_MAC_LEN);
+                          hisiEvent->info.ap_sta_connected.addr, HI_WIFI_MAC_LEN);
         if (cpyErr != EOK) {
             printf("[wifi_service]:DispatchStaConnectEvent memcpy failed, err = %d\n", cpyErr);
             return;
@@ -126,7 +126,7 @@ static void DispatchStaConnectEvent(const hi_wifi_event* hisiEvent, const WifiEv
     }
 
     cpyErr = memcpy_s(&info.macAddress, WIFI_MAC_LEN,
-        hisiEvent->info.ap_sta_disconnected.addr, HI_WIFI_MAC_LEN);
+                      hisiEvent->info.ap_sta_disconnected.addr, HI_WIFI_MAC_LEN);
     if (cpyErr != EOK) {
         printf("[wifi_service]:DispatchStaConnectEvent memcpy failed, err = %d\n", cpyErr);
         return;
@@ -135,7 +135,7 @@ static void DispatchStaConnectEvent(const hi_wifi_event* hisiEvent, const WifiEv
     hosEvent->OnHotspotStaLeave(&info);
 }
 
-static void DispatchApStartEvent(const WifiEvent* hosEvent)
+static void DispatchApStartEvent(const WifiEvent *hosEvent)
 {
     if (hosEvent->OnHotspotStateChanged == NULL) {
         return;
@@ -144,7 +144,7 @@ static void DispatchApStartEvent(const WifiEvent* hosEvent)
     hosEvent->OnHotspotStateChanged(WIFI_STATE_AVALIABLE);
 }
 
-static void DispatchEvent(const hi_wifi_event* hisiEvent, const WifiEvent* hosEvent)
+static void DispatchEvent(const hi_wifi_event *hisiEvent, const WifiEvent *hosEvent)
 {
     switch (hisiEvent->event) {
         case HI_WIFI_EVT_SCAN_DONE:
@@ -225,7 +225,7 @@ WifiErrorCode EnableWifi(void)
     }
 
     hiRet = hi_wifi_sta_set_reconnect_policy(WIFI_RECONN_POLICY_ENABLE, WIFI_RECONN_POLICY_TIMEOUT,
-        WIFI_RECONN_POLICY_PERIOD, WIFI_RECONN_POLICY_MAX_TRY_COUNT);
+            WIFI_RECONN_POLICY_PERIOD, WIFI_RECONN_POLICY_MAX_TRY_COUNT);
     if (hiRet != HISI_OK) {
         printf("[wifi_service]:EnableWifi set reconn policy fail\n");
         if (UnlockWifiGlobalLock() != WIFI_SUCCESS) {
@@ -361,7 +361,7 @@ WifiErrorCode AdvanceScan(WifiScanParams *params)
         if (UnlockWifiGlobalLock() != WIFI_SUCCESS) {
             return ERROR_WIFI_UNKNOWN;
         }
-            return ERROR_WIFI_NOT_STARTED;
+        return ERROR_WIFI_NOT_STARTED;
     }
 
     if (UnlockWifiGlobalLock() != WIFI_SUCCESS) {
@@ -406,7 +406,7 @@ WifiErrorCode AdvanceScan(WifiScanParams *params)
     return WIFI_SUCCESS;
 }
 
-WifiErrorCode GetScanInfoList(WifiScanInfo* result, unsigned int* size)
+WifiErrorCode GetScanInfoList(WifiScanInfo *result, unsigned int *size)
 {
     if (result == NULL || size == NULL || *size == 0) {
         return ERROR_WIFI_INVALID_ARGS;
@@ -458,7 +458,7 @@ WifiErrorCode GetScanInfoList(WifiScanInfo* result, unsigned int* size)
     return WIFI_SUCCESS;
 }
 
-WifiErrorCode AddDeviceConfig(const WifiDeviceConfig* config, int* result)
+WifiErrorCode AddDeviceConfig(const WifiDeviceConfig *config, int *result)
 {
     if (config == NULL || result == NULL) {
         return ERROR_WIFI_INVALID_ARGS;
@@ -500,7 +500,7 @@ WifiErrorCode AddDeviceConfig(const WifiDeviceConfig* config, int* result)
     return WIFI_SUCCESS;
 }
 
-WifiErrorCode GetDeviceConfigs(WifiDeviceConfig* result, unsigned int* size)
+WifiErrorCode GetDeviceConfigs(WifiDeviceConfig *result, unsigned int *size)
 {
     if (result == NULL || size == NULL || *size == 0) {
         return ERROR_WIFI_INVALID_ARGS;
@@ -561,7 +561,7 @@ static WifiErrorCode StaConnect(unsigned int chan, hi_wifi_assoc_request *assocR
         hiRet += memcpy_s(&fastReq.req, sizeof(hi_wifi_assoc_request), assocReq, sizeof(hi_wifi_assoc_request));
         if (pskType == WIFI_PSK_TYPE_HEX) {
             hiRet += memcpy_s(fastReq.req.key, sizeof(fastReq.req.key),
-                WIFI_DEFAULT_KEY_FOR_PSK, sizeof(WIFI_DEFAULT_KEY_FOR_PSK));
+                              WIFI_DEFAULT_KEY_FOR_PSK, sizeof(WIFI_DEFAULT_KEY_FOR_PSK));
             hiRet += memcpy_s(fastReq.psk, sizeof(fastReq.psk), assocReq->key, HI_WIFI_STA_PSK_LEN);
             fastReq.psk_flag = HI_WIFI_WPA_PSK_USE_OUTER;
         }
@@ -607,11 +607,11 @@ WifiErrorCode ConnectTo(int networkId)
     assocReq.auth = HoSecToHiSec(g_wifiConfigs[networkId].securityType);
 
     int cpyErr = memcpy_s(assocReq.ssid, sizeof(assocReq.ssid),
-        g_wifiConfigs[networkId].ssid, sizeof(g_wifiConfigs[networkId].ssid));
+                          g_wifiConfigs[networkId].ssid, sizeof(g_wifiConfigs[networkId].ssid));
     cpyErr += memcpy_s(assocReq.key, sizeof(assocReq.key),
-        g_wifiConfigs[networkId].preSharedKey, sizeof(g_wifiConfigs[networkId].preSharedKey));
+                       g_wifiConfigs[networkId].preSharedKey, sizeof(g_wifiConfigs[networkId].preSharedKey));
     cpyErr += memcpy_s(assocReq.bssid, sizeof(assocReq.bssid),
-        g_wifiConfigs[networkId].bssid, sizeof(g_wifiConfigs[networkId].bssid));
+                       g_wifiConfigs[networkId].bssid, sizeof(g_wifiConfigs[networkId].bssid));
     if (UnlockWifiGlobalLock() != WIFI_SUCCESS) {
         return ERROR_WIFI_UNKNOWN;
     }
@@ -654,7 +654,7 @@ WifiErrorCode RemoveDevice(int networkId)
         return ERROR_WIFI_UNKNOWN;
     }
     if (memset_s(&g_wifiConfigs[networkId], sizeof(WifiDeviceConfig),
-        0, sizeof(WifiDeviceConfig)) != EOK) {
+                 0, sizeof(WifiDeviceConfig)) != EOK) {
         printf("[wifi_service]:removeDevice memset failed\n");
     }
     g_wifiConfigs[networkId].netId = WIFI_CONFIG_INVALID;
@@ -664,7 +664,7 @@ WifiErrorCode RemoveDevice(int networkId)
     return WIFI_SUCCESS;
 }
 
-WifiErrorCode GetLinkedInfo(WifiLinkedInfo* result)
+WifiErrorCode GetLinkedInfo(WifiLinkedInfo *result)
 {
     if (result == NULL) {
         return ERROR_WIFI_INVALID_ARGS;
@@ -699,7 +699,7 @@ WifiErrorCode GetLinkedInfo(WifiLinkedInfo* result)
 }
 
 
-WifiErrorCode RegisterWifiEvent(WifiEvent* event)
+WifiErrorCode RegisterWifiEvent(WifiEvent *event)
 {
     if (event == NULL) {
         return ERROR_WIFI_INVALID_ARGS;
@@ -742,7 +742,7 @@ WifiErrorCode RegisterWifiEvent(WifiEvent* event)
     return WIFI_SUCCESS;
 }
 
-WifiErrorCode UnRegisterWifiEvent(const WifiEvent* event)
+WifiErrorCode UnRegisterWifiEvent(const WifiEvent *event)
 {
     if (event == NULL) {
         return ERROR_WIFI_INVALID_ARGS;
@@ -771,13 +771,13 @@ WifiErrorCode UnRegisterWifiEvent(const WifiEvent* event)
     return ERROR_WIFI_UNKNOWN;
 }
 
-WifiErrorCode GetDeviceMacAddress(unsigned char* result)
+WifiErrorCode GetDeviceMacAddress(unsigned char *result)
 {
     if (result == NULL) {
         return ERROR_WIFI_INVALID_ARGS;
     }
 
-    int hiRet = hi_wifi_get_macaddr((char*)result, WIFI_MAC_LEN);
+    int hiRet = hi_wifi_get_macaddr((char *)result, WIFI_MAC_LEN);
     if (hiRet != HISI_OK) {
         return ERROR_WIFI_UNKNOWN;
     }

@@ -24,14 +24,13 @@
  */
 
 
-#ifndef _SONATA_BLE_TRANS_H_
-#define _SONATA_BLE_TRANS_H_
+#ifndef _SONATA_BLE_TRANSPORT_H_
+#define _SONATA_BLE_TRANSPORT_H_
 
 /*
  * INCLUDE FILES
  ****************************************************************************************
  */
-#include "sonata_utils_api.h"
 
 
 
@@ -55,13 +54,12 @@
  * Type Definition
  ****************************************************************************************
  */
-typedef struct sonata_ble_transport_pad_config
-{
+typedef struct sonata_ble_transport_pad_config {
     void (*pf_init_pad_config)(void);
     void (*pf_wakeup_pad_config)(void);
     void (*pf_flow_on_pad_config)(void);
     void (*pf_flow_off_pad_config)(void);
-}sonata_ble_transport_pad_config_t;
+} sonata_ble_transport_pad_config_t;
 
 
 /*
@@ -81,5 +79,5 @@ extern void sonata_ble_transport_init(sonata_ble_transport_pad_config_t *config)
 extern void sonata_ble_transport_wkup(void);
 
 
-#endif //_SONATA_BLE_TRANS_H_
+#endif //_SONATA_BLE_TRANSPORT_H_
 
