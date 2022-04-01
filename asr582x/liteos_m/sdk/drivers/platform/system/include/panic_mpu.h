@@ -195,7 +195,7 @@ typedef struct {
  * @param[in]  mode         prohibit access(0) or read only(>0)
  */
 void debug_memory_access_err_check(unsigned long addr_start, unsigned long addr_size,
-                                    unsigned int mode,unsigned int cacheable,unsigned int rnr);
+                                   unsigned int mode, unsigned int cacheable, unsigned int rnr);
 void mpu_init(void);
 
 #else //STAR_MPU_ENABLE

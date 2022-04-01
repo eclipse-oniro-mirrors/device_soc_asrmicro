@@ -44,6 +44,7 @@
 #include "sonata_ble_hook.h"
 #include "msm_ble_api.h"
 #include "sonata_gap.h"
+#include "sonata_gap_api.h"
 
 
 
@@ -89,21 +90,19 @@
 #define KEY_LEN                          0x10
 
 
-enum app_connect_state
-{
+enum app_connect_state {
     ///Connection succeeded
     APP_STATE_CONNECTED = 0,
     /// Link is disconnected
     APP_STATE_DISCONNECTED,
 };
 
-typedef enum
-{
+typedef enum {
     APP_DISCONNECTED,
     APP_CONNECTED,
     APP_BONDING,
     APP_BONDED,
-}bound_conn_state;
+} bound_conn_state;
 
 
 /*
@@ -112,118 +111,103 @@ typedef enum
  */
 
 /// Long Term Key information
-typedef struct app_sonata_gap_ltk
-{
+typedef struct app_sonata_gap_ltk {
     /// Long Term Key
     uint8_t ltk[APP_GAP_KEY_LEN];
     /// Encryption Diversifier
     uint16_t ediv;
     /// Random Number
     uint8_t randnb[APP_GAP_RAND_NB_LEN];
-}app_sonata_gap_ltk_t;
+} app_sonata_gap_ltk_t;
 
 /// Short Term Key information
-typedef struct app_sonata_gap_irk
-{
+typedef struct app_sonata_gap_irk {
     /// Short Term Key
     uint8_t irk[APP_GAP_KEY_LEN];
     /// irk addr
     uint8_t irk_addr[APP_BD_ADDR_LEN];
-}app_sonata_gap_irk_t;
+} app_sonata_gap_irk_t;
 
-typedef struct bonded_dev_info
-{
+typedef struct bonded_dev_info {
     uint8_t              peer_addr[APP_BD_ADDR_LEN];
     app_sonata_gap_ltk_t ltk;
     uint8_t              ltk_in[APP_GAP_KEY_LEN];
     app_sonata_gap_irk_t irk;
     uint8_t              periph_bond;
-}bonded_dev_info_t;
+} bonded_dev_info_t;
 
-typedef struct bonded_dev_info_list
-{
+typedef struct bonded_dev_info_list {
     uint8_t           total_dev;
     uint8_t           current_dev_index;
     bonded_dev_info_t bonded_device_info[MAX_BONDED_DEV_NUM];
-}bonded_dev_info_list_t;
+} bonded_dev_info_list_t;
 
-typedef struct peer_conn_param
-{
+typedef struct peer_conn_param {
     /// Connection interval maximum
     uint16_t intv_max;
     /// Latency
     uint16_t latency;
     /// Supervision timeout
     uint16_t time_out;
-}peer_conn_param_t;
+} peer_conn_param_t;
 
 
-typedef struct connect_req_info
-{
+typedef struct connect_req_info {
     uint8_t           conidx;
     uint8_t           bd_addr[APP_BD_ADDR_LEN];
-}connect_req_info_t;
+} connect_req_info_t;
 
-typedef struct adv_idx_info
-{
+typedef struct adv_idx_info {
     uint8_t           local_idx;
     uint8_t           adv_id;
-}adv_idx_info_t;
+} adv_idx_info_t;
 
 
 
-typedef struct 
-{
-    uint8_t advdata[31];     
-    uint8_t advdataLen;     
+typedef struct {
+    uint8_t advdata[31];
+    uint8_t advdataLen;
 
 } ble_adv_data_set_t;
 
-typedef struct 
-{
-    uint8_t respdata[31];     
-    uint8_t respdataLen;     
+typedef struct {
+    uint8_t respdata[31];
+    uint8_t respdataLen;
 
 } ble_scan_data_set_t;
 
 
-typedef struct
-{
+typedef struct {
     int status;
     int len;
     int handler;
     uint8_t uuid[APP_UUID_LEN];
-}app_reg_service_cmp_t;
+} app_reg_service_cmp_t;
 
-typedef struct
-{
+typedef struct {
     int connId;
     uint8_t addr[APP_BD_ADDR_LEN];
-}app_connect_status_ind_t;
+} app_connect_status_ind_t;
 
-typedef struct
-{
+typedef struct {
     int connId;
     int status;
-}app_ind_sent_ind_t;
+} app_ind_sent_ind_t;
 
-typedef struct
-{
+typedef struct {
     int connId;
     int mtu;
-}app_mtu_change_ind_t;
+} app_mtu_change_ind_t;
 
-typedef struct
-{
+typedef struct {
     int advId;
     int status;
-}app_adv_status_ind_t;
+} app_adv_status_ind_t;
 
 /**
 * @brief enum core evt indicate type
 */
-typedef enum
-{
+typedef enum {
     BLE_SERVICE_ADD_CMP,
     BLE_DEV_CONNECTED,
     BLE_DEV_DISCONNECTED,
@@ -231,7 +215,7 @@ typedef enum
     BLE_MTU_CHANGE,
     BLE_ADV_START,
     BLE_ADV_STOP,
-}app_core_evt_ind_t;
+} app_core_evt_ind_t;
 
 /*
  * GLOBAL VARIABLE DECLARATION
@@ -240,36 +224,34 @@ typedef enum
 extern sonata_ble_hook_t app_hook;
 
 ///app Core Event indicate Callback
-typedef int (*app_core_evt_ind_cb)(app_core_evt_ind_t evt ,void * p_param);
+typedef int (*app_core_evt_ind_cb)(app_core_evt_ind_t evt, void *p_param);
 
-///
-typedef int (*app_sec_req_cb)(uint8_t * addr);
+typedef int (*app_sec_req_cb)(uint8_t *addr);
 
 
-typedef enum
-{
-    USER_INVALID_MODULE_ID ,
-    USER_MIDEA_MODULE_ID   ,
-    USER_OHOS_MODULE_ID   ,
+typedef enum {
+    USER_INVALID_MODULE_ID,
+    USER_MIDEA_MODULE_ID,
+    USER_OHOS_MODULE_ID,
     USER_MAX_MODULE_ID
-}ble_stack_opr_module_id_t;
+} ble_stack_opr_module_id_t;
 
 #define APP_ACTIVE_MAX 5
 
-typedef struct app_uuid_t{
+typedef struct app_uuid_t {
     uint16_t service;
     uint16_t read;
     uint16_t write;
     uint16_t ntf;
-}app_uuids;
-typedef struct actives_t{
+} app_uuids;
+typedef struct actives_t {
     uint8_t assign_id ;
     uint8_t type;//A0:Adv  A1:Scan  A2:Peer
     bool runing;
     uint8_t peer[SONATA_GAP_BD_ADDR_LEN];
     uint8_t name[20];
-}actives;
-typedef struct app_env_t{
+} actives;
+typedef struct app_env_t {
 
     uint8_t gAppStatus;
     uint16_t attrHandle;
@@ -278,7 +260,7 @@ typedef struct app_env_t{
     uint16_t targetNtfHandle;
     app_uuids appUuids;
     actives act[APP_ACTIVE_MAX];
-}app_env;
+} app_env;
 /*
  * FUNCTION DECLARATIONS
  ****************************************************************************************
@@ -290,18 +272,18 @@ typedef struct app_env_t{
  ****************************************************************************************
  */
 void app_init(void);
-void app_ble_config_legacy_advertising();
-void app_ble_config_scanning();
-void app_ble_config_initiating();
-void app_ble_stop_scanning();
+void app_ble_config_legacy_advertising(void);
+void app_ble_config_scanning(void);
+void app_ble_config_initiating(void);
+void app_ble_stop_scanning(void);
 
-uint8_t app_get_adv_status();
+uint8_t app_get_adv_status(void);
 uint8_t app_get_connect_status(void);
 uint16_t app_ble_start_advertising(uint8_t adv_id);
 bool app_is_ble_test_mode(void);
 void app_set_ble_test_mode(bool mode);
 uint16_t app_ble_advertising_stop(uint8_t adv_id);
-int app_ble_advertising_start(uint8_t *adv_id,ble_adv_data_set_t *data,ble_scan_data_set_t *scan_data);
+int app_ble_advertising_start(uint8_t *adv_id, ble_adv_data_set_t *data, ble_scan_data_set_t *scan_data);
 void app_gap_set_scan_cb(app_ble_scan_callback_t cb);
 int app_ble_stack_stop(ble_stack_opr_module_id_t module);
 int app_ble_stack_start(ble_stack_opr_module_id_t module);
@@ -310,21 +292,25 @@ int app_set_security_io_cap(uint8_t cap);
 int app_ble_disconnect_by_addr(uint8_t *addr);
 int  app_ble_disable_service_by_handler(uint16_t start_hdl);
 void app_register_core_evt_ind(app_core_evt_ind_cb cb);
-void app_gap_notify_pair_request_rsp(uint8_t *bd_addr,uint8_t accept);
+void app_gap_notify_pair_request_rsp(uint8_t *bd_addr, uint8_t accept);
 void app_register_sec_cb(app_sec_req_cb  cb);
 int app_set_security_auth_req(uint8_t auth_req);
 void app_set_connect_flag(uint8_t vaule);
 void app_gap_connect_confirm(uint8_t *addr, uint8_t auth);
-void app_ble_gatt_data_send_notify(uint16_t local_handle,uint16_t idx, uint16_t length, uint8_t *p_value);
+void app_ble_gatt_data_send_notify(uint16_t local_handle, uint16_t idx, uint16_t length, uint8_t *p_value);
 uint16_t app_ble_stop_adv_without_id(void);
-void app_ble_set_target_address(uint8_t * target);
-void app_ble_set_uuids(uint16_t service,uint16_t read,uint16_t write,uint16_t ntf);
+void app_ble_set_target_address(uint8_t *target);
+void app_ble_set_uuids(uint16_t service, uint16_t read, uint16_t write, uint16_t ntf);
 bool app_ble_master_write_data(uint8_t conidx, uint16_t length, uint8_t *data);
 bool app_ble_master_read_data(uint8_t conidx, uint16_t length, uint8_t *data);
 bool app_ble_master_turn_ntf(uint8_t conidx, bool on);
-app_uuids * app_ble_get_uuids();
+app_uuids *app_ble_get_uuids(void);
 void app_ble_disconnect(uint8_t conidx);
-actives *app_get_active();
+actives *app_get_active(void);
+void app_ble_set_test_write_uuid(uint8_t *uuid);
+void app_ble_set_test_read_uuid(uint8_t *uuid);
+void app_ble_start_advertising_with_param(sonata_gap_directed_adv_create_param_t *param, ble_adv_data_set_t *data,
+        ble_scan_data_set_t *scan_data, uint8_t own_addr_type, uint16_t duration, uint8_t max_adv_evt);
 
 /// @} APP
 

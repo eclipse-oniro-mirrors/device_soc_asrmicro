@@ -54,9 +54,9 @@
 #define IMAGE_ROLL_BACK_FLAG_SIZE       4
 #define IMAGE_VERIFY_DONE_SIZE          4
 #define IMAGE_RESERVED_SIZE             (IMAGE_HEADER_SIZE - IMAGE_TOKEN_SIZE - IMAGE_APP_VERSION_MAX_SIZE \
-                                            - FLASH_REMAPPING_EN_SIZE - FLASH_REMAPPING_BANK_SIZE - OTA_FLAG_SIZE - IMAGE_COMPRESS_EN_SIZE \
-                                            - IMAGE_LENGTH_SIZE - IMAGE_CRC_SIZE - APP_LENGTH_SIZE - APP_CRC_SIZE \
-                                            - OTA_REGION_DIRTY_FLAG_SIZE - IMAGE_ROLL_BACK_FLAG_SIZE - IMAGE_VERIFY_DONE_SIZE)
+        - FLASH_REMAPPING_EN_SIZE - FLASH_REMAPPING_BANK_SIZE - OTA_FLAG_SIZE - IMAGE_COMPRESS_EN_SIZE \
+        - IMAGE_LENGTH_SIZE - IMAGE_CRC_SIZE - APP_LENGTH_SIZE - APP_CRC_SIZE \
+        - OTA_REGION_DIRTY_FLAG_SIZE - IMAGE_ROLL_BACK_FLAG_SIZE - IMAGE_VERIFY_DONE_SIZE)
 
 //size of image
 #define IMAGE_APP_VERSION_SIZE          24 //e.g. app-1.0.2-20181115.1553
@@ -67,15 +67,14 @@
 
 #define IMAGE_HEADER_OFFSET             0x0 //offset in flash region
 #define OTA_IMAGE_CRC_OFFSET            (IMAGE_TOKEN_SIZE + IMAGE_APP_VERSION_MAX_SIZE \
-                                            + FLASH_REMAPPING_EN_SIZE + FLASH_REMAPPING_BANK_SIZE + OTA_FLAG_SIZE + IMAGE_COMPRESS_EN_SIZE \
-                                            + IMAGE_LENGTH_SIZE)
+        + FLASH_REMAPPING_EN_SIZE + FLASH_REMAPPING_BANK_SIZE + OTA_FLAG_SIZE + IMAGE_COMPRESS_EN_SIZE \
+        + IMAGE_LENGTH_SIZE)
 
 //offset in pure image
 #define IMAGE_APP_VERSION_OFFSET            0x100
 
 #define OTA_VERIFY_TOKEN 0xACDF160B
-struct OTA_INFO
-{
+struct OTA_INFO {
     char token[IMAGE_TOKEN_SIZE];
     char app_version[IMAGE_APP_VERSION_MAX_SIZE];
     uint32_t flash_remapping_en;

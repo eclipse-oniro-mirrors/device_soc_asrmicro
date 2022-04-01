@@ -49,7 +49,7 @@
  ****************************************************************************************
  */
 /** security level **/
-typedef enum{
+typedef enum {
     /** security mode 1 level 1: no security **/
     SONATA_SEC_M1_L1 = 0,
     /** security mode 1 level 2: unauthenticated pairing with encryption , no mitm protection **/
@@ -62,10 +62,10 @@ typedef enum{
     SONATA_SEC_M2_L1,
     /** authenticated pairing with data signing **/
     SONATA_SEC_M2_L2,
-}sonata_sec_lvl_t;
+} sonata_sec_lvl_t;
 
 /**IO capabilities**/
-typedef enum{
+typedef enum {
     /** display only **/
     SONATA_IO_CAP_DISPLAY_ONLY = 0,
     /** display yes no **/
@@ -76,15 +76,15 @@ typedef enum{
     SONATA_IO_CAP_NO_INPUT_NO_OUTPUT,
     /** keyboard display **/
     SONATA_IO_CAP_KB_DISPLAY,
-}sonata_iocap_t;
+} sonata_iocap_t;
 
 /** OOB data present flag values **/
-typedef enum{
+typedef enum {
     /** OOB data not present **/
     SONATA_OOB_AUTH_DATA_NOT_PRESENT = 0,
     /** OOB data present **/
     SONATA_OOB_AUTH_DATA_PRESENT,
-}sonata_oob_t;
+} sonata_oob_t;
 
 /** authentication requirements **/
 
@@ -95,25 +95,24 @@ typedef enum{
  * Type Definition
  ****************************************************************************************
  */
-typedef struct sonata_sec_api_cb{
+typedef struct sonata_sec_api_cb {
 
-    struct sonata_sec_api_cb * _next;
-}sonata_sec_api_cb_t;
+    struct sonata_sec_api_cb *_next;
+} sonata_sec_api_cb_t;
 
 
 
-typedef struct sonata_public_key
-{
+typedef struct sonata_public_key {
     uint8_t pub_key_x[32];
     uint8_t pub_key_y[32];
-}sonata_public_key_t;
+} sonata_public_key_t;
 
 
-typedef  void (* sonata_sec_public_key_gen_complete)(sonata_public_key_t * pub_key, uint16_t status) ;
+typedef  void (* sonata_sec_public_key_gen_complete)(sonata_public_key_t *pub_key, uint16_t status) ;
 
-typedef void (*sonata_sec_ecdh_secret_complete) (const uint8_t* p_ecdh_secret,uint16_t status);
+typedef void (*sonata_sec_ecdh_secret_complete) (const uint8_t *p_ecdh_secret, uint16_t status);
 
-typedef void (*sonata_sec_ecdh_session_key_complete) (const uint8_t* p_ecdh_session,uint16_t status);
+typedef void (*sonata_sec_ecdh_session_key_complete) (const uint8_t *p_ecdh_session, uint16_t status);
 
 
 /*
@@ -131,13 +130,14 @@ extern void sonata_sec_api_init(void);
 extern void sonata_sec_api_cb_register(sonata_sec_api_cb_t *cb);
 
 
-void sonata_genc_DH_key(uint8_t* secret_key,uint8_t* public_key_x, uint8_t* public_key_y ,sonata_sec_ecdh_secret_complete callback);
+void sonata_genc_DH_key(uint8_t *secret_key, uint8_t *public_key_x, uint8_t *public_key_y,
+                        sonata_sec_ecdh_secret_complete callback);
 
-void sonata_genc_public_key(uint8_t* secret_key,sonata_sec_public_key_gen_complete callback);
+void sonata_genc_public_key(uint8_t *secret_key, sonata_sec_public_key_gen_complete callback);
 
-void sonata_genc_secret_key(uint8_t* secret_key256);
+void sonata_genc_secret_key(uint8_t *secret_key256);
 
-void sonata_genc_session_key(uint8_t* secret_key,uint8_t *skd, sonata_sec_ecdh_session_key_complete callback);
+void sonata_genc_session_key(uint8_t *secret_key, uint8_t *skd, sonata_sec_ecdh_session_key_complete callback);
 
 
 #endif //_SONATA_SEC_API_H_

@@ -35,9 +35,7 @@
  */
 #include <stdint.h>        // standard integer definition
 #include <stdio.h>
-#include "compiler.h"      // inline functions
 #include "sonata_stack_config.h"
-//#include "sonata.h"
 
 
 /*
@@ -50,7 +48,6 @@
 #else
 #define CRITICAL_FUNC_SEG
 #endif //CFG_SEG
-#define _CRITICAL_FUNC_SEG
 
 /// ARM is a 32-bit CPU
 #define CPU_WORD_SIZE      4
@@ -77,7 +74,7 @@
 #define BLE_ROM               1
 #else
 #define BLE_ROM               0
-#endif //
+#endif
 
 /// Possible errors detected by FW
 #define    RESET_NO_ERROR           0x00000000
@@ -172,7 +169,7 @@ void assert_warn(uint16_t id, int param0, int param1);
  * @param length data size to dump
  ****************************************************************************************
  */
-void dump_data(uint8_t* data, uint16_t length);
+void dump_data(uint8_t *data, uint16_t length);
 
 
 
@@ -205,7 +202,7 @@ extern void (*pf_sonata_assert_warn)(uint16_t id, int param0, int param1);
         if (!(cond)) {                                                \
             if(pf_sonata_assert_param)                                       \
             {                                                         \
-                pf_sonata_assert_param(id, (int)param0, (int)param1);            \
+                pf_sonata_assert_param(id, (int)(param0), (int)(param1));            \
             }                                                         \
         }                                                             \
     } while(0)
@@ -213,19 +210,19 @@ extern void (*pf_sonata_assert_warn)(uint16_t id, int param0, int param1);
 
 /// Assertions showing a non-critical problem that has to be fixed by the SW
 #define ASSERT_WARN(id, cond, param0, param1)                                      \
-   do {                                                                        \
-       if (!(cond)) {                                                          \
-           if(pf_sonata_assert_warn)                                                  \
-           {                                                                   \
-               pf_sonata_assert_warn(id, (int)param0, (int)param1);                       \
-           }                                                                   \
-       }                                                                       \
-   } while(0)
+    do {                                                                        \
+        if (!(cond)) {                                                          \
+            if(pf_sonata_assert_warn)                                                  \
+            {                                                                   \
+                pf_sonata_assert_warn(id, (int)(param0), (int)(param1));                       \
+            }                                                                   \
+        }                                                                       \
+    } while(0)
 
 // modified for rom code 20200224
 
 #define DUMP_DATA(data, length) \
-    dump_data((uint8_t*)data, length)
+    dump_data((uint8_t*)(data), length)
 
 #else
 /// Assertions showing a critical error that could require a full system reset
@@ -244,7 +241,6 @@ extern void (*pf_sonata_assert_warn)(uint16_t id, int param0, int param1);
 
 // required to define GLOBAL_INT_** macros as inline assembly. This file is included after
 // definition of ASSERT macros as they are used inside ll.h
-//#include "ll.h"     // ll definitions
 
 #ifdef SONATA_RTOS_SUPPORT
 

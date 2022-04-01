@@ -16,10 +16,11 @@
 #ifndef _DUET_FLASH_ENCRYPT_H_
 #define _DUET_FLASH_ENCRYPT_H_
 
-#ifdef __cplusplus
-    extern "C" {
-#endif
 #include <errno.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /**
  * Get the encrypt status
@@ -28,7 +29,7 @@
  *
  * @return  0 : un-encrypt, 1 : encrypt
  */
-int duet_flash_encrypt_status();
+int duet_flash_encrypt_status(void);
 
 /**
  * Switch flash to encrypt mode.
@@ -39,7 +40,7 @@ int duet_flash_encrypt_status();
  *
  * @return  0 : On success, EIO : If an error occurred with any step
  */
-int duet_flash_encrypt();
+int duet_flash_encrypt(void);
 
 /**
  * Switch flash to disable encrypt mode.
@@ -50,7 +51,7 @@ int duet_flash_encrypt();
  *
  * @return  none
  */
-int duet_flash_disable_encrypt();
+int duet_flash_disable_encrypt(void);
 
 /**
  * Get the total times of encrypt and dis-encrypt operation rest.
@@ -60,10 +61,10 @@ int duet_flash_disable_encrypt();
  *
  * @return  The total times of encrypt and dis-encrypt operation rest.
  */
-int duet_flash_encrypt_operation_rest();
+int duet_flash_encrypt_operation_rest(void);
 
 #ifdef __cplusplus
-   }
+}
 #endif
 
 #endif // _DUET_FLASH_ENCRYPT_H_

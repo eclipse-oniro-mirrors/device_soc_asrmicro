@@ -193,8 +193,7 @@
 
 
 //hl_err
-enum stack_hl_err
-{
+enum stack_hl_err {
     /// No error
     SONATA_HL_GAP_ERR_NO_ERROR                                                               = 0x00,
 

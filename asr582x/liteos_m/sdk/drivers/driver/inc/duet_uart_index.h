@@ -14,10 +14,10 @@
  */
 
 #ifndef __DUET_UART_INDEX_H
-#define __DUET_UART_INDEX_Hs
+#define __DUET_UART_INDEX_H
 
 #ifdef __cplusplus
-extern "C"{
+extern "C" {
 #endif
 
 #define UART0_INDEX    0
@@ -28,4 +28,4 @@ extern "C"{
 #ifdef __cplusplus
 }
 #endif
-#endif //__SONATA_UART_INDEX_H
+#endif //__DUET_UART_INDEX_H

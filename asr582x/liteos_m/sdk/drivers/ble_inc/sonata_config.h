@@ -48,8 +48,7 @@
  */
 
 ///BD address type
-enum sonata_addr_type
-{
+enum sonata_addr_type {
     ///Public BD address
     SONATA_ADDR_PUBLIC                   = 0x00,
     ///Random BD Address
@@ -73,8 +72,7 @@ enum sonata_addr_type
 };
 
 ///Advertising filter policy
-enum stack_adv_filter_policy
-{
+enum stack_adv_filter_policy {
     ///Allow both scan and connection requests from anyone
     SONATA_ADV_ALLOW_SCAN_ANY_CON_ANY    = 0x00,
     ///Allow both scan req from White List devices only and connection req from anyone
@@ -86,8 +84,7 @@ enum stack_adv_filter_policy
 };
 
 /// Random Address type
-enum stack_random_addr_type
-{
+enum stack_random_addr_type {
     /// Mask over the 2 MSBs
     SONATA_BD_ADDR_RND_ADDR_TYPE_MSK = 0xC0,
 
@@ -100,8 +97,7 @@ enum stack_random_addr_type
 };
 
 /// Constant defining the role
-enum
-{
+enum {
     ///Master role
     SONATA_ROLE_MASTER,
     ///Slave role
@@ -109,8 +105,7 @@ enum
 };
 
 ///Privacy mode type
-enum
-{
+enum {
     ///Network privacy mode
     SONATA_PRIV_TYPE_NETWORK = 0x00,
     ///Device privacy mode

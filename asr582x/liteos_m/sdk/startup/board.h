@@ -25,7 +25,7 @@ typedef enum {
     PORT_UART_TEMP,
     PORT_UART_SIZE,
     PORT_UART_INVALID = 255
-}PORT_UART_TYPE;
+} PORT_UART_TYPE;
 
 void board_init(void);
 void board_before_init(void);

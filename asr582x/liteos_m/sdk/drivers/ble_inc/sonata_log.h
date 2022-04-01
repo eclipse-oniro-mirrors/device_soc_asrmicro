@@ -63,31 +63,6 @@ typedef enum {
  */
 typedef int (*vprintf_like_t)(const char *, va_list);
 
-/*
-#define LOG_COLOR_E
-#define LOG_COLOR_W
-#define LOG_COLOR_I
-#define LOG_COLOR_D
-#define LOG_COLOR_V
-#define LOG_RESET_COLOR
-#define LOG_FORMAT(letter, format)  LOG_COLOR_ ## letter #letter " (%d) %s: " format LOG_RESET_COLOR "\r\n"
-#define SONATA_LOG_LEVEL(level, tag, format, ...) do {                     \
-        if (level==SONATA_LOG_ERROR )           { sonata_logt_write(SONATA_LOG_ERROR,      tag, LOG_FORMAT(E, format), sonata_log_timestamp(), tag, ##__VA_ARGS__); } \
-        else if (level==SONATA_LOG_WARN )       { sonata_logt_write(SONATA_LOG_WARN,       tag, LOG_FORMAT(W, format), sonata_log_timestamp(), tag, ##__VA_ARGS__); } \
-        else if (level==SONATA_LOG_DEBUG )      { sonata_logt_write(SONATA_LOG_DEBUG,      tag, LOG_FORMAT(D, format), sonata_log_timestamp(), tag, ##__VA_ARGS__); } \
-        else if (level==SONATA_LOG_VERBOSE )    { sonata_logt_write(SONATA_LOG_VERBOSE,    tag, LOG_FORMAT(V, format), sonata_log_timestamp(), tag, ##__VA_ARGS__); } \
-        else                                    { sonata_logt_write(SONATA_LOG_INFO,       tag, LOG_FORMAT(I, format), sonata_log_timestamp(), tag, ##__VA_ARGS__); } \
-    } while(0)
-#define SONATA_LOG_LEVEL_LOCAL(level, tag, format, ...) do {               \
-        if ( LOG_LOCAL_LEVEL >= level ) SONATA_LOG_LEVEL(level, tag, format, ##__VA_ARGS__); \
-    } while(0)
-#define LOGE( tag, format, ... ) SONATA_LOG_LEVEL_LOCAL(SONATA_LOG_ERROR,   tag, format, ##__VA_ARGS__)
-#define LOGW( tag, format, ... ) SONATA_LOG_LEVEL_LOCAL(SONATA_LOG_WARN,    tag, format, ##__VA_ARGS__)
-#define LOGI( tag, format, ... ) SONATA_LOG_LEVEL_LOCAL(SONATA_LOG_INFO,    tag, format, ##__VA_ARGS__)
-#define LOGD( tag, format, ... ) SONATA_LOG_LEVEL_LOCAL(SONATA_LOG_DEBUG,   tag, format, ##__VA_ARGS__)
-#define LOGV( tag, format, ... ) SONATA_LOG_LEVEL_LOCAL(SONATA_LOG_VERBOSE, tag, format, ##__VA_ARGS__)
- */
-//#define CFG_SONATA_LOG
 #ifdef CFG_SONATA_LOG
 #define SONATA_LOGT_FORMAT_SIMPLE(format)  "%s: " format "\r\n"
 #define SONATA_LOGT_LEVEL_SIMPLE(level, tag, format, ...) do {                     \
@@ -173,4 +148,4 @@ void sonata_log_level_set(sonata_log_level level);
 //Internal use
 void sonata_logt_write(sonata_log_level level, const char *tag, const char *format, ...);
 
-#endif //_SONATA_LOG_H_
+#endif // _SONATA_LOG_H_

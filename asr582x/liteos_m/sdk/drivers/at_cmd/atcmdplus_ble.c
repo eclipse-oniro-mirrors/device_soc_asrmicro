@@ -29,11 +29,11 @@
  ****************************************************************************************
  */
 #include "atcmdplus_ble.h"
-#include "lega_at_api.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
+#include "lega_at_api.h"
 #include "app.h"
 #include "sonata_gap.h"
 #include "sonata_gatt_api.h"
@@ -57,20 +57,13 @@ uint8_t char2HexValue(char ch)
 {
     uint8_t result = 0;
 
-    if (ch >= '0' && ch <= '9')
-    {
+    if (ch >= '0' && ch <= '9') {
         result = ch - '0';
-    }
-    else if (ch >= 'a' && ch <= 'z')
-    {
+    } else if (ch >= 'a' && ch <= 'z') {
         result = (ch - 'a') + 10;
-    }
-    else if (ch >= 'A' && ch <= 'Z')
-    {
+    } else if (ch >= 'A' && ch <= 'Z') {
         result = (ch - 'A') + 10;
-    }
-    else
-    {
+    } else {
         result = -1;
     }
     return result;
@@ -86,8 +79,7 @@ void hexValue2Char(uint8_t value, uint8_t *chars)
 void macChar2Value(uint8_t *chars, uint8_t *mac, bool colon)
 {
     uint8_t d0, d1, d2, d3, d4, d5;
-    if (colon)
-    {
+    if (colon) {
         d0 = char2HexValue(chars[0]) * 16 + char2HexValue(chars[1]);
         d1 = char2HexValue(chars[3]) * 16 + char2HexValue(chars[4]);
         d2 = char2HexValue(chars[6]) * 16 + char2HexValue(chars[7]);
@@ -100,9 +92,7 @@ void macChar2Value(uint8_t *chars, uint8_t *mac, bool colon)
         mac[3] = d2;
         mac[4] = d1;
         mac[5] = d0;
-    }
-    else
-    {
+    } else {
         d0 = char2HexValue(chars[0]) * 16 + char2HexValue(chars[1]);
         d1 = char2HexValue(chars[2]) * 16 + char2HexValue(chars[3]);
         d2 = char2HexValue(chars[4]) * 16 + char2HexValue(chars[5]);
@@ -120,8 +110,7 @@ void macChar2Value(uint8_t *chars, uint8_t *mac, bool colon)
 
 uint8_t macValue2Char(uint8_t *mac, uint8_t *chars, bool colon)
 {
-    if (colon)
-    {
+    if (colon) {
         hexValue2Char(mac[5], &chars[0]);
         chars[2] = ':';
         hexValue2Char(mac[4], &chars[3]);
@@ -134,9 +123,7 @@ uint8_t macValue2Char(uint8_t *mac, uint8_t *chars, bool colon)
         chars[14] = ':';
         hexValue2Char(mac[0], &chars[15]);
         return 17;
-    }
-    else
-    {
+    } else {
         hexValue2Char(mac[5], &chars[0]);
         hexValue2Char(mac[4], &chars[2]);
         hexValue2Char(mac[3], &chars[4]);
@@ -149,26 +136,21 @@ uint8_t macValue2Char(uint8_t *mac, uint8_t *chars, bool colon)
 
 void apcmdplue_print_command(int argc, char **argv)
 {
-    APP_TRC("-------------------[%d]\r\n",argc);
-    if (argc > 0)
-    {
-        APP_TRC("     P0:%s\r\n",argv[PARA_ID_0]);
+    APP_TRC("-------------------[%d]\r\n", argc);
+    if (argc > 0) {
+        APP_TRC("     P0:%s\r\n", argv[PARA_ID_0]);
     }
-    if (argc > 1)
-    {
-        APP_TRC("     P1:%s\r\n",argv[PARA_ID_1]);
+    if (argc > 1) {
+        APP_TRC("     P1:%s\r\n", argv[PARA_ID_1]);
     }
-    if (argc > 2)
-    {
-        APP_TRC("     P2:%s\r\n",argv[PARA_ID_2]);
+    if (argc > 2) {
+        APP_TRC("     P2:%s\r\n", argv[PARA_ID_2]);
     }
-    if (argc > 3)
-    {
-        APP_TRC("     P3:%s\r\n",argv[PARA_ID_3]);
+    if (argc > 3) {
+        APP_TRC("     P3:%s\r\n", argv[PARA_ID_3]);
     }
-    if (argc > 4)
-    {
-        APP_TRC("     P4:%s\r\n",argv[PARA_ID_4]);
+    if (argc > 4) {
+        APP_TRC("     P4:%s\r\n", argv[PARA_ID_4]);
     }
     APP_TRC("-------------------\r\n");
 
@@ -179,12 +161,9 @@ void apcmdplue_print_command(int argc, char **argv)
 int atcmdplus_adv(int argc, char **argv)
 {
     apcmdplue_print_command(argc, argv);
-    if (strcmp(argv[PARA_ID_1], "1") == 0 )
-    {
+    if (strcmp(argv[PARA_ID_1], "1") == 0 ) {
         app_ble_config_legacy_advertising();
-    }
-    else if (strcmp(argv[PARA_ID_1], "0") == 0)
-    {
+    } else if (strcmp(argv[PARA_ID_1], "0") == 0) {
         app_ble_advertising_stop(0);
     }
     return CONFIG_OK;
@@ -193,13 +172,10 @@ int atcmdplus_adv(int argc, char **argv)
 int atcmdplus_scan(int argc, char **argv)
 {
     apcmdplue_print_command(argc, argv);
-    if (strcmp(argv[PARA_ID_1], "1") == 0 )
-    {
+    if (strcmp(argv[PARA_ID_1], "1") == 0 ) {
         app_ble_config_scanning();
-    }
-    else if (strcmp(argv[PARA_ID_1], "0") == 0)
-    {
-        app_ble_stop_scanning(0);
+    } else if (strcmp(argv[PARA_ID_1], "0") == 0) {
+        app_ble_stop_scanning();
     }
     return CONFIG_OK;
 }
@@ -207,13 +183,12 @@ int atcmdplus_scan(int argc, char **argv)
 int atcmdplus_conn(int argc, char **argv)
 {
     apcmdplue_print_command(argc, argv);
-    if (argc != 2)
-    {
+    if (argc != 2) {
         return PARAM_RANGE;
     }
 
     uint8_t targetAddr[SONATA_GAP_BD_ADDR_LEN] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
-    macChar2Value((uint8_t*)argv[PARA_ID_1], targetAddr, false);
+    macChar2Value((uint8_t *)argv[PARA_ID_1], targetAddr, false);
 
     app_ble_set_target_address(targetAddr);
     app_ble_config_initiating();
@@ -258,7 +233,7 @@ int atcmdplus_lesend(int argc, char **argv)
 
     uint8_t conidx = char2HexValue(argv[PARA_ID_1][0]);
     uint16_t dataLen = char2HexValue(argv[PARA_ID_2][0]); //Todo only support 1 char now.
-    uint8_t *data = (uint8_t*)argv[PARA_ID_3];
+    uint8_t *data = (uint8_t *)argv[PARA_ID_3];
     app_ble_master_write_data(conidx, dataLen, data);
     return CONFIG_OK;
 }
@@ -268,18 +243,14 @@ int atcmdplus_ntf(int argc, char **argv)
 {
     apcmdplue_print_command(argc, argv);
     app_uuids *uuids = app_ble_get_uuids();
-    if (uuids->service == 0)
-    {
+    if (uuids->service == 0) {
         return PARAM_RANGE;
     }
     uint8_t idValue = *argv[PARA_ID_1] - '0';
 
-    if (strcmp(argv[PARA_ID_2], "1") == 0 )
-    {
+    if (strcmp(argv[PARA_ID_2], "1") == 0 ) {
         app_ble_master_turn_ntf(idValue, true);
-    }
-    else if (strcmp(argv[PARA_ID_2], "0") == 0)
-    {
+    } else if (strcmp(argv[PARA_ID_2], "0") == 0) {
         app_ble_master_turn_ntf(idValue, false);
     }
     return CONFIG_OK;
@@ -300,10 +271,8 @@ int atcmdplus_chinfo(int argc, char **argv)
     apcmdplue_print_command(argc, argv);
     actives *act = app_get_active();
     uint8_t out[50] = {0};
-    for (int i = 0; i < APP_ACTIVE_MAX; ++i)
-    {
-        if (act[i].runing == true)
-        {
+    for (int i = 0; i < APP_ACTIVE_MAX; ++i) {
+        if (act[i].runing == true) {
             uint8_t offset = 0;
             offset = macValue2Char(act[i].peer, &out[0], true);
             out[offset] = ',';
@@ -314,8 +283,7 @@ int atcmdplus_chinfo(int argc, char **argv)
             offset += 1;
             out[offset] = '3';
             offset += 1;
-            for (int i = 0; i < offset; ++i)
-            {
+            for (int i = 0; i < offset; ++i) {
                 printf("%c", out[i]);
             }
             printf("\r\n");
@@ -332,7 +300,7 @@ int atcmdplus_test(int argc, char **argv)
 }
 
 #if (LOSCFG_USE_SHELL == 1)
-#include "shell.h" 
+#include "shell.h"
 #include "shcmd.h"
 #include "target_config.h"
 #endif
@@ -353,9 +321,8 @@ void atcmdplus_ble_register(void)
     osCmdReg(CMD_TYPE_STD, "le_lesend", 0, (CMD_CBK_FUNC)atcmdplus_lesend);
     osCmdReg(CMD_TYPE_STD, "le_ntf", 0, (CMD_CBK_FUNC)atcmdplus_ntf);
     osCmdReg(CMD_TYPE_STD, "le_ledisc", 0, (CMD_CBK_FUNC)atcmdplus_ledisc);
-    osCmdReg(CMD_TYPE_STD, "le_chinfo", 0, (CMD_CBK_FUNC)atcmdplus_chinfo);   
+    osCmdReg(CMD_TYPE_STD, "le_chinfo", 0, (CMD_CBK_FUNC)atcmdplus_chinfo);
 #endif
 }
 
 
- 

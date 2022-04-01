@@ -33,7 +33,6 @@
  * INCLUDE FILES
  ****************************************************************************************
  */
-#include "sonata_config.h"
 ///@cond
 #if BLE_HOST_PRESENT
 ///@endcond
@@ -59,8 +58,7 @@
  */
 
 /// Attribute Table Indexes
-typedef enum
-{
+typedef enum {
     /// Manufacturer Name
     SONATA_DIS_MANUFACTURER_NAME_CHAR,
     /// Model Number
@@ -81,7 +79,7 @@ typedef enum
     SONATA_DIS_PNP_ID_CHAR,
 
     SONATA_DIS_CHAR_MAX,
-}sonata_dis_info;
+} sonata_dis_info;
 
 /*
  * Type Definition
@@ -91,11 +89,10 @@ typedef enum
 /*!
  * @brief Callback for diss value
  */
-typedef struct prf_diss_callback
-{
+typedef struct prf_diss_callback {
     uint16_t (*prf_diss_value_req)(sonata_dis_info info_id);
 
-}prf_diss_callback_t;
+} prf_diss_callback_t;
 
 /*
  * FUNCTION DECLARATIONS
@@ -106,15 +103,15 @@ typedef struct prf_diss_callback
  */
 void sonata_prf_diss_init(void);
 
- /*!
- * @brief Send value confirm message
- * @param task_id task_id was get in SONATA_GAP_PROFILE_ADDED_IND event
- * @param value @see sonata_dis_info
- * @param data_len data length
- * @param data data
- * @return API_SUCCESS
- */
- int sonata_prf_diss_send_value_cfm_cmd(sonata_dis_info value, uint8_t data_len, uint8_t *data);
+/*!
+* @brief Send value confirm message
+* @param task_id task_id was get in SONATA_GAP_PROFILE_ADDED_IND event
+* @param value @see sonata_dis_info
+* @param data_len data length
+* @param data data
+* @return API_SUCCESS
+*/
+int sonata_prf_diss_send_value_cfm_cmd(sonata_dis_info value, uint8_t data_len, uint8_t *data);
 
 /*!
  * @brief add diss profile

@@ -68,13 +68,13 @@
  */
 
 /// Not Ready
-#define MESH_ERROR_NOT_READY       -2
+#define MESH_ERROR_NOT_READY       (-2)
 /// Invalid Parameter
-#define MESH_ERROR_INVALID_PARAM   -1
+#define MESH_ERROR_INVALID_PARAM   (-1)
 /// No Error
-#define MESH_ERROR_NO_ERROR         0
+#define MESH_ERROR_NO_ERROR         (0)
 /// No Space
-#define MESH_ERROR_NO_SPACE         1
+#define MESH_ERROR_NO_SPACE         (1)
 /**@} ERROR*/
 
 /**
@@ -194,8 +194,7 @@
  */
 
 /// Algorithms field values
-enum mesh_prov_algo
-{
+enum mesh_prov_algo {
     /// Bit[0]: FIPS P-256 Elliptic Curve
     MESH_PROV_ALGO_FIPS_P256_ELLIPTIC_CURVE = 0x0001,
     ///< Bit[1-15]: Reserved for Future Use
@@ -204,8 +203,7 @@ enum mesh_prov_algo
 
 
 /// Public Key Type field values
-enum mesh_prov_pub_key_val
-{
+enum mesh_prov_pub_key_val {
     /// No OOB Public Key is used
     MESH_PROV_PUB_KEY_OOB_NOT_USED = 0x00,
     /// OOB Public Key is used
@@ -215,8 +213,7 @@ enum mesh_prov_pub_key_val
 };
 
 /// Authentication Method field values
-enum mesh_prov_auth_method
-{
+enum mesh_prov_auth_method {
     /// No OOB authentication is used
     MESH_PROV_AUTH_NO_OOB,
     /// Static OOB authentication is used
@@ -229,16 +226,14 @@ enum mesh_prov_auth_method
 
 
 /// Static OOB Type field values
-enum mesh_prov_static_oob
-{
+enum mesh_prov_static_oob {
     /// Bit[0]: Static OOB information available
     MESH_PROV_STATIC_OOB_AVAILABLE = 0x01,
     ///< Bit[1-7]: Prohibited
 };
 
 /// Output OOB Action field values
-enum mesh_prov_out_oob
-{
+enum mesh_prov_out_oob {
     /// Bit[0]: Blink
     MESH_PROV_OUT_OOB_BLINK          = 0x0001,
     /// Bit[1]: Beep
@@ -254,8 +249,7 @@ enum mesh_prov_out_oob
 
 
 /// Input OOB Action field values
-enum mesh_prov_in_oob
-{
+enum mesh_prov_in_oob {
     /// Bit[0]: Push
     MESH_PROV_IN_OOB_PUSH             = 0x0001,
     /// Bit[1]: Twist
@@ -271,13 +265,12 @@ enum mesh_prov_in_oob
 /**
 * @brief enum Role bit meaning
 */
-typedef enum
-{
+typedef enum {
     /// Device Role
     MESH_PROV_ROLE_DEVICE       = 0x00,
     /// Provisioner Role
     MESH_PROV_ROLE_PROVISIONER  = 0x01,
-}mesh_prov_role_t;
+} mesh_prov_role_t;
 
 /**@}*/
 
@@ -290,8 +283,7 @@ typedef enum
 /**
 * @brief enum Mesh Supported Features
 */
-enum mesh_user_api_feat
-{
+enum mesh_user_api_feat {
     /// Relay Node
     MESH_FEAT_RELAY_NODE_SUP       = (1 << 0),
     /// Proxy Node
@@ -305,123 +297,119 @@ enum mesh_user_api_feat
 /**
 * @brief enum Mesh param set type
 */
-typedef enum
-{
-  /// Role
-  MESH_ROLE,
-  /// Addr
-  MESH_SYSTEM_ADDR,
-  /// Addr Type
-  MESH_ADDR_TYPE,
-  /// Provision Param for UnProv Device
-  MESH_PROV_PARAM,
-  /// Node Feature
-  MESH_FEATURE_SUPPORT,
-  /// Relay Transmit
-  MESH_RELAY_TRANSMIT,
-  /// Network Transmit
-  MESH_NETWORK_TRANSMIT,
-  /// Default TTL
-  MESH_DEFAULT_TTL,
-  /// System timing
-  MESH_RUNNING_TIME,
-  /// Friend Params
-  MESH_FRIEND_PARAM,
-  /// Data Save Interval
-  MESH_DATA_SAVE_INTERVAL,
-   /// NetKey Used By Provisioner
-  MESH_PROVISIONER_NETKEY,
-   /// AppKey Used By Provisioner
-  MESH_PROVISIONER_APPKEY,
-   /// Addr Pool Used By Provisioner
-  MESH_PROVISIONER_ADDR_POOL,
-  /// mesh model replay number
-  MESH_NUMBER_REPLAY,
-}mesh_param_opr_types_t;
+typedef enum {
+    /// Role
+    MESH_ROLE,
+    /// Addr
+    MESH_SYSTEM_ADDR,
+    /// Addr Type
+    MESH_ADDR_TYPE,
+    /// Provision Param for UnProv Device
+    MESH_PROV_PARAM,
+    /// Node Feature
+    MESH_FEATURE_SUPPORT,
+    /// Relay Transmit
+    MESH_RELAY_TRANSMIT,
+    /// Network Transmit
+    MESH_NETWORK_TRANSMIT,
+    /// Default TTL
+    MESH_DEFAULT_TTL,
+    /// System timing
+    MESH_RUNNING_TIME,
+    /// Friend Params
+    MESH_FRIEND_PARAM,
+    /// Data Save Interval
+    MESH_DATA_SAVE_INTERVAL,
+    /// NetKey Used By Provisioner
+    MESH_PROVISIONER_NETKEY,
+    /// AppKey Used By Provisioner
+    MESH_PROVISIONER_APPKEY,
+    /// Addr Pool Used By Provisioner
+    MESH_PROVISIONER_ADDR_POOL,
+    /// mesh model replay number
+    MESH_NUMBER_REPLAY,
+} mesh_param_opr_types_t;
 
 /**
 * @brief enum Mesh addr type
 */
-typedef enum
-{
-  /// Public Addr
-  MESH_PUBLIC_ADDR,
-  /// Private Static Addr
-  MESH_PRIVATE_STATIC_ADDR,
-  /// Resolvable Private Random Addr
-  MESH_RSLV_ADDR,
-  /// Non-Resolvable Private Random Addr
-  MESH_NON_RSLV_ADDR,
-}mesh_addr_types_t;
+typedef enum {
+    /// Public Addr
+    MESH_PUBLIC_ADDR,
+    /// Private Static Addr
+    MESH_PRIVATE_STATIC_ADDR,
+    /// Resolvable Private Random Addr
+    MESH_RSLV_ADDR,
+    /// Non-Resolvable Private Random Addr
+    MESH_NON_RSLV_ADDR,
+} mesh_addr_types_t;
 
 /**
 * @brief enum  sys cmd type
 */
-typedef enum
-{
-  /// Reboot Sys
-  MESH_SYS_REBOOT,
-  /// Erase Data And Reboot, Node Will Be Unprovisioned
-  MESH_SYS_RESET,
-}mesh_sys_cmd_t;
+typedef enum {
+    /// Reboot Sys
+    MESH_SYS_REBOOT,
+    /// Erase Data And Reboot, Node Will Be Unprovisioned
+    MESH_SYS_RESET,
+} mesh_sys_cmd_t;
 
 
 /**
 * @brief enum core evt indicate type
 */
-typedef enum
-{
-  /// Request Public Key OOB Info
-  MESH_PUBLIC_KEY_REQUEST,
-  /// Request Auth Data OOB Info
-  MESH_AUTH_OOB_IND,
- /// Indicate Attation Time
-  MESH_ATTATION_IND,
-  /// Indicate Current Provision State
-  MESH_PROVISION_STATE,
-  /// Indicate MODEL And APPKEY Binding Info
-  MESH_APPKEY_BINDING,
-  /// Indicate APPKEY Update
-  MESH_APPKEY_UPDATE,
-  /// Indicate MODEL And APPKEY Binded
-  MESH_APPKEY_BINDED,
-  /// Indicate MODEL Model Has Subscribed To A Group Addr
-  MESH_GRPADDR_SUBSED,
-  /// Indicate Local NetKey Update
-  MESH_NETKEY_UPDATE,
-  /// Indicate Local NetKey Set Compelete
-  MESH_NETKEY_SET_CMP,
-  /// Indicate Local AppKey Set Compelete
-  MESH_APPKEY_SET_CMP,
-  /// Indicate Local Model & App Compelete
-  MESH_MODEL_APP_BIND_CMP,
-  /// Indicate Local Publish Set Compelete
-  MESH_PUB_SET_CMP,
-  /// Indicate Local Addr Set Compelete
-  MESH_ADDR_SET_CMP,
+typedef enum {
+    /// Request Public Key OOB Info
+    MESH_PUBLIC_KEY_REQUEST,
+    /// Request Auth Data OOB Info
+    MESH_AUTH_OOB_IND,
+    /// Indicate Attation Time
+    MESH_ATTATION_IND,
+    /// Indicate Current Provision State
+    MESH_PROVISION_STATE,
+    /// Indicate MODEL And APPKEY Binding Info
+    MESH_APPKEY_BINDING,
+    /// Indicate APPKEY Update
+    MESH_APPKEY_UPDATE,
+    /// Indicate MODEL And APPKEY Binded
+    MESH_APPKEY_BINDED,
+    /// Indicate MODEL Model Has Subscribed To A Group Addr
+    MESH_GRPADDR_SUBSED,
+    /// Indicate Local NetKey Update
+    MESH_NETKEY_UPDATE,
+    /// Indicate Local NetKey Set Compelete
+    MESH_NETKEY_SET_CMP,
+    /// Indicate Local AppKey Set Compelete
+    MESH_APPKEY_SET_CMP,
+    /// Indicate Local Model & App Compelete
+    MESH_MODEL_APP_BIND_CMP,
+    /// Indicate Local Publish Set Compelete
+    MESH_PUB_SET_CMP,
+    /// Indicate Local Addr Set Compelete
+    MESH_ADDR_SET_CMP,
     /// Indicate Self Addr Alloced By Provisioner
-  MESH_SELF_ADDR_IND,
-  ///Indicate run time
-  MESH_GET_RUN_TIME,
+    MESH_SELF_ADDR_IND,
+    ///Indicate run time
+    MESH_GET_RUN_TIME,
     /// Indicate Publish Addr Update
-  MESH_PUB_UPDATE,
+    MESH_PUB_UPDATE,
     /// Indicate Sub Addrs Update
-  MESH_SUBS_UPDATE,
+    MESH_SUBS_UPDATE,
     /// Indicate Self Dev Key
-  MESH_SELF_DEV_KEY_IND,
-      /// Indicate Self Dev Key
-  MESH_SELF_IV_SEQ_IND,
-   /// Indicate Friend Offer
-  MESH_FRIEND_OFFER_IND,
-   /// Indicate lowpower Node Status
-  MESH_LPN_STATUS_IND,
-   /// Indicate  Lowpower Start CmdCompelete
-  MESH_LOWPOWER_START_CMP,
-  /// Indicate  Lowpower Stop Cmd Compelete
-  MESH_LOWPOWER_STOP_CMP,
-      /// Indicate  Lowpower Select Friend Cmd Compelete
-  MESH_LOWPOWER_SELECT_FRIEND_CMP,
-}mesh_core_evt_ind_t;
+    MESH_SELF_DEV_KEY_IND,
+    /// Indicate Self Dev Key
+    MESH_SELF_IV_SEQ_IND,
+    /// Indicate Friend Offer
+    MESH_FRIEND_OFFER_IND,
+    /// Indicate lowpower Node Status
+    MESH_LPN_STATUS_IND,
+    /// Indicate  Lowpower Start CmdCompelete
+    MESH_LOWPOWER_START_CMP,
+    /// Indicate  Lowpower Stop Cmd Compelete
+    MESH_LOWPOWER_STOP_CMP,
+    /// Indicate  Lowpower Select Friend Cmd Compelete
+    MESH_LOWPOWER_SELECT_FRIEND_CMP,
+} mesh_core_evt_ind_t;
 /** @} */
 
 /**
@@ -430,8 +418,7 @@ typedef enum
  */
 
 /// State of the provisioning
-enum mesh_prov_state
-{
+enum mesh_prov_state {
     /// Provisioning started - procedure started by a provisioner
     MESH_PROV_STARTED,
     /// Provisioning succeed
@@ -444,123 +431,119 @@ enum mesh_prov_state
 /**
 * @brief enum core provisioner evt indicate type
 */
-typedef enum
-{
-  /// Indicate Provisioner found a device
-  MESH_PROV_DEVICE_IND,
-  /// Indicate Peer Capability
-  MESH_PROVISIONER_PROV_CAP_IND,
-  /// Request Provision Auth Data
-  MESH_PROVISIONER_PROV_AUTH_REQ,
-  /// Request Provision Auth Data
-  MESH_PROVISIONER_PROVISIONING_DATA_REQ,
+typedef enum {
+    /// Indicate Provisioner found a device
+    MESH_PROV_DEVICE_IND,
+    /// Indicate Peer Capability
+    MESH_PROVISIONER_PROV_CAP_IND,
+    /// Request Provision Auth Data
+    MESH_PROVISIONER_PROV_AUTH_REQ,
+    /// Request Provision Auth Data
+    MESH_PROVISIONER_PROVISIONING_DATA_REQ,
     /// Indicate Provisioning Result
-  MESH_PROVISIONER_STATE_IND,
+    MESH_PROVISIONER_STATE_IND,
     /// Indicate  Appkey Add Result
-  MESH_PROVISIONER_APPKEY_ADD_STATUS,
+    MESH_PROVISIONER_APPKEY_ADD_STATUS,
     /// Indicate Model App Bind Result
-  MESH_PROVISIONER_MODEL_APP_IND,
+    MESH_PROVISIONER_MODEL_APP_IND,
     /// Indicate Composition Data
-  MESH_PROVISIONER_COMPOSITION_DATA,
-  /// Indicate Set Sub Result
-  MESH_PROV_SET_SUBS_IND,
-  /// Indicate Set Remote Publish Result
-  MESH_PROV_SET_PUBLISH_IND,
+    MESH_PROVISIONER_COMPOSITION_DATA,
+    /// Indicate Set Sub Result
+    MESH_PROV_SET_SUBS_IND,
+    /// Indicate Set Remote Publish Result
+    MESH_PROV_SET_PUBLISH_IND,
     /// Indicate Set Local Publish Result
-  MESH_PROV_SET_LOCAL_PUBLISH_IND,
+    MESH_PROV_SET_LOCAL_PUBLISH_IND,
     /// Indicate Add Node Result
-  MESH_PROV_ADD_LOCAL_NODE_IND,
+    MESH_PROV_ADD_LOCAL_NODE_IND,
     /// Indicate Delete Local Node Result
-  MESH_PROV_DELETE_LOCAL_NODE_IND,
+    MESH_PROV_DELETE_LOCAL_NODE_IND,
     /// Indicate Remote NetTransmit Status
-  MESH_PROV_NETTRANSMIT_IND,
-}mesh_core_provisioner_evt_ind_t;
+    MESH_PROV_NETTRANSMIT_IND,
+} mesh_core_provisioner_evt_ind_t;
 
 
 /**
 * @brief enum  app notify sys to compelete evt type
 */
-typedef enum
-{
- /// App Input Public Key OOB Info
-  MESH_PUBLIC_KEY_SET,
- /// App Input Auth Data OOB Info
-  MESH_AUTH_DATA_SET,
- /// Setting Local Netkey
-  MESH_SET_LOCAL_NETKEY,
- /// Setting Local Appkey
-  MESH_SET_LOCAL_APPKEY,
- /// Bind Local Model & AppKey
-  MESH_SET_LOCAL_MODEL_APP_BIND,
- /// Setting Local Publish Param
-  MESH_SET_LOCAL_PUBLISH_PARAM,
-  /// Setting Local Sub Param
- MESH_SET_LOCAL_SUBS_PARAM,
-   /// Setting Local dev key
- MESH_SET_LOCAL_DEV_KEY,
-   /// Setting Local primary addr
- MESH_SET_LOCAL_PRIM_ADDR,
-   /// Setting Local iv index and seq no
- MESH_SET_LOCAL_IV_SEQ,
-   /// App Start Node LPN, Stack Will Send Friend Request
- MESH_LOWPOWER_NODE_START,
-     /// App Stop Node LPN, Clean Up Friendship
- MESH_LOWPOWER_NODE_STOP,
-     /// App Select Friend
- MESH_LOWPOWER_SELECT_FRIEND,
-     /// App Set Friend State
- MESH_SET_LOCAL_FRIEND_STATE,
-}mesh_core_evt_cb_t;
+typedef enum {
+    /// App Input Public Key OOB Info
+    MESH_PUBLIC_KEY_SET,
+    /// App Input Auth Data OOB Info
+    MESH_AUTH_DATA_SET,
+    /// Setting Local Netkey
+    MESH_SET_LOCAL_NETKEY,
+    /// Setting Local Appkey
+    MESH_SET_LOCAL_APPKEY,
+    /// Bind Local Model & AppKey
+    MESH_SET_LOCAL_MODEL_APP_BIND,
+    /// Setting Local Publish Param
+    MESH_SET_LOCAL_PUBLISH_PARAM,
+    /// Setting Local Sub Param
+    MESH_SET_LOCAL_SUBS_PARAM,
+    /// Setting Local dev key
+    MESH_SET_LOCAL_DEV_KEY,
+    /// Setting Local primary addr
+    MESH_SET_LOCAL_PRIM_ADDR,
+    /// Setting Local iv index and seq no
+    MESH_SET_LOCAL_IV_SEQ,
+    /// App Start Node LPN, Stack Will Send Friend Request
+    MESH_LOWPOWER_NODE_START,
+    /// App Stop Node LPN, Clean Up Friendship
+    MESH_LOWPOWER_NODE_STOP,
+    /// App Select Friend
+    MESH_LOWPOWER_SELECT_FRIEND,
+    /// App Set Friend State
+    MESH_SET_LOCAL_FRIEND_STATE,
+} mesh_core_evt_cb_t;
 
 
 /**
 * @brief enum  app notify sys to compelete provisoner evt type
 */
-typedef enum
-{
-   /// App Confrim To Provision A Device
-  MESH_PROV_PROVISION_DEVICE,
-  /// Confirm selected Capability
-  MESH_PROVISIONER_PROV_CAP_CFM,
-  /// Confirm Provision Auth Data
-  MESH_PROVISIONER_PROV_AUTH_CFM,
-   /// Request Provision Auth Data
-  MESH_PROVISIONER_PROVISIONING_DATA_CFM,
-  /// Provisioner To Get Composition Data
-  MESH_PROV_GET_COMPOSITION_DATA,
-  /// Provisioner Add APPKEY To Node
-  MESH_PROV_ADD_APPKEY,
-  /// Provisioner Bind Mpdel And Appkey
-  MESH_PROV_MODEL_APP_BIND,
-   /// Provisioner Bind Mpdel And Appkey
-  MESH_PROV_MODEL_APP_UNBIND,
-  /// Provisioner Setting Sub Param
-  MESH_PROV_SET_SUBS_PARAM,
-  /// Provisioner Add Provisioned Node
-  MESH_PROV_ADD_LOCAL_NODE,
-  /// Provisioner Delete Provisioned Node
-  MESH_PROV_DEL_LOCAL_NODE,
-   /// Provisioner Set Local Addr
-  MESH_PROV_SET_LOCAL_ADDR,
-   /// Provisioner Setting Sub Param
-  MESH_PROV_SET_PUB_PARAM,
-   /// Provisioner Setting Net Transmit Param
-  MESH_PROV_SET_NETTRANSMIT_PARAM,
-}mesh_core_provisioner_evt_cb_t;
+typedef enum {
+    /// App Confrim To Provision A Device
+    MESH_PROV_PROVISION_DEVICE,
+    /// Confirm selected Capability
+    MESH_PROVISIONER_PROV_CAP_CFM,
+    /// Confirm Provision Auth Data
+    MESH_PROVISIONER_PROV_AUTH_CFM,
+    /// Request Provision Auth Data
+    MESH_PROVISIONER_PROVISIONING_DATA_CFM,
+    /// Provisioner To Get Composition Data
+    MESH_PROV_GET_COMPOSITION_DATA,
+    /// Provisioner Add APPKEY To Node
+    MESH_PROV_ADD_APPKEY,
+    /// Provisioner Bind Mpdel And Appkey
+    MESH_PROV_MODEL_APP_BIND,
+    /// Provisioner Bind Mpdel And Appkey
+    MESH_PROV_MODEL_APP_UNBIND,
+    /// Provisioner Setting Sub Param
+    MESH_PROV_SET_SUBS_PARAM,
+    /// Provisioner Add Provisioned Node
+    MESH_PROV_ADD_LOCAL_NODE,
+    /// Provisioner Delete Provisioned Node
+    MESH_PROV_DEL_LOCAL_NODE,
+    /// Provisioner Set Local Addr
+    MESH_PROV_SET_LOCAL_ADDR,
+    /// Provisioner Setting Sub Param
+    MESH_PROV_SET_PUB_PARAM,
+    /// Provisioner Setting Net Transmit Param
+    MESH_PROV_SET_NETTRANSMIT_PARAM,
+} mesh_core_provisioner_evt_cb_t;
 
 
 /**
 * @brief enum  Proxy connectable advertising control values
 */
-typedef enum mesh_proxy_broadcast_ctl
-{
+typedef enum mesh_proxy_broadcast_ctl {
     /// Stop connectable advertising
     MESH_PROXY_ADV_STOP = 0,
     /// Start connectable advertising with Node Identity (duration = 60s)
     MESH_PROXY_ADV_START_NODE_ID,
     /// Start connectable advertising with Network ID (duration = 60s)
     MESH_PROXY_ADV_START_NET,
-}mesh_proxy_broadcast_ctl_t;
+} mesh_proxy_broadcast_ctl_t;
 
 /**@}*/
 
@@ -575,8 +558,7 @@ typedef enum mesh_proxy_broadcast_ctl
  */
 
 /// Positions in Generic OnOff Set/Set Unacknowledged message
-enum mesh_model_gen_oo_set_pos
-{
+enum mesh_model_gen_oo_set_pos {
     /// OnOff state value
     MESH_MODEL_GEN_OO_SET_OO_POS = 0,
     /// TID value
@@ -588,8 +570,7 @@ enum mesh_model_gen_oo_set_pos
 };
 
 /// Positions in Generic OnOff Status message
-enum mesh_model_gen_oo_status_pos
-{
+enum mesh_model_gen_oo_status_pos {
     /// Present OnOff state value
     MESH_MODEL_GEN_OO_STATUS_OO_POS = 0,
     /// Target OnOff state value
@@ -599,8 +580,7 @@ enum mesh_model_gen_oo_status_pos
 };
 
 /// Positions in Generic Level Set/Set Unacknowledged message
-enum mesh_model_gen_lvl_set_pos
-{
+enum mesh_model_gen_lvl_set_pos {
     /// Level value
     MESH_MODEL_GEN_LVL_SET_LVL_POS = 0,
     /// TID value
@@ -614,8 +594,7 @@ enum mesh_model_gen_lvl_set_pos
 /**
 * @brief enum  model state
 */
-typedef enum
-{
+typedef enum {
     /// Generic OnOff state
     MESH_STATE_GEN_ONOFF = 0,
     /// Generic Level state
@@ -696,17 +675,16 @@ typedef enum
     MESH_STATE_LIGHT_XYL_XY_DFLT,
     /// Light xyL x and y Range
     MESH_STATE_LIGHT_XYL_XY_RANGE
-}mesh_state_type_t;
+} mesh_state_type_t;
 
 /// Mesh Scan Opr Module Define,
-typedef enum
-{
-    USER_APP_INVALID_MODULE_ID ,
-    USER_APP_MODULE_ID                   ,
-    USER_WF_MODULE_ID                    ,
+typedef enum {
+    USER_APP_INVALID_MODULE_ID,
+    USER_APP_MODULE_ID,
+    USER_WF_MODULE_ID,
     USER_AT_MODULE_ID,
     USER_MAX_MODULE_ID
-}mesh_scan_opr_module_id_t;
+} mesh_scan_opr_module_id_t;
 
 
 /*
@@ -729,11 +707,10 @@ typedef int32_t STATUS     ;
  */
 
 /// role struct
-typedef struct
-{
+typedef struct {
     /// Role
     uint8_t role;
-}mesh_role_t;
+} mesh_role_t;
 
 /**@} PROFILE*/
 
@@ -745,12 +722,11 @@ typedef struct
 /**
 * @brief   provision param
 */
-typedef struct
-{
+typedef struct {
     /// Device UUID
     uint8_t uuid[MESH_UUID_LEN];
     /// URI Hash
-    uint8_t * p_uri;
+    uint8_t *p_uri;
     /// Static OOB information available
     uint8_t  static_oob;
     /// Static OOB information len
@@ -775,7 +751,7 @@ typedef struct
     uint16_t vid;
     /// Localization descriptor
     uint16_t loc;
-}mesh_prov_param_t;
+} mesh_prov_param_t;
 /**@}*/
 
 /**
@@ -786,73 +762,66 @@ typedef struct
 /**
 * @brief   friend param
 */
-typedef struct
-{
+typedef struct {
     /// Number of addresses that can be stored for Message Replay Protection
     uint16_t nb_addr_replay;
     /// Receive window in milliseconds when Friend feature is supported
     uint8_t frd_rx_window_ms;
     /// Queue size when Friend feature is supported
     uint8_t frd_queue_size;
-}mesh_friend_param_t;
+} mesh_friend_param_t;
 
 /**
 * @brief   mesh support feature such as relay/proxy/friend
 */
-typedef struct
-{
-  /// Mask of supported features (@see enum mesh_user_api_feat)
-  uint32_t feature;  //m_user_api_feat
-}mesh_feature_support_param_t;
+typedef struct {
+    /// Mask of supported features (@see enum mesh_user_api_feat)
+    uint32_t feature;  //m_user_api_feat
+} mesh_feature_support_param_t;
 
 /**
 * @brief   mesh adv interval and count
 */
-typedef struct
-{
-  /// Advertising Count
-  uint8_t count;
-  /// Advertising interval in ms
-  uint8_t interval;
-}mesh_transmit_param_t;
+typedef struct {
+    /// Advertising Count
+    uint8_t count;
+    /// Advertising interval in ms
+    uint8_t interval;
+} mesh_transmit_param_t;
 
 /**
 * @brief   mesh default ttl
 */
-typedef struct
-{
-  /// TTL
-  uint8_t ttl;
-}mesh_default_ttl_param_t;
+typedef struct {
+    /// TTL
+    uint8_t ttl;
+} mesh_default_ttl_param_t;
 
 /**
 * @brief   current time of unit ms from  power off
 */
-typedef struct
-{
-  /// Current clock value in milliseconds
-  uint32_t time_ms;
-  /// Number of time the clock has wrapped since up time
-  uint16_t wrap;
-}mesh_running_time_t;
+typedef struct {
+    /// Current clock value in milliseconds
+    uint32_t time_ms;
+    /// Number of time the clock has wrapped since up time
+    uint16_t wrap;
+} mesh_running_time_t;
 
 /**
 * @brief   interval of saving data
 */
-typedef struct
-{
-   /// Data Save interval
-  uint32_t time_secs;
-}mesh_data_save_interval_t;
+typedef struct {
+    /// Data Save interval
+    uint32_t time_secs;
+} mesh_data_save_interval_t;
 
 /**
 * @brief   addr type struct
 */
-typedef struct
-{
+typedef struct {
     /// Addr
     mesh_addr_types_t type ;
-}mesh_system_addr_type_t;
+} mesh_system_addr_type_t;
 /** @} */
 
 /**
@@ -863,22 +832,20 @@ typedef struct
 /**
 * @brief   provisioner netkey set  struct
 */
-typedef struct
-{
+typedef struct {
     /// opr
     bool addOrDel;
     /// key
     uint8_t netkey[MESH_KEYS_LEN];
     /// key_index
     uint16_t key_index;
-}mesh_provisioner_netkey_t;
+} mesh_provisioner_netkey_t;
 
 
 /**
 * @brief   provisioner appkey struct
 */
-typedef struct
-{
+typedef struct {
     /// opr
     bool addOrDel;
     /// key
@@ -887,28 +854,26 @@ typedef struct
     uint16_t key_index;
     /// netkey_index
     uint16_t netkey_index;
-}mesh_provisioner_appkey_t;
+} mesh_provisioner_appkey_t;
 
 /**
 * @brief   provisioner addr pool struct
 */
-typedef struct
-{
+typedef struct {
     ///provisioner addr pool start
     uint16_t addr_start ;
     ///provisioner addr pool end
     uint16_t addr_end   ;
     ///used by provisioner to communicate to unprov device
     uint16_t addr_self  ;
-}mesh_provisioner_addr_pool_t;
+} mesh_provisioner_addr_pool_t;
 
 
 
 /**
 * @brief   mesh set params union structure
 */
-typedef union
-{
+typedef union {
     ///Role struct
     mesh_role_t mesh_role;
     ///provision param
@@ -937,7 +902,7 @@ typedef union
     mesh_provisioner_addr_pool_t addr_pool;
     ///mesh model repaly number
     uint8_t replay_number;
-}mesh_set_params_t;
+} mesh_set_params_t;
 /**@}*/
 
 /**
@@ -948,20 +913,18 @@ typedef union
 /**
 * @brief   addr struce
 */
-typedef struct
-{
+typedef struct {
     /// Addr
     uint8_t bd_addr[MESH_ADDR_LEN];
-}mesh_system_addr_t;
+} mesh_system_addr_t;
 
 
 /**
 * @brief   mesh get params union structure
 */
-typedef union
-{
+typedef union {
     mesh_system_addr_t addr;
-}mesh_get_params_t;
+} mesh_get_params_t;
 
 /**@}*/
 
@@ -973,8 +936,7 @@ typedef union
 /**
 * @brief   Inform reception of a specific mesh message
 */
-typedef struct
-{
+typedef struct {
     /// Model ID
     uint32_t model_id;
     ///Element index of the message
@@ -1002,8 +964,7 @@ typedef  void (* m_vendor_model_msg_rx_t)(mesh_api_model_msg_rx_t *pkt);
 /**
 * @brief   server send msg params
 */
-typedef struct
-{
+typedef struct {
     /// Index of element the model belongs to (zero based)
     uint8_t element;
     /// Application Key Local identifier (Required for a response)
@@ -1025,56 +986,50 @@ typedef struct
 } mesh_model_msg_param_t;
 
 /// Mesh Model Message Sent Callback
-typedef  void (* model_msg_sent_cb)(mesh_model_msg_param_t * p_param,STATUS status) ;
+typedef  void (* model_msg_sent_cb)(mesh_model_msg_param_t *p_param, STATUS status) ;
 
 /// OnOff state value set structure
-typedef struct
-{
+typedef struct {
     /// OnOff state value
     uint8_t onoff;
-}generic_onoff_set_param_t;
+} generic_onoff_set_param_t;
 
 /// Level state value set structure
-typedef struct
-{
+typedef struct {
     /// Level state value
     uint32_t value;
-}generic_level_set_param_t;
+} generic_level_set_param_t;
 
 /// Lightness state value set structure
-typedef struct
-{
+typedef struct {
     /// Lightness state value
     uint16_t lightness;
-}generic_lightness_set_param_t;
+} generic_lightness_set_param_t;
 
 /**
  * @brief   client send msg union struct
  */
-typedef union
-{
+typedef union {
     ///OnOff state value set structure
     generic_onoff_set_param_t onoff;
     ///Level state value set structure
     generic_level_set_param_t level;
     ///Lightness state value set structure
     generic_lightness_set_param_t lightness;
-}generic_client_params_t;
+} generic_client_params_t;
 
 /**
 * @brief enum client msg send type
 */
-typedef enum
-{
+typedef enum {
     /// Generic OnOff Set
     MESH_MSG_GEN_OO_SET,
     /// Generic OnOff Set Unacknowledged
     MESH_MSG_GEN_OO_SET_UNACK,
-}mesh_client_msg_t;
+} mesh_client_msg_t;
 
 ///mesh client msg param structure
-typedef struct
-{
+typedef struct {
     /// Msg Type (@see mesh_client_msg_t)
     mesh_client_msg_t msg_type;
     /// Transition time in milliseconds
@@ -1094,7 +1049,7 @@ typedef struct
 } mesh_client_msg_param_t;
 
 ///Client Message Sent Callback
-typedef  STATUS (* client_msg_sent_cb)(mesh_client_msg_param_t * p_param ,STATUS status) ;
+typedef  STATUS (* client_msg_sent_cb)(mesh_client_msg_param_t *p_param, STATUS status) ;
 
 /**@}*/
 
@@ -1104,32 +1059,28 @@ typedef  STATUS (* client_msg_sent_cb)(mesh_client_msg_param_t * p_param ,STATUS
 */
 
 ///Authentication data param structure
-typedef struct
-{
+typedef struct {
     /// Authentication Method used
     uint8_t method;
     /// Size of the Output OOB used or size of the Input OOB used or 0x00
     uint8_t size;
     /// Selected Output OOB Action or Input OOB Action or 0x00
     uint8_t action;
-}prov_auth_data_set_param_t;
+} prov_auth_data_set_param_t;
 
 ///prov Authentication data param structure
-typedef union
-{
+typedef union {
     prov_auth_data_set_param_t prov_auth_data;
-}mesh_core_evt_set_params_t;
+} mesh_core_evt_set_params_t;
 
 ///Node Provision State indicate structure
-typedef struct
-{
+typedef struct {
     /// Node Provision State
     uint8_t state;
-}prov_state_ind_param_t;
+} prov_state_ind_param_t;
 
 /// Appkey Binding Indicate Parameter
-typedef struct
-{
+typedef struct {
     /// Indicate To Add(1) Or Del(0) Binding Info
     uint8_t bind;
     /// Index of element the model belongs to (zero based)
@@ -1138,18 +1089,16 @@ typedef struct
     uint16_t appkey_global_index;
     /// Model ID
     uint32_t modelid;
-}appkey_binding_ind_param_t;
+} appkey_binding_ind_param_t;
 
 ///Unprovison Device uuid
-typedef struct
-{
+typedef struct {
     /// Device uuid
     uint8_t uuid[MESH_UUID_LEN];
-}prov_unprov_device_ind_t;
+} prov_unprov_device_ind_t;
 
 ///Provision Provisioner state indicate structure
-typedef struct
-{
+typedef struct {
     /// Device uuid
     uint8_t  uuid[MESH_UUID_LEN];
     /// Device key
@@ -1162,11 +1111,10 @@ typedef struct
     uint16_t elm_nb;
     /// state
     uint8_t  state;
-}prov_provisioner_state_ind_t;
+} prov_provisioner_state_ind_t;
 
 ///Provisioner Appkey Add Status structure
-typedef struct
-{
+typedef struct {
     ///Srouce Address
     uint16_t src_addr;
     ///Appkey Index
@@ -1175,11 +1123,10 @@ typedef struct
     uint16_t netkey_index;
     ///Status
     uint8_t status;
-}provisioner_appkey_add_status_t;
+} provisioner_appkey_add_status_t;
 
 ///Provisioner Model application status structure
-typedef struct
-{
+typedef struct {
     ///Element Address
     uint16_t element_addr;
     ///Appkey Index
@@ -1190,11 +1137,10 @@ typedef struct
     uint32_t model_id;
     ///Status
     uint8_t status;
-}provisioner_model_app_status_t;
+} provisioner_model_app_status_t;
 
 ///Provisioner Subcribe Add Status structure
-typedef struct
-{
+typedef struct {
     ///Status
     uint8_t status;
     ///Element Address
@@ -1203,31 +1149,28 @@ typedef struct
     uint16_t sub_addr;
     ///Model ID
     uint32_t model_id;
-}provisioner_subs_add_status_t;
+} provisioner_subs_add_status_t;
 
 ///Provisioner Composition Data structure
-typedef struct
-{
+typedef struct {
     /// Source Addr
     uint16_t src_addr;
     /// Data Length
     uint16_t length;
     /// Value
     uint8_t val[__ARRAY_EMPTY];
-}provisioner_composition_data_t;
+} provisioner_composition_data_t;
 
 ///Procision Select Device Parameter structure
-typedef struct
-{
+typedef struct {
     /// Device uuid
     uint8_t uuid[MESH_UUID_LEN];
     /// Indicate To Provision(1) Or Not(0)
     bool select;
-}prov_select_device_param_t;
+} prov_select_device_param_t;
 
 /// supported provisioning capabilities indicate structure
-typedef struct
-{
+typedef struct {
     /// Device uuid
     uint8_t uuid[MESH_UUID_LEN];
     ///    Algorithms
@@ -1244,11 +1187,10 @@ typedef struct
     uint8_t  in_oob_size;
     /// Supported Input OOB Actions
     uint16_t in_oob_action;
-}provisioner_prov_cap_ind_t;
+} provisioner_prov_cap_ind_t;
 
 /// supported provisioning capabilities confirm structure
-typedef struct
-{
+typedef struct {
     /// Device uuid
     uint8_t uuid[MESH_UUID_LEN];
     ///    Algorithms
@@ -1261,12 +1203,11 @@ typedef struct
     uint8_t  auth_action;
     /// Size of the Output OOB used or size of the Input OOB used or 0x00
     uint8_t  auth_size;
-}provisioner_prov_cap_cfm_t;
+} provisioner_prov_cap_cfm_t;
 
 
 /// Provisioner Provsion Auth Request structure
-typedef struct
-{
+typedef struct {
     /// Device uuid
     uint8_t uuid[MESH_UUID_LEN];
     ///
@@ -1279,11 +1220,10 @@ typedef struct
     ///   - MESH_PROV_AUTH_OUTPUT_OOB
     ///   - MESH_PROV_AUTH_INPUT_OOB
     uint16_t auth_action;
-}provisioner_prov_auth_req_t;
+} provisioner_prov_auth_req_t;
 
 /// Provision Provision Auth Confirm structure
-typedef struct
-{
+typedef struct {
     /// Device uuid
     uint8_t uuid[MESH_UUID_LEN];
     /// 1, Accept pairing request, 0 reject
@@ -1292,20 +1232,18 @@ typedef struct
     uint8_t  auth_size;
     /// Authentication data (LSB for a number or array of bytes)
     uint8_t  auth_data[MESH_PROVISION_AUTH_MAX_NUM];
-}provisioner_prov_auth_cfm_t;
+} provisioner_prov_auth_cfm_t;
 
 ///Provisioner provisioning data parameter structure
-typedef struct
-{
+typedef struct {
     /// Device uuid
     uint8_t uuid[MESH_UUID_LEN];
     /// Element num
     uint16_t elm_nb;
-}provisioner_provisioning_data_param_t;
+} provisioner_provisioning_data_param_t;
 
 ///Provisioner Publish Set status structure
-typedef struct
-{
+typedef struct {
     ///Status
     uint8_t status;
     ///Element Address
@@ -1313,37 +1251,35 @@ typedef struct
     ///Publish Address
     uint16_t pub_addr;
     ///Publish Appkey Index
-    uint16_t appkey_index :12;
+    uint16_t appkey_index : 12;
     ///Publish Friendship CredentialFlag
-    uint16_t credentialFlag:1;
+    uint16_t credentialFlag: 1;
     ///Reserved for Future Use
-    uint16_t rfu:3;
+    uint16_t rfu: 3;
     ///Default TTL value for the outgoing messages
     uint8_t  ttl;
     ///Period for periodic status publishing
     uint8_t  period;
     ///Number of retransmissions for each published message
-    uint8_t  retransmitCount:3;
+    uint8_t  retransmitCount: 3;
     ///Number of 50-millisecond steps between retransmissions
-    uint8_t  retransmitIntervalSteps:5;
+    uint8_t  retransmitIntervalSteps: 5;
     ///Model Identifier
     uint32_t model_id;
-}provisioner_pub_set_status_t;
+} provisioner_pub_set_status_t;
 
 ///Network Transmit Status structure
-typedef struct
-{
+typedef struct {
     ///Source Address
     uint16_t src_addr;
     ///Network Transmit Count
-    uint8_t  retransmitCount:3;
+    uint8_t  retransmitCount: 3;
     ///Network Transmit Interval Steps
-    uint8_t  retransmitIntervalSteps:5;
-}provisioner_nettransmit_status_t;
+    uint8_t  retransmitIntervalSteps: 5;
+} provisioner_nettransmit_status_t;
 
 /// Mesh Core Provision Event Indicate Parameter union
-typedef union
-{
+typedef union {
 
     ///Unprovison Device uuid
     prov_unprov_device_ind_t        unprov_device_ind;
@@ -1367,27 +1303,25 @@ typedef union
     provisioner_pub_set_status_t    pub_set_status;
     ///Network Transmit Status structure
     provisioner_nettransmit_status_t nettransmit_status;
-}mesh_core_provisioner_evt_ind_params_t;
+} mesh_core_provisioner_evt_ind_params_t;
 
 
 /**
 * @brief   provisioner netkey struct
 */
-typedef struct mesh_set_local_netkey
-{
+typedef struct mesh_set_local_netkey {
     /// opr
     bool addOrDel;
     /// key
     uint8_t netkey[MESH_KEYS_LEN];
     /// key_index
     uint16_t key_index;
-}mesh_set_local_netkey_t;
+} mesh_set_local_netkey_t;
 
 /**
 * @brief   provisioner appkey struct
 */
-typedef struct mesh_set_local_appkey
-{
+typedef struct mesh_set_local_appkey {
     /// opr
     bool addOrDel;
     /// key
@@ -1395,100 +1329,92 @@ typedef struct mesh_set_local_appkey
     /// key_index
     uint16_t key_index;
     uint16_t netkey_index;
-}mesh_set_local_appkey_t;
+} mesh_set_local_appkey_t;
 
 
 /**
 * @brief  Model App Bind message structure
 */
-typedef struct mesh_set_local_model_app_bind
-{
+typedef struct mesh_set_local_model_app_bind {
     ///Element Address
     uint16_t element_addr;
     ///Model Identifier
     uint32_t model_id;
     ///Appkey Index
     uint16_t appkey_index;
-}mesh_set_local_model_app_bind_t;
+} mesh_set_local_model_app_bind_t;
 
 ///Mesh Model Local Publication set structure
-typedef struct mesh_local_pub_set
-{
+typedef struct mesh_local_pub_set {
     ///Element Address
     uint16_t element_addr;
     ///Value of the Publish Address
     uint16_t pub_addr;
     ///Index of the application key
-    uint16_t appkey_index :12;
+    uint16_t appkey_index : 12;
     ///Publish Friendship CredentialFlag
-    uint16_t credentialFlag:1;
+    uint16_t credentialFlag: 1;
     ///Reserved for Future Use
-    uint16_t rfu:3;
+    uint16_t rfu: 3;
     ///Default TTL value for the outgoing messages
     uint8_t  ttl;
     ///Period for periodic status publishing
     uint8_t  period;
     ///Number of retransmissions for each published message
-    uint8_t  retransmitCount:3;
+    uint8_t  retransmitCount: 3;
     ///Number of 50-millisecond steps between retransmissions
-    uint8_t  retransmitIntervalSteps:5;
+    uint8_t  retransmitIntervalSteps: 5;
     ///Model Identifier
     uint32_t model_id;
 } mesh_local_pub_set_t;
 
 
 /// Structure For Appkey Update Ind
-typedef struct mesh_appkey_update_ind
-{
+typedef struct mesh_appkey_update_ind {
     /// AppKey index
     uint16_t appkey_index;
     /// AppKey
     uint8_t  key[MESH_KEYS_LEN];
     /// Added (> 0) or deleted (= 0)
     uint8_t added;
-}mesh_appkey_update_ind_t;
+} mesh_appkey_update_ind_t;
 
 
 /// Structure For Netkey Update Ind
-typedef struct mesh_netkey_update_ind
-{
+typedef struct mesh_netkey_update_ind {
     /// Netkey index
     uint16_t netkey_index;
     /// Network Key
     uint8_t  key[MESH_KEYS_LEN];
     /// Added (> 0) or deleted (= 0)
     uint8_t added;
-}mesh_netkey_update_ind_t;
+} mesh_netkey_update_ind_t;
 
 /// Structure For Self Addr Ind
-typedef struct mesh_self_addr_ind
-{
+typedef struct mesh_self_addr_ind {
     /// Addr
     uint16_t addr;
-}mesh_self_addr_ind_t;
+} mesh_self_addr_ind_t;
 
 /// Structure For get run time Ind
-typedef struct mesh_get_run_time_ind
-{
+typedef struct mesh_get_run_time_ind {
     /// Addr
     uint32_t clock_ms;
     uint16_t nb_wrap;
 
-}mesh_get_run_time_ind_t;
+} mesh_get_run_time_ind_t;
 
 /// Structure For Dev Key Ind
-typedef struct mesh_dev_key_ind
-{
+typedef struct mesh_dev_key_ind {
     uint8_t key[MESH_KEYS_LEN];
-}mesh_dev_key_ind_t;
+} mesh_dev_key_ind_t;
 
 
 
 
 
 /// Structure For pulish addr  Ind
-typedef struct mesh_publish_addr_ind
-{
+typedef struct mesh_publish_addr_ind {
     uint16_t element_addr;
     /// Model ID
     uint32_t model_id;
@@ -1506,12 +1432,11 @@ typedef struct mesh_publish_addr_ind
     uint8_t  friend_cred;
     /// Label UUID
     uint8_t  label_uuid[MESH_UUID_LEN];
-}mesh_publish_addr_ind_t;
+} mesh_publish_addr_ind_t;
 
 
 /// Structure For sub addr  Ind
-typedef struct mesh_sub_addr_ind
-{
+typedef struct mesh_sub_addr_ind {
     uint16_t element_addr;
     /// Sub address
     uint16_t addr;
@@ -1521,46 +1446,41 @@ typedef struct mesh_sub_addr_ind
     uint8_t  label_uuid[MESH_UUID_LEN];
     /// Add (> 0) or deleted (= 0)
     uint8_t  addOrDel;
-}mesh_sub_addr_ind_t;
+} mesh_sub_addr_ind_t;
 
 /// Structure For iv seq Ind
-typedef struct mesh_iv_seq_ind
-{
+typedef struct mesh_iv_seq_ind {
     /// IV Index
     uint32_t iv;
     /// Seq NO
     uint32_t seq;
-}mesh_iv_seq_ind_t;
+} mesh_iv_seq_ind_t;
 
 
 /// Structure For Friend Offer Ind
-typedef struct mesh_friend_offer_ind
-{
+typedef struct mesh_friend_offer_ind {
     uint16_t friend_addr;
     uint8_t  rx_window;
     uint8_t  queue_size;
     uint8_t  subs_list_size;
     int8_t   rssi;
-}mesh_friend_offer_ind_t;
+} mesh_friend_offer_ind_t;
 
 /// Structure For Friend Offer Ind
-typedef struct mesh_lowper_status_ind
-{
+typedef struct mesh_lowper_status_ind {
     uint16_t friend_addr;
     uint16_t  status;
-}mesh_lowper_status_ind_t;
+} mesh_lowper_status_ind_t;
 
 
 /// Structure For Friend Offer Ind
-typedef struct mesh_cmp_status_ind
-{
+typedef struct mesh_cmp_status_ind {
     uint16_t status;
-}mesh_cmp_status_ind_t;
+} mesh_cmp_status_ind_t;
 
 
 ///Mesh  Set Local Subcribtion
-typedef struct mesh_set_local_subs
-{
+typedef struct mesh_set_local_subs {
     /// Add (> 0) or deleted (= 0)
     uint8_t  addOrDel;
     ///Element Address
@@ -1569,31 +1489,27 @@ typedef struct mesh_set_local_subs
     uint16_t sub_addr;
     ///Model Identifier
     uint32_t  model_id;
-}mesh_set_local_subs_t;
+} mesh_set_local_subs_t;
 
 ///Mesh Provisioner Set Primary Addr
-typedef struct mesh_set_local_prim_addr
-{
+typedef struct mesh_set_local_prim_addr {
     uint16_t addr;
-}mesh_set_local_prim_addr_t;
+} mesh_set_local_prim_addr_t;
 
 
 ///Mesh  Set Local Dev key
-typedef struct mesh_set_local_dev_key
-{
+typedef struct mesh_set_local_dev_key {
     uint8_t dev_key[MESH_KEYS_LEN];
-}mesh_set_local_dev_key_t;
+} mesh_set_local_dev_key_t;
 
 ///Mesh  Set Local Iv Index And Seq NO
-typedef struct mesh_set_local_iv_seq
-{
+typedef struct mesh_set_local_iv_seq {
     uint32_t iv;
     uint32_t seq;
-}mesh_set_local_iv_seq_t;
+} mesh_set_local_iv_seq_t;
 
 ///Mesh  start lpn
-typedef struct mesh_start_lpn_param
-{
+typedef struct mesh_start_lpn_param {
     uint32_t poll_timeout_100ms;
     uint32_t poll_intv_ms;
     uint16_t prev_addr;
@@ -1601,26 +1517,23 @@ typedef struct mesh_start_lpn_param
     uint8_t  rssi_factor;
     uint8_t  rx_window_factor;
     uint8_t  min_queue_size_log;
-}mesh_start_lpn_param_t;
+} mesh_start_lpn_param_t;
 
 
 ///Mesh  select friend
-typedef struct mesh_select_friend_param
-{
+typedef struct mesh_select_friend_param {
     uint16_t addr;
-}mesh_select_friend_param_t;
+} mesh_select_friend_param_t;
 
 ///Mesh  Set friend state
-typedef struct mesh_set_friend_state
-{
+typedef struct mesh_set_friend_state {
     uint32_t state;
-}mesh_set_friend_state_t;
+} mesh_set_friend_state_t;
 
 
 
 ///Mesh Core Event indicate parameters structure
-typedef union
-{
+typedef union {
     ///Authentication data param structure
     prov_auth_data_set_param_t prov_auth_data_param;
     ///Node Provision State indicate structure
@@ -1645,11 +1558,10 @@ typedef union
     mesh_cmp_status_ind_t status_ind;
     ///structure for lowpower node status ind
     mesh_lowper_status_ind_t lpn_status;
-}mesh_core_evt_ind_params_t;
+} mesh_core_evt_ind_params_t;
 
 ///Mesh Core Event callback parameter structure
-typedef union
-{
+typedef union {
     ///provisioner appkey struct
     mesh_set_local_appkey_t              local_appkey_set;
     ///provisioner netkey struct
@@ -1672,11 +1584,10 @@ typedef union
     mesh_select_friend_param_t  friend_param;
     ///structure for local friend state
     mesh_set_friend_state_t friend_state;
-}mesh_core_evt_cb_params_t;
+} mesh_core_evt_cb_params_t;
 
 ///Provision Get Composition Structure
-typedef struct mesh_provisioner_get_composition
-{
+typedef struct mesh_provisioner_get_composition {
     ///Destination Address
     uint16_t dst;
     ///Index of the Network key
@@ -1686,8 +1597,7 @@ typedef struct mesh_provisioner_get_composition
 } mesh_provisioner_get_composition_t;
 
 ///Provisioner Add Appkey Structure
-typedef struct mesh_provisioner_add_appkey
-{
+typedef struct mesh_provisioner_add_appkey {
     ///Destination Address
     uint16_t dst;
     ///Index of the Network key
@@ -1699,8 +1609,7 @@ typedef struct mesh_provisioner_add_appkey
 } mesh_provisioner_add_appkey_t;
 
 ///Provisioner Model App Bind Structure
-typedef struct mesh_provisioner_mmodel_app
-{
+typedef struct mesh_provisioner_mmodel_app {
     ///Destination Address
     uint16_t dst;
     ///Element Address
@@ -1714,8 +1623,7 @@ typedef struct mesh_provisioner_mmodel_app
 } mesh_provisioner_model_app_t;
 
 ///Provisioner Subcription Set Structure
-typedef struct mesh_provisioner_subs_set
-{
+typedef struct mesh_provisioner_subs_set {
     /// Added (> 0) or deleted (= 0)
     uint8_t  addOrDel;
     ///Element Address
@@ -1729,15 +1637,13 @@ typedef struct mesh_provisioner_subs_set
 } mesh_provisioner_subs_set_t;
 
 ///Provisioner Node Delete Structure
-typedef struct mesh_provisioner_node_delete
-{
+typedef struct mesh_provisioner_node_delete {
     ///Node Address
     uint16_t addr;
 } mesh_provisioner_node_delete_t;
 
 ///Provisioner Node Add Structure
-typedef struct mesh_provisioner_node_add
-{
+typedef struct mesh_provisioner_node_add {
     ///Device key
     uint8_t  devkey[MESH_KEYS_LEN];
     ///Netkey Index
@@ -1749,17 +1655,15 @@ typedef struct mesh_provisioner_node_add
 } mesh_provisioner_node_add_t;
 
 ///Node Address Set Structure
-typedef struct mesh_provisioner_addr_set
-{
+typedef struct mesh_provisioner_addr_set {
     ///Node Address
     uint16_t addr;
 } mesh_provisioner_addr_set_t;
 
 ///Mesh Provision Data confirm Structure
-typedef struct  mesh_prov_data_cfm
-{
+typedef struct  mesh_prov_data_cfm {
     uint8_t uuid[MESH_UUID_LEN];
-        /// Network Key
+    /// Network Key
     uint8_t  net_key[MESH_KEYS_LEN];
     /// Network Key Index
     uint16_t netkey_index;
@@ -1768,48 +1672,45 @@ typedef struct  mesh_prov_data_cfm
 } mesh_prov_data_cfm_t;
 
 ///Mesh Provisioner Set Pubication Parameter Structure
-typedef struct mesh_provisioner_set_pub_param
-{
+typedef struct mesh_provisioner_set_pub_param {
     ///Element Address
     uint16_t element_addr;
     ///Value of the publish address
     uint16_t pub_addr;
     ///Index of the application key
-    uint16_t appkey_index :12;
+    uint16_t appkey_index : 12;
     ///Value of the Friendship Credential Flag
-    uint16_t credentialFlag:1;
+    uint16_t credentialFlag: 1;
     ///Reserved for Future Use
-    uint16_t rfu:3;
+    uint16_t rfu: 3;
     ///Default TTL value for the outgoing messages
     uint8_t  ttl;
     ///Period for periodic status publishing
     uint8_t  period;
     ///Number of retransmissions for each published message
-    uint8_t  retransmitCount:3;
+    uint8_t  retransmitCount: 3;
     ///Number of 50-millisecond steps between retransmissions
-    uint8_t  retransmitIntervalSteps:5;
+    uint8_t  retransmitIntervalSteps: 5;
     ///Model Identifier
     uint32_t model_id;
     ///Index of the Network key
     uint16_t netkey_index;
-}mesh_provisioner_set_pub_param_t;
+} mesh_provisioner_set_pub_param_t;
 
 ///Mesh Provisioner set nettransmit parameter Structure
-typedef struct mesh_provisioner_set_nettransmit_param
-{
+typedef struct mesh_provisioner_set_nettransmit_param {
     ///Address of Element
     uint16_t element_addr;
     ///Index of Netkey
     uint16_t netkey_index;
     ///Number of transmissions for each Network PDU originating from the node
-    uint8_t  retransmitCount:3;
+    uint8_t  retransmitCount: 3;
     ///Number of 10-millisecond steps between transmissions
-    uint8_t  retransmitIntervalSteps:5;
+    uint8_t  retransmitIntervalSteps: 5;
 } mesh_provisioner_set_nettransmit_param_t;
 
 /// Mesh Core Provisioner Event Callback Parameter Union
-typedef union
-{
+typedef union {
     ///Procision Select Device Parameter structure
     prov_select_device_param_t         unprov_device_param;
     /// supported provisioning capabilities confirm structure
@@ -1836,7 +1737,7 @@ typedef union
     mesh_provisioner_set_pub_param_t   pub_set;
     ///Mesh Provisioner set nettransmit parameter structure
     mesh_provisioner_set_nettransmit_param_t nettranssmit_set;
-}mesh_core_provisioner_evt_cb_params_t;
+} mesh_core_provisioner_evt_cb_params_t;
 
 /**@}*/
 
@@ -1846,10 +1747,10 @@ typedef union
  */
 
 ///Mesh Core Event indicate Callback
-typedef STATUS (*mesh_core_evt_ind_cb)(mesh_core_evt_ind_t evt ,mesh_core_evt_ind_params_t * p_param);
+typedef STATUS (*mesh_core_evt_ind_cb)(mesh_core_evt_ind_t evt, mesh_core_evt_ind_params_t *p_param);
 
 ///Server State indicate handler
-typedef  void (* srv_state_ind_handle)(void * p_param) ;
+typedef  void (* srv_state_ind_handle)(void *p_param) ;
 /**@}*/
 
 /**
@@ -1858,7 +1759,8 @@ typedef  void (* srv_state_ind_handle)(void * p_param) ;
  */
 
 ///Mesh Core Provisioner Event indicate Callback
-typedef STATUS (*mesh_core_provisioner_evt_ind_cb)(mesh_core_provisioner_evt_ind_t evt ,mesh_core_provisioner_evt_ind_params_t * p_param);
+typedef STATUS (*mesh_core_provisioner_evt_ind_cb)(mesh_core_provisioner_evt_ind_t evt,
+        mesh_core_provisioner_evt_ind_params_t *p_param);
 /**@}*/
 
 /**
@@ -1869,20 +1771,18 @@ typedef STATUS (*mesh_core_provisioner_evt_ind_cb)(mesh_core_provisioner_evt_ind
 /**
 * @brief   State entry structure
 */
-typedef struct
-{
+typedef struct {
     /// Indicate Node State Follow by type
     uint32_t state;
     /// State Type (@see mesh_state_type_t)
     mesh_state_type_t type;
-     ///  Transition Time in milliseconds
+    ///  Transition Time in milliseconds
     uint32_t trans_time_ms;
 } mesh_state_ind_t;
 
 
 /// Model request to publish a new message
-typedef struct mesh_model_publish_param
-{
+typedef struct mesh_model_publish_param {
     /// - M_API_MODEL_PUBLISH: Model request to publish a new message
     /// Operation code of the message
     uint32_t opcode;
@@ -1899,10 +1799,10 @@ typedef struct mesh_model_publish_param
 } mesh_model_publish_param_t;
 
 ///Message Publishde callback
-typedef  STATUS (* msg_published_cb)(mesh_model_publish_param_t * p_param ,STATUS status) ;
+typedef  STATUS (* msg_published_cb)(mesh_model_publish_param_t *p_param, STATUS status) ;
 
 ///Sig Nodel State callback
-typedef  void (* sig_model_state_cb)(mesh_state_ind_t * p_state ) ;
+typedef  void (* sig_model_state_cb)(mesh_state_ind_t *p_state ) ;
 /**@}*/
 
 /**
@@ -1955,7 +1855,7 @@ void sonata_mesh_start(mesh_start_complete cb);
  * @retval MESH_ERROR_NO_ERROR       No error/Success
  ************************************************************
 */
-STATUS  mesh_msg_publish(mesh_model_publish_param_t *param,msg_published_cb end_cb);
+STATUS  mesh_msg_publish(mesh_model_publish_param_t *param, msg_published_cb end_cb);
 
 /**
  ***********************************************************
@@ -1981,7 +1881,7 @@ STATUS sonata_mesh_client_send_msg(mesh_client_msg_param_t *param, client_msg_se
  * @retval MESH_ERROR_NO_ERROR       No error/Success
  ************************************************************
 */
-STATUS  sonata_mesh_msg_send(mesh_model_msg_param_t * param , model_msg_sent_cb sent_cb);
+STATUS  sonata_mesh_msg_send(mesh_model_msg_param_t *param, model_msg_sent_cb sent_cb);
 
 /**
  ***********************************************************
@@ -1997,7 +1897,7 @@ STATUS  sonata_mesh_msg_send(mesh_model_msg_param_t * param , model_msg_sent_cb 
  * @retval MESH_ERROR_NO_ERROR       No error/Success
  ************************************************************
 */
-STATUS sonata_mesh_model_register(uint32_t modelid ,uint8_t element,bool is_main, sig_model_state_cb cb);
+STATUS sonata_mesh_model_register(uint32_t modelid, uint8_t element, bool is_main, sig_model_state_cb cb);
 
 /**
  ***********************************************************
@@ -2012,7 +1912,7 @@ STATUS sonata_mesh_model_register(uint32_t modelid ,uint8_t element,bool is_main
  * @retval MESH_ERROR_NO_ERROR       No error/Success
  ************************************************************
 */
-STATUS mesh_vendor_model_register(uint32_t modelid ,uint8_t element,m_vendor_model_msg_rx_t pkt_cb);
+STATUS mesh_vendor_model_register(uint32_t modelid, uint8_t element, m_vendor_model_msg_rx_t pkt_cb);
 
 /**
  ***********************************************************
@@ -2025,7 +1925,7 @@ STATUS mesh_vendor_model_register(uint32_t modelid ,uint8_t element,m_vendor_mod
  * @retval 0
  ************************************************************
 */
-uint8_t sonata_mesh_app_key_bind(uint32_t element,uint32_t model_id,uint16_t app_key_id);
+uint8_t sonata_mesh_app_key_bind(uint32_t element, uint32_t model_id, uint16_t app_key_id);
 
 /**
  ***********************************************************
@@ -2038,7 +1938,7 @@ uint8_t sonata_mesh_app_key_bind(uint32_t element,uint32_t model_id,uint16_t app
  * @retval 0
  ************************************************************
 */
-uint8_t sonata_mesh_subs_group_addr(uint32_t element,uint32_t model_id,uint16_t group_addr);
+uint8_t sonata_mesh_subs_group_addr(uint32_t element, uint32_t model_id, uint16_t group_addr);
 
 /**
  ***********************************************************
@@ -2052,7 +1952,7 @@ uint8_t sonata_mesh_subs_group_addr(uint32_t element,uint32_t model_id,uint16_t 
  ************************************************************
 */
 
-void m_api_srv_set(uint32_t state,modelid_t modelid);
+void m_api_srv_set(uint32_t state, modelid_t modelid);
 /**@}*/
 
 /**
@@ -2070,7 +1970,7 @@ void m_api_srv_set(uint32_t state,modelid_t modelid);
  * @retval MESH_ERROR_NO_ERROR       No error/Success
  ************************************************************
 */
-STATUS sonata_mesh_param_set(mesh_param_opr_types_t type , mesh_set_params_t *p_param);
+STATUS sonata_mesh_param_set(mesh_param_opr_types_t type, mesh_set_params_t *p_param);
 
 /**
  ***********************************************************
@@ -2082,7 +1982,7 @@ STATUS sonata_mesh_param_set(mesh_param_opr_types_t type , mesh_set_params_t *p_
  * @retval MESH_ERROR_NO_ERROR       No error/Success
  ************************************************************
 */
-STATUS sonata_mesh_param_get(mesh_param_opr_types_t type , mesh_get_params_t *p_param);
+STATUS sonata_mesh_param_get(mesh_param_opr_types_t type, mesh_get_params_t *p_param);
 
 /**
  ***********************************************************
@@ -2150,7 +2050,7 @@ void sonata_mesh_register_core_evt_ind(mesh_core_evt_ind_cb cb);
  * @retval MESH_ERROR_NO_ERROR       No error/Success
  ************************************************************
 */
-int mesh_core_provisioner_evt_cb(mesh_core_provisioner_evt_cb_t evt ,mesh_core_provisioner_evt_cb_params_t *p_param);
+int mesh_core_provisioner_evt_cb(mesh_core_provisioner_evt_cb_t evt, mesh_core_provisioner_evt_cb_params_t *p_param);
 
 /**
  ***********************************************************
@@ -2162,7 +2062,7 @@ int mesh_core_provisioner_evt_cb(mesh_core_provisioner_evt_cb_t evt ,mesh_core_p
  * @retval MESH_ERROR_NO_ERROR         No error/Success
  ************************************************************
 */
-int mesh_core_evt_cb(mesh_core_evt_cb_t evt ,mesh_core_evt_cb_params_t *p_param);
+int mesh_core_evt_cb(mesh_core_evt_cb_t evt, mesh_core_evt_cb_params_t *p_param);
 /**@}*/
 
 /**
@@ -2234,7 +2134,7 @@ uint16_t sonata_mesh_rand_hword(void);
  * @return Source Address
  ************************************************************
 */
-uint16_t sonata_mesh_get_src_addr();
+uint16_t sonata_mesh_get_src_addr(void);
 /**
  ****************************************************************************************
  * @brief Get device run time

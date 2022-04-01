@@ -79,7 +79,7 @@ typedef void (*IncludeServiceAddCallback)(int status, int serverId, int srvcHand
 
 /* Callback invoked when a characteristic has been added to a service */
 typedef void (*CharacteristicAddCallback)(int status, int serverId, BtUuid *uuid,
-                                          int srvcHandle, int characteristicHandle);
+        int srvcHandle, int characteristicHandle);
 
 /* Callback invoked when a descriptor has been added to a characteristic */
 typedef void (*DescriptorAddCallback)(int status, int serverId, BtUuid *uuid,

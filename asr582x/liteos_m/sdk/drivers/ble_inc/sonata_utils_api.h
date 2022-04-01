@@ -34,6 +34,7 @@
 #include "sonata_error_api.h"
 #include "sonata_ble_hook.h"
 #include "compiler.h"      // for __INLINE
+#include "stdbool.h"
 
 /**
  * @defgroup SONATA_UTILS_API UTILS_API
@@ -75,55 +76,52 @@
  */
 
 
- /*!
-  * @brief app msg operation type
-  */
- typedef enum
- {
-     /// at command operation
-     APP_MSG_AT_CMD             = (1 << 0),
-     APP_MSG_UART_CMD           = (5),
+/*!
+ * @brief app msg operation type
+ */
+typedef enum {
+    /// at command operation
+    APP_MSG_AT_CMD             = (1 << 0),
+    APP_MSG_UART_CMD           = (5),
 
-     APP_MSG_HID_TIMER          = (10),
+    APP_MSG_HID_TIMER          = (10),
 
-     APP_MSG_LAST,
- }app_msg_op_t;
+    APP_MSG_LAST,
+} app_msg_op_t;
 
- /*!
-  * @brief file system possible return status
-  */
- typedef enum
- {
-      /// SONATA FILE SYSTEM status OK
-     SONATA_FS_OK,
-     /// generic SONATA FILE SYSTEM status KO
-     SONATA_FS_FAIL,
-     /// SONATA FILE SYSTEM TAG unrecognized
-     SONATA_FS_TAG_NOT_DEFINED,
-     /// No space for SONATA FILE SYSTEM
-     SONATA_FS_NO_SPACE_AVAILABLE,
-     /// Length violation
-     SONATA_FS_LENGTH_OUT_OF_RANGE,
-      /// SONATA FILE SYSTEM parameter locked
-     SONATA_FS_PARAM_LOCKED,
-      /// SONATA FILE SYSTEM corrupted
-     SONATA_FS_CORRUPT,
-      /// SONATA FILE TYPE OUT RANGE
-     SONATA_FS_OT_RANGE,
- }SONATA_FS_STATUS;
+/*!
+ * @brief file system possible return status
+ */
+typedef enum {
+    /// SONATA FILE SYSTEM status OK
+    SONATA_FS_OK,
+    /// generic SONATA FILE SYSTEM status KO
+    SONATA_FS_FAIL,
+    /// SONATA FILE SYSTEM TAG unrecognized
+    SONATA_FS_TAG_NOT_DEFINED,
+    /// No space for SONATA FILE SYSTEM
+    SONATA_FS_NO_SPACE_AVAILABLE,
+    /// Length violation
+    SONATA_FS_LENGTH_OUT_OF_RANGE,
+    /// SONATA FILE SYSTEM parameter locked
+    SONATA_FS_PARAM_LOCKED,
+    /// SONATA FILE SYSTEM corrupted
+    SONATA_FS_CORRUPT,
+    /// SONATA FILE TYPE OUT RANGE
+    SONATA_FS_OT_RANGE,
+} SONATA_FS_STATUS;
 typedef uint8_t sonata_fs_len_t;
 typedef uint8_t sonata_fs_tag_t;
 
 /*!
 * @brief ble addr priority return result
 */
-typedef enum
-{
+typedef enum {
     ///efuse > nvds
     SONATA_MAC_USE_EFUSE,
     ///nvds > efuse
     SONATA_MAC_USE_NVDS,
-}SONATA_MAC_PRIORITY;
+} SONATA_MAC_PRIORITY;
 
 
 
@@ -135,30 +133,28 @@ typedef enum
 typedef uint8_t (*PF_SONATA_API_APP_MSG_HANDLER)(void *p_param);
 
 /// asr api task messages
-typedef struct sonata_api_app_msg{
+typedef struct sonata_api_app_msg {
     uint8_t operation;
     PF_SONATA_API_APP_MSG_HANDLER function;
-}sonata_api_app_msg_t;
+} sonata_api_app_msg_t;
 
 /// asr api task message array
-typedef struct sonata_api_app_msg_array{
+typedef struct sonata_api_app_msg_array {
     int msg_num;
     sonata_api_app_msg_t *msg[SONATA_API_MAX_APP_MSG];
-}sonata_api_app_msg_array_t;
+} sonata_api_app_msg_array_t;
 
 /// asr api task message array
-typedef struct sonata_api_app_ke_msg
-{
+typedef struct sonata_api_app_ke_msg {
     uint8_t operation;
     void    *p_param;
-}sonata_api_app_ke_msg_t;
+} sonata_api_app_ke_msg_t;
 
 /// Ble bt addr priority callback
-typedef struct
-{
+typedef struct {
     SONATA_MAC_PRIORITY (*ble_addr_priority)(void);
 
-}ble_addr_callback_t;
+} ble_addr_callback_t;
 /**
  ****************************************************************************************
  * @brief Call back definition of the function that can handle result of an AES based algorithm
@@ -168,7 +164,7 @@ typedef struct
  * @param[in] src_info     Information provided by requester
  ****************************************************************************************
  */
-typedef void (*aes_func_result_cb) (uint8_t status, const uint8_t* aes_res, uint32_t src_info);
+typedef void (*aes_func_result_cb) (uint8_t status, const uint8_t *aes_res, uint32_t src_info);
 
 
 /*
@@ -205,7 +201,7 @@ uint8_t sonata_api_app_ke_msg_handler(void *p_param);
 void sonata_api_util_gap_status_print(uint8_t status);
 
 ///@hide
-void sonata_api_util_gatt_status_print(uint8_t operation,uint8_t status);
+void sonata_api_util_gatt_status_print(uint8_t operation, uint8_t status);
 
 
 /**
@@ -290,7 +286,7 @@ uint8_t sonata_fs_write(sonata_fs_tag_t tag, sonata_fs_len_t length, uint8_t *bu
 * @return uint8_t @see SONATA_FS_STATUS
 ****************************************************************************************
 */
-uint8_t sonata_fs_read(sonata_fs_tag_t tag, sonata_fs_len_t * lengthPtr, uint8_t *buf);
+uint8_t sonata_fs_read(sonata_fs_tag_t tag, sonata_fs_len_t *lengthPtr, uint8_t *buf);
 
 /**
 ***************************************************************************************
@@ -307,7 +303,7 @@ uint8_t sonata_fs_erase(sonata_fs_tag_t tag);
  * @brief get BT address
  * @return address
  */
-uint8_t * sonata_get_bt_address();
+uint8_t *sonata_get_bt_address(void);
 
 
 /**
@@ -321,7 +317,7 @@ uint8_t * sonata_get_bt_address();
 * @return void
 ****************************************************************************************
 */
-void sonata_set_bt_address(uint8_t * bd_addr,uint8_t length);
+void sonata_set_bt_address(uint8_t *bd_addr, uint8_t length);
 
 /**
 ***************************************************************************************
@@ -334,7 +330,7 @@ void sonata_set_bt_address(uint8_t * bd_addr,uint8_t length);
 * @return void
 ****************************************************************************************
 */
-void sonata_set_bt_address_no_save(uint8_t * bd_addr,uint8_t length);
+void sonata_set_bt_address_no_save(uint8_t *bd_addr, uint8_t length);
 
 /**
  ****************************************************************************************
@@ -347,7 +343,7 @@ void sonata_set_bt_address_no_save(uint8_t * bd_addr,uint8_t length);
  * @return  bool : true for encryption is ongoing, false for some error
  ****************************************************************************************
  */
-bool sonata_aes_app_encrypt(uint8_t* key, uint8_t *val, aes_func_result_cb res_cb, uint32_t src_info);
+bool sonata_aes_app_encrypt(uint8_t *key, uint8_t *val, aes_func_result_cb res_cb, uint32_t src_info);
 
 /**
  ****************************************************************************************
@@ -360,7 +356,7 @@ bool sonata_aes_app_encrypt(uint8_t* key, uint8_t *val, aes_func_result_cb res_c
  * @return  bool : true for decryption is ongoing, false for some error
  ****************************************************************************************
  */
-bool sonata_aes_app_decrypt(uint8_t* key, uint8_t *val, aes_func_result_cb res_cb, uint32_t src_info);
+bool sonata_aes_app_decrypt(uint8_t *key, uint8_t *val, aes_func_result_cb res_cb, uint32_t src_info);
 
 /*!
  * @brief change pin code to byte
@@ -368,14 +364,14 @@ bool sonata_aes_app_decrypt(uint8_t* key, uint8_t *val, aes_func_result_cb res_c
  * @param bytes
  * @param byte_len
  */
-void sonata_passkey_pincode_to_byte(uint32_t pin_code, uint8_t * bytes, uint8_t byte_len);
+void sonata_passkey_pincode_to_byte(uint32_t pin_code, uint8_t *bytes, uint8_t byte_len);
 
 /*!
  * @brief change byte to pin code
  * @param bytes
  * @return
  */
-uint32_t sonata_passkey_byte_to_pincode(uint8_t * bytes);
+uint32_t sonata_passkey_byte_to_pincode(uint8_t *bytes);
 
 /*!
  * @brief Get information form advertising report
@@ -387,20 +383,21 @@ uint32_t sonata_passkey_byte_to_pincode(uint8_t * bytes);
  * @param rel_length  [out] for target information
  * @return TRUE for target fond, FALSE for not found
  */
-bool sonata_get_adv_report_info(uint8_t type, uint8_t *info, uint16_t info_length, uint8_t *report, uint16_t report_length, uint16_t *rel_length);
+bool sonata_get_adv_report_info(uint8_t type, uint8_t *info, uint16_t info_length, uint8_t *report,
+                                uint16_t report_length, uint16_t *rel_length);
 
 /*!
  * @brief Get system tick value
  * @return System tick
  */
-uint32_t sonata_get_sys_time();
+uint32_t sonata_get_sys_time(void);
 
 
 /*!
  * @brief Reset BLE stack
  * @return
  */
-void sonata_ble_stack_reset();
+void sonata_ble_stack_reset(void);
 
 /*!
  * @brief  Get boot type value
@@ -443,15 +440,15 @@ __INLINE uint32_t util_min(uint32_t a, uint32_t b)
 
 __INLINE void util_write16p(void const *ptr16, uint16_t value)
 {
-    uint8_t *ptr=(uint8_t*)ptr16;
+    uint8_t *ptr = (uint8_t *)ptr16;
 
-    *ptr++ = value&0xff;
-    *ptr = (value&0xff00)>>8;
+    *ptr++ = value & 0xff;
+    *ptr = (value & 0xff00) >> 8;
 }
 
 __INLINE uint16_t util_read16p(void const *ptr16)
 {
-    uint16_t value = ((uint8_t *)ptr16)[0] | ((uint8_t *)ptr16)[1] << 8;
+    uint16_t value = (((uint8_t *)ptr16)[0]) | (((uint8_t *)ptr16)[1] << 8);
     return value;
 }
 
@@ -460,10 +457,10 @@ __INLINE uint32_t util_read32p(void const *ptr32)
     uint16_t addr_l, addr_h;
     addr_l = util_read16p((uint16_t *)ptr32);
     addr_h = util_read16p((uint16_t *)ptr32 + 1);
-    return ((uint32_t)addr_l | (uint32_t)addr_h << 16);
+    return (((uint32_t)addr_l) | (((uint32_t)addr_h) << 16));
 }
 
-void sonata_platform_reset();
+void sonata_platform_reset(void);
 
 
 

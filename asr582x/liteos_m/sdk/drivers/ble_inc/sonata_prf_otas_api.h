@@ -46,8 +46,7 @@
  * @brief Callback for ota status
  ****************************************************************************************
  */
-typedef struct prf_ota_callback
-{
+typedef struct prf_ota_callback {
     ///app call before ota start
     void (*prf_ota_before_start)(void);
     ///app call ota start
@@ -56,7 +55,7 @@ typedef struct prf_ota_callback
     void (*prf_ota_stop)(void);
     ///app call ota fail
     void (*prf_ota_fail)(void);
-}prf_ota_callback_t;
+} prf_ota_callback_t;
 
 /*
  * DEFINES

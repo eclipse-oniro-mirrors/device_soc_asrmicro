@@ -51,7 +51,7 @@ typedef struct _cmd_entry {
     char *name;
     int (*function)(int, char **);
     char *help;
-}cmd_entry;
+} cmd_entry;
 
 #define AT_MAX_COMMANDS           90
 struct cli_cmd_t {
@@ -59,8 +59,7 @@ struct cli_cmd_t {
     cmd_entry *cmds[AT_MAX_COMMANDS];
 };
 
-typedef struct
-{
+typedef struct {
     uint8_t   uart_echo;       /* echo uart input info log */
     uint8_t   max_txpwr;       /* max tx power for both sta and softap */
     uint8_t   flag_sap;        /* flag of user set softap ip config */
@@ -80,10 +79,9 @@ typedef struct
     char      sapmask[16];     /* Netmask on the target wlan interface for softap mode, ASCII */
     char      start_ip[16];    /* start ip addr of dhcp pool in softap mode */
     char      end_ip[16];      /* end ip addr of dhcp pool in softap mode */
-}_at_user_info;
+} _at_user_info;
 
-typedef enum
-{
+typedef enum {
     CONFIG_OK,          /* indicate at cmd set success and response OK */
     PARAM_RANGE,        /* indicate some at cmd param is out of range */
     PARAM_MISS,         /* indicate at cmd param is less than needed count */
@@ -92,8 +90,8 @@ typedef enum
     CONN_EAPOL_FAIL,    /* indicate 4-way handshake failed in station mode */
     CONN_DHCP_FAIL,     /* indicate got ip by dhcp failed in station mode */
     WAIT_PEER_RSP,
-    RSP_NULL=0xFF
-}lega_at_rsp_status_t;
+    RSP_NULL = 0xFF
+} lega_at_rsp_status_t;
 
 typedef struct {
     char *command;  /*at cmd string*/
@@ -101,12 +99,11 @@ typedef struct {
 } lega_at_cmd_entry;
 
 #ifdef CFG_SDIO_SUPPORT
-typedef void (*lega_at_sdio_host_tx_hdlr)(uint8_t * data, uint32_t data_len);
-typedef struct
-{
+typedef void (*lega_at_sdio_host_tx_hdlr)(uint8_t *data, uint32_t data_len);
+typedef struct {
     uint32_t sdio_data_len;
     uint32_t p_sdio_at_cmd;
-}at_msg_t;
+} at_msg_t;
 #endif
 
 /** @brief  register user at cmd.
@@ -120,7 +117,7 @@ void lega_at_cmd_register(cmd_entry *cmd);
  *  @return    0       : on success.
  *  @return    other   : error occurred
  */
-int lega_at_init(const char* task_name,uint8_t task_pri,uint32_t task_stack_size);
+int lega_at_init(const char *task_name, uint8_t task_pri, uint32_t task_stack_size);
 
 /** @brief  at deinit functin, user should call it when donot use at any more, to free resources
  *  @return    0       : on success.
@@ -157,7 +154,7 @@ void lega_at_response(lega_at_rsp_status_t status);
 extern char at_dbgflg;
 
 #ifdef PRINTF2_SUPPORT
-extern int printf2(const char* format, ...);
+extern int printf2(const char *format, ...);
 #else
 #define printf2 printf
 #endif

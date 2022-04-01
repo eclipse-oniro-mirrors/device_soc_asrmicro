@@ -26,7 +26,6 @@
 #define _TYPES_H_
 
 #include <stdint.h>
-#include <stdbool.h>
 
 #if 0   // use standard defines
 
@@ -78,12 +77,11 @@ typedef unsigned char bool;
 #ifndef NULL
 #define NULL (void*)0
 #endif
-#define BIT(n)           (1<<n)
+#define BIT(n)           (1<<(n))
 #define CO_WF_BIT(pos)      (1U<<(pos))
 
 /// structure of a list element header
-struct co_wf_list_hdr
-{
+struct co_wf_list_hdr {
     /// Pointer to the next element in the list
     struct co_wf_list_hdr *next;
 };
@@ -92,7 +90,7 @@ inline static uint16_t  ___swap16(uint16_t x)
 {
     uint16_t __x = x;
     return ((uint16_t)((((uint16_t)(__x) & (uint16_t)0x00ffU) << 8) |
-           (((uint16_t)(__x) & (uint16_t)0xff00U) >> 8)));
+                       (((uint16_t)(__x) & (uint16_t)0xff00U) >> 8)));
 }
 
 inline static uint16_t __arch__swap16(uint16_t x)

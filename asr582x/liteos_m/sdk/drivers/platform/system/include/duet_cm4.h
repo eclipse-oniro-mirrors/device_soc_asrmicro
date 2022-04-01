@@ -28,8 +28,10 @@
 #ifndef __DUET_CM4_H__
 #define __DUET_CM4_H__
 
+#include <stdint.h>
+
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
 #define __CM0_REV                 0 /*!< Core Revision r0p0                        */
@@ -43,51 +45,46 @@
 //set normal interrupt priority 6
 #define configLIBRARY_NORMAL_INTERRUPT_PRIORITY 6
 
-typedef enum IRQn
-{
-/**************   Processor Exceptions Numbers ******************************************/
-  NonMaskableInt_IRQn           = -14,      /*!< 2 Non Maskable Interrupt                         */
-  MemoryManagement_IRQn         = -12,      /*!< 4 Cortex-M3 Memory Management Interrupt          */
-  BusFault_IRQn                 = -11,      /*!< 5 Cortex-M3 Bus Fault Interrupt                  */
-  UsageFault_IRQn               = -10,      /*!< 6 Cortex-M3 Usage Fault Interrupt                */
-  SVCall_IRQn                   = -5,       /*!< 11 Cortex-M3 SV Call Interrupt                   */
-  DebugMonitor_IRQn             = -4,       /*!< 12 Cortex-M3 Debug Monitor Interrupt             */
-  PendSV_IRQn                   = -2,       /*!< 14 Cortex-M3 Pend SV Interrupt                   */
-  SysTick_IRQn                  = -1,       /*!< 15 Cortex-M3 System Tick Interrupt               */
-/******   Interrupt Numbers *******************************************************/
-  CEVA_RW_IP_IRQn               = 0,        /*!< CEVA RW IP Interrupt                             */
-  SLEEP_IRQn                    = 1,        /*!< Sleep Wake-Up Interrupt                          */
-  WDG_IRQn                      = 2,        /*!< Window WatchDog                                  */
-  FLASH_IRQn                    = 3,        /*!< FLASH Interrupt                                  */
-  GPIO_IRQn                     = 4,        /*!< GPIO Interrupt                                   */
-  TIMER_IRQn                    = 5,        /*!< Timer Interrupt                                  */
-  CRYPTOCELL310_IRQn            = 6,        /*!< CryptoCell 310 Interrupt                         */
-  DMA_IRQn                      = 7,        /*!< Generic DMA Ctrl Interrupt                       */
-  UART0_IRQn                    = 8,        /*!< UART0 Interrupt                                  */
-  UART1_IRQn                    = 9,        /*!< UART1 Interrupt                                  */
-  UART2_IRQn                    = 10,       /*!< UART2 Interrupt                                  */
-  SPI0_IRQn                     = 11,       /*!< SPI0 Interrupt                                   */
-  SPI1_IRQn                     = 12,       /*!< SPI1 Interrupt                                   */
-  SPI2_IRQn                     = 13,       /*!< SPI2                                             */
-  I2C0_IRQn                     = 14,       /*!< I2C0 Interrupt                                   */
-  I2C1_IRQn                     = 15,       /*!< I2C1 Interrupt                                   */
-  SDIO_IRQn                     = 16,       /*!< SDIO Combined Interrupt                          */
-  D_APLL_UNLOCK_IRQn            = 17,       /*!< RF added: D_APLL_UNLOCK Interrupt                */
-  D_SX_UNLOCK_IRQn              = 18,       /*!< RF added: D_SX_UNLOCK Interrupt                  */
-  AUX_ADC_IRQn                  = 20,       /*!< ADC Interrupt                                    */
-  PLF_WAKEUP_IRQn               = 23,       /*!< WiFi Platform Wake-Up Interrupt                  */
-  I2S_IRQn                      = 24,       /*!< I2S Interrupt                                    */
-  RW_BLE_IRQn                   = 25,       /*!< BLE Interrupt                                    */
+typedef enum IRQn {
+    /**************   Processor Exceptions Numbers ******************************************/
+    NonMaskableInt_IRQn           = -14,      /*!< 2 Non Maskable Interrupt                         */
+    MemoryManagement_IRQn         = -12,      /*!< 4 Cortex-M3 Memory Management Interrupt          */
+    BusFault_IRQn                 = -11,      /*!< 5 Cortex-M3 Bus Fault Interrupt                  */
+    UsageFault_IRQn               = -10,      /*!< 6 Cortex-M3 Usage Fault Interrupt                */
+    SVCall_IRQn                   = -5,       /*!< 11 Cortex-M3 SV Call Interrupt                   */
+    DebugMonitor_IRQn             = -4,       /*!< 12 Cortex-M3 Debug Monitor Interrupt             */
+    PendSV_IRQn                   = -2,       /*!< 14 Cortex-M3 Pend SV Interrupt                   */
+    SysTick_IRQn                  = -1,       /*!< 15 Cortex-M3 System Tick Interrupt               */
+    /******   Interrupt Numbers *******************************************************/
+    CEVA_RW_IP_IRQn               = 0,        /*!< CEVA RW IP Interrupt                             */
+    SLEEP_IRQn                    = 1,        /*!< Sleep Wake-Up Interrupt                          */
+    WDG_IRQn                      = 2,        /*!< Window WatchDog                                  */
+    FLASH_IRQn                    = 3,        /*!< FLASH Interrupt                                  */
+    GPIO_IRQn                     = 4,        /*!< GPIO Interrupt                                   */
+    TIMER_IRQn                    = 5,        /*!< Timer Interrupt                                  */
+    CRYPTOCELL310_IRQn            = 6,        /*!< CryptoCell 310 Interrupt                         */
+    DMA_IRQn                      = 7,        /*!< Generic DMA Ctrl Interrupt                       */
+    UART0_IRQn                    = 8,        /*!< UART0 Interrupt                                  */
+    UART1_IRQn                    = 9,        /*!< UART1 Interrupt                                  */
+    UART2_IRQn                    = 10,       /*!< UART2 Interrupt                                  */
+    SPI0_IRQn                     = 11,       /*!< SPI0 Interrupt                                   */
+    SPI1_IRQn                     = 12,       /*!< SPI1 Interrupt                                   */
+    SPI2_IRQn                     = 13,       /*!< SPI2                                             */
+    I2C0_IRQn                     = 14,       /*!< I2C0 Interrupt                                   */
+    I2C1_IRQn                     = 15,       /*!< I2C1 Interrupt                                   */
+    SDIO_IRQn                     = 16,       /*!< SDIO Combined Interrupt                          */
+    D_APLL_UNLOCK_IRQn            = 17,       /*!< RF added: D_APLL_UNLOCK Interrupt                */
+    D_SX_UNLOCK_IRQn              = 18,       /*!< RF added: D_SX_UNLOCK Interrupt                  */
+    AUX_ADC_IRQn                  = 20,       /*!< ADC Interrupt                                    */
+    PLF_WAKEUP_IRQn               = 23,       /*!< WiFi Platform Wake-Up Interrupt                  */
+    I2S_IRQn                      = 24,       /*!< I2S Interrupt                                    */
+    RW_BLE_IRQn                   = 25,       /*!< BLE Interrupt                                    */
 } IRQn_Type;
-
 
 #ifdef DUET_CM4
 #include "core_cm4.h"
 #include "cachel1_armv7.h"
 #endif
-
-#include <stdint.h>
-
 // ---------------------------------------------------------------------------
 typedef enum {RESET = 0, SET = !RESET} FlagStatus, ITstatus;
 typedef enum {DISABLE = 0, ENABLE = !DISABLE} FunctionalState;
@@ -164,8 +161,7 @@ extern uint32_t system_core_clk;
 #define APLL_FCAL_FSM_CTRL_ADDR     0x6E
 
 //efuse memory
-typedef struct
-{
+typedef struct {
     uint8_t mac_addr0[6];           //0x90-0x95
     uint8_t freq_err;               //0x96
     uint8_t tmmt1;                  //0x97
@@ -185,7 +181,7 @@ typedef struct
     uint8_t ble_tx_pwr1[3];         //0xe4-0xe6
     uint8_t ble_tx_pwr2[3];         //0xe7-0xe9
     uint8_t reserved2[6];           //0xea-0xef
-}efuse_info_t;
+} efuse_info_t;
 #define EFUSE_INFO_START_ADDR       0x90
 #define EFUSE_INFO_LEN              (sizeof(efuse_info_t))
 #define EFUSE_INFO_CHIP_TYPE_ADDR   0x1F6
@@ -319,15 +315,14 @@ typedef struct
 
 #endif
 
-#ifdef ALIOS_SUPPORT
-#include <k_api.h>
-#define duet_intrpt_enter() krhino_intrpt_enter()
-#define duet_intrpt_exit() krhino_intrpt_exit()
-#else
 #define duet_intrpt_enter()
 #define duet_intrpt_exit()
-#endif
 
-#endif
+#ifdef __cplusplus
+}
+#endif /* __cplusplus */
+
+
+#endif // __DUET_CM4_H__
 
 

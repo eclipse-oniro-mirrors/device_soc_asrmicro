@@ -16,13 +16,13 @@
 #ifndef HAL_UART_H
 #define HAL_UART_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <stdint.h>
 #include "los_event.h"
 #include "los_compiler.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define HAL_WAIT_FOREVER 0xFFFFFFFFU
 /*
@@ -150,7 +150,7 @@ int32_t hal_uart_recv_II(uart_dev_t *uart, void *data, uint32_t expect_size,
  */
 int32_t hal_uart_finalize(uart_dev_t *uart);
 
-int32_t UartGetc();
+int32_t UartGetc(void);
 
 #ifdef __cplusplus
 }

@@ -26,18 +26,18 @@ int mbedtls_hardware_poll( void *data,
     int ret = 0;
     lega_rnd_init();
     ret = lega_RND_AddAdditionalInput(rndContext_ptr, "0123", 4);
-    if (ret != LEGA_HW_OK){
-        printf("\n CRYS_RND_AddAdditionalInput failed with 0x%x \n",ret);
+    if (ret != LEGA_HW_OK) {
+        printf("\n CRYS_RND_AddAdditionalInput failed with 0x%x \n", ret);
         goto rnd_err;
     }
     ret = lega_RND_Reseeding (rndContext_ptr, rndWorkBuff_ptr);
-    if (ret != LEGA_HW_OK){
-        printf("\n CRYS_RND_Reseeding failed with 0x%x \n",ret);
+    if (ret != LEGA_HW_OK) {
+        printf("\n CRYS_RND_Reseeding failed with 0x%x \n", ret);
         goto rnd_err;
     }
     ret = lega_RND_GenerateVector(rndContext_ptr, len, output);
-    if (ret != LEGA_HW_OK){
-        printf("\n CRYS_RND_GenerateVector for vector 1 failed with 0x%x \n",ret);
+    if (ret != LEGA_HW_OK) {
+        printf("\n CRYS_RND_GenerateVector for vector 1 failed with 0x%x \n", ret);
         goto rnd_err;
     }
 
@@ -52,12 +52,11 @@ rnd_err:
 uint32_t mbedtls_hw_rand()
 {
     uint32_t ret = 0;
-    uint8_t buffer[RND_MAX_LEN] ={0};
+    uint8_t buffer[RND_MAX_LEN] = {0};
     uint32_t olen = 0;
     mbedtls_hardware_poll( "0", &buffer[0], RND_TEST_LEN, &olen );
     printf("data len = %d, data = \n", (int)olen);
-    for(ret = 0;ret < RND_TEST_LEN; ret++)
-    {
+    for (ret = 0; ret < RND_TEST_LEN; ret++) {
         printf("0x%x ", buffer[ret]);
     }
     printf("\n");

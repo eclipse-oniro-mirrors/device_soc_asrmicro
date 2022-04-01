@@ -115,7 +115,7 @@ WifiErrorCode DisableHotspot(void)
     return WIFI_SUCCESS;
 }
 
-WifiErrorCode SetHotspotConfig(const HotspotConfig* config)
+WifiErrorCode SetHotspotConfig(const HotspotConfig *config)
 {
     if (config == NULL) {
         return ERROR_WIFI_INVALID_ARGS;
@@ -135,7 +135,7 @@ WifiErrorCode SetHotspotConfig(const HotspotConfig* config)
     return WIFI_SUCCESS;
 }
 
-WifiErrorCode GetHotspotConfig(HotspotConfig* result)
+WifiErrorCode GetHotspotConfig(HotspotConfig *result)
 {
     if (result == NULL) {
         return ERROR_WIFI_INVALID_ARGS;
@@ -168,7 +168,7 @@ int IsHotspotActive(void)
     return ret;
 }
 
-WifiErrorCode GetStationList(StationInfo* result, unsigned int* size)
+WifiErrorCode GetStationList(StationInfo *result, unsigned int *size)
 {
     if (result == NULL || size == NULL || *size == 0) {
         return ERROR_WIFI_INVALID_ARGS;
@@ -215,7 +215,7 @@ WifiErrorCode SetBand(int band)
     return WIFI_SUCCESS;
 }
 
-WifiErrorCode GetBand(int* result)
+WifiErrorCode GetBand(int *result)
 {
     if (result == NULL) {
         return ERROR_WIFI_INVALID_ARGS;
@@ -295,7 +295,7 @@ int GetHotspotChannel(void)
     return channel;
 }
 
-WifiErrorCode GetHotspotInterfaceName(char* result, int size)
+WifiErrorCode GetHotspotInterfaceName(char *result, int size)
 {
     if (LockWifiGlobalLock() != WIFI_SUCCESS) {
         return ERROR_WIFI_UNKNOWN;
@@ -308,11 +308,11 @@ WifiErrorCode GetHotspotInterfaceName(char* result, int size)
     }
 
     int cpyErr = memcpy_s(result, size, g_wifiIfName, WIFI_IFNAME_MAX_SIZE + 1);
-    if (UnlockWifiGlobalLock() != WIFI_SUCCESS) {
-        return ERROR_WIFI_UNKNOWN;
-    }
     if (cpyErr != EOK) {
         printf("[wifi_service]:getifname memcpy fail, err = %d\n", cpyErr);
+        return ERROR_WIFI_UNKNOWN;
+    }
+    if (UnlockWifiGlobalLock() != WIFI_SUCCESS) {
         return ERROR_WIFI_UNKNOWN;
     }
     return WIFI_SUCCESS;

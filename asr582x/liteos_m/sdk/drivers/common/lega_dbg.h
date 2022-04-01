@@ -16,8 +16,8 @@
 #ifndef _LEGA_DBG_H_
 #define _LEGA_DBG_H_
 
-#include "lega_types.h"
 #include <stdio.h>
+#include "lega_types.h"
 
 #define D_CRT       1
 #define D_ERR       2

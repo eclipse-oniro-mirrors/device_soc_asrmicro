@@ -16,14 +16,12 @@
 #ifndef _DUET_COMM_H_
 #define _DUET_COMM_H_
 
-#include <stdio.h>
 #include <stdint.h>
-#include <stdlib.h>
 
 #define DUET_STR_TO_INT_ERR  0xFFFFFFFF
 #define LEGA_STR_TO_INT_ERR  DUET_STR_TO_INT_ERR
 void jumpToApp(int addr);
-void duet_memset(char *buf,int value, int size);
+void duet_memset(char *buf, int value, int size);
 void duet_memcpy(char *dst, char *src, int size);
 void udelay(unsigned int us);
 void delay(unsigned int cycles);

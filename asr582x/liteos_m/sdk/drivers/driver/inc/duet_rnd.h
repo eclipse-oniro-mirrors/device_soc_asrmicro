@@ -37,13 +37,14 @@ It implements referenced standard [SP800-90] - 10.2.1.3.2 - CTR-DRBG Instantiate
 @return CRYS_OK on success.
 @return A non-zero value from crys_rnd_error.h on failure.
 */
-int duet_RND_Instantiation(CRYS_RND_Context_t *rndContext_ptr,       /*!< [in/out]  Pointer to the RND context buffer allocated by the user, which is used to
+int duet_RND_Instantiation(CRYS_RND_Context_t
+                           *rndContext_ptr,       /*!< [in/out]  Pointer to the RND context buffer allocated by the user, which is used to
                                            maintain the RND state, as well as pointers to the functions used for
                                            random vector generation. This context must be saved and provided as a
                                            parameter to any API that uses the RND module.
                                            \note the context must be cleared before sent to the function. */
                            CRYS_RND_WorkBuff_t *rndWorkBuff_ptr       /*!< [in/out] Scratchpad for the RND module's work. */
-);
+                          );
 
 /*!
 @brief Clears existing RNG instantiation state.
@@ -65,7 +66,7 @@ It implements referenced standard [SP800-90] - 10.2.1.4.2 - CTR-DRBG Reseeding a
 */
 int duet_RND_Reseeding(CRYS_RND_Context_t *rndContext_ptr,      /*!< [in/out] Pointer to the RND context buffer. */
                        CRYS_RND_WorkBuff_t *rndWorkBuff_ptr      /*!< [in/out] Scratchpad for the RND module's work. */
-);
+                      );
 
 
 /****************************************************************************************/
@@ -82,11 +83,12 @@ The generation algorithm uses AES (FIPS-PUB 197) and Derivation Function (DF).
 @return CRYS_OK on success.
 @return A non-zero value from crys_rnd_error.h on failure.
 */
-int duet_RND_GenerateVector(CRYS_RND_State_t *rndState_ptr,     /*!< [in/out] Pointer to the RND state structure, which is part of the RND context structure.
+int duet_RND_GenerateVector(CRYS_RND_State_t
+                            *rndState_ptr,     /*!< [in/out] Pointer to the RND state structure, which is part of the RND context structure.
                                      Use rndContext->rndState field of the context for this parameter. */
                             uint16_t outSizeBytes,            /*!< [in]  The size in bytes of the random vector required. The maximal size is 2^16 -1 bytes. */
                             uint8_t *out_ptr                  /*!< [out] The pointer to output buffer. */
-);
+                           );
 
 
 /****************************************************************************************/
@@ -101,12 +103,13 @@ after ::CRYS_RND_Instantiation is called.
 @return CRYS_OK on success.
 @return A non-zero value from crys_rnd_error.h on failure.
 */
-int duet_RND_SetGenerateVectorFunc(CRYS_RND_Context_t *rndContext_ptr,                     /*!< [in/out] Pointer to the RND context buffer allocated by the user,
+int duet_RND_SetGenerateVectorFunc(CRYS_RND_Context_t
+                                   *rndContext_ptr,                     /*!< [in/out] Pointer to the RND context buffer allocated by the user,
                                               which is used to maintain the RND state as well as pointers
                                               to the functions used for random vector generation. */
                                    SaSiRndGenerateVectWorkFunc_t rndGenerateVectFunc       /*!< [in] Pointer to the random vector generation function.
                                               The pointer should point to the ::CRYS_RND_GenerateVector function. */
-);
+                                  );
 
 
 /**********************************************************************************************************/
@@ -125,11 +128,11 @@ The RND module must be instantiated prior to invocation of this API.
 @return A non-zero value from crys_rnd_error.h on failure.
 */
 int duet_RND_GenerateVectorInRange(
-        CRYS_RND_Context_t *rndContext_ptr,     /*!< [in/out] Pointer to the RND context buffer. */
-        uint32_t rndSizeInBits,                /*!< [in]  The size in bits of the random vector required. The allowed size in range  2 <= rndSizeInBits < 2^19-1, bits. */
-        uint8_t *maxVect_ptr,                  /*!< [in]  Pointer to the vector defining the upper limit for the random vector output, Given as little-endian byte array.
+    CRYS_RND_Context_t *rndContext_ptr,     /*!< [in/out] Pointer to the RND context buffer. */
+    uint32_t rndSizeInBits,                /*!< [in]  The size in bits of the random vector required. The allowed size in range  2 <= rndSizeInBits < 2^19-1, bits. */
+    uint8_t *maxVect_ptr,                  /*!< [in]  Pointer to the vector defining the upper limit for the random vector output, Given as little-endian byte array.
                                                                        If not NULL, its actual size is treated as [(rndSizeInBits+7)/8] bytes. */
-        uint8_t *rndVect_ptr                   /*!< [in/out] Pointer to the output buffer for the random vector. Must be at least [(rndSizeInBits+7)/8] bytes.
+    uint8_t *rndVect_ptr                   /*!< [in/out] Pointer to the output buffer for the random vector. Must be at least [(rndSizeInBits+7)/8] bytes.
                                                                  Treated as little-endian byte array. */
 );
 
@@ -142,11 +145,11 @@ to be later used by the ::CRYS_RND_Instantiation/::CRYS_RND_Reseeding/::CRYS_RND
 @return CRYS_OK on success.
 @return A non-zero value from crys_rnd_error.h on failure.
 */
-int
-duet_RND_AddAdditionalInput(CRYS_RND_Context_t *rndContext_ptr,     /*!< [in/out] Pointer to the RND context buffer. */
-                            uint8_t *additonalInput_ptr,            /*!< [in]  The Additional Input buffer. */
-                            uint16_t additonalInputSize             /*!< [in]  The size of the Additional Input buffer. Must be <= 48, and a multiple of 4. */
-);
+int duet_RND_AddAdditionalInput(CRYS_RND_Context_t
+                                *rndContext_ptr,     /*!< [in/out] Pointer to the RND context buffer. */
+                                uint8_t *additonalInput_ptr,            /*!< [in]  The Additional Input buffer. */
+                                uint16_t additonalInputSize             /*!< [in]  The size of the Additional Input buffer. Must be <= 48, and a multiple of 4. */
+                               );
 
 /*!
 @brief The CRYS_RND_EnterKatMode function sets KAT mode bit into StateFlag of global CRYS_RND_WorkingState structure.
@@ -163,9 +166,10 @@ int duet_RND_EnterKatMode(CRYS_RND_Context_t *rndContext_ptr,     /*!< [in/out] 
                           uint32_t entrSize,           /*!< [in] Entropy size in bytes. */
                           uint8_t *nonce_ptr,          /*!< [in] Nonce. */
                           uint32_t nonceSize,          /*!< [in] Entropy size in bytes. */
-                          CRYS_RND_WorkBuff_t *workBuff_ptr      /*!< [out] RND working buffer, must be the same buffer, which should be passed into
+                          CRYS_RND_WorkBuff_t
+                          *workBuff_ptr      /*!< [out] RND working buffer, must be the same buffer, which should be passed into
                             Instantiation/Reseeding functions. */
-);
+                         );
 
 /**********************************************************************************************************/
 /*!
@@ -177,6 +181,6 @@ The user must call this function after KAT tests before actual using RND module 
 @return A non-zero value from crys_rnd_error.h on failure.
 */
 void duet_RND_DisableKatMode(CRYS_RND_Context_t *rndContext_ptr     /*!< [in/out] Pointer to the RND context buffer. */
-);
+                            );
 
 #endif //_DUET_RND_H_

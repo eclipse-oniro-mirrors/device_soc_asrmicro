@@ -34,7 +34,6 @@
  ****************************************************************************************
  */
 
-#include "sonata_config.h"
 ///@cond
 #if BLE_HOST_PRESENT
 ///@endcond
@@ -59,10 +58,9 @@
 /*!
  * @brief
  */
-typedef enum
-{
+typedef enum {
     /// Peripheral Bonded
-    SONATA_TAG_PERIPH_BONDED              = (APP_DATA_SAVE_TAG_FIRST+0),
+    SONATA_TAG_PERIPH_BONDED              = (APP_DATA_SAVE_TAG_FIRST + 0),
     /// Mouse NTF Cfg
     SONATA_TAG_MOUSE_NTF_CFG,
     /// Mouse Timeout value
@@ -79,13 +77,12 @@ typedef enum
     SONATA_TAG_IRK,
     /// RCS mode control handle
     SONATA_TAG_CMD_HANDLE,
-}sonata_app_nvds_tag;
+} sonata_app_nvds_tag;
 
 /*!
  * @brief
  */
-typedef enum
-{
+typedef enum {
     /// Peripheral Bonded len
     SONATA_LEN_PERIPH_BONDED              = 1,
     /// Mouse NTF Cfg len
@@ -104,11 +101,10 @@ typedef enum
     SONATA_LEN_IRK                        = 16,
     /// RCS mode control handle len
     SONATA_LEN_CMD_HANDLE                 = 2,
-}sonata_app_nvds_len;
+} sonata_app_nvds_len;
 
 /// Peer HID service info that can be read/write
-enum sonata_hogprh_info
-{
+enum sonata_hogprh_info {
     /// Protocol Mode
     SONATA_HOGPRH_PROTO_MODE,
     /// Report Map
@@ -131,8 +127,7 @@ enum sonata_hogprh_info
 };
 
 ///Parameters of the @ref HOGPRH_READ_INFO_RSP message
-typedef struct sonata_hogprh_read_info_req
-{
+typedef struct sonata_hogprh_read_info_req {
     ///Characteristic info @see enum hogprh_info
     uint8_t info;
     /// HID Service Instance - From 0 to HOGPRH_NB_HIDS_INST_MAX-1
@@ -142,12 +137,11 @@ typedef struct sonata_hogprh_read_info_req
     ///  - info = HOGPRH_REPORT_REF
     ///  - info = HOGPRH_REPORT_NTF_CFG
     uint8_t report_idx;
-}sonata_hogprh_read_info_req_t;
+} sonata_hogprh_read_info_req_t;
 
 
 /// HID Information structure
-struct sonata_hids_hid_info
-{
+struct sonata_hids_hid_info {
     /// bcdHID
     uint16_t bcdHID;
     /// bCountryCode
@@ -157,8 +151,7 @@ struct sonata_hids_hid_info
 };
 
 /// HID report info
-struct sonata_hogprh_report
-{
+struct sonata_hogprh_report {
     /// Report Length
     uint8_t length;
     /// Report value
@@ -166,8 +159,7 @@ struct sonata_hogprh_report
 };
 
 /// HID report Reference
-struct sonata_hogprh_report_ref
-{
+struct sonata_hogprh_report_ref {
     /// Report ID
     uint8_t id;
     /// Report Type
@@ -175,8 +167,7 @@ struct sonata_hogprh_report_ref
 };
 
 /// HID report MAP info
-struct sonata_hogprh_report_map
-{
+struct sonata_hogprh_report_map {
     /// Report MAP Length
     uint16_t length;
     /// Report MAP value
@@ -184,8 +175,7 @@ struct sonata_hogprh_report_map
 };
 
 /// HID report MAP reference
-struct sonata_hogprh_report_map_ref
-{
+struct sonata_hogprh_report_map_ref {
     /// Reference UUID length
     uint8_t uuid_len;
     /// Reference UUID Value
@@ -193,8 +183,7 @@ struct sonata_hogprh_report_map_ref
 };
 
 /// Information data
-union sonata_hogprh_data
-{
+union sonata_hogprh_data {
     /// Protocol Mode
     ///  - info = HOGPRH_PROTO_MODE
     uint8_t proto_mode;
@@ -230,8 +219,7 @@ union sonata_hogprh_data
 
 
 ///Parameters of the @ref HOGPRH_WRITE_REQ message
-typedef struct sonata_hogprh_write_req
-{
+typedef struct sonata_hogprh_write_req {
     ///Characteristic info @see enum hogprh_info
     uint8_t info;
     /// HID Service Instance - From 0 to HOGPRH_NB_HIDS_INST_MAX-1
@@ -245,16 +233,15 @@ typedef struct sonata_hogprh_write_req
     bool    wr_cmd;
     /// Information data
     union sonata_hogprh_data data;
-}sonata_hogprh_write_req_t;
+} sonata_hogprh_write_req_t;
 
 /*!
  * @brief Callback for hogpd value
  */
-typedef struct
-{
+typedef struct {
     uint16_t (*hogprh_report_indicate)(uint8_t hid_idx, uint8_t report_idx, uint8_t report_length, uint8_t *value);
 
-}prf_hogprh_callback;
+} prf_hogprh_callback;
 
 /*!
  * @brief sonata_prf_hogprh_init
@@ -295,13 +282,13 @@ void sonata_prf_hogprh_updata_conn_params(uint16_t intv_min, uint16_t intv_max, 
  * @brief sonata_prf_hogprh_write_req_handler
  * @param param
  */
-int sonata_prf_hogprh_write_req_handler(sonata_hogprh_write_req_t* param);
+int sonata_prf_hogprh_write_req_handler(sonata_hogprh_write_req_t *param);
 
 /*!
  * @brief sonata_prf_hogprh_register_callback
  * @param cb
  */
-uint16_t sonata_prf_hogprh_register_callback(prf_hogprh_callback * cb);
+uint16_t sonata_prf_hogprh_register_callback(prf_hogprh_callback *cb);
 
 void sonata_prf_hogprh_reset();
 

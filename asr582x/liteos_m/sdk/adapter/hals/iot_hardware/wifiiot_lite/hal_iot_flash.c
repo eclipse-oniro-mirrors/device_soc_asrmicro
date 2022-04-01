@@ -22,7 +22,7 @@
 static int param_part = PARTITION_PARAMETER_2;
 unsigned int IoTFlashRead(unsigned int flashOffset, unsigned int size, unsigned char *ramData)
 {
-    return duet_flash_read(param_part, (uint32_t*)&flashOffset, ramData, size);
+    return duet_flash_read(param_part, (uint32_t *)&flashOffset, ramData, size);
 }
 
 unsigned int IoTFlashWrite(unsigned int flashOffset, unsigned int size,
@@ -32,10 +32,11 @@ unsigned int IoTFlashWrite(unsigned int flashOffset, unsigned int size,
     lega_rtos_declare_critical();
     lega_enter_critical_expble();
 
-    if(doErase)
-        ret = duet_flash_erase_write(param_part, (uint32_t*)&flashOffset, ramData, size);
-    else
-        ret = duet_flash_write(param_part, (uint32_t*)&flashOffset, ramData, size);
+    if (doErase) {
+        ret = duet_flash_erase_write(param_part, (uint32_t *)&flashOffset, ramData, size);
+    } else {
+        ret = duet_flash_write(param_part, (uint32_t *)&flashOffset, ramData, size);
+    }
 
     lega_exit_critical_expble();
     return ret;

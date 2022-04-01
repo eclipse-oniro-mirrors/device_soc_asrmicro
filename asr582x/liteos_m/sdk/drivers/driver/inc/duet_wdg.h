@@ -16,7 +16,6 @@
 #ifndef _DUET_WDG_H_
 #define _DUET_WDG_H_
 #include <stdint.h>
-#include <errno.h>
 
 typedef struct {
     uint32_t timeout;  /* Watchdag timeout */

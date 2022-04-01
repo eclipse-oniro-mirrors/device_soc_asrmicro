@@ -16,12 +16,12 @@
 #ifndef __DUET_SPI_H
 #define __DUET_SPI_H
 
-#ifdef __cplusplus
-extern "C"{
-#endif
-
 #include "duet.h"
 #include <errno.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define DUET_SPI0_INDEX    0
 #define DUET_SPI1_INDEX    1
@@ -87,30 +87,30 @@ typedef struct {
 typedef void (*duet_spi_callback_func)(uint8_t);
 extern duet_spi_callback_func g_duet_spi_callback_handler[DUET_SPI_NUM];
 
-__STATIC_INLINE void duet_spi_interrupt_clear(SPI_TypeDef * SPIx, uint8_t spi_interrupt)
+__STATIC_INLINE void duet_spi_interrupt_clear(SPI_TypeDef *SPIx, uint8_t spi_interrupt)
 {
     SPIx->ICR |= spi_interrupt;
 }
 
-__STATIC_INLINE ITstatus duet_spi_get_flag_status(SPI_TypeDef * SPIx, uint8_t spi_flag)
+__STATIC_INLINE ITstatus duet_spi_get_flag_status(SPI_TypeDef *SPIx, uint8_t spi_flag)
 {
     return SPIx->SR & spi_flag;
 }
 
-__STATIC_INLINE ITstatus duet_spi_get_interrupt_status(SPI_TypeDef * SPIx, uint8_t spi_interrupt)
+__STATIC_INLINE ITstatus duet_spi_get_interrupt_status(SPI_TypeDef *SPIx, uint8_t spi_interrupt)
 {
     return SPIx->MIS & spi_interrupt;
 }
 
-__STATIC_INLINE ITstatus duet_spi_get_raw_interrupt_status(SPI_TypeDef * SPIx, uint8_t spi_interrupt)
+__STATIC_INLINE ITstatus duet_spi_get_raw_interrupt_status(SPI_TypeDef *SPIx, uint8_t spi_interrupt)
 {
     return SPIx->RIS & spi_interrupt;
 }
 
-void duet_spi_interrupt_config(SPI_TypeDef * SPIx, uint8_t spi_interrupt, uint8_t new_state);
-int32_t duet_spi_dma_config(duet_spi_dev_t * spi,uint8_t dma_tx_rx_sel,uint8_t new_state);
-int32_t duet_spi_cpol_cpha_config(duet_spi_dev_t * spi,uint8_t mode);
-void duet_spi_cmd(SPI_TypeDef * SPIx, uint8_t new_state);
+void duet_spi_interrupt_config(SPI_TypeDef *SPIx, uint8_t spi_interrupt, uint8_t new_state);
+int32_t duet_spi_dma_config(duet_spi_dev_t *spi, uint8_t dma_tx_rx_sel, uint8_t new_state);
+int32_t duet_spi_cpol_cpha_config(duet_spi_dev_t *spi, uint8_t mode);
+void duet_spi_cmd(SPI_TypeDef *SPIx, uint8_t new_state);
 void duet_spi_struct_init(duet_spi_dev_t *init_struct);
 
 /**

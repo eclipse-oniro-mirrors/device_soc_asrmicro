@@ -34,8 +34,6 @@
 #include "sonata_utils_api.h"
 #include "sonata_gatt_api.h"
 #include "sonata_gap_api.h"
-#include "sonata_prf_diss_api.h"
-#include "sonata_log.h"
 /*
  * MACRO DEFINITIONS
  ****************************************************************************************
@@ -64,16 +62,14 @@
  */
 
 /// App callback status
-typedef enum
-{
+typedef enum {
     CB_DONE           = 0, //Done in callback
     CB_REJECT         = 1, //Do nothing in callback, SDK will do it
-    CB_MAX            =0XFF,
-}CBStatus;
+    CB_MAX            = 0xFF,
+} CBStatus;
 
 /// Result of sleep state.
-enum sonata_ble_sleep_state
-{
+enum sonata_ble_sleep_state {
     /// Some activity pending, can not enter in sleep state
     SONATA_BLE_ACTIVE    = 0,
     /// CPU can be put in sleep state
@@ -126,7 +122,7 @@ void sonata_ble_prevent_sleep_clear(uint16_t prv_slp_bit);
  * @brief Reset ble module
  * @return API_SUCCESS
  */
-uint16_t sonata_ble_reset();
+uint16_t sonata_ble_reset(void);
 
 /*!
  * @brief ble stack schedule

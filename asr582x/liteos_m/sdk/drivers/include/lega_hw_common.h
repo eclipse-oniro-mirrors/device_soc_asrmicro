@@ -25,8 +25,8 @@
 #include "lega_rtos_api.h"
 #endif
 extern lega_mutex_t HwSecurityMutex;
-#define LEGA_HW_OK         0
-#define LEGA_HW_ERR        -1
+#define LEGA_HW_OK         (0)
+#define LEGA_HW_ERR        (-1)
 
 /*!
 HASH operation mode
@@ -41,9 +41,9 @@ typedef enum {
 
     LEGA_HASH_NumOfModes,
 
-    LEGA_HASH_OperationModeLast= 0x7FFFFFFF,
+    LEGA_HASH_OperationModeLast = 0x7FFFFFFF,
 
-}LEGA_HASH_OperationMode_t;
+} LEGA_HASH_OperationMode_t;
 
 /*! Defines the HASH result buffer. */
 typedef uint32_t LEGA_HASH_Result_t[16];
@@ -52,9 +52,9 @@ extern uint8_t   *rndContext_ptr;
 extern uint8_t  *rndWorkBuff_ptr;
 extern int hw_lib_init_flag;
 
-int lega_hw_lib_init();
-int lega_hw_lib_deinit();
-int lega_security_engine_init();
-int lega_security_engine_deinit();
+int lega_hw_lib_init(void);
+int lega_hw_lib_deinit(void);
+int lega_security_engine_init(void);
+int lega_security_engine_deinit(void);
 
 #endif //_LEGA_HW_COMMON_H_

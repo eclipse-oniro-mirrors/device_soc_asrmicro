@@ -28,16 +28,17 @@ char other_m[6] = "Other";
 
 char *component_info(uint32_t module_t)
 {
-    if(module_t & LWIFI_COMP)
+    if (module_t &LWIFI_COMP) {
         return lwifi_m;
-    else if(module_t & UWIFI_COMP)
+    } else if (module_t &UWIFI_COMP) {
         return uwifi_m;
-    else if(module_t & OS_COMP)
+    } else if (module_t &OS_COMP) {
         return os_m;
-    else if(module_t & LWIP_COMP)
+    } else if (module_t &LWIP_COMP) {
         return lwip_m;
-    else if(module_t & AT_COMP)
+    } else if (module_t &AT_COMP) {
         return at_m;
+    }
 
     return other_m;
 }

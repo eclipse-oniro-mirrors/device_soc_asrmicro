@@ -16,6 +16,7 @@
 #include <wchar.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <stdarg.h>
 #include "duet_cm4.h"
 #include "printf_uart.h"
 
@@ -43,4 +44,16 @@ const char *__locale_ctype_ptr (void)
 int access(const char *filename, int amode)
 {
     return 0;
+}
+
+int sscanf(const char *__restrict __s, const char *__restrict __format, ...)
+{
+    va_list args;
+    int i;
+
+    va_start(args, __format);
+    i = sys_vsscanf(__s, __format, args);
+    va_end(args);
+
+    return i;
 }

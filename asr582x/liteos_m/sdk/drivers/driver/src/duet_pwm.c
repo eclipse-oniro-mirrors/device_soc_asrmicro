@@ -14,54 +14,54 @@
  */
 
 #include <stdio.h>
+#include <errno.h>
 #include "duet.h"
 #include "duet_cm4.h"
-#include "duet_pwm.h"
 #include "duet_pinmux.h"
+#include "duet_pwm.h"
 
 void PWM_IRQHandler(void)
 {
-//    duet_intrpt_enter();
-//    duet_intrpt_exit();
+    //    duet_intrpt_enter();
+    //    duet_intrpt_exit();
 }
 
 //pwm pinmux init
 void duet_pwm_pinmux_init(duet_pwm_dev_t *pwm)
 {
-    switch(pwm->port)
-    {
+    switch (pwm->port) {
         case PWM_OUTPUT_CH0:
             //pin mux control
             //PWM0_PAD PAD14 1
-            duet_pinmux_config(PAD14,PF_PWM0);
+            duet_pinmux_config(PAD14, PF_PWM0);
             break;
         case PWM_OUTPUT_CH1:
             //PWM1_PAD PAD10 1
-            duet_pinmux_config(PAD10,PF_PWM1);
+            duet_pinmux_config(PAD10, PF_PWM1);
             break;
         case PWM_OUTPUT_CH2:
             //PWM2_PAD PAD15 1
-            duet_pinmux_config(PAD15,PF_PWM2);
+            duet_pinmux_config(PAD15, PF_PWM2);
             break;
         case PWM_OUTPUT_CH3:
             //PWM3_PAD PAD11 1
-            duet_pinmux_config(PAD11,PF_PWM3);
+            duet_pinmux_config(PAD11, PF_PWM3);
             break;
         case PWM_OUTPUT_CH4:
             //PWM4_PAD PAD6  4
-            duet_pinmux_config(PAD6,PF_PWM4);
+            duet_pinmux_config(PAD6, PF_PWM4);
             break;
         case PWM_OUTPUT_CH5:
             //PWM5_PAD PAD0  4
-            duet_pinmux_config(PAD0,PF_PWM5);
+            duet_pinmux_config(PAD0, PF_PWM5);
             break;
         case PWM_OUTPUT_CH6:
             //PWM6_PAD PAD7  4
-            duet_pinmux_config(PAD7,PF_PWM6);
+            duet_pinmux_config(PAD7, PF_PWM6);
             break;
         case PWM_OUTPUT_CH7:
             //PWM7_PAD PAD1  4
-            duet_pinmux_config(PAD1,PF_PWM7);
+            duet_pinmux_config(PAD1, PF_PWM7);
             break;
         default:
             break;
@@ -72,8 +72,7 @@ void duet_pwm_pinmux_init(duet_pwm_dev_t *pwm)
 void duet_pwm_cfg(duet_pwm_dev_t *pwm)
 {
     uint32_t tmp_value;
-    switch(pwm->port)
-    {
+    switch (pwm->port) {
         case PWM_OUTPUT_CH0:
             PWM->PWMCTL |= PWM_COUNT_MODE; //0: count-up mode, 1: count-up/down mode
             tmp_value = PWM->PWM01LOAD & (~(0x0000FFFF));
@@ -81,7 +80,7 @@ void duet_pwm_cfg(duet_pwm_dev_t *pwm)
             PWM->PWM01LOAD = tmp_value;
 
             tmp_value = PWM->PWM0CMP & (~(0x0000FFFF));
-            tmp_value |= (uint16_t)(SYSTEM_CLOCK / pwm->config.freq * (1-pwm->config.duty_cycle));
+            tmp_value |= (uint16_t)(SYSTEM_CLOCK / pwm->config.freq * (1 - pwm->config.duty_cycle));
             PWM->PWM0CMP = tmp_value;
             PWM->PWM01DB = 0;
             break;
@@ -92,7 +91,7 @@ void duet_pwm_cfg(duet_pwm_dev_t *pwm)
             PWM->PWM01LOAD = tmp_value;
 
             tmp_value = PWM->PWM0CMP & (~(0xFFFF0000));
-            tmp_value |= (uint16_t)(SYSTEM_CLOCK / pwm->config.freq * (1-pwm->config.duty_cycle)) << 16;
+            tmp_value |= (uint16_t)(SYSTEM_CLOCK / pwm->config.freq * (1 - pwm->config.duty_cycle)) << 16;
             PWM->PWM0CMP = tmp_value;
             PWM->PWM01DB = 0;
             break;
@@ -103,7 +102,7 @@ void duet_pwm_cfg(duet_pwm_dev_t *pwm)
             PWM->PWM01LOAD = tmp_value;
 
             tmp_value = PWM->PWM1CMP & (~(0x0000FFFF));
-            tmp_value |= (uint16_t)(SYSTEM_CLOCK / pwm->config.freq * (1-pwm->config.duty_cycle));
+            tmp_value |= (uint16_t)(SYSTEM_CLOCK / pwm->config.freq * (1 - pwm->config.duty_cycle));
             PWM->PWM1CMP = tmp_value;
             PWM->PWM01DB = 0;
             break;
@@ -114,7 +113,7 @@ void duet_pwm_cfg(duet_pwm_dev_t *pwm)
             PWM->PWM01LOAD = tmp_value;
 
             tmp_value = PWM->PWM1CMP & (~(0xFFFF0000));
-            tmp_value |= (uint16_t)(SYSTEM_CLOCK / pwm->config.freq * (1-pwm->config.duty_cycle)) << 16;
+            tmp_value |= (uint16_t)(SYSTEM_CLOCK / pwm->config.freq * (1 - pwm->config.duty_cycle)) << 16;
             PWM->PWM1CMP = tmp_value;
             PWM->PWM01DB = 0;
             break;
@@ -125,7 +124,7 @@ void duet_pwm_cfg(duet_pwm_dev_t *pwm)
             PWM->PWM23LOAD = tmp_value;
 
             tmp_value = PWM->PWM2CMP & (~(0x0000FFFF));
-            tmp_value |= (uint16_t)(SYSTEM_CLOCK / pwm->config.freq * (1-pwm->config.duty_cycle));
+            tmp_value |= (uint16_t)(SYSTEM_CLOCK / pwm->config.freq * (1 - pwm->config.duty_cycle));
             PWM->PWM2CMP = tmp_value;
             PWM->PWM23DB = 0;
             break;
@@ -136,7 +135,7 @@ void duet_pwm_cfg(duet_pwm_dev_t *pwm)
             PWM->PWM23LOAD = tmp_value;
 
             tmp_value = PWM->PWM2CMP & (~(0xFFFF0000));
-            tmp_value |= (uint16_t)(SYSTEM_CLOCK / pwm->config.freq * (1-pwm->config.duty_cycle)) << 16;
+            tmp_value |= (uint16_t)(SYSTEM_CLOCK / pwm->config.freq * (1 - pwm->config.duty_cycle)) << 16;
             PWM->PWM2CMP = tmp_value;
             PWM->PWM23DB = 0;
             break;
@@ -147,7 +146,7 @@ void duet_pwm_cfg(duet_pwm_dev_t *pwm)
             PWM->PWM23LOAD = tmp_value;
 
             tmp_value = PWM->PWM3CMP & (~(0x0000FFFF));
-            tmp_value |= (uint16_t)(SYSTEM_CLOCK / pwm->config.freq * (1-pwm->config.duty_cycle));
+            tmp_value |= (uint16_t)(SYSTEM_CLOCK / pwm->config.freq * (1 - pwm->config.duty_cycle));
             PWM->PWM3CMP = tmp_value;
             PWM->PWM23DB = 0;
             break;
@@ -158,7 +157,7 @@ void duet_pwm_cfg(duet_pwm_dev_t *pwm)
             PWM->PWM23LOAD = tmp_value;
 
             tmp_value = PWM->PWM3CMP & (~(0xFFFF0000));
-            tmp_value |= (uint16_t)(SYSTEM_CLOCK / pwm->config.freq * (1-pwm->config.duty_cycle)) << 16;
+            tmp_value |= (uint16_t)(SYSTEM_CLOCK / pwm->config.freq * (1 - pwm->config.duty_cycle)) << 16;
             PWM->PWM3CMP = tmp_value;
             PWM->PWM23DB = 0;
             break;
@@ -178,12 +177,10 @@ void duet_pwm_cfg(duet_pwm_dev_t *pwm)
 int32_t duet_pwm_init(duet_pwm_dev_t *pwm)
 {
     uint32_t reg_value;
-    if(NULL == pwm)
-    {
+    if (NULL == pwm) {
         return EIO;
     }
-    if(pwm->port >= DUET_PWM_CH_NUM)
-    {
+    if (pwm->port >= DUET_PWM_CH_NUM) {
         return EIO;
     }
     //pinmux
@@ -209,12 +206,10 @@ int32_t duet_pwm_init(duet_pwm_dev_t *pwm)
  */
 int32_t duet_pwm_start(duet_pwm_dev_t *pwm)
 {
-    if(NULL == pwm)
-    {
+    if (NULL == pwm) {
         return EIO;
     }
-    if(pwm->port >= DUET_PWM_CH_NUM)
-    {
+    if (pwm->port >= DUET_PWM_CH_NUM) {
         return EIO;
     }
     PWM->PWMCFG |= (1 << pwm->port);
@@ -230,12 +225,10 @@ int32_t duet_pwm_start(duet_pwm_dev_t *pwm)
  */
 int32_t duet_pwm_stop(duet_pwm_dev_t *pwm)
 {
-    if(NULL == pwm)
-    {
+    if (NULL == pwm) {
         return EIO;
     }
-    if(pwm->port >= DUET_PWM_CH_NUM)
-    {
+    if (pwm->port >= DUET_PWM_CH_NUM) {
         return EIO;
     }
     PWM->PWMCFG &= ~(1 << pwm->port);
@@ -252,12 +245,10 @@ int32_t duet_pwm_stop(duet_pwm_dev_t *pwm)
  */
 int32_t duet_pwm_para_chg(duet_pwm_dev_t *pwm, duet_pwm_config_t para)
 {
-    if(NULL == pwm)
-    {
+    if (NULL == pwm) {
         return EIO;
     }
-    if(pwm->port >= DUET_PWM_CH_NUM)
-    {
+    if (pwm->port >= DUET_PWM_CH_NUM) {
         return EIO;
     }
     //duet_pwm_stop(pwm);
@@ -278,12 +269,10 @@ int32_t duet_pwm_finalize(duet_pwm_dev_t *pwm)
 {
     //pwm clock disable
     //uint32_t reg_value;
-    if(NULL == pwm)
-    {
+    if (NULL == pwm) {
         return EIO;
     }
-    if(pwm->port >= DUET_PWM_CH_NUM)
-    {
+    if (pwm->port >= DUET_PWM_CH_NUM) {
         return EIO;
     }
     //one clk enable for 8 pwm channel

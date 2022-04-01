@@ -26,11 +26,7 @@
 #ifndef _SONATA_BLE_HOOK_H_
 #define _SONATA_BLE_HOOK_H_
 
-#include <stddef.h>    // standard definitions
 #include <stdint.h>    // standard integer definition
-#include <stdbool.h>   // boolean definition
-#include <stdio.h>
-#include <string.h>
 
 /*
  * TYPEDEF
@@ -39,11 +35,10 @@
 typedef void (*PF_APP_INIT)(void);
 typedef void (*PF_PLF_RESET)(uint32_t error);
 typedef uint16_t (*PF_GET_STACK_USAGE)(void);
-typedef int (*PF_PRINTF)(const char* format, ...);
+typedef int (*PF_PRINTF)(const char *format, ...);
 typedef void (*PF_APP_PRF_API_INIT)(void);
 
-typedef struct sonata_ble_hook
-{
+typedef struct sonata_ble_hook {
 #ifdef CFG_PLF_SONATA
     void (*pf_assert_err)(uint16_t id, int cond);
     void (*pf_assert_param)(uint16_t id, int param0, int param1);

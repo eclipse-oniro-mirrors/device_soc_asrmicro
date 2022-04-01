@@ -17,8 +17,8 @@
 #include <stdlib.h>
 #include "duet.h"
 #include "duet_cm4.h"
-#include "duet_efuse.h"
 #include "duet_rf_spi.h"
+#include "duet_efuse.h"
 
 void efuse_ldo25_open(void)
 {
@@ -59,8 +59,7 @@ void duet_efuse_init(uint8_t ldo25_open)
     EFUSE->RD_CNT = EFUSE_READ_OP_WAIT_CYCLE;
     EFUSE->WR_CNT = EFUSE_WRITE_OP_WAIT_CYCLE;
     EFUSE->DIV_CNT = EFUSE_DIV_OP_WAIT_CYCLE;
-    if(ldo25_open)
-    {
+    if (ldo25_open) {
         efuse_ldo25_open();
     }
 }
@@ -75,7 +74,7 @@ uint8_t duet_efuse_byte_read(uint16_t addr)
     EFUSE->CFG_TYPE = 0x0;//read type
 
     EFUSE->START = 0x1;
-    while(EFUSE->START & 0x1);
+    while (EFUSE->START & 0x1);
     return EFUSE->RDBK_DATA;
 }
 
@@ -87,10 +86,9 @@ uint32_t duet_efuse_word_read(uint16_t addr)
 {
     uint32_t rd_word_data = 0;
     uint8_t rd_byte_data = 0;
-    for(int i = 0; i < 4; i++)
-    {
-        rd_byte_data = duet_efuse_byte_read(addr+i);
-        rd_word_data |= rd_byte_data << (i<<3);
+    for (int i = 0; i < 4; i++) {
+        rd_byte_data = duet_efuse_byte_read(addr + i);
+        rd_word_data |= rd_byte_data << (i << 3);
     }
     return rd_word_data;
 }
@@ -107,7 +105,7 @@ void duet_efuse_byte_write(uint16_t addr, uint8_t data)
     EFUSE->CFG_TYPE = 0x1;//program type
     EFUSE->WR_TYPE = 0x0;//write type: byte
     EFUSE->START = 0x1;
-    while(EFUSE->START & 0x1);
+    while (EFUSE->START & 0x1);
 }
 
 /*
@@ -122,7 +120,7 @@ void duet_efuse_word_write(uint16_t addr, uint32_t data)
     EFUSE->CFG_TYPE = 0x1;//program type
     EFUSE->WR_TYPE = 0x1;//write type: word
     EFUSE->START = 0x1;
-    while(EFUSE->START & 0x1);
+    while (EFUSE->START & 0x1);
 }
 
 /*
@@ -138,9 +136,8 @@ void duet_efuse_multi_read(uint16_t start_addr, uint16_t size_in_bytes, uint8_t 
     duet_efuse_init(EFUSE_LDO25_CLOSE);
 
     //efuse byte read
-    for(i = 0; i < size_in_bytes; i++)
-    {
-        *(pData+i) = duet_efuse_byte_read(start_addr+i);
+    for (i = 0; i < size_in_bytes; i++) {
+        *(pData + i) = duet_efuse_byte_read(start_addr + i);
     }
 }
 

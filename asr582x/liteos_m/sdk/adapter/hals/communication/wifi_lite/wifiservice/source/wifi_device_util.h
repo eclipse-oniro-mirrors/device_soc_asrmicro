@@ -55,7 +55,7 @@ int GetHotspotChannel(void);
  *
  * @return WifiErrorCode.
  */
-WifiErrorCode GetHotspotInterfaceName(char* result, int size);
+WifiErrorCode GetHotspotInterfaceName(char *result, int size);
 
 /**
  * @brief lock wifi global lock

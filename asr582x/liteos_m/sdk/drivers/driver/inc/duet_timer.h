@@ -16,7 +16,6 @@
 #ifndef _DUET_TIMER_H_
 #define _DUET_TIMER_H_
 #include <stdint.h>
-#include <errno.h>
 
 #define DUET_TIMER1_INDEX 0
 #define DUET_TIMER2_INDEX 1

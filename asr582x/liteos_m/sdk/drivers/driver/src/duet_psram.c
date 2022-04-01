@@ -51,143 +51,160 @@ int mode_config = -1;
 
 static void psram_wait_finish(void)
 {
-    while(REG_RD(PSRAM_SR)&0x2);
-    while(!(REG_RD(PSRAM_FR)&0x1));
+    while (REG_RD(PSRAM_SR) & 0x2);
+    while (!(REG_RD(PSRAM_FR) & 0x1));
     REG_WR(PSRAM_FR, 1);
 }
 
 static void psram_init_lut_ps_read(unsigned int seq_id)
 {
-    REG_WR((PSRAM_LUT0+0x10*seq_id),(PSRAM_CMD_ADDR<<26|0x0<<24|0x18<<16 | PSRAM_CMD_CMD<<10|0x0<<8|FLASH_CMD_READ));
-    REG_WR((PSRAM_LUT1+0x10*seq_id),(PSRAM_CMD_JMP_ON_CS<<26|0x0<<24|0x00<<16 | PSRAM_CMD_READ<<10|0x0<<8|0x20));
-    REG_WR((PSRAM_LUT2+0x10*seq_id),0);
-    REG_WR((PSRAM_LUT3+0x10*seq_id),0);
+    REG_WR((PSRAM_LUT0 + 0x10 * seq_id),
+           ((PSRAM_CMD_ADDR << 26) | (0x0 << 24) | (0x18 << 16) | (PSRAM_CMD_CMD << 10) | (0x0 << 8) | FLASH_CMD_READ));
+    REG_WR((PSRAM_LUT1 + 0x10 * seq_id),
+           ((PSRAM_CMD_JMP_ON_CS << 26) | (0x0 << 24) | (0x00 << 16) | (PSRAM_CMD_READ << 10) | (0x0 << 8) | 0x20));
+    REG_WR((PSRAM_LUT2 + 0x10 * seq_id), 0);
+    REG_WR((PSRAM_LUT3 + 0x10 * seq_id), 0);
 }
 
 static void psram_init_lut_ps_write(unsigned int seq_id)
 {
-    REG_WR((PSRAM_LUT0+0x10*seq_id),(PSRAM_CMD_ADDR<<26|0x0<<24|0x18<<16 | PSRAM_CMD_CMD<<10|0x0<<8|FLASH_CMD_WRITE));
-    REG_WR((PSRAM_LUT1+0x10*seq_id),(PSRAM_CMD_JMP_ON_CS<<26|0x0<<24|0x00<<16 | PSRAM_CMD_WRITE<<10|0x0<<8|0x20));
-    REG_WR((PSRAM_LUT2+0x10*seq_id),0);
-    REG_WR((PSRAM_LUT3+0x10*seq_id),0);
+    REG_WR((PSRAM_LUT0 + 0x10 * seq_id),
+           ((PSRAM_CMD_ADDR << 26) | (0x0 << 24) | (0x18 << 16) | (PSRAM_CMD_CMD << 10) | (0x0 << 8) | FLASH_CMD_WRITE));
+    REG_WR((PSRAM_LUT1 + 0x10 * seq_id),
+           ((PSRAM_CMD_JMP_ON_CS << 26) | (0x0 << 24) | (0x00 << 16) | (PSRAM_CMD_WRITE << 10) | (0x0 << 8) | 0x20));
+    REG_WR((PSRAM_LUT2 + 0x10 * seq_id), 0);
+    REG_WR((PSRAM_LUT3 + 0x10 * seq_id), 0);
 }
 
 static void psram_init_lut_ps_write_evict(unsigned int seq_id)
 {
-    REG_WR((PSRAM_LUT0+0x10*seq_id),(PSRAM_CMD_ADDR<<26|0x0<<24|0x18<<16 | PSRAM_CMD_CMD<<10|0x0<<8|FLASH_CMD_WRITE));
-    REG_WR((PSRAM_LUT1+0x10*seq_id),(PSRAM_CMD_JMP_ON_CS<<26|0<<24|0x00<<16 | 21<<10|0<<8|0x20));
-    REG_WR((PSRAM_LUT2+0x10*seq_id),0);
-    REG_WR((PSRAM_LUT3+0x10*seq_id),0);
+    REG_WR((PSRAM_LUT0 + 0x10 * seq_id),
+           ((PSRAM_CMD_ADDR << 26) | (0x0 << 24) | (0x18 << 16) | (PSRAM_CMD_CMD << 10) | (0x0 << 8) | FLASH_CMD_WRITE));
+    REG_WR((PSRAM_LUT1 + 0x10 * seq_id),
+           ((PSRAM_CMD_JMP_ON_CS << 26) | (0 << 24) | (0x00 << 16) | (21 << 10) | (0 << 8) | 0x20));
+    REG_WR((PSRAM_LUT2 + 0x10 * seq_id), 0);
+    REG_WR((PSRAM_LUT3 + 0x10 * seq_id), 0);
 }
 
 static void psram_init_lut_ps_mode_register_read(unsigned int seq_id)
 {
-    REG_WR((PSRAM_LUT0+0x10*seq_id),(PSRAM_CMD_ADDR<<26|0x0<<24|0x18<<16 | PSRAM_CMD_CMD<<10|0x0<<8|FLASH_CMD_MODE_REG_READ));
-    REG_WR((PSRAM_LUT1+0x10*seq_id),(PSRAM_CMD_READ<<26|0x0<<24|0x2<<16 | PSRAM_CMD_DUMMY<<10|0x0<<8|(8-1)));
-    REG_WR((PSRAM_LUT2+0x10*seq_id),( PSRAM_CMD_JMP_ON_CS<<10|0x0<<8|0x0));
-    REG_WR((PSRAM_LUT3+0x10*seq_id),0);
+    REG_WR((PSRAM_LUT0 + 0x10 * seq_id),
+           ((PSRAM_CMD_ADDR << 26) | (0x0 << 24) | (0x18 << 16) | (PSRAM_CMD_CMD << 10) | (0x0 << 8) | FLASH_CMD_MODE_REG_READ));
+    REG_WR((PSRAM_LUT1 + 0x10 * seq_id),
+           ((PSRAM_CMD_READ << 26) | (0x0 << 24) | (0x2 << 16) | (PSRAM_CMD_DUMMY << 10) | (0x0 << 8) | (8 - 1)));
+    REG_WR((PSRAM_LUT2 + 0x10 * seq_id), ( (PSRAM_CMD_JMP_ON_CS << 10) | (0x0 << 8) | 0x0));
+    REG_WR((PSRAM_LUT3 + 0x10 * seq_id), 0);
 }
 
 static void psram_init_lut_ps_mode_register_write(unsigned int seq_id)
 {
-    REG_WR((PSRAM_LUT0+0x10*seq_id),(PSRAM_CMD_ADDR<<26|0x0<<24|0x18<<16 | PSRAM_CMD_CMD<<10|0x0<<8|FLASH_CMD_MODE_REG_WRITE));
-    REG_WR((PSRAM_LUT1+0x10*seq_id),(PSRAM_CMD_JMP_ON_CS<<26|0x0<<24|0x00<<16 | PSRAM_CMD_WRITE<<10|0x0<<8|0x20));
-    REG_WR((PSRAM_LUT2+0x10*seq_id),0);
-    REG_WR((PSRAM_LUT3+0x10*seq_id),0);
+    REG_WR((PSRAM_LUT0 + 0x10 * seq_id),
+           ((PSRAM_CMD_ADDR << 26) | (0x0 << 24) | (0x18 << 16) | (PSRAM_CMD_CMD << 10) | (0x0 << 8) | FLASH_CMD_MODE_REG_WRITE));
+    REG_WR((PSRAM_LUT1 + 0x10 * seq_id),
+           ((PSRAM_CMD_JMP_ON_CS << 26) | (0x0 << 24) | (0x00 << 16) | (PSRAM_CMD_WRITE << 10) | (0x0 << 8) | 0x20));
+    REG_WR((PSRAM_LUT2 + 0x10 * seq_id), 0);
+    REG_WR((PSRAM_LUT3 + 0x10 * seq_id), 0);
 }
 
 static void psram_init_lut_ps_qmode_enable(unsigned int seq_id)
 {
-    REG_WR((PSRAM_LUT0+0x10*seq_id),(PSRAM_CMD_CMD<<10|0<<8|FLASH_CMD_ENTER_QUAD_MODE));
-    REG_WR((PSRAM_LUT1+0x10*seq_id),0);
-    REG_WR((PSRAM_LUT2+0x10*seq_id),0);
-    REG_WR((PSRAM_LUT3+0x10*seq_id),0);
+    REG_WR((PSRAM_LUT0 + 0x10 * seq_id), ((PSRAM_CMD_CMD << 10) | (0 << 8) | FLASH_CMD_ENTER_QUAD_MODE));
+    REG_WR((PSRAM_LUT1 + 0x10 * seq_id), 0);
+    REG_WR((PSRAM_LUT2 + 0x10 * seq_id), 0);
+    REG_WR((PSRAM_LUT3 + 0x10 * seq_id), 0);
 }
 
 static void psram_init_lut_ps_qmode_exit(unsigned int seq_id)
 {
-    REG_WR((PSRAM_LUT0+0x10*seq_id),(PSRAM_CMD_CMD<<10|0x2<<8|FLASH_CMD_EXIT_QUAD_MODE));
-    REG_WR((PSRAM_LUT1+0x10*seq_id),0);
-    REG_WR((PSRAM_LUT2+0x10*seq_id),0);
-    REG_WR((PSRAM_LUT3+0x10*seq_id),0);
+    REG_WR((PSRAM_LUT0 + 0x10 * seq_id), ((PSRAM_CMD_CMD << 10) | (0x2 << 8) | FLASH_CMD_EXIT_QUAD_MODE));
+    REG_WR((PSRAM_LUT1 + 0x10 * seq_id), 0);
+    REG_WR((PSRAM_LUT2 + 0x10 * seq_id), 0);
+    REG_WR((PSRAM_LUT3 + 0x10 * seq_id), 0);
 }
 
 static void psram_init_lut_ps_read_4x(unsigned int seq_id)
 {
-    REG_WR((PSRAM_LUT0+0x10*seq_id),(PSRAM_CMD_ADDR<<26|0x2<<24|0x18<<16 | PSRAM_CMD_CMD<<10|0x2<<8|FLASH_CMD_FAST_READ_QUAD));
-    REG_WR((PSRAM_LUT1+0x10*seq_id),(PSRAM_CMD_READ<<26|0x2<<24|0x20<<16 | PSRAM_CMD_DUMMY<<10|0x2<<8|(6-1)));
-    REG_WR((PSRAM_LUT2+0x10*seq_id),(PSRAM_CMD_JMP_ON_CS<<10|0x2<<8|0x00) );
-    REG_WR((PSRAM_LUT3+0x10*seq_id),0);
+    REG_WR((PSRAM_LUT0 + 0x10 * seq_id),
+           ((PSRAM_CMD_ADDR << 26) | (0x2 << 24) | (0x18 << 16) | (PSRAM_CMD_CMD << 10) | (0x2 << 8) | FLASH_CMD_FAST_READ_QUAD));
+    REG_WR((PSRAM_LUT1 + 0x10 * seq_id),
+           ((PSRAM_CMD_READ << 26) | (0x2 << 24) | (0x20 << 16) | (PSRAM_CMD_DUMMY << 10) | (0x2 << 8) | (6 - 1)));
+    REG_WR((PSRAM_LUT2 + 0x10 * seq_id), ((PSRAM_CMD_JMP_ON_CS << 10) | (0x2 << 8) | 0x00) );
+    REG_WR((PSRAM_LUT3 + 0x10 * seq_id), 0);
 }
 
 static void psram_init_lut_ps_write_4x(unsigned int seq_id)
 {
-    REG_WR((PSRAM_LUT0+0x10*seq_id),(PSRAM_CMD_ADDR<<26|0x2<<24|0x18<<16 | PSRAM_CMD_CMD<<10|0x2<<8|FLASH_CMD_WRITE));
-    REG_WR((PSRAM_LUT1+0x10*seq_id),(PSRAM_CMD_JMP_ON_CS<<26|0x2<<24|0x00<<16 | PSRAM_CMD_WRITE<<10|0x2<<8|0x20));
-    REG_WR((PSRAM_LUT2+0x10*seq_id),0);
-    REG_WR((PSRAM_LUT3+0x10*seq_id),0);
+    REG_WR((PSRAM_LUT0 + 0x10 * seq_id),
+           ((PSRAM_CMD_ADDR << 26) | (0x2 << 24) | (0x18 << 16) | (PSRAM_CMD_CMD << 10) | (0x2 << 8) | FLASH_CMD_WRITE));
+    REG_WR((PSRAM_LUT1 + 0x10 * seq_id),
+           ((PSRAM_CMD_JMP_ON_CS << 26) | (0x2 << 24) | (0x00 << 16) | (PSRAM_CMD_WRITE << 10) | (0x2 << 8) | 0x20));
+    REG_WR((PSRAM_LUT2 + 0x10 * seq_id), 0);
+    REG_WR((PSRAM_LUT3 + 0x10 * seq_id), 0);
 }
 
 static void psram_init_lut_ps_write_evict_4x(unsigned int seq_id)
 {
-    REG_WR((PSRAM_LUT0+0x10*seq_id),(PSRAM_CMD_ADDR<<26|0x2<<24|0x18<<16 | PSRAM_CMD_CMD<<10|0x2<<8|FLASH_CMD_WRITE));
-    REG_WR((PSRAM_LUT1+0x10*seq_id),(PSRAM_CMD_JMP_ON_CS<<26|0x2<<24|0x00<<16 | 21<<10|0x2<<8|0x20));
-    REG_WR((PSRAM_LUT2+0x10*seq_id),0);
-    REG_WR((PSRAM_LUT3+0x10*seq_id),0);
+    REG_WR((PSRAM_LUT0 + 0x10 * seq_id),
+           ((PSRAM_CMD_ADDR << 26) | (0x2 << 24) | (0x18 << 16) | (PSRAM_CMD_CMD << 10) | (0x2 << 8) | FLASH_CMD_WRITE));
+    REG_WR((PSRAM_LUT1 + 0x10 * seq_id),
+           ((PSRAM_CMD_JMP_ON_CS << 26) | (0x2 << 24) | (0x00 << 16) | (21 << 10) | (0x2 << 8) | 0x20));
+    REG_WR((PSRAM_LUT2 + 0x10 * seq_id), 0);
+    REG_WR((PSRAM_LUT3 + 0x10 * seq_id), 0);
 }
 
 static void psram_init_lut_ps_readid(unsigned int seq_id)
 {
-    REG_WR((PSRAM_LUT0+0x10*seq_id),( PSRAM_CMD_ADDR<<26|0x0<<24|0x18<<16 | PSRAM_CMD_CMD<<10|0x0<<8|FLASH_CMD_READ_ID));
-    REG_WR((PSRAM_LUT1+0x10*seq_id),( PSRAM_CMD_READ<<10|0x0<<8|0x9));
-    REG_WR((PSRAM_LUT2+0x10*seq_id),0);
-    REG_WR((PSRAM_LUT3+0x10*seq_id),0);
+    REG_WR((PSRAM_LUT0 + 0x10 * seq_id),
+           ( (PSRAM_CMD_ADDR << 26) | (0x0 << 24) | (0x18 << 16) | (PSRAM_CMD_CMD << 10) | (0x0 << 8) | FLASH_CMD_READ_ID));
+    REG_WR((PSRAM_LUT1 + 0x10 * seq_id), ( (PSRAM_CMD_READ << 10) | (0x0 << 8) | 0x9));
+    REG_WR((PSRAM_LUT2 + 0x10 * seq_id), 0);
+    REG_WR((PSRAM_LUT3 + 0x10 * seq_id), 0);
 }
 
 int psram_set_channel(duet_psram_channel channel)
 {
-    if(channel != PSRAM_CHANNEL_4_9 && channel != PSRAM_CHANNEL_16_21)
+    if (channel != PSRAM_CHANNEL_4_9 && channel != PSRAM_CHANNEL_16_21) {
         return -1;
-    REG_WR(ADC_SDIO_BLE_DEBUG_CTRL_REG,REG_RD(ADC_SDIO_BLE_DEBUG_CTRL_REG) & (~(1<<3)));//disable sdio debug
-    if(channel == PSRAM_CHANNEL_4_9)
-    {
-        duet_pinmux_config(PAD4,PF_PSRAM);//set pad4 mux to psram
-        duet_pinmux_config(PAD5,PF_PSRAM);//set pad5 mux to psram
-        duet_pinmux_config(PAD6,PF_PSRAM);//set pad6 mux to psram
-        duet_pinmux_config(PAD7,PF_PSRAM);//set pad7 mux to psram
-        duet_pinmux_config(PAD8,PF_PSRAM);//set pad8 mux to psram
-        duet_pinmux_config(PAD9,PF_PSRAM);//set pad9 mux to psram
-        REG_WR(HW_CTRL_PE_PS,REG_RD(HW_CTRL_PE_PS)& 0xfffffc0f);//set all pad pull up and down
     }
-    else
-    {
-        duet_pinmux_config(PAD16,PF_PSRAM);//set pad16 mux to psram
-        duet_pinmux_config(PAD17,PF_PSRAM);//set pad17 mux to psram
-        duet_pinmux_config(PAD18,PF_PSRAM);//set pad18 mux to psram
-        duet_pinmux_config(PAD19,PF_PSRAM);//set pad19 mux to psram
-        duet_pinmux_config(PAD20,PF_PSRAM);//set pad20 mux to psram
-        duet_pinmux_config(PAD21,PF_PSRAM);//set pad21 mux to psram
-        REG_WR(HW_CTRL_PE_PS,REG_RD(HW_CTRL_PE_PS)& 0xffc0ffff);//set all pad pull up and down
+    REG_WR(ADC_SDIO_BLE_DEBUG_CTRL_REG, REG_RD(ADC_SDIO_BLE_DEBUG_CTRL_REG) & (~(1 << 3))); //disable sdio debug
+    if (channel == PSRAM_CHANNEL_4_9) {
+        duet_pinmux_config(PAD4, PF_PSRAM); //set pad4 mux to psram
+        duet_pinmux_config(PAD5, PF_PSRAM); //set pad5 mux to psram
+        duet_pinmux_config(PAD6, PF_PSRAM); //set pad6 mux to psram
+        duet_pinmux_config(PAD7, PF_PSRAM); //set pad7 mux to psram
+        duet_pinmux_config(PAD8, PF_PSRAM); //set pad8 mux to psram
+        duet_pinmux_config(PAD9, PF_PSRAM); //set pad9 mux to psram
+        REG_WR(HW_CTRL_PE_PS, REG_RD(HW_CTRL_PE_PS) & 0xfffffc0f); //set all pad pull up and down
+    } else {
+        duet_pinmux_config(PAD16, PF_PSRAM); //set pad16 mux to psram
+        duet_pinmux_config(PAD17, PF_PSRAM); //set pad17 mux to psram
+        duet_pinmux_config(PAD18, PF_PSRAM); //set pad18 mux to psram
+        duet_pinmux_config(PAD19, PF_PSRAM); //set pad19 mux to psram
+        duet_pinmux_config(PAD20, PF_PSRAM); //set pad20 mux to psram
+        duet_pinmux_config(PAD21, PF_PSRAM); //set pad21 mux to psram
+        REG_WR(HW_CTRL_PE_PS, REG_RD(HW_CTRL_PE_PS) & 0xffc0ffff); //set all pad pull up and down
     }
     REG_WR(PERI_CLK_EN_REG0, (REG_RD(PERI_CLK_EN_REG0) | (0x0000203F))); //open clock of dma and psram
     return 0;
 }
 int psram_config(duet_psram_mode mode)
 {
-    if(mode != PSRAM_MODE_SPI && mode != PSRAM_MODE_QSPI)
+    if (mode != PSRAM_MODE_SPI && mode != PSRAM_MODE_QSPI) {
         return -1;
-    REG_WR(PSRAM_MCR, REG_RD(PSRAM_MCR)&(~(1<<14))); //MCR,MDIS = 0
+    }
+    REG_WR(PSRAM_MCR, REG_RD(PSRAM_MCR) & (~(1 << 14))); //MCR,MDIS = 0
 
-    REG_WR(PSRAM_MCR, REG_RD(PSRAM_MCR)|((3))); //MCR , AHB and SF domain reset
+    REG_WR(PSRAM_MCR, REG_RD(PSRAM_MCR) | ((3))); //MCR , AHB and SF domain reset
 
-    REG_WR(PSRAM_MCR, REG_RD(PSRAM_MCR)& 0xfffffffc); //clear AHB and SF reset
+    REG_WR(PSRAM_MCR, REG_RD(PSRAM_MCR) & 0xfffffffc); //clear AHB and SF reset
 
-    REG_WR(PSRAM_MCR, REG_RD(PSRAM_MCR)|1<<14); //MCR , MDIS=1
+    REG_WR(PSRAM_MCR, REG_RD(PSRAM_MCR) | 1 << 14); //MCR , MDIS=1
 
-    if(mode == PSRAM_MODE_SPI)//the simple logic has been modified. set bit7 means to use the original logic
-        REG_WR(PSRAM_SMPR, 0x00000080); // sampled by sfif_clk_b; half cycle delay
-    else
-        REG_WR(PSRAM_SMPR, 0x00000000); // sampled by sfif_clk_b; half cycle delay
+    if (mode == PSRAM_MODE_SPI) { //the simple logic has been modified. set bit7 means to use the original logic
+        REG_WR(PSRAM_SMPR, 0x00000080);    // sampled by sfif_clk_b; half cycle delay
+    } else {
+        REG_WR(PSRAM_SMPR, 0x00000000);    // sampled by sfif_clk_b; half cycle delay
+    }
 
     REG_WR(PSRAM_FLSHCR, 0x00000000);  //set setup and hold time for psram
 
@@ -205,40 +222,40 @@ int psram_config(duet_psram_mode mode)
     //kzheng: TO DO, now hmaster[3:0] tie0, so need modified here
     //mst id =0 is CPU
     //PSRAM0_BUF0CR = 0x00001001; // CPU A9
-    REG_WR(PSRAM_BUF0CR , 0x00001000); // CPU A9
-    REG_WR(PSRAM_BUF1CR , 0x00001006); // CPU M4
-    REG_WR(PSRAM_BUF2CR , 0x00001003); // SDMA
-    REG_WR(PSRAM_BUF3CR , 0x80001002); // other masters
+    REG_WR(PSRAM_BUF0CR, 0x00001000);  // CPU A9
+    REG_WR(PSRAM_BUF1CR, 0x00001006);  // CPU M4
+    REG_WR(PSRAM_BUF2CR, 0x00001003);  // SDMA
+    REG_WR(PSRAM_BUF3CR, 0x80001002);  // other masters
 
     // config the flash mmap
-    REG_WR(PSRAM_SFA1AD , PSRAM_FLASH_A1_TOP & 0xfffffc00);
-    REG_WR(PSRAM_SFA2AD , PSRAM_FLASH_A2_TOP & 0xfffffc00);
-    REG_WR(PSRAM_SFB1AD , PSRAM_FLASH_B1_TOP & 0xfffffc00);
-    REG_WR(PSRAM_SFB2AD , PSRAM_FLASH_B2_TOP & 0xfffffc00);
+    REG_WR(PSRAM_SFA1AD, PSRAM_FLASH_A1_TOP & 0xfffffc00);
+    REG_WR(PSRAM_SFA2AD, PSRAM_FLASH_A2_TOP & 0xfffffc00);
+    REG_WR(PSRAM_SFB1AD, PSRAM_FLASH_B1_TOP & 0xfffffc00);
+    REG_WR(PSRAM_SFB2AD, PSRAM_FLASH_B2_TOP & 0xfffffc00);
 
     // ISD3FB, ISD2FB, ISD3FA, ISD2FA = 1; ENDIAN = 'h3; END_CFG='h3
     // DELAY_CLK4X_EN = 1
-    REG_WR(PSRAM_MCR, REG_RD(PSRAM_MCR)| 0x000F000C);
+    REG_WR(PSRAM_MCR, REG_RD(PSRAM_MCR) | 0x000F000C);
 
     //ddr_en   data aligned with 2x serial flash half clock
     //REG_WR(PSRAM_FLSHCR, REG_RD(PSRAM_FLSHCR)| 0x00010000);
 
     //MCR SCLKCFG 0, dqs en =1
-    REG_WR(PSRAM_MCR, REG_RD(PSRAM_MCR)& 0xfbffffff );
+    REG_WR(PSRAM_MCR, REG_RD(PSRAM_MCR) & 0xfbffffff );
 
     //dqs_loopback_en = 1, dqs_loopback_from_pad = 1
-    REG_WR(PSRAM_MCR, REG_RD(PSRAM_MCR)| 3<<24 );
+    REG_WR(PSRAM_MCR, REG_RD(PSRAM_MCR) | 3 << 24 );
 
     //ddr_en = 1, enable 2x and 4x clock
     ///REG_WR(PSRAM_MCR, REG_RD(PSRAM_MCR)| 1<<7 );
 
     //MDIS = 0, enable psram clocks,must clear MDIS to enable clock for transfer.
-    REG_WR(PSRAM_MCR, REG_RD(PSRAM_MCR)& 0xffffbfff );
+    REG_WR(PSRAM_MCR, REG_RD(PSRAM_MCR) & 0xffffbfff );
 
     //printf("PSRAM initialize done. \n");
     //printf("begin initialize LUT tables. \n");
 
-    if(mode == PSRAM_MODE_SPI) {
+    if (mode == PSRAM_MODE_SPI) {
         psram_init_lut_ps_read(0);
         psram_init_lut_ps_read(PSRAM_SEQ_ID_READ);
         psram_init_lut_ps_write_evict(PSRAM_SEQ_ID_WRITE_EVICT);
@@ -246,8 +263,7 @@ int psram_config(duet_psram_mode mode)
         psram_init_lut_ps_readid(PSRAM_SEQ_ID_READ_ID);
         psram_init_lut_ps_mode_register_read(PSRAM_SEQ_ID_MODE_REG_READ);
         psram_init_lut_ps_mode_register_write(PSRAM_SEQ_ID_MODE_REG_WRITE);
-    }
-    else {
+    } else {
         psram_init_lut_ps_read_4x(0);
         psram_init_lut_ps_read_4x(PSRAM_SEQ_ID_READ);
         psram_init_lut_ps_write_evict_4x(PSRAM_SEQ_ID_WRITE_EVICT);
@@ -259,17 +275,16 @@ int psram_config(duet_psram_mode mode)
     //printf(" initialize LUT tables done. \n");
 
     // set read miss cmd, evict is in next lut
-    REG_WR(PSRAM_BFGENCR, PSRAM_SEQ_ID_READ<<12);
+    REG_WR(PSRAM_BFGENCR, PSRAM_SEQ_ID_READ << 12);
 
-    if(mode_config != mode) {
-        if(mode == PSRAM_MODE_SPI) {
-            REG_WR(PSRAM_SFAR,PSRAM_AMBA_BASE);
-            REG_WR(PSRAM_IPCR, PSRAM_SEQ_ID_QUAD_EXIT<<24);
+    if (mode_config != mode) {
+        if (mode == PSRAM_MODE_SPI) {
+            REG_WR(PSRAM_SFAR, PSRAM_AMBA_BASE);
+            REG_WR(PSRAM_IPCR, PSRAM_SEQ_ID_QUAD_EXIT << 24);
             psram_wait_finish();
-        }
-        else {
-            REG_WR(PSRAM_SFAR,PSRAM_AMBA_BASE);
-            REG_WR(PSRAM_IPCR, PSRAM_SEQ_ID_QUAD_ENABLE<<24);
+        } else {
+            REG_WR(PSRAM_SFAR, PSRAM_AMBA_BASE);
+            REG_WR(PSRAM_IPCR, PSRAM_SEQ_ID_QUAD_ENABLE << 24);
             psram_wait_finish();
         }
     }
