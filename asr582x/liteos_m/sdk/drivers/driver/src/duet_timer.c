@@ -106,10 +106,9 @@ int32_t duet_timer_start(duet_timer_dev_t *tim)
     //open TIMER interrupt
     reg_value = REG_RD(DUTE_IRQ_EN_REG) & (~TIMER_IRQ_BIT);
     REG_WR(DUTE_IRQ_EN_REG, (reg_value | (TIMER_IRQ_BIT)));
-    NVIC_EnableIRQ(TIMER_IRQn); //0x20
+    NVIC_EnableIRQ(TIMER_IRQn); // 0x20
     return 0;
 }
-
 
 /**
  * get hardware timer remain time

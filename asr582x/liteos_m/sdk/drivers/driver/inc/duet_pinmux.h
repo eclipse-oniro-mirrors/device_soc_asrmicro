@@ -16,14 +16,13 @@
 #ifndef __DUET_PINMUX_H
 #define __DUET_PINMUX_H
 
+#include "duet.h"
+
 #ifdef __cplusplus
 extern "c" {
 #endif
 
-#include "duet.h"
-
-    typedef enum
-    {
+    typedef enum {
         PAD0,
         PAD1,
         PAD2,
@@ -57,9 +56,7 @@ extern "c" {
         PAD30
     } Pad_Num_Type;
 
-
-    typedef enum
-    {
+    typedef enum {
         PF_GPIO0, PF_GPIO1, PF_GPIO2, PF_GPIO3, PF_GPIO4, PF_GPIO5,
         PF_GPIO6, PF_GPIO7, PF_GPIO8, PF_GPIO9, PF_GPIO10, PF_GPIO11,
         PF_GPIO12, PF_GPIO13, PF_GPIO14, PF_GPIO15, PF_GPIO16, PF_GPIO17,
@@ -74,28 +71,24 @@ extern "c" {
         PF_PSRAM
     } Pad_Func_Type;
 
-    typedef enum
-    {
+    typedef enum {
         Config_Success,
         Config_Fail
     } Pad_Config_State;
 
-    typedef enum
-    {
+    typedef enum {
         PULL_DEFAULT = 0x00,
         PULL_UP,
         PULL_DOWN,
         PULL_NONE
     } Pad_Pull_Type;
 
-    typedef enum
-    {
+    typedef enum {
         DS1DS0_00 = 0x00,
         DS1DS0_01,
         DS1DS0_10,
         DS1DS0_11
     } Pad_DS_Type;
-
 
     Pad_Config_State duet_pinmux_config(Pad_Num_Type pad_num, Pad_Func_Type pad_func);
     void duet_pad_config(Pad_Num_Type pad_num, Pad_Pull_Type pull_type);
@@ -105,7 +98,3 @@ extern "c" {
 #endif
 
 #endif /*__DUET_PINMUX_H */
-
-
-
-

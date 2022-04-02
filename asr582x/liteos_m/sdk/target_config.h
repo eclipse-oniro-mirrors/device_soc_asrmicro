@@ -151,5 +151,4 @@ extern unsigned char __los_heap_addr_end__[];
 #endif /* __cplusplus */
 #endif /* __cplusplus */
 
-
 #endif /* _TARGET_CONFIG_H */

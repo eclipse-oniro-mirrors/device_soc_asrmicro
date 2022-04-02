@@ -96,7 +96,6 @@ static struct cli_command rfota_ble_cmd = {
     .function = lega_enable_rfota_ble_test,
 };
 
-
 void lega_rfota_ble_test_at_init(void)
 {
     aos_cli_register_command(&rfota_ble_cmd);

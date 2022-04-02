@@ -20,9 +20,9 @@
 #define FLASH_CRYPT_EFUSE_KEY_ADDR      124
 #define FLASH_CRYPT_EFUSE_ENABLE_ADDR   128
 #define FLASH_CRYPT_EFUSE_KEY           0x12345678
-#define FLASH_CRYPT_RESET               *((volatile unsigned int *)(0x40005038)) //default 0, write 1 reset, HW auto clear
+#define FLASH_CRYPT_RESET               *((volatile unsigned int *)(0x40005038)) // default 0, write 1 reset, HW auto clear
 
-#define FLASH_CRYPT_BIT_NUM             23  //bit0~bit22
+#define FLASH_CRYPT_BIT_NUM             23  // bit0~bit22
 
 int duet_flash_encrypt_status(void)
 {

@@ -13,7 +13,6 @@
  * limitations under the License.
  */
 
-
 #include "iot_errno.h"
 #include "iot_pwm.h"
 #include "duet_pwm.h"

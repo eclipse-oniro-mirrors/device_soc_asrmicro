@@ -148,7 +148,6 @@
 #define SONATA_ATT_BT_UUID_128 {0xFB, 0x34, 0x9B, 0x5F, 0x80, 0x00, 0x00, 0x80, \
         0x00, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}
 
-
 /// MAC length
 #define SONATA_ATT_SIGN_MAC_LEN                       (8)
 /// SignCounter length
@@ -456,7 +455,6 @@ enum {
     ////time unit - month
     SONATA_ATT_UNIT_MONTH                              = SONATA_ATT_UUID_16(0x27B4),
 
-
     /*---------------- DECLARATIONS -----------------*/
     /// Primary service Declaration
     SONATA_ATT_DECL_PRIMARY_SERVICE                     = SONATA_ATT_UUID_16(0x2800),
@@ -466,7 +464,6 @@ enum {
     SONATA_ATT_DECL_INCLUDE                             = SONATA_ATT_UUID_16(0x2802),
     /// Characteristic Declaration
     SONATA_ATT_DECL_CHARACTERISTIC                      = SONATA_ATT_UUID_16(0x2803),
-
 
     /*----------------- DESCRIPTORS -----------------*/
     /// Characteristic extended properties
@@ -493,7 +490,6 @@ enum {
     SONATA_ATT_DESC_ES_MEASUREMENT                      = SONATA_ATT_UUID_16(0x290C),
     /// Environmental Sensing Trigger Setting
     SONATA_ATT_DESC_ES_TRIGGER_SETTING                  = SONATA_ATT_UUID_16(0x290D),
-
 
     /*--------------- CHARACTERISTICS ---------------*/
     /// Device name
@@ -871,7 +867,6 @@ enum {
     SONATA_ATT_FORMAT_LAST
 };
 
-
 /// Client Characteristic Configuration Codes
 enum sonata_att_ccc_val {
     /// Stop notification/indication
@@ -889,7 +884,6 @@ enum sonata_att_ccc_val {
 
 /// Attribute length type
 
-
 /// UUID - 128-bit type
 struct sonata_att_uuid_128 {
     /// 128-bit UUID
@@ -901,8 +895,6 @@ struct sonata_att_uuid_32 {
     /// 32-bit UUID
     uint8_t uuid[SONATA_ATT_UUID_32_LEN];
 };
-
-
 
 /// Characteristic Value Descriptor
 struct sonata_att_char_desc {
@@ -945,7 +937,6 @@ struct sonata_att_incl128_desc {
     uint16_t end_hdl;
 };
 
-
 // --------------------------- Database permissions -----------------------------
 
 /// Macro used to retrieve access permission rights
@@ -966,7 +957,6 @@ struct sonata_att_incl128_desc {
       & (SONATA_PERM_MASK_ ## access)) == SONATA_PERM(access, right))
 
 /// Retrieve attribute security level from attribute right and service right
-
 
 /// Retrieve UUID LEN from UUID Length Permission
 #define SONATA_ATT_UUID_LEN(uuid_len_perm) (((uuid_len_perm) == 0) ? ATT_UUID_16_LEN : \
@@ -1072,7 +1062,6 @@ enum sonata_attm_value_perm_mask {
     SONATA_PERM_POS_RI           = 15,
 };
 
-
 /**
  * Service permissions
  *
@@ -1108,7 +1097,6 @@ enum sonata_attm_svc_perm_mask {
     SONATA_PERM_MASK_SVC_SECONDARY = 0x80,
     SONATA_PERM_POS_SVC_SECONDARY  = 7,
 };
-
 
 /// Attribute & Service access mode
 enum {
@@ -1152,9 +1140,6 @@ enum {
     /// Write All the Reliable Writes
     SONATA_ATT_EXECUTE_ALL_PREPARED_WRITES
 };
-
-
-
 
 /// @} ATT
 #endif // SONATA_ATT_H_

@@ -77,7 +77,6 @@
 #define APP_BLE_INVALID_ADVIDX  0xFF
 #define APP_MAX_SERVICE_NUM 5
 
-
 typedef struct ble_gatt_att_reg_list {
     uint16_t start_hdl;
     uint8_t nb_att;
@@ -93,7 +92,6 @@ typedef struct ble_gatt_att_manager {
     uint8_t add_nb;
     ble_gatt_att_reg_list_t *reg_list[MAX_SERVICE_NUM];
 } ble_gatt_att_manager_t;
-
 
 /*!
  * @brief save local handle start index
@@ -116,10 +114,9 @@ static bool app_adv_bonding = false;
 static uint8_t app_connection_state = 0;
 static peer_conn_param_t app_peer_conn_param = {0};
 
-
 static bool app_bond = false;
 static uint8_t app_loc_irk[KEY_LEN] = {0}; //Get in app_gap_gen_random_number_callback()
-//static uint8_t app_loc_irk[KEY_LEN]= {0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0x10,0x11,0x12,0x13,0x14,0x15,0x16};//Get in app_gap_gen_random_number_callback()
+//static uint8_t app_loc_irk[KEY_LEN]= {0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0x10,0x11,0x12,0x13,0x14,0x15,0x16}; // Get in app_gap_gen_random_number_callback()
 
 static uint8_t app_rand_cnt = 0;
 static uint32_t app_passkey_pincode = 0;
@@ -177,27 +174,27 @@ void print_serv_env(void)
  * @brief
  */
 typedef enum {
-    /// Peripheral Bonded
+    // Peripheral Bonded
     SONATA_TAG_PERIPH_BONDED              = (APP_DATA_SAVE_TAG_FIRST + 0),
-    /// Mouse NTF Cfg
+    // Mouse NTF Cfg
     SONATA_TAG_MOUSE_NTF_CFG,
-    /// Mouse Timeout value
+    // Mouse Timeout value
     SONATA_TAG_MOUSE_TIMEOUT,
-    /// Peer Device BD Address
+    // Peer Device BD Address
     SONATA_TAG_PEER_BD_ADDRESS,
-    /// EDIV (2bytes), RAND NB (8bytes),  LTK (16 bytes), Key Size (1 byte)
+    // EDIV (2bytes), RAND NB (8bytes),  LTK (16 bytes), Key Size (1 byte)
     SONATA_TAG_LTK,
-    /// app_ltk_key_in
+    // app_ltk_key_in
     SONATA_TAG_LTK_IN,
-    /// app irk addr
+    // app irk addr
     SONATA_TAG_IRK_ADDR,
-    /// app irk
+    // app irk
     SONATA_TAG_IRK,
-    /// device address
+    // device address
     SONATA_TAG_BD_ADDRESS,
-    /// bonded dev info
+    // bonded dev info
     SONATA_TAG_BONDED_DEV_INFO,
-    /// start pair on boot
+    // start pair on boot
     SONATA_TAG_PAIR_ON_BOOT,
 } sonata_app_nvds_tag;
 
@@ -205,30 +202,29 @@ typedef enum {
  * @brief
  */
 typedef enum {
-    /// Peripheral Bonded len
+    // Peripheral Bonded len
     SONATA_LEN_PERIPH_BONDED              = 1,
-    /// Mouse NTF Cfg len
+    // Mouse NTF Cfg len
     SONATA_LEN_MOUSE_NTF_CFG              = 2,
-    /// Mouse Timeout value len
+    // Mouse Timeout value len
     SONATA_LEN_MOUSE_TIMEOUT              = 2,
-    /// Peer Device BD Address len
+    // Peer Device BD Address len
     SONATA_LEN_PEER_BD_ADDRESS            = 6,
-    /// EDIV (2bytes), RAND NB (8bytes),  LTK (16 bytes), Key Size (1 byte)
+    // EDIV (2bytes), RAND NB (8bytes),  LTK (16 bytes), Key Size (1 byte)
     SONATA_LEN_LTK                        = 27,
-    /// app_ltk_key_in len
+    // app_ltk_key_in len
     SONATA_LEN_LTK_IN                     = 16,
-    /// app irk addr len
+    // app irk addr len
     SONATA_LEN_IRK_ADDR                   = 6,
-    /// app irk len
+    // app irk len
     SONATA_LEN_IRK                        = 16,
-    /// device address
+    // device address
     SONATA_LEN_BD_ADDRESS                 = 6,
-    /// bonded dev info len
+    // bonded dev info len
     SONATA_LEN_BONDED_DEV_INFO            = 218, //218: 3, 290:4,
-    /// start pair on boot
+    // start pair on boot
     SONATA_LEN_PAIR_ON_BOOT               = 1,
 } sonata_app_nvds_len;
-
 
 /*!
  * @brief
@@ -255,7 +251,6 @@ static sonata_app_timer_callback_t app_timer_callbacks = {
     .timeout                  = app_timer_handler,
 };
 
-
 static void app_print_hex(uint8_t *hex, uint8_t len )
 {
     for (int i = 0; i < len; i++) {
@@ -263,7 +258,6 @@ static void app_print_hex(uint8_t *hex, uint8_t len )
     }
     APP_TRC("\r\n");
 }
-
 
 void app_data_init(void)
 {
@@ -305,7 +299,6 @@ static uint8_t  app_get_conidx_by_addr(uint8_t *addr)
     return APP_BLE_INVALID_CONIDX;
 }
 
-
 static uint8_t  *app_get_addr_by_conidx(uint8_t  conidx)
 {
     for (int idx = 0; idx < APP_BLE_CONNECT_MAX; idx++) {
@@ -325,7 +318,6 @@ void app_ble_set_device_name(uint8_t *name, uint32_t len)
     }
     memmove(local_dev_name, name, len);
 }
-
 
 /*
 uint8_t app_adv_idx_list_alloc(void)
@@ -392,27 +384,24 @@ void app_ble_config_legacy_advertising(void)
     param.phy = SONATA_GAP_PHY_LE_1MBPS;
     ble_adv_state = BLE_ADV_STATE_CREATING;
     uint16_t ret = sonata_ble_config_legacy_advertising(SONATA_GAP_STATIC_ADDR,
-                   &param);//Next event:SONATA_GAP_CMP_ADVERTISING_CONFIG
+                   &param); // Next event:SONATA_GAP_CMP_ADVERTISING_CONFIG
     if (ret != API_SUCCESS) {
         APP_TRC("APP: %s  ERROR:%02X\r\n", __FUNCTION__, ret);
         ble_adv_state = BLE_ADV_STATE_IDLE;
     }
 }
-
-
 
 void app_ble_config_legacy_advertising_with_param(uint8_t own_addr_type, sonata_gap_directed_adv_create_param_t *param)
 {
     APP_TRC("APP: %s  \r\n", __FUNCTION__);
 
     ble_adv_state = BLE_ADV_STATE_CREATING;
-    uint16_t ret = sonata_ble_config_legacy_advertising(own_addr_type, param);//Next event:SONATA_GAP_CMP_ADVERTISING_CONFIG
+    uint16_t ret = sonata_ble_config_legacy_advertising(own_addr_type, param); // Next event:SONATA_GAP_CMP_ADVERTISING_CONFIG
     if (ret != API_SUCCESS) {
         APP_TRC("APP: %s  ERROR:%02X\r\n", __FUNCTION__, ret);
         ble_adv_state = BLE_ADV_STATE_IDLE;
     }
 }
-
 
 void app_ble_start_advertising_with_param(sonata_gap_directed_adv_create_param_t *param, ble_adv_data_set_t *data,
         ble_scan_data_set_t *scan_data, uint8_t own_addr_type, uint16_t duration, uint8_t max_adv_evt)
@@ -446,7 +435,6 @@ void app_ble_start_advertising_with_param(sonata_gap_directed_adv_create_param_t
     return ;
 
 }
-
 
 /*!
  * @brief set advertising data
@@ -486,7 +474,6 @@ void app_ble_set_adv_data_default(void)
         APP_TRC("APP: %s  ERROR:%02X\r\n", __FUNCTION__, ret);
     }
 }
-
 
 static uint16_t app_ble_set_scansponse_data(uint8_t adv_id)
 {
@@ -560,7 +547,6 @@ uint16_t app_ble_advertising_stop(uint8_t adv_id)
     return ret;
 }
 
-
 uint16_t app_ble_stop_adv(uint8_t adv_id)
 {
     APP_TRC("APP: %s  dv state %d \r\n", __FUNCTION__, ble_adv_state);
@@ -577,12 +563,10 @@ uint16_t app_ble_stop_adv(uint8_t adv_id)
     return ret;
 }
 
-
 uint16_t app_ble_stop_adv_without_id(void)
 {
     return app_ble_stop_adv(current_adv_id);
 }
-
 
 int app_ble_advertising_start(uint8_t *adv_id, ble_adv_data_set_t *data, ble_scan_data_set_t *scan_data)
 {
@@ -591,10 +575,8 @@ int app_ble_advertising_start(uint8_t *adv_id, ble_adv_data_set_t *data, ble_sca
     app_ble_adv_data.advdataLen = data->advdataLen;
     app_ble_scan_data.respdataLen = scan_data->respdataLen;
 
-
     memmove((void *)app_ble_adv_data.advdata, (void *)data->advdata, data->advdataLen);
     memmove((void *)app_ble_scan_data.respdata, (void *)scan_data->respdata, scan_data->respdataLen);
-
 
     ble_adv_set_state = APP_BLE_ADV_ON;
 
@@ -628,7 +610,6 @@ void app_ble_config_scanning(void)
     }
 }
 
-
 /*!
  * @brief Start scanning
  */
@@ -641,7 +622,7 @@ void app_ble_start_scanning(void)
     // For continuous scan, use OBSERVER type, use duration to control scan timeer.
     // if duration=0, will scan for ever until sonata_ble_stop_scanning() called
     //param.type = SONATA_GAP_SCAN_TYPE_OBSERVER;
-    param.prop = SONATA_GAP_SCAN_PROP_ACTIVE_1M_BIT | SONATA_GAP_SCAN_PROP_PHY_1M_BIT;//0x05
+    param.prop = SONATA_GAP_SCAN_PROP_ACTIVE_1M_BIT | SONATA_GAP_SCAN_PROP_PHY_1M_BIT; // 0x05
     param.dup_filt_pol = SONATA_GAP_DUP_FILT_EN;
     param.scan_param_1m.scan_intv = 0x0140;
     param.scan_param_1m.scan_wd = 0x00A0;
@@ -657,12 +638,10 @@ void app_ble_start_scanning(void)
 
 }
 
-
 void app_ble_stop_scanning(void)
 {
     sonata_ble_stop_scanning();
 }
-
 
 /*!
  * @brief config initiating
@@ -694,7 +673,6 @@ static bool app_ble_check_address(uint8_t *address)
     }
     return true;
 }
-
 
 /*!
  * @brief Start initiating
@@ -822,7 +800,7 @@ static void app_ble_on(void)
         APP_TRC("APP: %s  not bonded device info  \r\n", __FUNCTION__);
     }
 
-    uint16_t ret = sonata_ble_on(&cmd);//Next event:SONATA_GAP_CMP_BLE_ON
+    uint16_t ret = sonata_ble_on(&cmd); // Next event:SONATA_GAP_CMP_BLE_ON
     if (ret != API_SUCCESS) {
         APP_TRC("APP: %s  ERROR:%02X\r\n", __FUNCTION__, ret);
     }
@@ -1052,7 +1030,6 @@ static uint16_t app_ble_complete_event_handler(sonata_ble_complete_type opt_id, 
     return cb_result;
 }
 
-
 static void app_ble_gatt_add_srv_rsp_hand(uint16_t handle)
 {
     APP_TRC("app_ble_gatt_add_srv_rsp_hand\r\n");
@@ -1081,7 +1058,6 @@ static void app_ble_gatt_add_srv_rsp_hand(uint16_t handle)
     }
 }
 
-
 static uint16_t app_ble_rsp_event_handler(uint16_t opt_id, uint8_t status, uint16_t handle, uint16_t perm,
         uint16_t ext_perm, uint16_t length, void *param)
 {
@@ -1103,7 +1079,6 @@ static uint16_t app_ble_rsp_event_handler(uint16_t opt_id, uint8_t status, uint1
     return CB_DONE;
 }
 
-
 /*!
  * @brief get devcie informations
  * @param info_type @see sonata_gap_local_dev_info
@@ -1124,7 +1099,7 @@ static uint16_t app_get_dev_info_callback(sonata_gap_local_dev_info info_type, v
             APP_TRC("APP_CB: %s, manuf_name =0x%04X\r\n", __FUNCTION__, dev_info->manuf_name);
 #endif //SONATA_API_TASK_DBG
         }
-        break;
+            break;
         case SONATA_GET_DEV_BDADDR: {
 #if APP_DBG
             sonata_gap_dev_bdaddr_ind_t *param = (sonata_gap_dev_bdaddr_ind_t *) info;
@@ -1135,7 +1110,7 @@ static uint16_t app_get_dev_info_callback(sonata_gap_local_dev_info info_type, v
             APP_TRC("\r\n");
 #endif //SONATA_API_TASK_DBG
         }
-        break;
+            break;
 
         case SONATA_GET_DEV_ADV_TX_POWER: {
 #if APP_DBG
@@ -1143,7 +1118,7 @@ static uint16_t app_get_dev_info_callback(sonata_gap_local_dev_info info_type, v
             APP_TRC("APP_CB: %s, SONATA_GET_DEV_ADV_TX_POWER power_lvl =0x%02X\r\n", __FUNCTION__, param->power_lvl);
 #endif //SONATA_API_TASK_DBG
         }
-        break;
+            break;
         case SONATA_GET_WLIST_SIZE: {
 #if APP_DBG
             sonata_gap_list_size_ind_t *param = (sonata_gap_list_size_ind_t *) info;
@@ -1159,7 +1134,7 @@ static uint16_t app_get_dev_info_callback(sonata_gap_local_dev_info info_type, v
                     param->supp_switching_sampl_rates, param->antennae_num, param->max_switching_pattern_len, param->max_cte_len);
 #endif //SONATA_API_TASK_DBG
         }
-        break;
+            break;
 
         case SONATA_GET_SUGGESTED_DFLT_LE_DATA_LEN: {
 #if APP_DBG
@@ -1230,7 +1205,6 @@ static uint16_t app_get_dev_info_callback(sonata_gap_local_dev_info info_type, v
     return CB_DONE;
 }
 
-
 /*!
  * @brief Deal with peer device get local information request.
  * @param opt @see asr_gap_dev_info
@@ -1263,7 +1237,6 @@ static uint16_t app_gap_peer_get_local_info_callback(uint8_t conidx, sonata_gap_
 
     return CB_DONE;
 }
-
 
 void app_gap_set_scan_cb(app_ble_scan_callback_t cb)
 {
@@ -1335,7 +1308,6 @@ static uint16_t app_gap_disconnect_ind_callback(uint8_t conidx, uint16_t conhdl,
     return CB_DONE;
 }
 
-
 void app_ble_gatt_add_srv_rsp(uint16_t handle)
 {
     APP_TRC("app_ble_gatt_add_srv_rsp\r\n");
@@ -1395,11 +1367,10 @@ void app_user_config_write_cb(uint16_t handle, uint8_t *data, uint16_t size)
     }
     s_indicateEnable = *(uint16_t *)data;
     if (s_indicateEnable == 0x0002) {
-        int32_t send_status = sonata_ble_gatt_send_indicate_event(0, handle, size, data); //0x0200
+        int32_t send_status = sonata_ble_gatt_send_indicate_event(0, handle, size, data); // 0x0200
         printf("send status %ld\r\n", send_status);
     }
 }
-
 
 void app_ble_gatt_write_request_handler(uint16_t handle, uint16_t length, uint8_t *p_value)
 {
@@ -1419,7 +1390,6 @@ void app_ble_gatt_write_request_handler(uint16_t handle, uint16_t length, uint8_
     }
 }
 
-
 void app_ble_gatt_get_att_info(uint16_t handle, uint16_t *p_length, uint8_t *p_status)
 {
     printf("[API]ble_gatt_get_att_info %d\r\n", handle);
@@ -1433,7 +1403,6 @@ void app_ble_gatt_get_att_info(uint16_t handle, uint16_t *p_length, uint8_t *p_s
     *p_length = 200;
     *p_status  = BLE_STATUS_SUCCESS;
 }
-
 
 static uint16_t app_gatt_disc_svc_callback(uint8_t connection_id, uint16_t start_hdl, uint16_t end_hdl,
         uint8_t uuid_len, uint8_t *uuid)
@@ -1457,7 +1426,6 @@ static uint16_t app_gatt_disc_svc_callback(uint8_t connection_id, uint16_t start
     if (service_uuid == gAppEnv.appUuids.service) {
         sonata_ble_gatt_disc_all_characteristic(connection_id, start_hdl, end_hdl);
     }
-
 
     return CB_DONE;
 }
@@ -1522,7 +1490,6 @@ static uint16_t app_gatt_disc_desc_callback(uint8_t conidx, uint16_t attr_hdl, u
     return CB_DONE;
 }
 
-
 static uint16_t app_gatt_event_callback(uint8_t conidx, uint16_t handle, uint16_t type, uint16_t length, uint8_t *value)
 {
     APP_TRC("APP_CB: %s,handle = %04X, type = %04X,length = %04X", __FUNCTION__,
@@ -1536,7 +1503,6 @@ static uint16_t app_gatt_event_callback(uint8_t conidx, uint16_t handle, uint16_
 
     return CB_DONE;
 }
-
 
 void app_ble_gatt_data_send(uint16_t local_handle, uint16_t idx, uint16_t length, uint8_t *p_value)
 {
@@ -1556,7 +1522,6 @@ void app_ble_gatt_data_send(uint16_t local_handle, uint16_t idx, uint16_t length
     return;
 }
 
-
 void app_ble_gatt_data_send_notify(uint16_t local_handle, uint16_t idx, uint16_t length, uint8_t *p_value)
 {
     if (local_handle > service_reg_env.add_nb) {
@@ -1569,19 +1534,16 @@ void app_ble_gatt_data_send_notify(uint16_t local_handle, uint16_t idx, uint16_t
     //idx = 5;
     uint16_t localhandle = p_list->start_hdl + idx;
 
-
     int32_t send_status = sonata_ble_gatt_send_notify_event(0, localhandle, length, p_value);
     APP_TRC("send status %ld\r\n", send_status);
     return;
 }
-
 
 static void app_ble_enable_service(uint16_t start_hdl, uint8_t perm)
 {
     APP_TRC("app_ble_enable_service,handle =%02X(X) %d", start_hdl, perm);
     sonata_ble_gatt_set_service_visibility(start_hdl, true);
 }
-
 
 static void app_ble_disable_service(uint16_t start_hdl, uint8_t perm)
 {
@@ -1602,7 +1564,6 @@ int  app_ble_disable_service_by_handler(uint16_t start_hdl)
     return 0;
 }
 
-
 static uint8_t app_ble_search_svc(uint8_t *service_uuid)
 {
     for (int idx = 0; idx < service_reg_env.add_nb; idx++) {
@@ -1611,7 +1572,6 @@ static uint8_t app_ble_search_svc(uint8_t *service_uuid)
         }
     }
     return MAX_SERVICE_NUM;
-
 
 }
 
@@ -1689,7 +1649,6 @@ int app_ble_gatt_add_svc_helper(uint16_t *start_hdl, uint8_t nb_att, ble_gatt_at
     return BLE_STATUS_SUCCESS;
 }
 
-
 int app_set_security_io_cap(uint8_t cap)
 {
     APP_TRC("app_set_security_io_cap,cap=%02X(X)", cap);
@@ -1697,14 +1656,12 @@ int app_set_security_io_cap(uint8_t cap)
     return 0;
 }
 
-
 int app_set_security_auth_req(uint8_t auth_req)
 {
     APP_TRC("app_set_security_auth_req,auth_req=%02X(X)", auth_req);
     app_auth =  auth_req;
     return 0;
 }
-
 
 uint8_t app_get_connection_state(void)
 {
@@ -1778,13 +1735,11 @@ static void print_peer_bond_request(struct sonata_gap_bond_req_ind *request)
     }
 }
 
-
-
 void app_gap_notify_pair_request_rsp(uint8_t *bd_addr, uint8_t accept)
 {
     uint8_t key_size      = SONATA_GAP_SMP_MAX_ENC_SIZE_LEN;
     enum sonata_gap_oob_auth          oob        = SONATA_GAP_OOB_AUTH_DATA_NOT_PRESENT;
-    enum sonata_gap_kdist        ikey_dist  = SONATA_GAP_KDIST_LINKKEY;//Initiator key distribution
+    enum sonata_gap_kdist        ikey_dist  = SONATA_GAP_KDIST_LINKKEY; // Initiator key distribution
     enum sonata_gap_kdist        rkey_dist  = SONATA_GAP_KDIST_NONE;  //Responder key distribution
     enum sonata_gap_sec_req      sec_req    = SONATA_GAP_NO_SEC;
     //ikey_dist = GAP_KDIST_ENCKEY | GAP_KDIST_IDKEY;
@@ -1811,7 +1766,6 @@ static void app_gap_notify_pair_request(void)
         sec_req_call(target_address);
     }
 }
-
 
 static uint16_t app_gap_bond_req_callback(uint8_t conidx, struct sonata_gap_bond_req_ind *request)
 {
@@ -1906,7 +1860,6 @@ static uint16_t app_gap_bond_req_callback(uint8_t conidx, struct sonata_gap_bond
             }
             APP_TRC("\r\n");
 
-
         }
         break;
         case SONATA_GAP_NC_EXCH: {
@@ -1933,11 +1886,9 @@ static uint16_t app_gap_bond_req_callback(uint8_t conidx, struct sonata_gap_bond
             break;
     }
 
-
     return CB_DONE;
 
 }
-
 
 static uint16_t app_gap_bond_callback(uint8_t conidx, struct sonata_gap_bond_ind *ind)
 {
@@ -2018,7 +1969,6 @@ static uint16_t app_gap_bond_callback(uint8_t conidx, struct sonata_gap_bond_ind
                 APP_TRC("%02X ", ind->data.ltk.ltk.key[i]);
             }
             APP_TRC("\r\n");
-
 
             break;
         case SONATA_GAP_IRK_EXCH:
@@ -2214,7 +2164,6 @@ static uint16_t app_gap_peer_att_info_callback(uint8_t conidx, sonata_gap_peer_a
     return CB_DONE;
 }
 
-
 static uint16_t app_gap_peer_info_callback(uint8_t conidx, sonata_gap_peer_info_ind_t *info)
 {
     APP_TRC("APP_CB: %s  conidx=%02X, info_type=%02X\r\n", __FUNCTION__, conidx, info->req);
@@ -2310,12 +2259,10 @@ static uint16_t app_gap_peer_set_local_device_name_callback(uint8_t conidx, uint
     return CB_DONE;
 }
 
-
 void app_set_connect_flag(uint8_t vaule)
 {
     need_connect_confirm = vaule;
 }
-
 
 static void app_gap_send_connection_confirm(uint8_t conidx, uint8_t auth)
 {
@@ -2334,7 +2281,6 @@ static void app_gap_send_connection_confirm(uint8_t conidx, uint8_t auth)
 
     sonata_ble_gap_send_connection_cfm(conidx, &connectionCfm);
 }
-
 
 void app_gap_connect_confirm(uint8_t *addr, uint8_t auth)
 {
@@ -2468,7 +2414,6 @@ static uint16_t app_gatt_mtu_changed_callback(uint8_t connection_id, uint16_t mt
     return CB_DONE;
 }
 
-
 /*!
  * @brief
  * @param connection_id
@@ -2489,9 +2434,6 @@ static uint16_t app_gatt_att_info_req_ind_callback(uint8_t connection_id, uint16
     sonata_ble_gatt_send_att_info_confirm(connection_id, handle, length, status);
     return CB_DONE;
 }
-
-
-
 
 bool app_ble_master_write_data(uint8_t conidx, uint16_t length, uint8_t *data)
 {
@@ -2684,7 +2626,6 @@ sonata_api_app_msg_t app_at_cmd_msg = {
  ****************************************************************************************
  */
 
-
 /*
  * GLOBAL FUNCTION DEFINITIONS
  ****************************************************************************************
@@ -2854,12 +2795,10 @@ static uint8_t app_timer_handler(uint16_t id)
 
 }
 
-
 extern int init_ble_task(void);
 extern int deinit_ble_task(void);
 
 uint32_t ble_open = 0;
-
 
 // 连接相关
 int app_ble_stack_start(ble_stack_opr_module_id_t module)
@@ -2873,7 +2812,6 @@ int app_ble_stack_start(ble_stack_opr_module_id_t module)
     init_ble_task();
     return 0;
 }
-
 
 int app_ble_stack_stop(ble_stack_opr_module_id_t module)
 {
@@ -2909,7 +2847,6 @@ void app_ble_set_target_address(uint8_t *target)
     APP_TRC("\r\n ");
 }
 
-
 void app_ble_set_uuids(uint16_t service, uint16_t read, uint16_t write, uint16_t ntf)
 {
     APP_TRC("APP: %s  service=0x%04X,read=0x%04X,write=0x%04X,ntf=0x%04X\r\n", __FUNCTION__, service, read, write, ntf);
@@ -2919,7 +2856,6 @@ void app_ble_set_uuids(uint16_t service, uint16_t read, uint16_t write, uint16_t
     gAppEnv.appUuids.write = write;
     gAppEnv.appUuids.ntf = ntf;
 }
-
 
 app_uuids *app_ble_get_uuids()
 {
@@ -2947,4 +2883,4 @@ CRITICAL_FUNC_SEG void BLE_IRQHandler(void)
     sonata_ble_isr();
 }
 
-/// @} APP
+// @} APP

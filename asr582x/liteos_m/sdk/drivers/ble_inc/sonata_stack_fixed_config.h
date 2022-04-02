@@ -16,7 +16,6 @@
 #ifndef SONATA_STACK_FIXED_CONFIG_H_
 #define SONATA_STACK_FIXED_CONFIG_H_
 
-
 /*
  * DEFINES
  ****************************************************************************************

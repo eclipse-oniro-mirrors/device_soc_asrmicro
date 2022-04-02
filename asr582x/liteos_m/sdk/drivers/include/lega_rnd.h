@@ -22,7 +22,6 @@
 void lega_rnd_init(void);
 void lega_rnd_deinit(void);
 
-
 /*!
 @brief This function is used for reseeding the RNG with additional entropy and additional user-provided input.
 (additional data should be provided by calling ::CRYS_RND_AddAdditionalInput prior to using this API).
@@ -35,7 +34,6 @@ int lega_RND_Reseeding(
     uint8_t   *rndContext_ptr,      /*!< [in/out] Pointer to the RND context buffer. */
     uint8_t  *rndWorkBuff_ptr      /*!< [in/out] Scratchpad for the RND module's work. */
 );
-
 
 /****************************************************************************************/
 /*!
@@ -72,6 +70,5 @@ int lega_RND_AddAdditionalInput(
     uint8_t *additonalInput_ptr,            /*!< [in]  The Additional Input buffer. */
     uint16_t additonalInputSize             /*!< [in]  The size of the Additional Input buffer. Must be <= 48, and a multiple of 4. */
 );
-
 
 #endif //_LEGA_RND_H_

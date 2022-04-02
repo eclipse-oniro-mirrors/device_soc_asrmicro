@@ -25,7 +25,6 @@
  ****************************************************************************************
  */
 
-
 #ifndef _ARCH_H_
 #define _ARCH_H_
 
@@ -35,8 +34,8 @@
  */
 #include <stdint.h>        // standard integer definition
 #include <stdio.h>
+#include "compiler.h"      // inline functions
 #include "sonata_stack_config.h"
-
 
 /*
  * MACRO DEFINES
@@ -49,46 +48,46 @@
 #define CRITICAL_FUNC_SEG
 #endif //CFG_SEG
 
-/// ARM is a 32-bit CPU
+// ARM is a 32-bit CPU
 #define CPU_WORD_SIZE      4
 
-/// ARM is little endian
+// ARM is little endian
 #define CPU_LE             1
 
-/// debug configuration
+// debug configuration
 #if defined(CFG_DBG)
 #define PLF_DEBUG          1
 #else //CFG_DBG
 #define PLF_DEBUG          0
 #endif //CFG_DBG
 
-/// NVDS configuration
+// NVDS configuration
 #ifdef CFG_NVDS
 #define PLF_NVDS             1
 #else // CFG_NVDS
 #define PLF_NVDS             0
 #endif // CFG_NVDS
 
-/// ble rom support
+// ble rom support
 #if defined(CFG_BLE_ROM)
 #define BLE_ROM               1
 #else
 #define BLE_ROM               0
 #endif
 
-/// Possible errors detected by FW
+// Possible errors detected by FW
 #define    RESET_NO_ERROR           0x00000000
 #define    RESET_MEM_ALLOC_FAIL     0xF2F2F2F2
 
-/// Reset platform and stay in ROM
+// Reset platform and stay in ROM
 #define    RESET_TO_ROM             0xA5A5A5A5
-/// Reset platform and reload FW
+// Reset platform and reload FW
 #define    RESET_AND_LOAD_FW        0xC3C3C3C3
 
-/// Exchange memory size limit
+// Exchange memory size limit
 #define    EM_SIZE_LIMIT            0x8000
 
-/// maximum assert number
+// maximum assert number
 #define ASSERT_ID_LAST              3703s
 
 /*
@@ -160,7 +159,6 @@ void assert_param(uint16_t id, int param0, int param1);
  */
 void assert_warn(uint16_t id, int param0, int param1);
 
-
 /**
  ****************************************************************************************
  * @brief Dump data value into FW.
@@ -170,9 +168,6 @@ void assert_warn(uint16_t id, int param0, int param1);
  ****************************************************************************************
  */
 void dump_data(uint8_t *data, uint16_t length);
-
-
-
 
 /*
  * ASSERTION CHECK
@@ -184,7 +179,7 @@ extern void (*pf_sonata_assert_err)(uint16_t id, int cond);
 extern void (*pf_sonata_assert_param)(uint16_t id, int param0, int param1);
 extern void (*pf_sonata_assert_warn)(uint16_t id, int param0, int param1);
 
-/// Assertions showing a critical error that could require a full system reset
+// Assertions showing a critical error that could require a full system reset
 #define ASSERT_ERR(id, cond)                                     \
     do {                                                     \
         if (!(cond)) {                                       \
@@ -195,8 +190,7 @@ extern void (*pf_sonata_assert_warn)(uint16_t id, int param0, int param1);
         }                                                    \
     } while(0)
 
-
-/// Assertions showing a critical error that could require a full system reset
+// Assertions showing a critical error that could require a full system reset
 #define ASSERT_INFO(id, cond, param0, param1)                             \
     do {                                                              \
         if (!(cond)) {                                                \
@@ -207,8 +201,7 @@ extern void (*pf_sonata_assert_warn)(uint16_t id, int param0, int param1);
         }                                                             \
     } while(0)
 
-
-/// Assertions showing a non-critical problem that has to be fixed by the SW
+// Assertions showing a non-critical problem that has to be fixed by the SW
 #define ASSERT_WARN(id, cond, param0, param1)                                      \
     do {                                                                        \
         if (!(cond)) {                                                          \
@@ -225,19 +218,18 @@ extern void (*pf_sonata_assert_warn)(uint16_t id, int param0, int param1);
     dump_data((uint8_t*)(data), length)
 
 #else
-/// Assertions showing a critical error that could require a full system reset
+// Assertions showing a critical error that could require a full system reset
 #define ASSERT_ERR(id, cond)
 
-/// Assertions showing a critical error that could require a full system reset
+// Assertions showing a critical error that could require a full system reset
 #define ASSERT_INFO(id, cond, param0, param1)
 
-/// Assertions showing a non-critical problem that has to be fixed by the SW
+// Assertions showing a non-critical problem that has to be fixed by the SW
 #define ASSERT_WARN(id, cond, param0, param1)
 
-/// DUMP data array present in the SW.
+// DUMP data array present in the SW.
 #define DUMP_DATA(data, length)
 #endif //PLF_DEBUG
-
 
 // required to define GLOBAL_INT_** macros as inline assembly. This file is included after
 // definition of ASSERT macros as they are used inside ll.h
@@ -255,5 +247,5 @@ int rtos_set_semaphore(void **semaphore);
 
 #endif //(SONATA_RTOS_SUPPORT)
 
-/// @} DRIVERS
+// @} DRIVERS
 #endif // _ARCH_H_

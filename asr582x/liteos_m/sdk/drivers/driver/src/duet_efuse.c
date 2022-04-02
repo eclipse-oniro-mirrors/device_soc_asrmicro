@@ -71,7 +71,7 @@ void duet_efuse_init(uint8_t ldo25_open)
 uint8_t duet_efuse_byte_read(uint16_t addr)
 {
     EFUSE->B_ADDR = addr;
-    EFUSE->CFG_TYPE = 0x0;//read type
+    EFUSE->CFG_TYPE = 0x0; // read type
 
     EFUSE->START = 0x1;
     while (EFUSE->START & 0x1);
@@ -102,8 +102,8 @@ void duet_efuse_byte_write(uint16_t addr, uint8_t data)
 {
     EFUSE->PGM_DATA = data;
     EFUSE->B_ADDR = addr;
-    EFUSE->CFG_TYPE = 0x1;//program type
-    EFUSE->WR_TYPE = 0x0;//write type: byte
+    EFUSE->CFG_TYPE = 0x1; // program type
+    EFUSE->WR_TYPE = 0x0; // write type: byte
     EFUSE->START = 0x1;
     while (EFUSE->START & 0x1);
 }
@@ -117,8 +117,8 @@ void duet_efuse_word_write(uint16_t addr, uint32_t data)
 {
     EFUSE->PGM_DATA = data;
     EFUSE->B_ADDR = addr;
-    EFUSE->CFG_TYPE = 0x1;//program type
-    EFUSE->WR_TYPE = 0x1;//write type: word
+    EFUSE->CFG_TYPE = 0x1; // program type
+    EFUSE->WR_TYPE = 0x1; // write type: word
     EFUSE->START = 0x1;
     while (EFUSE->START & 0x1);
 }

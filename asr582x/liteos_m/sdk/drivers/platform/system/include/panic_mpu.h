@@ -34,7 +34,6 @@ typedef struct {
     unsigned int mair1;             /*!< Offset: 0x034 (R/W)  MPU Memory Attribute Indirection Register 1     */
 } MPU_t;
 
-
 /* System Handler Control and State register */
 #define SHCSR_M                  ((unsigned int*)0xE000ED24UL)
 
@@ -131,7 +130,6 @@ typedef struct {
 #define REGION_ENABLE               (0x1)
 #define REGION_DISABLE              (0x0)
 
-
 /* MPU regions size */
 
 #define MPU_REGION_SIZE_32B      (0x04U)
@@ -171,7 +169,6 @@ typedef struct {
 #define MPU_AP_RO_NA             (0x05U)
 #define MPU_AP_RO_RO             (0x06U)
 
-
 typedef struct {
     unsigned long base_addr;
     unsigned char range_no;
@@ -185,7 +182,6 @@ typedef struct {
     unsigned char bufferable;
     unsigned char enable;
 } MPU_Region_Init_t;
-
 
 /**
  * set mpu region for memory unauthorized access check
@@ -218,7 +214,6 @@ typedef struct {
     unsigned int rbar_a3;
     unsigned int rasr_a3;
 } MPU_t;
-
 
 /* System Handler Control and State register */
 #define SHCSR_M                  ((unsigned int*)0xE000ED24UL)
@@ -308,7 +303,6 @@ typedef struct {
 
 #define MPU_RASR_ENABLE_MASK        (1UL)
 
-
 /* MPU regions size */
 
 #define MPU_REGION_SIZE_32B      (0x04U)
@@ -347,7 +341,6 @@ typedef struct {
 #define MPU_AP_RESV              (0x04U)
 #define MPU_AP_RO_NA             (0x05U)
 #define MPU_AP_RO_RO             (0x06U)
-
 
 typedef struct {
     unsigned long base_addr;

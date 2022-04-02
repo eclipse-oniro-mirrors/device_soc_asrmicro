@@ -54,7 +54,6 @@ static void sonata_string_to_array(char *input_str, uint8_t input_length, uint8_
     }
 }
 
-
 duet_gpio_dev_t  g_duet_gpio11;
 duet_gpio_dev_t  g_duet_gpio12;
 duet_gpio_dev_t  g_duet_gpio6;
@@ -212,7 +211,6 @@ static struct cli_command disconnect_cmd = {
 };
 #endif
 
-
 void lega_ble_test_mode(char *pwbuf, int blen, int argc, char **argv)
 {
     int c = 1;
@@ -239,7 +237,6 @@ void lega_ble_test_mode(char *pwbuf, int blen, int argc, char **argv)
 
         duet_gpio_output_low(&g_duet_gpio11);
 
-
         app_set_ble_test_mode(true);
     } else {
         app_set_ble_test_mode(false);
@@ -262,7 +259,6 @@ void lega_ble_adv_state(char *pwbuf, int blen, int argc, char **argv)
     sonata_api_app_timer_active(5);
 }
 
-
 #ifdef ALIOS_SUPPORT
 static struct cli_command adv_state = {
     .name     = "printf-adv-state",
@@ -282,7 +278,6 @@ void lega_ble_set_uuid(char *pwbuf, int blen, int argc, char **argv)
     ble_set_max_mtu(200);
 }
 
-
 #ifdef ALIOS_SUPPORT
 static struct cli_command set_test_uuid = {
     .name     = "test-uuid",
@@ -299,14 +294,12 @@ void lega_ble_add_test_service(char *pwbuf, int blen, int argc, char **argv)
 #endif
 }
 
-
 #ifdef ALIOS_SUPPORT
 static struct cli_command add_test_service = {
     .name     = "add-test-service",
     .help     = "add-test-service",
     .function = lega_ble_add_test_service,
 };
-
 
 void lega_ble_at_init(void)
 {

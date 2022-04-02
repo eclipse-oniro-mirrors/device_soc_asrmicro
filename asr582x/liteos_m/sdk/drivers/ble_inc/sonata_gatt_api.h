@@ -23,11 +23,8 @@
  ****************************************************************************************
  */
 
-
 #ifndef _SONATA_GATT_API_H_
 #define _SONATA_GATT_API_H_
-
-
 
 /*
  * INCLUDE FILES
@@ -84,7 +81,6 @@
 #define PRI      (SONATA_PERM(RI, ENABLE))
 
 #define PWC_NA (SONATA_PERM(WRITE_COMMAND, ENABLE) | SONATA_PERM(WP, NO_AUTH))
-
 
 /*
  * ENUM DEFINITIONS
@@ -225,7 +221,6 @@ typedef struct sonata_gatt_att_desc {
      */
     uint16_t perm;
 
-
     /**
      * Maximum length of the attribute
      *
@@ -324,7 +319,6 @@ typedef struct {
     /*************** GATT Manager  ***************/
 } ble_gatt_callback;
 
-
 /*
  * FUNCTION DECLARATIONS
  ****************************************************************************************
@@ -409,7 +403,6 @@ uint16_t sonata_ble_gatt_read_by_handle(uint8_t conidx, uint16_t handle_id);
  */
 uint16_t sonata_ble_gatt_send_notify_event(uint8_t conidx, uint16_t handle, uint16_t length, uint8_t *value);
 
-
 /*!
  * @brief Send indicate event
  * @param conidx connecting index, used for multiple connection. for single connection, set it to 0.
@@ -452,8 +445,6 @@ uint16_t sonata_ble_gatt_gatt_read_long(uint8_t conidx, uint16_t handle, uint16_
  */
 uint16_t sonata_ble_gatt_read_by_uuid(uint8_t conidx, uint16_t seq_num, uint16_t start_hdl, uint16_t end_hdl,
                                       uint8_t uuid_len, uint8_t *uuid);
-
-
 
 /*!
  * @brief Gatt write

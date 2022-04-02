@@ -23,7 +23,6 @@
  ****************************************************************************************
  */
 
-
 #ifndef _SONATA_UTILS_API_H_
 #define _SONATA_UTILS_API_H_
 
@@ -47,7 +46,6 @@
  */
 /// maxium supported messages from application
 #define SONATA_API_MAX_APP_MSG                  32
-
 
 /// debug trace
 #ifdef SONATA_UTILS_API_DBG
@@ -74,7 +72,6 @@
  * ENUM DEFINITIONS
  ****************************************************************************************
  */
-
 
 /*!
  * @brief app msg operation type
@@ -123,8 +120,6 @@ typedef enum {
     SONATA_MAC_USE_NVDS,
 } SONATA_MAC_PRIORITY;
 
-
-
 /*
  * Type Definition
  ****************************************************************************************
@@ -166,7 +161,6 @@ typedef struct {
  */
 typedef void (*aes_func_result_cb) (uint8_t status, const uint8_t *aes_res, uint32_t src_info);
 
-
 /*
  * FUNCTION DECLARATIONS
  ****************************************************************************************
@@ -202,7 +196,6 @@ void sonata_api_util_gap_status_print(uint8_t status);
 
 ///@hide
 void sonata_api_util_gatt_status_print(uint8_t operation, uint8_t status);
-
 
 /**
 ***************************************************************************************
@@ -305,7 +298,6 @@ uint8_t sonata_fs_erase(sonata_fs_tag_t tag);
  */
 uint8_t *sonata_get_bt_address(void);
 
-
 /**
 ***************************************************************************************
 * @brief sonata set bd addr
@@ -392,7 +384,6 @@ bool sonata_get_adv_report_info(uint8_t type, uint8_t *info, uint16_t info_lengt
  */
 uint32_t sonata_get_sys_time(void);
 
-
 /*!
  * @brief Reset BLE stack
  * @return
@@ -416,11 +407,6 @@ const char *sonata_get_rom_version(void);
  * @brief Ble addr priority callback
  */
 void sonata_ble_register_bt_addr_callback(ble_addr_callback_t *cb);
-
-
-
-
-
 
 extern int rand (void);
 
@@ -461,9 +447,6 @@ __INLINE uint32_t util_read32p(void const *ptr32)
 }
 
 void sonata_platform_reset(void);
-
-
-
 
 /** @}*/
 #endif //_SONATA_UTILS_API_H_

@@ -23,7 +23,6 @@
  ****************************************************************************************
  */
 
-
 #ifndef _SONATA_BLE_API_H_
 #define _SONATA_BLE_API_H_
 
@@ -34,6 +33,8 @@
 #include "sonata_utils_api.h"
 #include "sonata_gatt_api.h"
 #include "sonata_gap_api.h"
+#include "sonata_prf_diss_api.h"
+#include "sonata_log.h"
 /*
  * MACRO DEFINITIONS
  ****************************************************************************************
@@ -43,8 +44,7 @@
  * @{
  */
 
-
-/// debug trace
+// debug trace
 #define SONATA_BLE_API_DBG    1
 #if SONATA_BLE_API_DBG
 #define SONATA_BLE_API_TRC    printf
@@ -52,29 +52,27 @@
 #define SONATA_BLE_API_TRC(...)
 #endif //SONATA_BLE_API_DBG
 
-
 #define SONATA_TASK_FIRST_MSG(task) ((uint16_t)((task) << 8))
-
 
 /*
  * ENUM DEFINITIONS
  ****************************************************************************************
  */
 
-/// App callback status
+// App callback status
 typedef enum {
     CB_DONE           = 0, //Done in callback
     CB_REJECT         = 1, //Do nothing in callback, SDK will do it
     CB_MAX            = 0xFF,
 } CBStatus;
 
-/// Result of sleep state.
+// Result of sleep state.
 enum sonata_ble_sleep_state {
-    /// Some activity pending, can not enter in sleep state
+    // Some activity pending, can not enter in sleep state
     SONATA_BLE_ACTIVE    = 0,
-    /// CPU can be put in sleep state
+    // CPU can be put in sleep state
     SONATA_BLE_CPU_SLEEP,
-    /// IP could enter in deep sleep
+    // IP could enter in deep sleep
     SONATA_BLE_DEEP_SLEEP,
 };
 
@@ -82,7 +80,6 @@ enum sonata_ble_sleep_state {
  * Type Definition
  ****************************************************************************************
  */
-
 
 /*
  * GLOBAL VARIABLE DECLARATIONS
@@ -109,7 +106,6 @@ void sonata_ble_init(sonata_ble_hook_t hook);
  * @param prv_slp_bit Bit to be set in the prevent sleep bit field
  */
 void sonata_ble_prevent_sleep_set(uint16_t prv_slp_bit);
-
 
 /*!
  * @brief Clears a bit in the prevent sleep bit field, in order to allow the system
@@ -146,9 +142,7 @@ void sonata_ble_isr(void);
  ****************************************************************************************
  */
 
-
 /** @}*/
-
 
 #endif //_SONATA_BLE_API_H_
 

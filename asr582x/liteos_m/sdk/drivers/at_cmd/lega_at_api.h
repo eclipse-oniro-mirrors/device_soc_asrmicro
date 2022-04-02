@@ -138,7 +138,6 @@ extern duet_uart_dev_t lega_at_uart;
 extern lega_uart_dev_t lega_at_uart;
 #endif
 
-
 /** @brief  at register init functin, register all support cmd and user register cmd
  */
 void lega_at_cmd_register_all(void);
@@ -159,7 +158,6 @@ extern int printf2(const char *format, ...);
 #define printf2 printf
 #endif
 
-
 #define dbg_at(Fmt, ...)         do{if(at_dbgflg) printf2(Fmt "\r\n", ## __VA_ARGS__);}while(0)
 #define dbg_atnn(Fmt, ...)       do{if(at_dbgflg) printf2(Fmt, ## __VA_ARGS__);}while(0)
 #define at_rspdata(Fmt, ...)     printf2("+" Fmt "\r\n", ## __VA_ARGS__)
@@ -167,8 +165,5 @@ extern int printf2(const char *format, ...);
 #define at_rspinfor(Fmt, ...)    printf2(Fmt "\r\n", ## __VA_ARGS__)
 #define at_rspinfornn(Fmt, ...)  printf2(Fmt, ## __VA_ARGS__)
 
-
-
 #endif  //_LEGA_AT_API_H_
-
 

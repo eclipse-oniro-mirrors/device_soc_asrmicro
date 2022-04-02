@@ -26,6 +26,7 @@
 #define _TYPES_H_
 
 #include <stdint.h>
+#include <stdbool.h>
 
 #if 0   // use standard defines
 
@@ -80,9 +81,9 @@ typedef unsigned char bool;
 #define BIT(n)           (1<<(n))
 #define CO_WF_BIT(pos)      (1U<<(pos))
 
-/// structure of a list element header
+// structure of a list element header
 struct co_wf_list_hdr {
-    /// Pointer to the next element in the list
+    // Pointer to the next element in the list
     struct co_wf_list_hdr *next;
 };
 
@@ -109,10 +110,7 @@ inline static uint16_t __fswap16(uint16_t x)
 #define __be16_to_cpu(x) __swap16(x)
 
 #define wlan_htons(x) __cpu_to_be16(x)
-//#define ntohs(x) __be16_to_cpu(x)
-
-
+// #define ntohs(x) __be16_to_cpu(x)
 
 #endif //_TYPES_H_
-
 

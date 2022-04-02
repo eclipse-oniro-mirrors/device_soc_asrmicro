@@ -23,11 +23,8 @@
  ****************************************************************************************
  */
 
-
 #ifndef _SONATA_PRF_HOGPD_API_H_
 #define _SONATA_PRF_HOGPD_API_H_
-
-
 
 /*
  * INCLUDE FILES
@@ -74,7 +71,6 @@
 #define HID_REPORT_ID_SERVICE_CTRL_INDEX      (3)
 #define HID_REPORT_ID_VENDOR_DEFINED_INDEX    (4)
 #define HID_REPORT_ID_MOUSE_INDEX             (1)
-
 
 #define HID_REPORT_ID_KEYBOARD                (1)
 #define HID_REPORT_ID_MOUSE                   (2)
@@ -342,7 +338,6 @@ typedef enum {
     MOTION_ADC = 'A',
 } sonata_mouse_motion;
 
-
 /// Report Char. Configuration Flag Values   //Report's read and write property
 typedef enum {
     /// Input Report
@@ -382,7 +377,6 @@ typedef enum {
     SONATA_HOGPD_OP_PROT_UPDATE,
 } sonata_hogpd_op;
 
-
 /// Messages for HID Over GATT Profile Device Role
 /*@TRACE*/
 enum sonata_hogpd_msg_id {
@@ -395,7 +389,6 @@ enum sonata_hogpd_msg_id {
     SONATA_HOGPD_REPORT_UPD_REQ,
     /// Response sending of a report to the host
     SONATA_HOGPD_REPORT_UPD_RSP,
-
 
     /// Request from peer device to Read or update a report value
     SONATA_HOGPD_REPORT_REQ_IND,
@@ -434,7 +427,6 @@ typedef enum {
     DIR_BROADCAST_ALREADY_SEND,
 } directed_broadcast_state;
 
-
 /// HID Information bit values
 typedef enum {
     /// Device capable of providing wake-up signal to a HID host
@@ -447,9 +439,6 @@ typedef enum {
  * Type Definition
  ****************************************************************************************
  */
-
-
-
 
 /// External Report Reference
 typedef struct sonata_hogpd_ext_ref {
@@ -494,7 +483,6 @@ typedef  struct sonata_hogpd_db_cfg {
     struct sonata_hogpd_hids_cfg cfg[SONATA_HOGPD_NB_HIDS_INST_MAX];
 } sonata_hogpd_db_cfg_t;
 
-
 /*!
  * @brief Callback for hogpd value
  */
@@ -508,9 +496,6 @@ typedef struct {
     uint16_t (*hogpd_ntf_config)(uint8_t conidx, uint8_t ntf_len, uint16_t *ntf_cfg);
 } prf_hogpd_callback;
 
-
-
-
 /**
  *  Botton definition
  *  --------------------------------------------------------------------------
@@ -523,7 +508,6 @@ typedef struct ps_mouse_report {
     int16_t   repX;    //x-quaddec of the mouse
     int16_t   repY;    //y-quaddec of the mouse
 } ps_mouse_report_t;
-
 
 /*!
  * @brief sonata_get_connection_state
@@ -556,7 +540,6 @@ int sonata_prf_hogp_send_report_update_request(uint8_t conidx, uint8_t hid_idx, 
  * @return
  */
 int sonata_prf_hogp_send_protocol_mode_confirm(uint8_t conidx, uint8_t hid_idx, uint8_t status, uint8_t proto_mode);
-
 
 /*!
  * @brief send report map confirm
@@ -605,7 +588,6 @@ void sonata_prf_hogp_mouse_data_send_report(ps_mouse_report_t report_buff);
  */
 void sonata_prf_hogp_send_report_update_request_for_mouse(uint8_t report_idx, ps_mouse_report_t report);
 
-
 /*!
  * @brief sonata_prf_hogp_send_report_update_request_for_keyboard
  * @param ps_keyboard_report_t
@@ -614,14 +596,12 @@ void sonata_prf_hogp_send_report_update_request_for_mouse(uint8_t report_idx, ps
 void sonata_prf_hogp_send_report_update_request_for_keyboard(uint8_t report_idx, uint8_t *ps_keyboard_report_t,
         uint8_t report_len);
 
-
 /*!
  * @brief app_start_hid_keyboard
  * @param cb
  * @return
  */
 uint16_t sonata_prf_hogpd_register_callback(prf_hogpd_callback *cb);
-
 
 /*!
  * @brief sonata_prf_hogpd_boot_mouse_input_report

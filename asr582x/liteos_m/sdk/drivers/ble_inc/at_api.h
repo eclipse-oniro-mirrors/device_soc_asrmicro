@@ -29,7 +29,6 @@
 #include "stdio.h"
 #include "sonata_ble_hook.h"
 
-
 #define SONATA_AT_VERSION        "AT-V0.9.1"
 #define SONATA_SDK_VERSION       "SDK-V1.0.10"
 #define SONATA_APP_VERSION       "APP-V1.0.10"
@@ -118,7 +117,6 @@ extern char at_dbgflg;
 
 #define at_printf printf
 
-
 #define dbg_at(Fmt, ...)         do{if(at_dbgflg) at_printf(Fmt "\r\n", ## __VA_ARGS__);}while(0)
 #define dbg_atnn(Fmt, ...)       do{if(at_dbgflg) at_printf(Fmt, ## __VA_ARGS__);}while(0)
 
@@ -128,5 +126,4 @@ extern char at_dbgflg;
 #define at_rspinfornn(Fmt, ...)  at_printf(Fmt, ## __VA_ARGS__)
 
 #endif  //_AT_API_H_
-
 

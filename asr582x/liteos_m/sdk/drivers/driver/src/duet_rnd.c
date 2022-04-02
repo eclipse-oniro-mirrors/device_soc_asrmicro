@@ -28,7 +28,6 @@
 /**********************        Public Functions      *************************/
 /*****************************************************************************/
 
-
 int duet_RND_Instantiation(CRYS_RND_Context_t *rndContext_ptr, CRYS_RND_WorkBuff_t *rndWorkBuff_ptr)
 {
     return CRYS_RND_Instantiation(rndContext_ptr, rndWorkBuff_ptr);

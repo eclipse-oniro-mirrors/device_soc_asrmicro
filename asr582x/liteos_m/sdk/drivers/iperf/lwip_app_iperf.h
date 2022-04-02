@@ -76,7 +76,6 @@ extern volatile IPERF_UDP_CLIENT_STATUS iperf_udp_client_status;
 //extern volatile int iperf_tcp_client_running;
 //extern volatile int iperf_udp_client_term;
 
-
 struct lwip_iperf_outputInfo {
     int seconds; //start time
     u64_t lastByte;

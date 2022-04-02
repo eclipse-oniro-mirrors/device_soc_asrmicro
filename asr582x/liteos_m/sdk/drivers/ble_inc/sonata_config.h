@@ -37,7 +37,6 @@
  */
 #define UTIL_BIT(pos) (1UL<<(pos))
 
-
 #define SONATA_KEY_LEN             (0x10)
 #define SONATA_RAND_NB_LEN         (0x08)
 #define SONATA_BD_ADDR_LEN         (6)
@@ -123,11 +122,9 @@ enum {
 #define STACK_BLE_HOST_PRESENT            0
 #endif // defined(CFG_BLE) && defined(CFG_HOST)
 
-
 #define SONATA_TASK_ID_APP   (15)
 #define SONATA_TASK_ID_BASS  (36)
 #define SONATA_TASK_ID_HOGPD (38)
-
 
 #define SONATA_GAP_MAX_NAME_SIZE            (0x20)
 

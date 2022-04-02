@@ -25,7 +25,6 @@
 #include "ohos_bt_gatt_server.h"
 #include "ohos_bt_gatt_client.h"
 
-
 static BtGattServerCallbacks  gatts_callback = {0};
 static BtGattCallbacks        bt_gattcallback = {0};
 
@@ -39,7 +38,6 @@ static BtGattCallbacks        bt_gattcallback = {0};
 #define ATT_SIG_UUID_16_LEN                         0x0002
 
 int BleGattsSetEncryption(BdAddr bdAddr, BleSecAct secAct);
-
 
 int BleGattsSendIndication(int serverId, GattsSendIndParam *param);
 static int8_t test_value[5] = {0x2, 0x02, 0x02, 0x04, 0x05};
@@ -61,7 +59,6 @@ void test_ind(void)
     test_value[4] = count;
     BleGattsSendIndication(0, &indParam);
 }
-
 
 int app_core_evt_ind_cb_h(app_core_evt_ind_t evt, void *p_param)
 {
@@ -162,7 +159,6 @@ int BleSetSecurityIoCap(BleIoCapMode mode)
     return BT_STATUS_SUCCESS;
 }
 
-
 static uint8_t sec_auth_req_h2a(BleAuthReqMode mode)
 {
     uint8_t auth_req_temp ;
@@ -215,7 +211,6 @@ int BleGattsDisconnect(int serverId, BdAddr bdAddr, int connId)
     return BT_STATUS_SUCCESS;
 }
 
-
 static void perm_2_perm(uint8_t user_perm, uint8_t user_prop, uint16_t *p_perm)
 {
     if ((user_prop  & OHOS_GATT_CHARACTER_PROPERTY_BIT_READ) == OHOS_GATT_CHARACTER_PROPERTY_BIT_READ) {
@@ -264,8 +259,6 @@ static void perm_2_perm(uint8_t user_perm, uint8_t user_prop, uint16_t *p_perm)
     print_log("[Harmony]user_perm= %x prop = %x out : %x\r\n", user_perm, user_prop, *p_perm);
 }
 
-
-
 ble_gatt_att_reg_t   *ble_ohos_add_service(ble_gatt_att_reg_t *dst_attr, BleGattAttr *service_attr)
 {
     if (service_attr->attrType != OHOS_BLE_ATTRIB_TYPE_SERVICE) {
@@ -282,8 +275,6 @@ ble_gatt_att_reg_t   *ble_ohos_add_service(ble_gatt_att_reg_t *dst_attr, BleGatt
     }
     return dst_attr;
 }
-
-
 
 ble_gatt_att_reg_t *ble_ohos_add_char(ble_gatt_att_reg_t *dst_attr, BleGattAttr *char_attr, bool isLast)
 {
@@ -316,7 +307,6 @@ ble_gatt_att_reg_t *ble_ohos_add_char(ble_gatt_att_reg_t *dst_attr, BleGattAttr 
     dst_attr->att_desc.ext_perm |= PRI;
     dst_attr->att_desc.max_len = 512;
 
-
     if (((char_attr->properties  & OHOS_GATT_CHARACTER_PROPERTY_BIT_INDICATE) == OHOS_GATT_CHARACTER_PROPERTY_BIT_INDICATE
          ||  (char_attr->properties  & OHOS_GATT_CHARACTER_PROPERTY_BIT_NOTIFY) == OHOS_GATT_CHARACTER_PROPERTY_BIT_NOTIFY )
         && isLast) {
@@ -332,7 +322,6 @@ ble_gatt_att_reg_t *ble_ohos_add_char(ble_gatt_att_reg_t *dst_attr, BleGattAttr 
 
     return dst_attr;
 }
-
 
 int BleGattServiceRead1(unsigned char *buff, unsigned int *len)
 {
@@ -357,14 +346,11 @@ int BleGattServiceIndicate1(unsigned char *buff, unsigned int len)
     return 0;
 }
 
-
 BleGattOperateFunc  opr_func = {
     .read = BleGattServiceRead1,
     .write = BleGattServiceWrite1,
     .indicate = BleGattServiceIndicate1,
 };
-
-
 
 BleGattAttr h_attr1 = {
     .attrType = OHOS_BLE_ATTRIB_TYPE_SERVICE,
@@ -392,7 +378,6 @@ BleGattAttr h_attr2 = {
     },
 
 };
-
 
 BleGattAttr h_attr3 = {
     .attrType = OHOS_BLE_ATTRIB_TYPE_SERVICE,
@@ -452,7 +437,6 @@ void test_h_add_service(void)
     BleGattsStartServiceEx(&handler, &service_info);
 }
 
-
 void test_h_add_service2(void)
 {
     static uint8_t flagg = 0;
@@ -479,7 +463,6 @@ static unsigned int get_service_num(unsigned int attrNum, uint8_t indicate_is_ex
     int num = 2 * (attrNum - 1) + 1 + indicate_is_exit;
     return num;
 }
-
 
 int BleGattsStartServiceEx(int *srvcHandle, BleGattService *srvcInfo)
 {
@@ -539,8 +522,6 @@ int BleGattsStartServiceEx(int *srvcHandle, BleGattService *srvcInfo)
     free(att_list);
     return BT_STATUS_SUCCESS;
 }
-
-
 
 int BleGattsStopServiceEx(int srvcHandle)
 {
@@ -610,7 +591,6 @@ int ReadBtMacAddr(unsigned char *mac, unsigned int len)
 
 }
 
-
 int BleStartAdvEx(int *advId, const StartAdvRawData rawData, BleAdvParams advParam)
 {
     print_log("harmony  : %s %d %d\r\n", __FUNCTION__, rawData.advDataLen, rawData.rspDataLen);
@@ -647,7 +627,6 @@ int BleStartAdvEx(int *advId, const StartAdvRawData rawData, BleAdvParams advPar
     return BT_STATUS_SUCCESS;
 }
 
-
 static uint8_t sec_enc_req_h2a(BleSecAct secAct)
 {
     switch (secAct) {
@@ -676,14 +655,12 @@ int BleGattsSetEncryption(BdAddr bdAddr, BleSecAct secAct)
     return BT_STATUS_SUCCESS;
 }
 
-
 int BleStopAdv(int advId)
 {
     print_log("harmony  : %s %d\r\n", __FUNCTION__, advId);
     app_ble_stop_adv_without_id();
     return BT_STATUS_SUCCESS;
 }
-
 
 // not used start!!!
 /* gatt client register, callback return clientId */
@@ -713,14 +690,11 @@ int BleStartAdv(int advId, const BleAdvParams *param)
     return BT_STATUS_FAIL;
 }
 
-
-
 int BleGattcRegisterCallbacks(BtGattClientCallbacks *func)
 {
     print_log("harmony ERROR : %s  should not be used\r\n", __FUNCTION__);
     return BT_STATUS_FAIL;
 }
-
 
 int BleGattsRegister(BtUuid appUuid)
 {
@@ -770,7 +744,6 @@ int BleGattsStopService(int serverId, int srvcHandle)
     return BT_STATUS_FAIL;
 }
 
-
 int BleGattsSendResponse(int serverId, GattsSendRspParam *param)
 {
     print_log("harmony ERROR : %s  should not be used\r\n", __FUNCTION__);
@@ -778,14 +751,4 @@ int BleGattsSendResponse(int serverId, GattsSendRspParam *param)
 }
 
 // not used end!!!
-
-
-
-
-
-
-
-
-
-
 

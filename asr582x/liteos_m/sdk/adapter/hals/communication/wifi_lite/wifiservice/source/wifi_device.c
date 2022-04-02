@@ -698,7 +698,6 @@ WifiErrorCode GetLinkedInfo(WifiLinkedInfo *result)
     return WIFI_SUCCESS;
 }
 
-
 WifiErrorCode RegisterWifiEvent(WifiEvent *event)
 {
     if (event == NULL) {

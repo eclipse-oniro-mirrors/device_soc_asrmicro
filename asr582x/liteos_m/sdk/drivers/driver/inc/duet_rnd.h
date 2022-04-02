@@ -55,7 +55,6 @@ int duet_RND_Instantiation(CRYS_RND_Context_t
 int duet_RND_UnInstantiation(CRYS_RND_Context_t *rndContext_ptr);       /*!< [in/out] Pointer to the RND context
  * buffer. */
 
-
 /*!
 @brief This function is used for reseeding the RNG with additional entropy and additional user-provided input.
 (additional data should be provided by calling ::CRYS_RND_AddAdditionalInput prior to using this API).
@@ -67,7 +66,6 @@ It implements referenced standard [SP800-90] - 10.2.1.4.2 - CTR-DRBG Reseeding a
 int duet_RND_Reseeding(CRYS_RND_Context_t *rndContext_ptr,      /*!< [in/out] Pointer to the RND context buffer. */
                        CRYS_RND_WorkBuff_t *rndWorkBuff_ptr      /*!< [in/out] Scratchpad for the RND module's work. */
                       );
-
 
 /****************************************************************************************/
 /*!
@@ -90,7 +88,6 @@ int duet_RND_GenerateVector(CRYS_RND_State_t
                             uint8_t *out_ptr                  /*!< [out] The pointer to output buffer. */
                            );
 
-
 /****************************************************************************************/
 /*!
 
@@ -110,7 +107,6 @@ int duet_RND_SetGenerateVectorFunc(CRYS_RND_Context_t
                                    SaSiRndGenerateVectWorkFunc_t rndGenerateVectFunc       /*!< [in] Pointer to the random vector generation function.
                                               The pointer should point to the ::CRYS_RND_GenerateVector function. */
                                   );
-
 
 /**********************************************************************************************************/
 /*!
@@ -135,7 +131,6 @@ int duet_RND_GenerateVectorInRange(
     uint8_t *rndVect_ptr                   /*!< [in/out] Pointer to the output buffer for the random vector. Must be at least [(rndSizeInBits+7)/8] bytes.
                                                                  Treated as little-endian byte array. */
 );
-
 
 /*************************************************************************************/
 /*!

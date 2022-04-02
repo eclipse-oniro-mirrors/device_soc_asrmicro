@@ -53,7 +53,6 @@
 
 #define DUET_GPIO_TOTAL_NUM     24
 
-
 /*
  * Pin configuration
  */

@@ -23,7 +23,6 @@
  ****************************************************************************************
  */
 
-
 #ifndef _SONATA_SEC_API_H_
 #define _SONATA_SEC_API_H_
 
@@ -33,16 +32,10 @@
  */
 #include "sonata_utils_api.h"
 
-
-
 /*
  * MACRO DEFINITIONS
  ****************************************************************************************
  */
-
-
-
-
 
 /*
  * ENUM DEFINITIONS
@@ -88,9 +81,6 @@ typedef enum {
 
 /** authentication requirements **/
 
-
-
-
 /*
  * Type Definition
  ****************************************************************************************
@@ -100,13 +90,10 @@ typedef struct sonata_sec_api_cb {
     struct sonata_sec_api_cb *_next;
 } sonata_sec_api_cb_t;
 
-
-
 typedef struct sonata_public_key {
     uint8_t pub_key_x[32];
     uint8_t pub_key_y[32];
 } sonata_public_key_t;
-
 
 typedef  void (* sonata_sec_public_key_gen_complete)(sonata_public_key_t *pub_key, uint16_t status) ;
 
@@ -114,13 +101,10 @@ typedef void (*sonata_sec_ecdh_secret_complete) (const uint8_t *p_ecdh_secret, u
 
 typedef void (*sonata_sec_ecdh_session_key_complete) (const uint8_t *p_ecdh_session, uint16_t status);
 
-
 /*
  * GLOBAL VARIABLES DECLARATIONS
  ****************************************************************************************
  */
-
-
 
 /*
  * FUNCTION DECLARATIONS
@@ -128,7 +112,6 @@ typedef void (*sonata_sec_ecdh_session_key_complete) (const uint8_t *p_ecdh_sess
  */
 extern void sonata_sec_api_init(void);
 extern void sonata_sec_api_cb_register(sonata_sec_api_cb_t *cb);
-
 
 void sonata_genc_DH_key(uint8_t *secret_key, uint8_t *public_key_x, uint8_t *public_key_y,
                         sonata_sec_ecdh_secret_complete callback);
@@ -138,7 +121,6 @@ void sonata_genc_public_key(uint8_t *secret_key, sonata_sec_public_key_gen_compl
 void sonata_genc_secret_key(uint8_t *secret_key256);
 
 void sonata_genc_session_key(uint8_t *secret_key, uint8_t *skd, sonata_sec_ecdh_session_key_complete callback);
-
 
 #endif //_SONATA_SEC_API_H_
 

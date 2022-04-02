@@ -23,7 +23,6 @@
  ****************************************************************************************
  */
 
-
 /*
  * INCLUDE FILES
  ****************************************************************************************
@@ -156,8 +155,6 @@ void apcmdplue_print_command(int argc, char **argv)
 
 }
 
-
-
 int atcmdplus_adv(int argc, char **argv)
 {
     apcmdplue_print_command(argc, argv);
@@ -218,14 +215,12 @@ int atcmdplus_uuid(int argc, char **argv)
     return CONFIG_OK;
 }
 
-
 int atcmdplus_discovery(int argc, char **argv)
 {
     uint8_t conidx = char2HexValue(argv[PARA_ID_1][0]);
     sonata_ble_gatt_disc_all_svc(conidx);//--->app_gatt_disc_svc_callback()
     return CONFIG_OK;
 }
-
 
 int atcmdplus_lesend(int argc, char **argv)
 {
@@ -237,7 +232,6 @@ int atcmdplus_lesend(int argc, char **argv)
     app_ble_master_write_data(conidx, dataLen, data);
     return CONFIG_OK;
 }
-
 
 int atcmdplus_ntf(int argc, char **argv)
 {
@@ -256,7 +250,6 @@ int atcmdplus_ntf(int argc, char **argv)
     return CONFIG_OK;
 }
 
-
 int atcmdplus_ledisc(int argc, char **argv)
 {
     apcmdplue_print_command(argc, argv);
@@ -264,7 +257,6 @@ int atcmdplus_ledisc(int argc, char **argv)
     app_ble_disconnect(idValue);
     return CONFIG_OK;
 }
-
 
 int atcmdplus_chinfo(int argc, char **argv)
 {
@@ -291,7 +283,6 @@ int atcmdplus_chinfo(int argc, char **argv)
     }
     return CONFIG_OK;
 }
-
 
 int atcmdplus_test(int argc, char **argv)
 {
@@ -324,5 +315,4 @@ void atcmdplus_ble_register(void)
     osCmdReg(CMD_TYPE_STD, "le_chinfo", 0, (CMD_CBK_FUNC)atcmdplus_chinfo);
 #endif
 }
-
 

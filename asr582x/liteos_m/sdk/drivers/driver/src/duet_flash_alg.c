@@ -15,9 +15,9 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include "duet_flash_alg.h"        // FlashOS Structures
 #include "duet_cm4.h"
 #include "duet.h"
-#include "duet_flash_alg.h"        // FlashOS Structures
 
 FLASH_DRIVER_SEG void duet_flash_alg_cache_flush(void)
 {
@@ -86,7 +86,7 @@ FLASH_DRIVER_SEG int duet_flash_alg_check_abort_busy (void)
 FLASH_DRIVER_SEG int duet_flash_alg_clr_flg (void)
 {
     /* Add your Code */
-    FLASH->QSPI_FCR = 0xF001B;//0x1F;
+    FLASH->QSPI_FCR = 0xF001B; // 0x1F;
     FLASH->QSPI_FCR = 0x0;
 
     return (0);                                  // Finished without Errors
@@ -111,9 +111,9 @@ FLASH_DRIVER_SEG int duet_flash_alg_polling_wip (void)
     FLASH->QSPI_CCR = 0x9000105;
     var_rdata = FLASH->QSPI_CR;
     FLASH->QSPI_CR = (var_rdata & 0xFFBFFFFF) + 0x400000; //QSPI_CR[22],apms= 1'b1;
-    FLASH->QSPI_DLR = 0x0;//one byte
-    FLASH->QSPI_PSMKR = 0x1;//mask = 0x1;
-    FLASH->QSPI_PSMAR = 0x0;//match = 0x0;
+    FLASH->QSPI_DLR = 0x0; // one byte
+    FLASH->QSPI_PSMKR = 0x1; // mask = 0x1;
+    FLASH->QSPI_PSMAR = 0x0; // match = 0x0;
     FLASH->SBUS_START = 0x1;
     duet_flash_alg_f_delay(10);
     duet_flash_alg_check_busy();
@@ -129,9 +129,9 @@ FLASH_DRIVER_SEG int duet_flash_alg_polling_wel (void)
     FLASH->QSPI_CCR = 0x9000105;
     var_rdata = FLASH->QSPI_CR;
     FLASH->QSPI_CR = (var_rdata & 0xFFBFFFFF) + 0x400000; //QSPI_CR[22],apms= 1'b1;
-    FLASH->QSPI_DLR = 0x0;//one byte
-    FLASH->QSPI_PSMKR = 0x2;//mask = 0x1;
-    FLASH->QSPI_PSMAR = 0x2;//match = 0x0;
+    FLASH->QSPI_DLR = 0x0; // one byte
+    FLASH->QSPI_PSMKR = 0x2; // mask = 0x1;
+    FLASH->QSPI_PSMAR = 0x2; // match = 0x0;
     FLASH->SBUS_START = 0x1;
     duet_flash_alg_f_delay(10);
     duet_flash_alg_check_busy();
@@ -149,7 +149,7 @@ FLASH_DRIVER_SEG int duet_flash_alg_setqe (unsigned char quad)
     duet_flash_alg_abort_en();
     duet_flash_alg_check_abort_busy();
 
-    FLASH->QSPI_CCR = 0x106;//IMODE=2'b01,INSTRUCTION=WREN
+    FLASH->QSPI_CCR = 0x106; // IMODE=2'b01,INSTRUCTION=WREN
     duet_flash_alg_clr_flg();
     FLASH->SBUS_START = 0x1;
     duet_flash_alg_f_delay(10);
@@ -157,12 +157,12 @@ FLASH_DRIVER_SEG int duet_flash_alg_setqe (unsigned char quad)
     duet_flash_alg_polling_wel();
 
     FLASH->QSPI_CCR =
-        0x01000101;//dumode=2'b00,fmode=2'b00,dmode=2'b01,reserved=1'b0,dcyc=5'h0,absize=2'b00,abmode=2'b00,adsize=2'b00,admode=2'b00,imode=2'b01,instruction=8'h01;
-    FLASH->QSPI_DLR = 0x1;//two byte
+        0x01000101; // dumode=2'b00,fmode=2'b00,dmode=2'b01,reserved=1'b0,dcyc=5'h0,absize=2'b00,abmode=2'b00,adsize=2'b00,admode=2'b00,imode=2'b01,instruction=8'h01;
+    FLASH->QSPI_DLR = 0x1; // two byte
     if (quad == 0x1) {
         FLASH->QSPI_DR = 0x200;
     } else {
-        FLASH->QSPI_DR = 0x0; //0x200;
+        FLASH->QSPI_DR = 0x0; // 0x200;
     }
     duet_flash_alg_clr_flg();
     FLASH->SBUS_START = 0x1;
@@ -189,7 +189,7 @@ FLASH_DRIVER_SEG int duet_flash_alg_check_setqe (void)
     duet_flash_alg_check_busy();
     FLASH->QSPI_DLR = 0x0;
     FLASH->QSPI_CCR =
-        0x5000135;//dumode=2'b00,fmode=2'b01,dmode=2'b01,reserved=1'b0,dcyc=5'h0,absize=2'b00,abmode=2'b00,adsize=2'b00,admode=2'b00,imode=2'b01,instruction=8'h35;
+        0x5000135; // dumode=2'b00,fmode=2'b01,dmode=2'b01,reserved=1'b0,dcyc=5'h0,absize=2'b00,abmode=2'b00,adsize=2'b00,admode=2'b00,imode=2'b01,instruction=8'h35;
     duet_flash_alg_clr_flg();
     FLASH->SBUS_START = 0x1;
     duet_flash_alg_f_delay(10);
@@ -284,7 +284,7 @@ FLASH_DRIVER_SEG int duet_flash_alg_erase(unsigned int cmd, unsigned long adr)
     duet_flash_alg_abort_en();
     duet_flash_alg_check_abort_busy();
 
-    FLASH->QSPI_CCR = 0x106;//IMODE=2'b01,INSTRUCTION=WREN
+    FLASH->QSPI_CCR = 0x106; // IMODE=2'b01,INSTRUCTION=WREN
     duet_flash_alg_clr_flg();
     FLASH->SBUS_START = 0x1;
     duet_flash_alg_f_delay(10);
@@ -348,7 +348,7 @@ FLASH_DRIVER_SEG int duet_flash_alg_programpage(unsigned long adr, unsigned long
     duet_flash_alg_abort_en();
     duet_flash_alg_check_abort_busy();
 
-    FLASH->QSPI_CCR = 0x106;//IMODE=2'b01,INSTRUCTION=WREN
+    FLASH->QSPI_CCR = 0x106; // IMODE=2'b01,INSTRUCTION=WREN
     duet_flash_alg_clr_flg();
     FLASH->SBUS_START = 0x1;
     duet_flash_alg_f_delay(10);
@@ -356,7 +356,7 @@ FLASH_DRIVER_SEG int duet_flash_alg_programpage(unsigned long adr, unsigned long
     duet_flash_alg_polling_wel();
 
     FLASH->QSPI_CCR =
-        0x1002502;//fmode=2'b00,dmode=2'b01,reserved=1'b0,dcyc=5'h0,absize=2'b00,abmode=2'b00,adsize=2'b10,admode=2'b01,imode=2'b01,instruction=8'h02;
+        0x1002502; // fmode=2'b00,dmode=2'b01,reserved=1'b0,dcyc=5'h0,absize=2'b00,abmode=2'b00,adsize=2'b10,admode=2'b01,imode=2'b01,instruction=8'h02;
     FLASH->QSPI_DLR = sz_temp;
     FLASH->QSPI_AR = adr;
     while ((sz > 0) && (cnt < fthres)) {
@@ -457,7 +457,7 @@ FLASH_DRIVER_SEG int duet_flash_alg_read_id(void)
     duet_flash_alg_check_abort_busy();
 
     FLASH->QSPI_CCR =
-        0x500019F;//fmode=2'b01,dmode=2'b01,reserved=1'b0,dcyc=5'h0,absize=2'b00,abmode=2'b00,adsize=2'b00,admode=2'b00,imode=2'b01,instruction=8'h9F;
+        0x500019F; // fmode=2'b01,dmode=2'b01,reserved=1'b0,dcyc=5'h0,absize=2'b00,abmode=2'b00,adsize=2'b00,admode=2'b00,imode=2'b01,instruction=8'h9F;
     FLASH->QSPI_DLR = 0x2;
     duet_flash_alg_clr_flg();
     FLASH->SBUS_START = 0x1;

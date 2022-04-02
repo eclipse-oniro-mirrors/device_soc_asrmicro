@@ -74,7 +74,6 @@ extern "C" {
 #define UART_DMA_TX_EN                   (1<<1)
 #define UART_DMA_RX_EN                   (1<<0)
 
-
 #define UART_IRDA_ENABLE                 (1<<1)
 #define UART_IRDA_LP_EN                  (1<<2)
 #define UART_CLK                         (52000000)
@@ -195,7 +194,6 @@ int32_t duet_uart_finalize(duet_uart_dev_t *uart);
 
 void duet_uart_start(UART_TypeDef *UARTx);
 
-
 void duet_uart_stop(UART_TypeDef *UARTx);
 
 void duet_uart_set_callback(uint8_t uart_idx, duet_uart_callback_func func);
@@ -214,7 +212,6 @@ ITstatus duet_uart_get_flag_status(UART_TypeDef *UARTx, uint8_t uart_flag);
 
 void UART_SendData(UART_TypeDef *UARTx, unsigned char Data);
 uint8_t UART_ReceiveData(UART_TypeDef *UARTx);
-
 
 #ifdef __cplusplus
 }

@@ -29,7 +29,7 @@
  * INCLUDE FILES
  ****************************************************************************************
  */
-
+#include <stdarg.h>
 
 /*
  * ENUM DEFINITIONS
@@ -56,7 +56,6 @@ typedef enum {
  * @brief Defalut log level
  */
 #define LOG_LOCAL_LEVEL  SONATA_LOG_VERBOSE
-
 
 /*!
  * @brief vprintf
@@ -126,7 +125,6 @@ typedef int (*vprintf_like_t)(const char *, va_list);
 
 #endif //CFG_SONATA_LOG
 
-
 /*
 * FUNCTION DEFINITIONS
 ****************************************************************************************
@@ -143,7 +141,6 @@ vprintf_like_t sonata_log_set_vprintf(vprintf_like_t func);
  * @param level @see sonata_log_level
  */
 void sonata_log_level_set(sonata_log_level level);
-
 
 //Internal use
 void sonata_logt_write(sonata_log_level level, const char *tag, const char *format, ...);

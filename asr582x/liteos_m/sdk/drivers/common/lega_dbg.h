@@ -49,7 +49,6 @@
 #define LWIP_COMP         (D_LWIP)
 #define AT_COMP           (D_AT)
 
-
 extern uint32_t  GlobalDebugComponents;
 extern uint32_t  GlobalDebugLevel;
 extern uint8_t   GlobalDebugEn;
