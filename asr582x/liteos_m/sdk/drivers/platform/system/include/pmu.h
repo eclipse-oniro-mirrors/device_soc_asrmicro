@@ -81,32 +81,3 @@ uint8_t lega_drv_wakeup_gpio_is_valid(uint8_t wakeup_gpio);
 void lega_drv_goto_deepsleep(uint32_t sleep_ms, uint8_t wakeup_gpio);
 
 #endif //__PMU_H
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

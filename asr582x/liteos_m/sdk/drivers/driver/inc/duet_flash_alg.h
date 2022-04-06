@@ -47,7 +47,6 @@ typedef volatile unsigned short vu16;
 #define READ2 0xBB
 #define READ4 0xEB
 
-
 #define RDID 0x9F
 #define WRSR 0x01
 #define RDSR 0x05
@@ -57,25 +56,25 @@ typedef volatile unsigned short vu16;
 #define OSC_D ((OSC*144)/8)
 
 typedef struct {
-    vu32 QSPI_CR     ;        //offset 0x00
-    vu32 QSPI_DCR    ;        //offset 0x04
-    vu32 QSPI_SR     ;        //offset 0x08
-    vu32 QSPI_FCR    ;        //offset 0x0C
-    vu32 QSPI_DLR    ;        //offset 0x10
-    vu32 QSPI_CCR    ;        //offset 0x14
-    vu32 QSPI_AR     ;        //offset 0x18
-    vu32 QSPI_ABR    ;        //offset 0x1C
-    vu32 QSPI_DR     ;        //offset 0x20
-    vu32 QSPI_PSMKR  ;        //offset 0x24
-    vu32 QSPI_PSMAR  ;        //offset 0x28
-    vu32 QSPI_PIR    ;        //offset 0x2C
-    vu32 QSPI_TOR    ;        //offset 0x30
+    vu32 QSPI_CR     ;        // offset 0x00
+    vu32 QSPI_DCR    ;        // offset 0x04
+    vu32 QSPI_SR     ;        // offset 0x08
+    vu32 QSPI_FCR    ;        // offset 0x0C
+    vu32 QSPI_DLR    ;        // offset 0x10
+    vu32 QSPI_CCR    ;        // offset 0x14
+    vu32 QSPI_AR     ;        // offset 0x18
+    vu32 QSPI_ABR    ;        // offset 0x1C
+    vu32 QSPI_DR     ;        // offset 0x20
+    vu32 QSPI_PSMKR  ;        // offset 0x24
+    vu32 QSPI_PSMAR  ;        // offset 0x28
+    vu32 QSPI_PIR    ;        // offset 0x2C
+    vu32 QSPI_TOR    ;        // offset 0x30
     vu32 RESERVERD[19];
-    vu32 QSPI_HIT0R  ;        //offset 0x80
-    vu32 QSPI_HIT1R  ;        //offset 0x84
-    vu32 QSPI_MIR    ;        //offset 0x88
-    vu32 QSPI_CFGR   ;        //offset 0x8C
-    vu32 SBUS_START  ;        //offset 0x90
+    vu32 QSPI_HIT0R  ;        // offset 0x80
+    vu32 QSPI_HIT1R  ;        // offset 0x84
+    vu32 QSPI_MIR    ;        // offset 0x88
+    vu32 QSPI_CFGR   ;        // offset 0x8C
+    vu32 SBUS_START  ;        // offset 0x90
 } FLASH_TypeDef;
 
 #define NVM_CTRL_WR_LOCK        *((volatile unsigned int *)(0x40000A04))
@@ -109,9 +108,9 @@ typedef struct {
 #define PAGE_MAX               65536       // Max Page Size for Programming
 #define CLK_FLASH_SEL       0x40000808
 
-#define FLASH_52_CLK        0x0            //flash clk src 52MHz
-#define FLASH_120_CLK       0x1            //flash clk src 120MHz
-#define FLASH_240_CLK       0x2            //flash clk src 240MHz
+#define FLASH_52_CLK        0x0            // flash clk src 52MHz
+#define FLASH_120_CLK       0x1            // flash clk src 120MHz
+#define FLASH_240_CLK       0x2            // flash clk src 240MHz
 
 #define FLASH_QSPI_DIV4     0x09004801
 #define FLASH_QSPI_DIV3     0x89004801
@@ -121,7 +120,6 @@ typedef struct {
 #define FLASH_QSPI_L4       0x6F0CEDEB
 #define FLASH_QSPI_DCR_2M   0x00140000
 #define FLASH_QSPI_DCR_4M   0x00150000
-
 
 #define CHIP_ERASE_CMD      0x0000160
 #define SECTOR_ERASE_CMD    0x0002520

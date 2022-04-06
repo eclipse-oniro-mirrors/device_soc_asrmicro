@@ -74,7 +74,7 @@ void duet_pwm_cfg(duet_pwm_dev_t *pwm)
     uint32_t tmp_value;
     switch (pwm->port) {
         case PWM_OUTPUT_CH0:
-            PWM->PWMCTL |= PWM_COUNT_MODE; //0: count-up mode, 1: count-up/down mode
+            PWM->PWMCTL |= PWM_COUNT_MODE; // 0: count-up mode, 1: count-up/down mode
             tmp_value = PWM->PWM01LOAD & (~(0x0000FFFF));
             tmp_value |= (SYSTEM_CLOCK / pwm->config.freq - 1);
             PWM->PWM01LOAD = tmp_value;
@@ -85,7 +85,7 @@ void duet_pwm_cfg(duet_pwm_dev_t *pwm)
             PWM->PWM01DB = 0;
             break;
         case PWM_OUTPUT_CH1:
-            PWM->PWMCTL |= PWM_COUNT_MODE; //0: count-up mode, 1: count-up/down mode
+            PWM->PWMCTL |= PWM_COUNT_MODE; // 0: count-up mode, 1: count-up/down mode
             tmp_value = PWM->PWM01LOAD & (~(0x0000FFFF));
             tmp_value |= (SYSTEM_CLOCK / pwm->config.freq - 1);
             PWM->PWM01LOAD = tmp_value;
@@ -96,7 +96,7 @@ void duet_pwm_cfg(duet_pwm_dev_t *pwm)
             PWM->PWM01DB = 0;
             break;
         case PWM_OUTPUT_CH2:
-            PWM->PWMCTL |= (PWM_COUNT_MODE << 1); //0: count-up mode, 1: count-up/down mode
+            PWM->PWMCTL |= (PWM_COUNT_MODE << 1); // 0: count-up mode, 1: count-up/down mode
             tmp_value = PWM->PWM01LOAD & (~(0xFFFF0000));
             tmp_value |= ((uint16_t)(SYSTEM_CLOCK / pwm->config.freq - 1) << 16);
             PWM->PWM01LOAD = tmp_value;
@@ -107,7 +107,7 @@ void duet_pwm_cfg(duet_pwm_dev_t *pwm)
             PWM->PWM01DB = 0;
             break;
         case PWM_OUTPUT_CH3:
-            PWM->PWMCTL |= (PWM_COUNT_MODE << 1); //0: count-up mode, 1: count-up/down mode
+            PWM->PWMCTL |= (PWM_COUNT_MODE << 1); // 0: count-up mode, 1: count-up/down mode
             tmp_value = PWM->PWM01LOAD & (~(0xFFFF0000));
             tmp_value |= ((uint16_t)(SYSTEM_CLOCK / pwm->config.freq - 1) << 16);
             PWM->PWM01LOAD = tmp_value;
@@ -118,7 +118,7 @@ void duet_pwm_cfg(duet_pwm_dev_t *pwm)
             PWM->PWM01DB = 0;
             break;
         case PWM_OUTPUT_CH4:
-            PWM->PWMCTL |= (PWM_COUNT_MODE << 2); //0: count-up mode, 1: count-up/down mode
+            PWM->PWMCTL |= (PWM_COUNT_MODE << 2); // 0: count-up mode, 1: count-up/down mode
             tmp_value = PWM->PWM23LOAD & (~(0x0000FFFF));
             tmp_value |= (SYSTEM_CLOCK / pwm->config.freq - 1);
             PWM->PWM23LOAD = tmp_value;
@@ -129,7 +129,7 @@ void duet_pwm_cfg(duet_pwm_dev_t *pwm)
             PWM->PWM23DB = 0;
             break;
         case PWM_OUTPUT_CH5:
-            PWM->PWMCTL |= (PWM_COUNT_MODE << 2); //0: count-up mode, 1: count-up/down mode
+            PWM->PWMCTL |= (PWM_COUNT_MODE << 2); // 0: count-up mode, 1: count-up/down mode
             tmp_value = PWM->PWM23LOAD & (~(0x0000FFFF));
             tmp_value |= (SYSTEM_CLOCK / pwm->config.freq - 1);
             PWM->PWM23LOAD = tmp_value;
@@ -140,7 +140,7 @@ void duet_pwm_cfg(duet_pwm_dev_t *pwm)
             PWM->PWM23DB = 0;
             break;
         case PWM_OUTPUT_CH6:
-            PWM->PWMCTL |= (PWM_COUNT_MODE << 3); //0: count-up mode, 1: count-up/down mode
+            PWM->PWMCTL |= (PWM_COUNT_MODE << 3); // 0: count-up mode, 1: count-up/down mode
             tmp_value = PWM->PWM23LOAD & (~(0xFFFF0000));
             tmp_value |= ((uint16_t)(SYSTEM_CLOCK / pwm->config.freq - 1) << 16);
             PWM->PWM23LOAD = tmp_value;
@@ -151,7 +151,7 @@ void duet_pwm_cfg(duet_pwm_dev_t *pwm)
             PWM->PWM23DB = 0;
             break;
         case PWM_OUTPUT_CH7:
-            PWM->PWMCTL |= (PWM_COUNT_MODE << 3); //0: count-up mode, 1: count-up/down mode
+            PWM->PWMCTL |= (PWM_COUNT_MODE << 3); // 0: count-up mode, 1: count-up/down mode
             tmp_value = PWM->PWM23LOAD & (~(0xFFFF0000));
             tmp_value |= ((uint16_t)(SYSTEM_CLOCK / pwm->config.freq - 1) << 16);
             PWM->PWM23LOAD = tmp_value;

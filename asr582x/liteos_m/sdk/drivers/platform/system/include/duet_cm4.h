@@ -23,7 +23,6 @@
  ****************************************************************************************
  */
 
-
 /*************************   **************************************/
 #ifndef __DUET_CM4_H__
 #define __DUET_CM4_H__
@@ -81,10 +80,6 @@ typedef enum IRQn {
     RW_BLE_IRQn                   = 25,       /*!< BLE Interrupt                                    */
 } IRQn_Type;
 
-#ifdef DUET_CM4
-#include "core_cm4.h"
-#include "cachel1_armv7.h"
-#endif
 // ---------------------------------------------------------------------------
 typedef enum {RESET = 0, SET = !RESET} FlagStatus, ITstatus;
 typedef enum {DISABLE = 0, ENABLE = !DISABLE} FunctionalState;
@@ -244,7 +239,6 @@ typedef struct {
 #define MIDEA_INFO_BKUP_START_ADDR  0x101FF000
 #define NVDS_FLASH_START_ADDR       0x1037E000
 
-
 #define OTA_FLASH_START_ADDR        0x10200000  //can't change
 
 #define KV_FLASH_START_ADDR         (OTA_FLASH_START_ADDR+OTA_MAX_SIZE)//0x10366000
@@ -322,7 +316,10 @@ typedef struct {
 }
 #endif /* __cplusplus */
 
+#ifdef DUET_CM4
+#include "core_cm4.h"
+#include "cachel1_armv7.h"
+#endif
 
 #endif // __DUET_CM4_H__
-
 

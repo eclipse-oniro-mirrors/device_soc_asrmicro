@@ -23,7 +23,6 @@
  ****************************************************************************************
  */
 
-
 #ifndef _SONATA_ERROR_API_H_
 #define _SONATA_ERROR_API_H_
 
@@ -57,9 +56,7 @@
 
 /// asr ble api error code
 
-
 /// asr api task error code
-
 
 /// asr gap api error code
 #define SONATA_GAP_ERR_NO_ERROR                      (0X00 | SONATA_GAP_API_ERR_ID)
@@ -77,8 +74,6 @@
 #define SONATA_GAP_ERR_INSUFF_RESOURCES              (0x4B | SONATA_GAP_API_ERR_ID)
 #define SONATA_GAP_ERR_UNEXPECTED                    (0x4C | SONATA_GAP_API_ERR_ID)
 #define SONATA_GAP_ERR_MISMATCH                      (0x4D | SONATA_GAP_API_ERR_ID)
-
-
 
 /// asr gatt api error code
 #define SONATA_GATT_ERR_NO_ERROR                      (0X00 | SONATA_GATT_API_ERR_ID)
@@ -105,7 +100,6 @@
 
 /// asr utils api error code
 
-
 /// debug trace
 #ifdef SONATA_UTILS_API_DBG
 #define SONATA_UTILS_API_TRC    printf
@@ -117,8 +111,6 @@
  * ENUM DEFINITIONS
  ****************************************************************************************
  */
-
-
 
 //C error
 #define SONATA_CO_ERROR_NO_ERROR                        (0x00)
@@ -190,7 +182,6 @@
 #define SONATA_CO_ERROR_HW_UART_OUT_OF_SYNC             (0x00)
 #define SONATA_CO_ERROR_HW_MEM_ALLOC_FAIL               (0x01)
 //C error end
-
 
 //hl_err
 enum stack_hl_err {
@@ -278,7 +269,6 @@ enum stack_hl_err {
     SONATA_HL_L2C_ERR_CID_ALREADY_ALLOC = 0x3E,
     /// Unknown PDU
     SONATA_HL_L2C_ERR_UNKNOWN_PDU = 0x3F,
-
 
     // ----------------------------------------------------------------------------------
     // -------------------------- GAP Specific Error ------------------------------------

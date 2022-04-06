@@ -23,11 +23,8 @@
  ****************************************************************************************
  */
 
-
 #ifndef _SONATA_GAP_API_H_
 #define _SONATA_GAP_API_H_
-
-
 
 /*
  * INCLUDE FILES
@@ -53,8 +50,6 @@
 #define SONATA_GAP_SMP_MIN_ENC_SIZE_LEN                      (7)
 /// Maximum Encryption Key size
 #define SONATA_GAP_SMP_MAX_ENC_SIZE_LEN                     (16)
-
-
 
 /// GAP Manager operation type - application interface
 typedef enum {
@@ -252,11 +247,6 @@ typedef enum {
     SONATA_GET_DEV_RF_PATH_COMP                      = 0xAF,
 } sonata_gap_local_dev_info;
 
-
-
-
-
-
 /// List of device info that should be provided by application,peer device can get it
 typedef enum {
     /// Device Name
@@ -270,7 +260,6 @@ typedef enum {
     /// maximum device info parameter
     SONATA_GAP_DEV_INFO_MAX,
 } sonata_gap_dev_info;
-
 
 ///// Option for PHY configuration
 typedef enum {
@@ -413,7 +402,6 @@ typedef enum {
     SONATA_GAP_PRIV_CFG_PRIV_EN_BIT   = (1 << 2),
 } sonata_gap_priv_cfg;
 
-
 /// Scanning properties bit field bit value
 typedef enum {
     /// Scan advertisement on the LE 1M PHY
@@ -452,8 +440,6 @@ typedef enum {
     SONATA_GAP_PER_SYNC_TYPE_PAST,
 } sonata_gap_per_sync_type;
 
-
-
 /// Initiating Types
 typedef enum {
     /// Direct connection establishment, establish a connection with an indicated device
@@ -475,7 +461,6 @@ typedef enum {
     /// Scan connectable advertisements on the LE Coded PHY. Connection parameters for the LE Coded PHY are provided
     SONATA_GAP_INIT_PROP_CODED_BIT    = (1 << 2),
 } sonata_gap_init_prop;
-
 
 /// Advertising report information
 typedef enum {
@@ -611,7 +596,6 @@ typedef enum {
     /* 240 -> 241 reserved for Audio Mode 0 */
     SONATA_PRF_ID_AM0          = 240,  /**< BLE Audio Mode 0 Task  */
     SONATA_PRF_ID_AM0_HAS      = 241,  /**< BLE Audio Mode 0 Hearing Aid Service Task  */
-
 
     SONATA_PRF_ID_THPP         = 242,  /**< Throughput profile tester used for debugging */
 } sonata_ble_profile_id;
@@ -749,7 +733,6 @@ typedef enum {
     SONATA_GAP_KEY_NTF_ENTRY_COMPLETED
 } sonata_gap_key_ntf_type;
 
-
 /// Constant Tone Extension type
 typedef enum {
     /// Allow AoA Constant Tone Extension Response
@@ -868,9 +851,6 @@ typedef struct sonata_gap_peer_version_ind {
 } sonata_gap_peer_version_ind_t;
 /// Indication of peer features info
 
-
-
-
 /*@TRACE*/
 typedef struct sonata_gap_peer_features_ind {
     /// 8-byte array for LE features
@@ -906,7 +886,6 @@ typedef struct sonata_gap_le_phy_ind {
     /// LE PHY for data reception (@see enum gap_phy_val)
     uint8_t rx_phy;
 } sonata_gap_le_phy_ind_t;
-
 
 /// Parameters of the @ref SONATA_GAP_CHAN_SEL_ALGO_IND
 /*@TRACE*/
@@ -991,18 +970,15 @@ typedef struct  {
     //    ///
     //    /// LE Audio Mode Configuration (@see sonata_gap_audio_cfg_flag)
 
-
     //    /// ------------------ LE PHY Management  -------------------------
     //    /// Preferred LE PHY for data transmission (@see enum gap_phy)
 
     //    /// Preferred LE PHY for data reception (@see enum gap_phy)
 
-
     //    /// ------------------ Miscellaneous 2 ----------------------------
     //    /// RF TX Path Compensation value (from -128dB to 128dB, unit is 0.1dB)
 
     //    /// RF RX Path Compensation value (from -128dB to 128dB, unit is 0.1dB)
-
 
     ///------------------ Miscellaneou 3 -----------------------------
     bool hl_trans_dbg;
@@ -1011,8 +987,6 @@ typedef struct  {
     ///<pa enable  1:pa enable 0:pa disable  default:0
     ///<pinmux: rxcore->pad12 txcore->pad17
 } sonata_gap_set_dev_config_cmd;
-
-
 
 /// create directed advertising
 typedef struct sonata_gap_directed_adv_create_param {
@@ -1375,8 +1349,6 @@ typedef struct sonata_gap_bond_ind {
     union sonata_gap_bond_data data;
 } sonata_gap_bond_ind_t;
 
-
-
 /// List Size indication event
 typedef struct sonata_gap_list_size_ind {
     /// Operation code, indicate list for which size has been read
@@ -1388,7 +1360,6 @@ typedef struct sonata_gap_list_size_ind {
     uint8_t size;
 } sonata_gap_list_size_ind_t;
 
-
 /// Indicates suggested default data length
 typedef struct sonata_gap_sugg_dflt_data_len_ind {
     ///Host's suggested value for the Controller's maximum transmitted number of payload octets
@@ -1396,9 +1367,6 @@ typedef struct sonata_gap_sugg_dflt_data_len_ind {
     ///Host's suggested value for the Controller's maximum packet transmission time
     uint16_t suggted_max_tx_time;
 } sonata_gap_sugg_dflt_data_len_ind_t;
-
-
-
 
 /// Indicates maximum data length
 typedef struct sonata_gap_max_data_len_ind {
@@ -1412,22 +1380,17 @@ typedef struct sonata_gap_max_data_len_ind {
     uint16_t suppted_max_rx_time;
 } sonata_gap_max_data_len_ind_t;
 
-
-
 /// Number of available advertising sets indication event
 typedef struct sonata_gap_nb_adv_sets_ind {
     /// Number of available advertising sets
     uint8_t nb_adv_sets;
 } sonata_gap_nb_adv_sets_ind_t;
 
-
-
 /// Maximum advertising data length indication event
 typedef struct sonata_gap_max_adv_data_len_ind {
     /// Maximum advertising data length supported by controller
     uint16_t length;
 } sonata_gap_max_adv_data_len_ind_t;
-
 
 /// Indicate the transmit powers supported by the controller
 typedef struct sonata_gap_dev_tx_pwr_ind {
@@ -1437,7 +1400,6 @@ typedef struct sonata_gap_dev_tx_pwr_ind {
     int8_t max_tx_pwr;
 } sonata_gap_dev_tx_pwr_ind_t;
 
-
 /// Indicate the RF path compensation values
 typedef struct sonata_gap_dev_rf_path_comp_ind {
     /// RF TX path compensation
@@ -1445,7 +1407,6 @@ typedef struct sonata_gap_dev_rf_path_comp_ind {
     /// RF RX path compensation
     uint16_t rx_path_comp;
 } sonata_gap_dev_rf_path_comp_ind_t;
-
 
 /// Pairing parameters
 typedef struct sonata_gap_pairing {
@@ -1467,9 +1428,6 @@ typedef struct sonata_gap_pairing {
     /// Device security requirements (minimum security level). (@see gap_sec_req)
     uint8_t sec_req;
 } sonata_gap_pairing_t;
-
-
-
 
 /// Set specific link data configuration.
 typedef struct sonata_gap_connection_cfm {
@@ -1497,7 +1455,6 @@ typedef struct sonata_gap_connection_cfm {
     uint16_t           svc_chg_handle;
 } sonata_gap_connection_cfm_t;
 
-
 /// Indicate reception of a IQ Report event over a BLE connection
 /*@TRACE*/
 typedef struct sonata_gap_cte_iq_report_ind {
@@ -1522,7 +1479,6 @@ typedef struct sonata_gap_cte_iq_report_ind {
     /// I/Q sample
     struct sonata_gap_iq_sample sample[__ARRAY_EMPTY];
 } sonata_gap_cte_iq_report_ind_t;
-
 
 /// Provide statistic information about ISO exchange
 typedef struct sonata_gap_iso_stat_ind {
@@ -1609,7 +1565,6 @@ struct sonata_gap_bond_cfm {
 
 typedef void (*PF_NOTIFY_MESH_PRF_READY)(void);
 extern PF_NOTIFY_MESH_PRF_READY pf_notify_mesh_prf_ready;
-
 
 ///  Ble complete event type
 typedef enum {
@@ -1748,7 +1703,6 @@ typedef enum {
 
     //System event                           GATTM
 
-
     //System event                           GATTC
     /// Discover all services
     SONATA_GATT_CMP_DISC_ALL_SVC                            = 0x0402,
@@ -1804,7 +1758,6 @@ typedef struct {
     ///@deprecated use @see ble_complete_callback
     void (*set_white_list_complete)(uint16_t status);
     ///@deprecated use @see ble_complete_callback
-
 
     /// Callback for getting device version, BT address, advertising TX power, antenna inf.
     uint16_t (*get_local_dev_info)(sonata_gap_local_dev_info info_type,
@@ -1945,7 +1898,6 @@ typedef struct {
 
 } ble_response_callback;
 
-
 /*!
  * @brief Turn on ble module
  * @param param @see sonata_gap_set_dev_config_cmd
@@ -1953,14 +1905,12 @@ typedef struct {
  */
 uint16_t sonata_ble_on(sonata_gap_set_dev_config_cmd *param);
 
-
 /*!
  * @brief Register GAP callback functions for ble module
  * @param cb @see ble_gap_callback
  * @return API_SUCCESS
  */
 uint16_t sonata_ble_register_gap_callback(ble_gap_callback *cb);
-
 
 /*!
  * @brief Register ble complete event callback functions
@@ -2007,8 +1957,6 @@ uint16_t sonata_ble_config_scanning(uint8_t own_addr_type);
  */
 uint16_t sonata_ble_config_initiating(uint8_t own_addr_type);
 
-
-
 /*!
  * @brief Set advertising data
  * @param length: Data length
@@ -2016,7 +1964,6 @@ uint16_t sonata_ble_config_initiating(uint8_t own_addr_type);
  * @return API_SUCCESS
  */
 uint16_t sonata_ble_set_advertising_data(uint16_t length, uint8_t *data);
-
 
 /*!
  * @brief Set advertising data
@@ -2062,7 +2009,6 @@ uint16_t sonata_ble_start_advertising(uint16_t duration, uint8_t max_adv_evt); /
  * @return API_SUCCESS
  */
 uint16_t sonata_ble_start_advertising_byid(uint8_t id, uint16_t duration, uint8_t max_adv_evt);
-
 
 /*!
  * @brief Stop advertising
@@ -2173,7 +2119,6 @@ uint16_t sonata_ble_gap_send_set_dev_name_cfm(uint8_t conidx, uint8_t status);
  */
 uint16_t sonata_ble_gap_send_get_dev_info_cfm_for_ctl_addr_resol(uint8_t conidx, uint8_t ctl_addr_resol);
 
-
 /*!
  * @brief Set white list
  * @param size white list size
@@ -2230,7 +2175,6 @@ uint16_t sonata_ble_gap_send_bond_cfm_for_pairing_req(uint8_t conidx, struct son
         uint8_t accept,
         enum sonata_gap_io_cap iocap, enum sonata_gap_oob_auth oob, enum sonata_gap_auth auth, uint8_t key_size,
         enum sonata_gap_kdist ikey_dist, enum sonata_gap_kdist rkey_dist, enum sonata_gap_sec_req sec_req);
-
 
 /*!
  * @brief Send bond confirm message for ltk exchange
@@ -2401,7 +2345,6 @@ uint16_t sonata_ble_gap_set_le_pkt_size(uint8_t conidx, uint16_t tx_octets, uint
  */
 uint16_t sonata_ble_gap_send_param_update_cfm(uint8_t conidx, bool accept, uint16_t ce_len_min, uint16_t ce_len_max);
 
-
 /*
  * FUNCTION DECLARATIONS             Connection help function
  ****************************************************************************************
@@ -2427,10 +2370,8 @@ uint8_t *sonata_ble_get_peer_addr(uint8_t connection_id);
  */
 uint16_t sonata_ble_gap_send_connection_cfm(uint8_t conidx, sonata_gap_connection_cfm_t *cfm);
 
-
 ///@hide
 void sonata_ble_show_connection_info(void);
-
 
 struct sonata_gap_bdaddr *sonata_ble_gap_get_bdaddr(uint8_t conidx, uint8_t src);
 

@@ -109,7 +109,6 @@ void lalala_test2(void)
     (void)memset_s(&init_param, sizeof(init_param), 0, sizeof(init_param));
 }
 
-
 extern lega_semaphore_t lega_wlan_vendor_close_sta_semaphore;
 WifiErrorCode DisableWifi(void)
 {
@@ -640,7 +639,6 @@ void wifi_event_cb(lega_wlan_event_e evt, void *info)
             break;
     }
 }
-
 
 WifiErrorCode RegisterWifiEvent(WifiEvent *event)
 {

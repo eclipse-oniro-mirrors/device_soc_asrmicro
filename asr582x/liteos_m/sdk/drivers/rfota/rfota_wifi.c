@@ -106,7 +106,6 @@ static struct cli_command rfota_wifi_cmd = {
     .function = lega_enable_rfota_wifi_test,
 };
 
-
 void lega_rfota_wifi_test_at_init(void)
 {
     aos_cli_register_command(&rfota_wifi_cmd);

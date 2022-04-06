@@ -46,29 +46,22 @@
 #include "sonata_gap.h"
 #include "sonata_gap_api.h"
 
-
-
-
-
 /*
  * DEFINES
  ****************************************************************************************
  */
 
-
-
 /*
  * MACROS
  ****************************************************************************************
  */
-/// debug trace
+// debug trace
 #define APP_DBG    1
 #if APP_DBG
 #define APP_TRC    printf
 #else
 #define APP_TRC(...)
 #endif //APP_DBG
-
 
 #define APP_DBG_ERROR    1
 #if APP_DBG_ERROR
@@ -89,11 +82,10 @@
 #define APP_UUID_LEN                     (16)
 #define KEY_LEN                          0x10
 
-
 enum app_connect_state {
     ///Connection succeeded
     APP_STATE_CONNECTED = 0,
-    /// Link is disconnected
+    // Link is disconnected
     APP_STATE_DISCONNECTED,
 };
 
@@ -104,27 +96,26 @@ typedef enum {
     APP_BONDED,
 } bound_conn_state;
 
-
 /*
  * TYPE DEFINITIONS
  ****************************************************************************************
  */
 
-/// Long Term Key information
+// Long Term Key information
 typedef struct app_sonata_gap_ltk {
-    /// Long Term Key
+    // Long Term Key
     uint8_t ltk[APP_GAP_KEY_LEN];
-    /// Encryption Diversifier
+    // Encryption Diversifier
     uint16_t ediv;
-    /// Random Number
+    // Random Number
     uint8_t randnb[APP_GAP_RAND_NB_LEN];
 } app_sonata_gap_ltk_t;
 
-/// Short Term Key information
+// Short Term Key information
 typedef struct app_sonata_gap_irk {
-    /// Short Term Key
+    // Short Term Key
     uint8_t irk[APP_GAP_KEY_LEN];
-    /// irk addr
+    // irk addr
     uint8_t irk_addr[APP_BD_ADDR_LEN];
 } app_sonata_gap_irk_t;
 
@@ -143,14 +134,13 @@ typedef struct bonded_dev_info_list {
 } bonded_dev_info_list_t;
 
 typedef struct peer_conn_param {
-    /// Connection interval maximum
+    // Connection interval maximum
     uint16_t intv_max;
-    /// Latency
+    // Latency
     uint16_t latency;
-    /// Supervision timeout
+    // Supervision timeout
     uint16_t time_out;
 } peer_conn_param_t;
-
 
 typedef struct connect_req_info {
     uint8_t           conidx;
@@ -161,8 +151,6 @@ typedef struct adv_idx_info {
     uint8_t           local_idx;
     uint8_t           adv_id;
 } adv_idx_info_t;
-
-
 
 typedef struct {
     uint8_t advdata[31];
@@ -175,7 +163,6 @@ typedef struct {
     uint8_t respdataLen;
 
 } ble_scan_data_set_t;
-
 
 typedef struct {
     int status;
@@ -227,7 +214,6 @@ extern sonata_ble_hook_t app_hook;
 typedef int (*app_core_evt_ind_cb)(app_core_evt_ind_t evt, void *p_param);
 
 typedef int (*app_sec_req_cb)(uint8_t *addr);
-
 
 typedef enum {
     USER_INVALID_MODULE_ID,
@@ -312,7 +298,6 @@ void app_ble_set_test_read_uuid(uint8_t *uuid);
 void app_ble_start_advertising_with_param(sonata_gap_directed_adv_create_param_t *param, ble_adv_data_set_t *data,
         ble_scan_data_set_t *scan_data, uint8_t own_addr_type, uint16_t duration, uint8_t max_adv_evt);
 
-/// @} APP
-
+// @} APP
 
 #endif // APP_H_

@@ -23,7 +23,6 @@
  ****************************************************************************************
  */
 
-
 #ifndef _SONATA_BLE_TRANSPORT_H_
 #define _SONATA_BLE_TRANSPORT_H_
 
@@ -32,23 +31,15 @@
  ****************************************************************************************
  */
 
-
-
 /*
  * MACRO DEFINITIONS
  ****************************************************************************************
  */
 
-
-
-
-
 /*
  * ENUM DEFINITIONS
  ****************************************************************************************
  */
-
-
 
 /*
  * Type Definition
@@ -61,13 +52,10 @@ typedef struct sonata_ble_transport_pad_config {
     void (*pf_flow_off_pad_config)(void);
 } sonata_ble_transport_pad_config_t;
 
-
 /*
  * GLOBAL VARIABLES DECLARATIONS
  ****************************************************************************************
  */
-
-
 
 /*
  * FUNCTION DECLARATIONS
@@ -75,9 +63,7 @@ typedef struct sonata_ble_transport_pad_config {
  */
 extern void sonata_ble_transport_init(sonata_ble_transport_pad_config_t *config);
 
-
 extern void sonata_ble_transport_wkup(void);
-
 
 #endif //_SONATA_BLE_TRANSPORT_H_
 

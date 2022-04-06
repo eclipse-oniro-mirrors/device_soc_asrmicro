@@ -16,7 +16,6 @@
 #ifndef __LEGA_RTOS_PORT_H__
 #define __LEGA_RTOS_PORT_H__
 
-
 #include "los_arch_context.h"
 
 #endif //__LEGA_RTOS_PORT_H__

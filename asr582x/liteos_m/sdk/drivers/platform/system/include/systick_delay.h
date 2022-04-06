@@ -16,9 +16,13 @@
 #ifndef __SYSTICK_DELAY_H
 #define __SYSTICK_DELAY_H
 
-
 #include "duet_cm4.h"
 
+#ifdef __cplusplus
+#if __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+#endif /* __cplusplus */
 
 #ifdef ALIOS_SUPPORT
 uint32_t duet_systick_csr_get();
@@ -29,34 +33,11 @@ void delay_us(u32 nus);
 void delay_ms(u32 nms);
 void delay_xms(u32 nms);
 
+#ifdef __cplusplus
+#if __cplusplus
+}
+#endif /* __cplusplus */
+#endif /* __cplusplus */
 
-#endif //__SYSTICK_DELAY_H
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#endif // __SYSTICK_DELAY_H
 

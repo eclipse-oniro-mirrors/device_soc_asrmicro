@@ -145,7 +145,7 @@ OSStatus lega_rtos_delete_thread( lega_thread_t *thread )
     }
     return kNoErr;
 }
-//////////////////////////////  semaphore  //////////////////////////////////////
+/////////////////////////////  semaphore  //////////////////////////////////////
 
 /*******************************************************************
 * Name:lega_rtos_init_semaphore
@@ -199,7 +199,6 @@ FLASH_COMMON2_SEG OSStatus lega_rtos_set_semaphore( lega_semaphore_t *semaphore 
 
     return kNoErr;
 }
-
 
 OSStatus lega_rtos_deinit_semaphore( lega_semaphore_t *semaphore )
 {
@@ -295,7 +294,6 @@ OSStatus lega_rtos_init_queue( lega_queue_t *queue, const char *name, uint32_t m
     return kNoErr;
 }
 
-
 OSStatus lega_rtos_push_to_queue( lega_queue_t *queue, void *message, uint32_t timeout_ms )
 {
     osStatus_t ret;
@@ -340,8 +338,6 @@ OSStatus lega_rtos_deinit_queue( lega_queue_t *queue )
 
     return kNoErr;
 }
-
-
 
 OSBool lega_rtos_is_queue_empty( lega_queue_t *queue )
 {
@@ -448,7 +444,6 @@ OSStatus lega_rtos_init_timer_name( lega_timer_t *timer, uint32_t time_ms, timer
     return kNoErr;
 }
 #endif
-
 
 OSStatus lega_rtos_start_timer( lega_timer_t *timer )
 {

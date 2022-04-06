@@ -40,9 +40,7 @@ typedef enum {
     LEGA_HASH_MD5_mode           = 5,    /*!< MD5 */
 
     LEGA_HASH_NumOfModes,
-
     LEGA_HASH_OperationModeLast = 0x7FFFFFFF,
-
 } LEGA_HASH_OperationMode_t;
 
 /*! Defines the HASH result buffer. */

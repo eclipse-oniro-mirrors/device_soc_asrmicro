@@ -21,8 +21,6 @@
 typedef enum { RESET = 0, SET = !RESET} FlagStatus, ITstatus;
 typedef enum { DISABLE = 0, ENABLE = !DISABLE } State;
 
-
-
 typedef enum IRQn {
     /**************   Processor Exceptions Numbers ******************************************/
     NonMaskableInt_IRQn           = -14,      /*!< 2 Non Maskable Interrupt                         */
@@ -61,10 +59,9 @@ typedef enum IRQn {
 #include "duet_cm4.h"
 #include "core_cm4.h"
 
-
-/// Macro to read a register
+// Macro to read a register
 #define REG_RD(addr)              (*(volatile uint32_t *)(addr))
-/// Macro to write a register
+// Macro to write a register
 #define REG_WR(addr, value)       (*(volatile uint32_t *)(addr)) = (value)
 
 /*
@@ -72,9 +69,7 @@ typedef enum IRQn {
 */
 typedef struct Sys_Con_Block {
     union {
-        struct
-
-        {
+        struct {
             __IO uint32_t hclk_src_sel: 2;
             __IO uint32_t pclk_div_sel: 3;
             __IO uint32_t kp_sclk_sel: 1;
@@ -266,7 +261,6 @@ typedef struct __DMACR {
     __I uint32_t RESV1[0x3ec];           /* 0x50 - 0xffc */
 } DMA_TypeDef;
 
-
 #define DMA                   ( (DMA_TypeDef *)DMA_REG_BASE )
 #define DMA_ERROR             ( *(volatile uint32_t *)(SYS_CON_REG_BASE + 0x70) )
 #define DMA_INT_STAT          ( *(volatile uint32_t *)(SYS_CON_REG_BASE + 0x74) )
@@ -281,7 +275,6 @@ typedef struct __DMACR {
 
 #define DMA_IRQ_BIT            (0X01<<7)
 #define DMA_CLK_EN             (0X01<<13)
-
 
 /*
    DUET I2S definition
@@ -298,27 +291,27 @@ typedef struct __I2S {
     __I  uint32_t RESV0; // 0x1c
 
     /* channel-specific registers */
-    __IO uint32_t LRBR_LTHR;  //0x20
-    __IO uint32_t RRBR_RTHR;  //0x24
-    __IO uint32_t RER;        //0x28
-    __IO uint32_t TER;        //0x2c
-    __IO uint32_t RCR;        //0x30
-    __IO uint32_t TCR;        //0x34
-    __I  uint32_t ISR;        //0x38
-    __IO uint32_t IMR;        //0x3c
-    __I  uint32_t ROR;        //0x40
-    __I  uint32_t TOR;        //0x44
-    __IO uint32_t RFCR;       //0x48
-    __IO uint32_t TFCR;       //0x4c
-    __O  uint32_t RFF;        //0x50
-    __O  uint32_t TFF;        //0x54
+    __IO uint32_t LRBR_LTHR;  // 0x20
+    __IO uint32_t RRBR_RTHR;  // 0x24
+    __IO uint32_t RER;        // 0x28
+    __IO uint32_t TER;        // 0x2c
+    __IO uint32_t RCR;        // 0x30
+    __IO uint32_t TCR;        // 0x34
+    __I  uint32_t ISR;        // 0x38
+    __IO uint32_t IMR;        // 0x3c
+    __I  uint32_t ROR;        // 0x40
+    __I  uint32_t TOR;        // 0x44
+    __IO uint32_t RFCR;       // 0x48
+    __IO uint32_t TFCR;       // 0x4c
+    __O  uint32_t RFF;        // 0x50
+    __O  uint32_t TFF;        // 0x54
     __I  uint32_t RESV1[0x5a];
-    __IO uint32_t RXDMA;      //0x1c0
+    __IO uint32_t RXDMA;      // 0x1c0
     __O  uint32_t RRXDMA;
     __IO uint32_t TXDMA;
-    __O  uint32_t RTXDMA;     //0x1cc
+    __O  uint32_t RTXDMA;     // 0x1cc
     __I  uint32_t RESV2[8];
-    __I  uint32_t I2S_COMP_PARAM_2; //0x1f0
+    __I  uint32_t I2S_COMP_PARAM_2; // 0x1f0
     __I  uint32_t I2S_COMP_PARAM_1;
     __I  uint32_t I2S_COMP_VERSION;
     __I  uint32_t I2S_COMP_TYPE;
@@ -327,7 +320,6 @@ typedef struct __I2S {
 #define REG_I2S_HW_SHFIT_SET       ( *(volatile uint32_t *)(SYS_CON_REG_BASE + 0xC0) )
 #define REG_I2S_HW_SHIFT_DATAIN    ( *(volatile uint32_t *)(SYS_CON_REG_BASE + 0xC4) )
 #define REG_I2S_HW_SHIFT_DATAOUT   ( *(volatile uint32_t *)(SYS_CON_REG_BASE + 0xC8) )
-
 
 #define I2S_BASE    (0x4008D000)
 #define I2S         ((I2S_TypeDef *)I2S_BASE)
@@ -350,16 +342,16 @@ typedef struct {
 
 /* SPI register block */
 typedef struct __SPI {
-    __IO  uint32_t   CR0   ;/* 0x0  */
-    __IO  uint32_t   CR1   ;/* 0x4  */
-    __IO  uint32_t   DR    ;/* 0x8  */
-    __I   uint32_t   SR    ;/* 0xC  */
-    __IO  uint32_t   CPSR  ;/* 0x10 */
-    __IO  uint32_t   IMSC  ;/* 0x14 */
-    __I   uint32_t   RIS   ;/* 0x18 */
-    __I   uint32_t   MIS   ;/* 0x1C */
-    __IO  uint32_t   ICR   ;/* 0x20 */
-    __IO  uint32_t DMA_CR  ;/* 0x24 */
+    __IO  uint32_t   CR0   ; /* 0x0  */
+    __IO  uint32_t   CR1   ; /* 0x4  */
+    __IO  uint32_t   DR    ; /* 0x8  */
+    __I   uint32_t   SR    ; /* 0xC  */
+    __IO  uint32_t   CPSR  ; /* 0x10 */
+    __IO  uint32_t   IMSC  ; /* 0x14 */
+    __I   uint32_t   RIS   ; /* 0x18 */
+    __I   uint32_t   MIS   ; /* 0x1C */
+    __IO  uint32_t   ICR   ; /* 0x20 */
+    __IO  uint32_t DMA_CR  ; /* 0x24 */
 } SPI_TypeDef ;
 
 #define SPI_NUM_PORTS 3
@@ -446,25 +438,24 @@ typedef struct __GPIO {
     DUET I2C BEGIN
 */
 typedef struct  __I2C {
-    __IO uint32_t  CR; //0x00
+    __IO uint32_t  CR; // 0x00
     __IO uint32_t  SR;
-    __IO uint32_t  SAR; //0x08
+    __IO uint32_t  SAR; // 0x08
     __IO uint32_t  DBR;
     __IO uint32_t  LCR;
     __IO uint32_t  WCR;  //0x14
-    __IO uint32_t  RST_CYCL; //0x18
+    __IO uint32_t  RST_CYCL; // 0x18
     __I  uint32_t  BMR;  //0x1c
-    __IO uint32_t  WFIFO; //0x20
-    __IO uint32_t  WFIFO_WPTR; //0x24
-    __IO uint32_t  WFIFO_RPTR; //0x28
-    __IO uint32_t  RFIFO; //0x2c
+    __IO uint32_t  WFIFO; // 0x20
+    __IO uint32_t  WFIFO_WPTR; // 0x24
+    __IO uint32_t  WFIFO_RPTR; // 0x28
+    __IO uint32_t  RFIFO; // 0x2c
     __IO uint32_t  RFIFO_WPTR;
     __IO uint32_t  RFIFO_RPTR;  //0x34
     __IO uint32_t  RESV[2];       //0x38 0x3C
     __I uint32_t   WFIFO_STATUS;  //0x40
     __I uint32_t   RFIFO_STATUS;  //0x44
 } I2C_TypeDef;
-
 
 #define I2C0_BASE                   0x4008A000
 #define I2C1_BASE                   0x4008B000
@@ -494,18 +485,18 @@ typedef struct  __I2C {
 
 #define I2C0_IRQ_DISABLE             (1 << I2C0_IRQ_BIT)
 #define I2C1_IRQ_DISABLE             (1 << I2C1_IRQ_BIT)
-//// set pad2:3 for i2c0 func 4
-//#define I2C0_PINMUX_MASK0   0x0000FF00
-//#define I2C0_PINMUX_VALUE0  0x00004400
-//// set pad20:21 for i2c0 scl/sda func 1
-//#define I2C0_PINMUX_MASK1   0x00FF0000
-//#define I2C0_PINMUX_VALUE1  0x00110000
-//// set pad 8:9 for i2c1 func 3
-//#define I2C1_PINMUX_MASK0   0x000000FF
-//#define I2C1_PINMUX_VALUE0  0x00000033
-//// set pad22:23 for i2c1 scl/sda func 1
-//#define I2C1_PINMUX_MASK1   0xFF000000
-//#define I2C1_PINMUX_VALUE1  0x11000000
+/// set pad2:3 for i2c0 func 4
+// #define I2C0_PINMUX_MASK0   0x0000FF00
+// #define I2C0_PINMUX_VALUE0  0x00004400
+/// set pad20:21 for i2c0 scl/sda func 1
+// #define I2C0_PINMUX_MASK1   0x00FF0000
+// #define I2C0_PINMUX_VALUE1  0x00110000
+/// set pad 8:9 for i2c1 func 3
+// #define I2C1_PINMUX_MASK0   0x000000FF
+// #define I2C1_PINMUX_VALUE0  0x00000033
+/// set pad22:23 for i2c1 scl/sda func 1
+// #define I2C1_PINMUX_MASK1   0xFF000000
+// #define I2C1_PINMUX_VALUE1  0x11000000
 
 /*
     DUET I2C END
@@ -534,11 +525,9 @@ typedef struct __RTC {
 #define RTC_REG_BASE 0x40000A20
 #define RTC ((RTC_TypeDef *)(RTC_REG_BASE))
 
-
 #define COUNT_IN_SECOND 32768
 
 #define RTC_IRQ_BIT   0
-
 
 #define RTC_CNT_CYCLE_ENABLE    (1 << 15)
 #define RTC_ENABLE              (1 << 14)
@@ -591,18 +580,17 @@ struct DUET_RETENTION_SRAM {
 #define RETENTION_RAM_ADDR                0x40008000
 #define RETENTION_SRAM                    ((struct DUET_RETENTION_SRAM *)(RETENTION_RAM_ADDR))
 #define DUET_RETENTION_SRAM_CUSTOM_SIZE   64
-//#define RTC_TIME_RETENTION_RAM_ADDR       RETENTION_RAM_ADDR
+// #define RTC_TIME_RETENTION_RAM_ADDR       RETENTION_RAM_ADDR
 
 /*
     RETENTION SRAM END
 */
 
-
 /*
     DUET TIMER BEGIN
 */
 
-///////////// to do ////////////
+//////////// to do ////////////
 /*
     DUET TIMER END
 */
@@ -613,30 +601,29 @@ struct DUET_RETENTION_SRAM {
 
 /* DUET UART register block */
 typedef struct __UART {
-    __IO      uint32_t  DR              ;/* 0x0  */
-    __IO      uint32_t  RSC_ECR     ;/* 0x4  */
-    __I       uint32_t  RSV0[4]     ;/* 0x8~0x14  */
-    __I       uint32_t  FR          ;/* 0x18 */
-    __I       uint32_t  RSV1        ;/* 0x1C */
-    __IO       uint32_t  ILPR        ;/* 0x20 */
-    __IO      uint32_t  IBRD        ;/* 0x24 */
-    __IO      uint32_t  FBRD        ;/* 0x28 */
-    __IO      uint32_t  LCR_H       ;/* 0x2C */
-    __IO      uint32_t  CR          ;/* 0x30 */
-    __IO      uint32_t  IFLS        ;/* 0x34 */
-    __IO      uint32_t  IMSC        ;/* 0x38 */
-    __I       uint32_t  RIS         ;/* 0x3C */
-    __I       uint32_t  MIS         ;/* 0x40 */
-    __O       uint32_t  ICR         ;/* 0x44 */
-    __IO      uint32_t  DMACR       ;/* 0x48 */
-    __I       uint32_t  RSV2[997]   ;/* 0x04C~0xFDC */
-    __I       uint32_t  ID[8]         ;/* 0xFE0~0xFFC*/
+    __IO      uint32_t  DR              ; /* 0x0  */
+    __IO      uint32_t  RSC_ECR     ; /* 0x4  */
+    __I       uint32_t  RSV0[4]     ; /* 0x8~0x14  */
+    __I       uint32_t  FR          ; /* 0x18 */
+    __I       uint32_t  RSV1        ; /* 0x1C */
+    __IO       uint32_t  ILPR        ; /* 0x20 */
+    __IO      uint32_t  IBRD        ; /* 0x24 */
+    __IO      uint32_t  FBRD        ; /* 0x28 */
+    __IO      uint32_t  LCR_H       ; /* 0x2C */
+    __IO      uint32_t  CR          ; /* 0x30 */
+    __IO      uint32_t  IFLS        ; /* 0x34 */
+    __IO      uint32_t  IMSC        ; /* 0x38 */
+    __I       uint32_t  RIS         ; /* 0x3C */
+    __I       uint32_t  MIS         ; /* 0x40 */
+    __O       uint32_t  ICR         ; /* 0x44 */
+    __IO      uint32_t  DMACR       ; /* 0x48 */
+    __I       uint32_t  RSV2[997]   ; /* 0x04C~0xFDC */
+    __I       uint32_t  ID[8]         ; /* 0xFE0~0xFFC*/
 } UART_TypeDef;
 
 #define UART0_BASE (0x40080000+0x1000)
 #define UART1_BASE (0x40080000+0x2000)
 #define UART2_BASE (0x40080000+0x3000)
-
 
 #define UART0     ((UART_TypeDef *)UART0_BASE)
 #define UART1     ((UART_TypeDef *)UART1_BASE)
@@ -666,14 +653,14 @@ struct DUET_WDOG {
     __IO uint32_t CONTROL;
     __O  uint32_t INTCLR;
     __I  uint32_t RIS;
-    __I  uint32_t MIS; //0x14
+    __I  uint32_t MIS; // 0x14
     __I  uint32_t DUMMY0[0x2FA];
-    __IO uint32_t LOCK; //0xC00
+    __IO uint32_t LOCK; // 0xC00
     __I  uint32_t DUMMY1[0xBF];
-    __IO uint32_t ITCR; //0xF00
-    __O  uint32_t ITOP; //0xF04
+    __IO uint32_t ITCR; // 0xF00
+    __O  uint32_t ITOP; // 0xF04
     __I  uint32_t DUMMY2[0x32];
-    __I  uint32_t PERIPHID4; //0xFD0
+    __I  uint32_t PERIPHID4; // 0xFD0
     __I  uint32_t PERIPHID5;
     __I  uint32_t PERIPHID6;
     __I  uint32_t PERIPHID7;
@@ -838,19 +825,19 @@ struct DUET_PWM {
     DUET EFUDE BEGIN
 */
 struct DUET_EFUSE {
-    __IO uint32_t CFG_TYPE; //0x00
+    __IO uint32_t CFG_TYPE; // 0x00
     __IO uint32_t WR_TYPE;
     __IO uint32_t START;
     __IO uint32_t RD_CNT;
-    __IO uint32_t WR_CNT; //0x10
+    __IO uint32_t WR_CNT; // 0x10
     __IO uint32_t DIV_CNT;
     __IO uint32_t B_ADDR;
     __IO uint32_t PGM_DATA;
-    __IO uint32_t RDBK_DATA; //0x20
+    __IO uint32_t RDBK_DATA; // 0x20
     __I  uint32_t RSVD;
     __IO uint32_t INT_EN;
     __IO uint32_t INT_CLR;
-    __IO uint32_t E_ENABLE; //0x30
+    __IO uint32_t E_ENABLE; // 0x30
 };
 
 #define EFUSE_CTRL_BASE              0x40005000
@@ -866,7 +853,7 @@ struct DUET_EFUSE {
 #define EFUSE_REG_B_ADDR            *((volatile uint32_t *)(EFUSE_CTRL_BASE + 0x018))
 #define EFUSE_REG_PGM_DATA          *((volatile uint32_t *)(EFUSE_CTRL_BASE + 0x01C))
 #define EFUSE_REG_RDBK_DATA         *((volatile uint32_t *)(EFUSE_CTRL_BASE + 0x020))
-//#define EFUSE_REG_DONE               *((volatile uint32_t *)(EFUSE_CTRL_BASE + 0x024))
+// #define EFUSE_REG_DONE               *((volatile uint32_t *)(EFUSE_CTRL_BASE + 0x024))
 #define EFUSE_REG_INT_EN            *((volatile uint32_t *)(EFUSE_CTRL_BASE + 0x028))
 #define EFUSE_REG_INT_CLR           *((volatile uint32_t *)(EFUSE_CTRL_BASE + 0x02C))
 #define EFUSE_REG_ENABLE            *((volatile uint32_t *)(EFUSE_CTRL_BASE + 0x030))
@@ -918,7 +905,7 @@ struct DUET_EFUSE {
 /*
     DUET LPUART BEGIN
 */
-/////////////////////// to do /////////////////
+////////////////////// to do /////////////////
 /*
     DUET LPUART END
 */

@@ -62,7 +62,6 @@ typedef struct {
 /* Modem Config */
 #define MDM_CLKGATEFCTRL0_ADDR          0x60C00874
 
-
 typedef enum {
     ADC_CHANNEL_NUM0,
     ADC_CHANNEL_NUM1,

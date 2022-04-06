@@ -587,7 +587,7 @@
  *
  * Uncomment to enable testing of the constant-flow nature of selected code.
  */
-//#define MBEDTLS_TEST_CONSTANT_FLOW_VALGRIND
+// #define MBEDTLS_TEST_CONSTANT_FLOW_VALGRIND
 
 /**
  * \def MBEDTLS_TEST_NULL_ENTROPY
@@ -865,7 +865,7 @@
  *
  * Uncomment this macro to disable some counter-measures in ECP.
  */
-//#define MBEDTLS_ECP_NO_INTERNAL_RNG
+// #define MBEDTLS_ECP_NO_INTERNAL_RNG
 
 /**
  * \def MBEDTLS_ECP_RESTARTABLE
@@ -1223,7 +1223,7 @@
  *
  * Enable functions that use the filesystem.
  */
-//#define MBEDTLS_FS_IO
+// #define MBEDTLS_FS_IO
 
 /**
  * \def MBEDTLS_NO_DEFAULT_ENTROPY_SOURCES
@@ -2991,7 +2991,7 @@
  *
  * This module is used by the HAVEGE random number generator.
  */
-//#define MBEDTLS_TIMING_C
+// #define MBEDTLS_TIMING_C
 
 /**
  * \def MBEDTLS_VERSION_C

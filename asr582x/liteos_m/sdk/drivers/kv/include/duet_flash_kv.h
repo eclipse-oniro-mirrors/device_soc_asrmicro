@@ -78,6 +78,5 @@ int32_t duet_flash_kv_get(const char *key, void *buffer, int32_t *buffer_len);
  */
 int32_t duet_flash_kv_del(const char *key);
 
-
 #endif  /* _DUET_FLASH_KV_H_ */
 

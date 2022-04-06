@@ -206,7 +206,6 @@ void do_iperf_output(char *mode, struct lwip_iperf_outputInfo *outputInfo)
     outputInfo->lastPacketNum = outputInfo->currentPacketNum;
 }
 
-
 void iperf_output(void *args)
 {
     printf("\nlalala %s\n", __func__);

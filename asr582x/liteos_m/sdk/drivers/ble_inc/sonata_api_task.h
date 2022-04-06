@@ -23,7 +23,6 @@
  ****************************************************************************************
  */
 
-
 #ifndef _SONATA_API_TASK_H_
 #define _SONATA_API_TASK_H_
 
@@ -67,8 +66,6 @@ typedef enum {
     SONATA_API_TASK_STATE_MAX
 } sonata_api_task_state_t;
 
-
-
 /// asr api task messages
 typedef enum {
     SONATA_API_DUMMY_MSG = STACK_TASK_FIRST_MSG(SONATA_TASK_ID_APP),
@@ -77,7 +74,6 @@ typedef enum {
 
     SONATA_API_LAST_MSG,
 } sonata_api_task_msg_id;
-
 
 /*
  * Type Definition

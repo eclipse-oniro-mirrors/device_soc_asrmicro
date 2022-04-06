@@ -35,7 +35,7 @@ defined in linker script */
 /* start address for the .func section. defined in linker script */
 .word  _sfunc
 /* end address for the .func section. defined in linker script */
-.word  _efunc    
+.word  _efunc
 /* start address for the .bss section. defined in linker script */
 .word  _sbss
 /* end address for the .bss section. defined in linker script */
@@ -136,7 +136,6 @@ Infinite_Loop:
   .type  g_pfnVectors, %object
   .size  g_pfnVectors, .-g_pfnVectors
 
-
 g_pfnVectors:
   .word  _estack
   .word  Reset_Handler
@@ -182,7 +181,6 @@ g_pfnVectors:
   .word     PLATFORM_WAKEUP_IRQHandler        /*!< WiFi SOC Wake-Up Interrupt */
   .word     I2S_IRQHandler                    /* I2S                          */
   .word     BLE_IRQHandler                    /* BLE Interrupt                */
-
 
 /*******************************************************************************
 *

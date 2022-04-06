@@ -23,11 +23,8 @@
  ****************************************************************************************
  */
 
-
 #ifndef _SONATA_PRF_DISS_API_H_
 #define _SONATA_PRF_DISS_API_H_
-
-
 
 /*
  * INCLUDE FILES
@@ -50,7 +47,6 @@
  */
 
 #define PRF_DISS_FEATURES                   (0x01FF)
-
 
 /*
  * ENUM DEFINITIONS

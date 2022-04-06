@@ -356,7 +356,7 @@ int32_t duet_gpio_enable_irq(duet_gpio_dev_t *gpio, duet_gpio_irq_trigger_t trig
     } else {
         return EIO;
     }
-    NVIC_EnableIRQ(GPIO_IRQn); //0x10
+    NVIC_EnableIRQ(GPIO_IRQn); // 0x10
     return 0;
 }
 

@@ -114,14 +114,12 @@ typedef struct {
     uint8_t use_pri_only;
 } DMA_Init_Struct_Type;
 
-
 typedef struct {
     uint32_t chan_src_end_ptr;
     uint32_t chan_dst_end_ptr;
     Chan_Ctl_Data_TypeDef chan_ctr;
     uint32_t resv;
 } Chan_Cfg_TypeDef;
-
 
 Chan_Cfg_TypeDef *duet_dma_ctrl_block_init(void);
 void duet_dma_init(void);

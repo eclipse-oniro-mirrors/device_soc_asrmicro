@@ -77,7 +77,6 @@ extern PF_GET_STACK_USAGE pf_get_stack_usage;
 extern PF_PRINTF pf_printf;
 extern PF_APP_PRF_API_INIT pf_app_prf_api_init;
 
-
 /*
  * FUNCTION DECLARATION
  *****************************************************************************************

@@ -28,14 +28,14 @@ void delay(unsigned int cycles);
 int convert_str_to_int(char *str);
 void convert_int_to_str(unsigned int val, unsigned int type, char *ch);
 
-/// Macro to read a register
+// Macro to read a register
 #define REG_RD(addr)              (*(volatile uint32_t *)(addr))
-/// Macro to write a register
+// Macro to write a register
 #define REG_WR(addr, value)       (*(volatile uint32_t *)(addr)) = (value)
 
-/// Macro to read a register
+// Macro to read a register
 #define REG_BLE_RD(addr)              (*(volatile uint32_t *)(addr))
-/// Macro to write a register
+// Macro to write a register
 #define REG_BLE_WR(addr, value)       (*(volatile uint32_t *)(addr)) = (value)
 
 #ifdef DUET_BLE_NO_BLOCK
@@ -47,7 +47,6 @@ void lega_exit_critical_expble(void);
 #define lega_enter_critical_expble() lega_rtos_enter_critical()
 #define lega_exit_critical_expble() lega_rtos_exit_critical()
 #endif
-
 
 void duet_write32_bit(uint32_t reg, uint8_t start_bit, uint8_t len, uint32_t src_val);
 uint32_t duet_read32_bit(uint32_t reg, uint8_t start_bit, uint8_t len);

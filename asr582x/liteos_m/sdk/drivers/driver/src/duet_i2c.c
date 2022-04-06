@@ -119,8 +119,6 @@ void duet_i2c_interrupt_config(I2C_TypeDef *I2Cx, uint32_t I2C_interrupt_en, int
     }
 }
 
-
-
 /**
  * Initialises an I2C interface
  * Prepares an I2C hardware interface for communication as a master or slave
@@ -851,7 +849,6 @@ void duet_i2c_master_dma_recv(uint8_t iic_idx, uint32_t *data, uint16_t len)
 
     DMA->CHAN_EN_CLR |= ~(1 << dma_chan); // disable other channels
     DMA->CHAN_EN_SET |= (1 << dma_chan); // enable channel
-
 
     //        free(pChan_Cfg);
 }

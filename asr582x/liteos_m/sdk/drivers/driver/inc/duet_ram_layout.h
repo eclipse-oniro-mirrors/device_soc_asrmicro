@@ -72,7 +72,6 @@ typedef struct {
 uint32_t duet_ram_layout_init(Tcm_Config_Type tcm_config, Wifi_Ram_Config_Type wifi_config,
                               Bt_Ram_Config_Type bt_config);
 
-
 /**
  * Get the current ram layout parameters
  *

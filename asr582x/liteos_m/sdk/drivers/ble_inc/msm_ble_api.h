@@ -22,7 +22,6 @@
 
 #define BLE_APP_FRAME_DATA_MAX_LENGTH    300
 
-
 /*
  * MACRO DEFINITIONS
  ****************************************************************************************
@@ -152,21 +151,18 @@ typedef struct BLE_ADV_ENABLE_T {
     uint8_t advertising_enable;
 } ble_adv_enable_t;
 
-
 typedef enum MS_BLE_STACK_EVENT_T {
     MS_BLE_STACK_EVENT_STACK_READY = 0,
     MS_BLE_STACK_EVENT_STACK_FAIL,
     MS_BLE_STACK_EVENT_ADV_ON,                  /*!< ???????????г??*/
     MS_BLE_STACK_EVENT_ADV_OFF,                /*!< ???????????г??*/
-    MS_BLE_STACK_EVENT_DISCONNECT, /*!< ??????*/
+    MS_BLE_STACK_EVENT_DISCONNECT, /* !< ?????? */
     MS_BLE_STACK_EVENT_CONNECTED,  /*!< ??????*/
 } ms_ble_stack_event_t;
-
 
 typedef void (*ble_gatt_service_att_wirte_cb)(uint8_t *data, uint16_t size);
 typedef void (*ble_gatt_service_att_read_cb)(uint8_t *data,  uint16_t *size);
 typedef void (*ble_gatt_service_att_ind_cb)(uint8_t *data,  uint16_t size);
-
 
 typedef struct ble_gatt_att_opr {
     ble_gatt_service_att_wirte_cb write_request;
@@ -179,10 +175,8 @@ typedef struct ble_gatt_att_reg {
     ble_gatt_att_opr_t  att_opr;
 } ble_gatt_att_reg_t;
 
-
 typedef void (*cb_fun)(ms_ble_stack_event_t);
 typedef void (*app_ble_scan_callback_t)(uint8_t *data, uint16_t len);
-
 
 extern cb_fun ble_cb_fun;
 

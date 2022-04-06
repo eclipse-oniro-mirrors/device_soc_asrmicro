@@ -25,7 +25,6 @@
 #ifndef SONATA_PRF_OTAS_API_H_
 #define SONATA_PRF_OTAS_API_H_
 
-
 /*
  * INCLUDE FILES
  ****************************************************************************************
@@ -94,7 +93,6 @@ void sonata_prf_otas_init(void);
  ****************************************************************************************
  */
 void sonata_prf_otas_add_otas(void);
-
 
 void sonata_prf_otas_disable(bool disable);
 /**

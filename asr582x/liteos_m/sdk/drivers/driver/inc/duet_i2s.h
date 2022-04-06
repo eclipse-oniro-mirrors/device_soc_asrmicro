@@ -86,7 +86,6 @@ extern "c" {
 #define I2S_RX_WORDSIZE_MASK       (0x7)
 #define I2S_TX_WORDSIZE_MASK       (0x7)
 
-
 #define I2S_ROLE_MASTER         (1)
 #define I2S_ROLE_SLAVE          (0)
 
@@ -104,8 +103,7 @@ extern "c" {
     typedef void (*duet_i2s_callback_func)(uint32_t, uint32_t);
     extern duet_i2s_callback_func g_duet_i2s_callback_handler;
 
-    typedef struct
-    {
+    typedef struct {
         uint32_t i2s_sample_rate;
         uint32_t i2s_mclk_src;
         uint32_t i2s_ws;
@@ -116,7 +114,6 @@ extern "c" {
         uint8_t i2s_fifo_threshold;
         uint8_t i2s_mode;
     } duet_i2s_dev_t;
-
 
     __STATIC_INLINE ITstatus i2s_get_interrupt_status(I2S_TypeDef * I2Sx, uint32_t i2s_interrupt)
     {

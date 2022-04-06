@@ -110,7 +110,7 @@ uint16_t rf_sw_get_reg_bit(uint16_t reg, uint8_t start_bit, uint8_t len)
     }
 }
 
-//// single wifi run and without PTA init,these api is useful
+/// single wifi run and without PTA init,these api is useful
 uint8_t hw_spi_pta = 0;
 
 FLASH_COMMON2_SEG void spi_mst_write(uint16_t addr, uint16_t data)
@@ -223,5 +223,4 @@ uint16_t rf_get_reg_bit(uint16_t reg, uint8_t start_bit, uint8_t len)
         return -1;
     }
 }
-
 

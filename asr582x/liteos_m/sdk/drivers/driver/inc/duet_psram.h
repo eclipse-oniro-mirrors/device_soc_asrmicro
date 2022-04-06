@@ -33,7 +33,6 @@
 #define PSRAM_FLASH_B2_BASE      PSRAM_FLASH_A1_TOP
 #define PSRAM_FLASH_B2_TOP       PSRAM_FLASH_A1_TOP
 
-
 /**
  *APS1604-SQR
  */
@@ -77,4 +76,4 @@ int psram_set_channel(duet_psram_channel channel);
  */
 int psram_config(duet_psram_mode mode);
 
-#endif //__PSRAM_PSRAM_H
+#endif // __PSRAM_PSRAM_H

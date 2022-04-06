@@ -23,11 +23,8 @@
  ****************************************************************************************
  */
 
-
 #ifndef _SONATA_PRF_HOGPRH_API_H_
 #define _SONATA_PRF_HOGPRH_API_H_
-
-
 
 /*
  * INCLUDE FILES
@@ -49,7 +46,6 @@
  * MACRO DEFINITIONS
  ****************************************************************************************
  */
-
 
 /*
  * Type Definition
@@ -139,7 +135,6 @@ typedef struct sonata_hogprh_read_info_req {
     uint8_t report_idx;
 } sonata_hogprh_read_info_req_t;
 
-
 /// HID Information structure
 struct sonata_hids_hid_info {
     /// bcdHID
@@ -216,7 +211,6 @@ union sonata_hogprh_data {
     ///  - info = HOGPRH_REPORT_MAP_EXT_REP_REF
     struct sonata_hogprh_report_map_ref report_map_ref;
 };
-
 
 ///Parameters of the @ref HOGPRH_WRITE_REQ message
 typedef struct sonata_hogprh_write_req {

@@ -111,7 +111,6 @@ void duet_uart_interrupt_config(UART_TypeDef *UARTx, uint32_t uart_int, bool new
     }
 }
 
-
 ITstatus duet_uart_get_interrupt_status(UART_TypeDef *UARTx, uint32_t uart_interrupt)
 {
     if ( UARTx->MIS & uart_interrupt ) {
@@ -424,7 +423,7 @@ static void UARTX_IRQHandler(uint8_t uart_idx)
 
         /* read rx fifo till it's empty */
         while ( ! duet_uart_get_flag_status(UARTx, UART_FLAG_RX_FIFO_EMPTY) ) {
-            tmp = (char)(UARTx->DR);//uart_receive_data(UART );
+            tmp = (char)(UARTx->DR); // uart_receive_data(UART );
             if (g_duet_uart_callback_handler[uart_idx] != NULL) {
                 g_duet_uart_callback_handler[uart_idx](tmp);
             }
@@ -480,7 +479,6 @@ void UART2_IRQHandler(void)
     UARTX_IRQHandler(2);
     duet_intrpt_exit();
 }
-
 
 void duet_uart_set_callback(uint8_t uart_idx, duet_uart_callback_func func)
 {

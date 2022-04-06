@@ -269,7 +269,6 @@ int32_t duet_flash_erase(duet_partition_t in_partition, uint32_t off_set, uint32
     return 0;
 }
 
-
 /**
  * Write data to an area on a flash logical partition without erase
  *

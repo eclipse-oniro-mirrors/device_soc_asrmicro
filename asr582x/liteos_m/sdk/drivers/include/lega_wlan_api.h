@@ -177,7 +177,7 @@ typedef struct {
     int client_num;                                 /* linked station number */
     lega_wlan_client_addr_info_t sta[4];            /* linked station entry, max client number is 4 */
 } lega_wlan_ap_client_info_t;
-/// start with dataelem struct declaration
+// start with dataelem struct declaration
 typedef enum {
     MS_OK = 0,
     MS_ERROR
@@ -268,8 +268,7 @@ MS_STATUS ms_hal_test_start(void);
  *  @return    other   : error occurred
  */
 MS_STATUS ms_hal_test_report_get(ms_hal_test_report_t *report);
-/// end of dataelem struct declaration
-
+// end of dataelem struct declaration
 
 /** @brief  wifi init functin, user should call it before use any wifi cmd
  *  @return    0       : on success.
@@ -356,7 +355,6 @@ int lega_wlan_get_mac_address(uint8_t *mac_addr);
  */
 void lega_wlan_set_mac_address(uint8_t *mac_addr);
 
-
 /** @brief  used in station mode, get the ip information
  *
  * @param void
@@ -364,7 +362,6 @@ void lega_wlan_set_mac_address(uint8_t *mac_addr);
  * @return    pointer : ip status got.
  */
 lega_wlan_ip_stat_t *lega_wlan_get_ip_status(void);
-
 
 /** @brief  used in station mode, get link status information
  *
@@ -455,7 +452,6 @@ typedef void (*start_adv_cb_t)(lega_start_adv_results_e status);
  *  @return    other   : error occurred
  */
 int lega_wlan_register_start_adv_cb(start_adv_cb_t fn);
-
 
 /** @brief  used in station mode or sniffer mode, call this cmd to send a MPDU constructed by user
  *

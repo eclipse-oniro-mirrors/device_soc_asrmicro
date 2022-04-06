@@ -21,7 +21,6 @@
 #include "duet_pinmux.h"
 #include "lega_at_api.h"
 #include "arch.h"
-#include "board.h"
 #ifdef _SPI_FLASH_ENABLE_
 #include "duet_flash_alg.h"
 #include "duet_flash.h"
@@ -33,6 +32,7 @@
 #include "los_interrupt.h"
 #include "target_config.h"
 #include "uart.h"
+#include "board.h"
 #include "los_arch_interrupt.h"
 #include "lega_rtos.h"
 
@@ -109,7 +109,6 @@ void NVIC_deinit(void)
     NVIC_DisableIRQ(DMA_IRQn);
     NVIC_DisableIRQ(RW_BLE_IRQn);
 }
-
 
 void os_post_init_hook(void)
 {
