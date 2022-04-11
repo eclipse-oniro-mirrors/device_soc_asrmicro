@@ -32,12 +32,12 @@ extern lega_mutex_t HwSecurityMutex;
 HASH operation mode
 */
 typedef enum {
-    LEGA_HASH_SHA1_mode          = 0,    /*!< SHA1 */
-    LEGA_HASH_SHA224_mode        = 1,    /*!< SHA224 */
-    LEGA_HASH_SHA256_mode        = 2,    /*!< SHA256 */
-    LEGA_HASH_SHA384_mode        = 3,    /*!< SHA384 */
-    LEGA_HASH_SHA512_mode        = 4,    /*!< SHA512 */
-    LEGA_HASH_MD5_mode           = 5,    /*!< MD5 */
+    LEGA_HASH_SHA1_mode          = 0,    /* !< SHA1 */
+    LEGA_HASH_SHA224_mode        = 1,    /* !< SHA224 */
+    LEGA_HASH_SHA256_mode        = 2,    /* !< SHA256 */
+    LEGA_HASH_SHA384_mode        = 3,    /* !< SHA384 */
+    LEGA_HASH_SHA512_mode        = 4,    /* !< SHA512 */
+    LEGA_HASH_MD5_mode           = 5,    /* !< MD5 */
 
     LEGA_HASH_NumOfModes,
     LEGA_HASH_OperationModeLast = 0x7FFFFFFF,
@@ -55,4 +55,4 @@ int lega_hw_lib_deinit(void);
 int lega_security_engine_init(void);
 int lega_security_engine_deinit(void);
 
-#endif //_LEGA_HW_COMMON_H_
+#endif // _LEGA_HW_COMMON_H_

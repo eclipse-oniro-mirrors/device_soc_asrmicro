@@ -19,7 +19,7 @@
 #include "duet_gpio.h"
 
 duet_gpio_cb_t g_duet_gpio_handler[DUET_GPIO_TOTAL_NUM];
-//gpio pinmux function table
+// gpio pinmux function table
 const uint32_t GPIO_PINMUX_FUN[DUET_GPIO_TOTAL_NUM] = {
     0, 0, 0, 0, 1, 1, 0, 0,
     0, 0, 2, 0, 0, 0, 4, 4,
@@ -31,18 +31,18 @@ void GPIO_IRQHandler(void)
     // duet_intrpt_enter();
     for (int i = 0; i < DUET_GPIO_TOTAL_NUM; i++) {
         if (i < DUET_GPIO_NUM_PER_GROUP) {
-            //gpio group0 irq
+            // gpio group0 irq
             if (GPIO_GROUP0->INTSTATUS & (0x0001 << i)) {
-                //clear GPIO GROUP0 interrupt
+                // clear GPIO GROUP0 interrupt
                 GPIO_GROUP0->INTSTATUS = (0x0001 << i);
                 if (g_duet_gpio_handler[i].cb) {
                     g_duet_gpio_handler[i].cb(g_duet_gpio_handler[i].arg);
                 }
             }
         } else {
-            //gpio group1 irq
+            // gpio group1 irq
             if (GPIO_GROUP1->INTSTATUS & (0x0001 << (i - DUET_GPIO_NUM_PER_GROUP))) {
-                //clear GPIO GROUP1 interrupt
+                // clear GPIO GROUP1 interrupt
                 GPIO_GROUP1->INTSTATUS = (0x0001 << (i - DUET_GPIO_NUM_PER_GROUP));
                 if (g_duet_gpio_handler[i].cb) {
                     g_duet_gpio_handler[i].cb(g_duet_gpio_handler[i].arg);
@@ -69,7 +69,7 @@ int32_t duet_gpio_init(duet_gpio_dev_t *gpio)
     if (NULL == gpio) {
         return EIO;
     }
-    //pinmux setting
+    // pinmux setting
     if (gpio->port < 8) {
         reg_value = REG_RD(PINMUX_CTRL_REG0) & (~(0x0000000F << (4 * gpio->port)));
         REG_WR(PINMUX_CTRL_REG0, (reg_value | (GPIO_PINMUX_FUN[gpio->port] << (4 * gpio->port))));
@@ -130,9 +130,9 @@ int32_t duet_gpio_init(duet_gpio_dev_t *gpio)
                 break;
             default:
                 return EIO;
-                //break;
+                // break;
         }
-    } else { //if(gpio->port < 32/24)
+    } else { // if(gpio->port < 32/24)
         switch (gpio->config) {
             case DUET_ANALOG_MODE:
                 break;
@@ -174,7 +174,7 @@ int32_t duet_gpio_init(duet_gpio_dev_t *gpio)
                 break;
             default:
                 return EIO;
-                //break;
+                // break;
         }
     }
     return 0;
@@ -326,8 +326,8 @@ int32_t duet_gpio_enable_irq(duet_gpio_dev_t *gpio, duet_gpio_irq_trigger_t trig
     if (gpio->port < DUET_GPIO_NUM_PER_GROUP) {
         switch (trigger) {
             case DUET_IRQ_TRIGGER_RISING_EDGE:
-                GPIO_GROUP0->INTTYPESET = (1 << gpio->port); //edge or level trig
-                GPIO_GROUP0->INTPOLSET = (1 << gpio->port); //trig polarity
+                GPIO_GROUP0->INTTYPESET = (1 << gpio->port); // edge or level trig
+                GPIO_GROUP0->INTPOLSET = (1 << gpio->port); // trig polarity
                 break;
             case DUET_IRQ_TRIGGER_FALLING_EDGE:
                 GPIO_GROUP0->INTTYPESET = (1 << gpio->port);
@@ -337,7 +337,7 @@ int32_t duet_gpio_enable_irq(duet_gpio_dev_t *gpio, duet_gpio_irq_trigger_t trig
             default:
                 return EIO;
         }
-        GPIO_GROUP0->INTENSET = (1 << gpio->port); //int enable
+        GPIO_GROUP0->INTENSET = (1 << gpio->port); // int enable
     } else if (gpio->port < DUET_GPIO_TOTAL_NUM) {
         switch (trigger) {
             case DUET_IRQ_TRIGGER_RISING_EDGE:
@@ -376,7 +376,7 @@ int32_t duet_gpio_disable_irq(duet_gpio_dev_t *gpio)
     }
     g_duet_gpio_handler[gpio->port].cb = NULL;
     g_duet_gpio_handler[gpio->port].arg = NULL;
-    //NVIC_DisableIRQ(GPIO_IRQn); //common use
+    // NVIC_DisableIRQ(GPIO_IRQn); // common use
     if (gpio->port < DUET_GPIO_NUM_PER_GROUP) {
         GPIO_GROUP0->INTENCLR = (1 << gpio->port);
         GPIO_GROUP0->INTTYPECLR = (1 << gpio->port);
@@ -407,9 +407,9 @@ int32_t duet_gpio_clear_irq(duet_gpio_dev_t *gpio)
     }
 
     if (gpio->port < DUET_GPIO_NUM_PER_GROUP) {
-        //GPIO interrupt status
+        // GPIO interrupt status
         if (GPIO_GROUP0->INTSTATUS & (1 << gpio->port)) {
-            //clear GPIO interrupt status
+            // clear GPIO interrupt status
             GPIO_GROUP0->INTSTATUS = (1 << gpio->port);
         }
     } else if (gpio->port < DUET_GPIO_TOTAL_NUM) {

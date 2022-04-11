@@ -65,4 +65,4 @@ extern char *component_info(uint32_t module_t);
         }\
     }while(0)
 
-#endif //_LEGA_DBG_H_
+#endif // _LEGA_DBG_H_

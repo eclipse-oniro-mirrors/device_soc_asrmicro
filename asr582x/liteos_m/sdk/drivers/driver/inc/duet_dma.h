@@ -48,7 +48,7 @@ extern "C" {
 #define DMA_OP_MODE_PERI_SCT_GAT_PRI    (6)
 #define DMA_OP_MODE_PERI_SCT_GAT_ALT    (7)
 
-#define DMA_R_POWER_1                   (0)   //every dma period   nums of transfer uinit
+#define DMA_R_POWER_1                   (0)   // every dma period   nums of transfer uinit
 #define DMA_R_POWER_2                   (1)
 #define DMA_R_POWER_4                   (2)
 #define DMA_R_POWER_8                   (3)
@@ -62,7 +62,7 @@ extern "C" {
 
 #define DMA_N_1_MAX                     (1024)
 
-#define DMA_MAX_CHAN_NUM                (32)  //nums of primary channels
+#define DMA_MAX_CHAN_NUM                (32)  // nums of primary channels
 typedef enum {
     DMA_CH_UART0_TX = 0,
     DMA_CH_UART0_RX,
@@ -86,7 +86,7 @@ typedef void (*duet_dma_callback_func)(uint32_t);
 
 typedef struct {
     uint32_t cycle_ctl: 3;
-    uint32_t next_useburst: 1;
+    uint32_t next_useburst : 1;
     uint32_t n_minus_1: 10;
     uint32_t R_pow: 4;
     uint32_t src_prot: 3;
@@ -135,4 +135,4 @@ void duet_dma_spi_rx(uint8_t ssp_idx, uint8_t *data, uint16_t len);
 void duet_dma_spi_tx(uint8_t ssp_idx, uint8_t *data, uint16_t len);
 void duet_dma_callback_register(uint8_t chn_idx, duet_dma_callback_func func);
 
-#endif //__DUET_DMA_H
+#endif // __DUET_DMA_H

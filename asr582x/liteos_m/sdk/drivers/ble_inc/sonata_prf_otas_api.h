@@ -30,9 +30,9 @@
  ****************************************************************************************
  */
 
-///@cond
+/// @cond
 #ifdef SONATA_CFG_OTAS
-///@endcond
+/// @endcond
 #include <stdint.h>
 
 /**
@@ -46,13 +46,13 @@
  ****************************************************************************************
  */
 typedef struct prf_ota_callback {
-    ///app call before ota start
+    /// app call before ota start
     void (*prf_ota_before_start)(void);
-    ///app call ota start
+    /// app call ota start
     uint8_t (*prf_ota_start)(uint8_t length, uint8_t *version);
-    ///app call ota stop
+    /// app call ota stop
     void (*prf_ota_stop)(void);
-    ///app call ota fail
+    /// app call ota fail
     void (*prf_ota_fail)(void);
 } prf_ota_callback_t;
 
@@ -106,7 +106,7 @@ uint16_t sonata_prf_ota_register_callback(prf_ota_callback_t *cb);
 
 /// Table of kernel message handlers
 extern const sonata_api_subtask_handlers_t sonata_prf_otas_ke_msg_handlers;
-#endif //SONATA_CFG_OTAS
+#endif // SONATA_CFG_OTAS
 
 /** @}*/
-#endif //SONATA_PRF_OTAS_API_H_
+#endif // SONATA_PRF_OTAS_API_H_

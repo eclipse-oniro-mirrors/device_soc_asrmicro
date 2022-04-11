@@ -65,8 +65,8 @@ extern "C" {
 /* SPI interrupts */
 #define SPI_INTERRUPT_RX_FIFO_OVERRUN  (1 << 0)
 #define SPI_INTERRUPT_RX_TIMEOUT       (1 << 1)
-#define SPI_INTERRUPT_RX_FIFO_TRIGGER  (1 << 2)  //there are four or more entries in rx fifo
-#define SPI_INTERRUPT_TX_FIFO_TRIGGER  (1 << 3)  //there are four or fewer entries in tx fifo. what happens when fifo level is exactly 4??
+#define SPI_INTERRUPT_RX_FIFO_TRIGGER  (1 << 2)  // there are four or more entries in rx fifo
+#define SPI_INTERRUPT_TX_FIFO_TRIGGER  (1 << 3)  // there are four or fewer entries in tx fifo. what happens when fifo level is exactly 4??
 #define SPI_INTERRUPT_ALL              (0xf)
 #define SPI_DISABLE_INTERRUPT_ALL      (0x0)
 

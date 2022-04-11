@@ -31,9 +31,9 @@
  ****************************************************************************************
  */
 #include "sonata_config.h"
-///@cond
+/// @cond
 #if defined(STACK_BLE_HOST_PRESENT) || defined(BLE_HOST_PRESENT)
-///@endcond
+/// @endcond
 
 #include "sonata_utils_api.h"
 #include "sonata_att.h"
@@ -146,7 +146,7 @@ typedef enum {
     /// Unregister from peer device events
     SONATA_GATT_UNREGISTER                               = 0x11,
 
-    /* Operation flags for sending events to peer device*/
+    /* Operation flags for sending events to peer devicd */
     /* ************************************************ */
     /// Send an attribute notification
     SONATA_GATT_NOTIFY                                   = 0x12,
@@ -175,7 +175,7 @@ typedef enum {
     SONATA_GATT_SVC_CHANGED                              = 0x40,
 } sonata_gatt_operation;
 
-///GATT response type
+/// GATT response type
 typedef enum {
     /// Add service in database response
     SONATA_GATT_ADD_SVC_RSP                   = 0x0B01,
@@ -211,7 +211,7 @@ typedef enum {
 /**
  * Attribute Description
  */
-/*@TRACE*/
+/* @TRACE */
 typedef struct sonata_gatt_att_desc {
     /** Attribute UUID (LSB First) */
     uint8_t uuid[SONATA_ATT_UUID_128_LEN];
@@ -254,7 +254,7 @@ typedef struct sonata_gatt_att_desc {
 } sonata_gatt_att_desc_t;
 
 /// Service information
-/*@TRACE*/
+/* @TRACE */
 typedef struct sonata_gatt_svc_info {
     /// Service start handle
     uint16_t start_hdl;
@@ -269,9 +269,9 @@ typedef struct sonata_gatt_svc_info {
 /// @brief Callbacks for GATT module
 typedef struct {
     /*************** GATT Controller  ***************/
-    ///@deprecated use @see ble_complete_callback
+    /// @deprecated use @see ble_complete_callback
     void (*gatt_disc_all_svc_complete)(uint8_t conidx, uint16_t status);
-    ///@deprecated use @see ble_complete_callback
+    /// @deprecated use @see ble_complete_callback
     void (*gatt_read_complete)(uint8_t conidx, uint16_t status);
 
     /// Callback for discover services
@@ -283,11 +283,11 @@ typedef struct {
 
     /// Callback for discover characteristic
     uint16_t (*gatt_disc_char)(uint8_t conidx, uint16_t attr_hdl, uint16_t pointer_hdl, uint8_t prop, uint8_t uuid_len,
-                               uint8_t *uuid);    /*void(*gatt_disc_char_desc)(void);*/
+                               uint8_t *uuid);    /* void(*gatt_disc_char_desc)(void); */
 
     /// Callback for discover characteristic description
     uint16_t (*gatt_disc_char_desc)(uint8_t conidx, uint16_t attr_hdl, uint8_t uuid_len,
-                                    uint8_t *uuid);    /*void(*gatt_disc_char_desc)(void);*/
+                                    uint8_t *uuid);    /* void(*gatt_disc_char_desc)(void); */
 
     /// Callback for GATT read complete
     uint16_t (*gatt_read)(uint8_t conidx, uint16_t handle, uint16_t offset, uint16_t length, uint8_t *value);
@@ -605,7 +605,7 @@ uint16_t sonata_ble_gatt_send_svc_change_confirm(uint8_t conidx, uint16_t handle
 uint16_t sonata_ble_gatt_add_service(uint16_t start_hdl, uint8_t perm, uint8_t *uuid,
                                      uint8_t nb_att, sonata_gatt_att_desc_t *atts);
 
-///@deprecated use sonata_ble_gatt_add_service()
+/// @deprecated use sonata_ble_gatt_add_service()
 uint16_t sonata_ble_gatt_add_service_request(uint16_t start_hdl, uint8_t perm, uint8_t *uuid,
         uint8_t nb_att, sonata_gatt_att_desc_t *atts);
 
@@ -688,5 +688,5 @@ uint16_t sonata_ble_register_gatt_callback(ble_gatt_callback *cb);
 
 #endif // BLE_HOST_PRESENT
 
-#endif //_SONATA_GATT_API_H_
+#endif // _SONATA_GATT_API_H_
 

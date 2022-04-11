@@ -97,4 +97,4 @@ extern "c" {
 }
 #endif
 
-#endif /*__DUET_PINMUX_H */
+#endif /* __DUET_PINMUX_H */

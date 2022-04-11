@@ -48,10 +48,10 @@ typedef struct {
     uint8_t  at_scan;         /* scan flag which indicate call by at task */
     uint8_t  sta_connected;   /* indicate status of station is connected */
     uint8_t  sap_opend;       /* indicate status of softap is open done */
-    //ip_addr_t at_ping;        /* save ping ip addr for at cmd */
-    char     ip[16];          /* Local IP address on the target wlan interface, ASCII*/
+    // ip_addr_t at_ping;        /* save ping ip addr for at cmd */
+    char     ip[16];          /* Local IP address on the target wlan interface, ASCII */
     char     gw[16];          /* Router IP address on the target wlan interface, ASCII */
-    char     mask[16];        /* Netmask on the target wlan interface, ASCII*/
+    char     mask[16];        /* Netmask on the target wlan interface, ASCII */
 } at_user_info_s;
 
 typedef enum {
@@ -66,8 +66,8 @@ typedef enum {
 } at_rsp_status_t;
 
 typedef struct {
-    char *command;  /*at cmd string*/
-    int (*function)(int argc, char **argv); /*at cmd proccess function*/
+    char *command;  /* at cmd string */
+    int (*function)(int argc, char **argv); /* at cmd proccess function */
 } at_cmd_entry;
 int at_init(void);
 void at_command_process_ble(void);
@@ -125,5 +125,5 @@ extern char at_dbgflg;
 #define at_rspinfor(Fmt, ...)    at_printf(Fmt "\r\n", ## __VA_ARGS__)
 #define at_rspinfornn(Fmt, ...)  at_printf(Fmt, ## __VA_ARGS__)
 
-#endif  //_AT_API_H_
+#endif  // _AT_API_H_
 

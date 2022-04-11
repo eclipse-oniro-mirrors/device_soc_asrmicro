@@ -216,7 +216,7 @@ void lega_ble_test_mode(char *pwbuf, int blen, int argc, char **argv)
     int c = 1;
     if (strcmp(argv[c], "on") == 0) {
         printf("ble test on \r\n");
-        //gpio1 output
+        // gpio1 output
         g_duet_gpio11.port = GPIO11_INDEX;
         g_duet_gpio11.config = DUET_OUTPUT_PUSH_PULL;
         g_duet_gpio11.priv = NULL;

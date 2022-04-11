@@ -115,7 +115,7 @@ int32_t duet_spi_init(duet_spi_dev_t *spi)
     } else {
         return EIO;
     }
-    //enable spi clk
+    // enable spi clk
     if (SPIx == SPI0) {
         tmp_value = REG_RD(PERI_CLK_EN_REG1) & (~(SPI0_BUS_CLK_EN | SPI0_PERI_CLK_EN));
         REG_WR(PERI_CLK_EN_REG1, (tmp_value | (SPI0_BUS_CLK_EN | SPI0_PERI_CLK_EN)));
@@ -126,7 +126,7 @@ int32_t duet_spi_init(duet_spi_dev_t *spi)
         tmp_value = REG_RD(PERI_CLK_EN_REG1) & (~(SPI2_BUS_CLK_EN | SPI2_PERI_CLK_EN));
         REG_WR(PERI_CLK_EN_REG1, (tmp_value | (SPI2_BUS_CLK_EN | SPI2_PERI_CLK_EN)));
     }
-    //fpga no effect, soc need
+    // fpga no effect, soc need
     duet_spi_cmd(SPIx, DISABLE);
     duet_spi_interrupt_config(SPIx, SPI_INTERRUPT_ALL, DISABLE);
     duet_spi_interrupt_clear(SPIx, SPI_INTERRUPT_ALL);
@@ -195,9 +195,9 @@ int32_t duet_spi_init(duet_spi_dev_t *spi)
     //        SPIx->DMA_CR &= ~SPI_DMA_RX_EN;
     //    }
     if (spi->priv) {
-        //enable rx interrupt
+        // enable rx interrupt
         SPIx->IMSC |= (SPI_INTERRUPT_RX_TIMEOUT | SPI_INTERRUPT_RX_FIFO_TRIGGER);
-        //enable cm4 interrupt
+        // enable cm4 interrupt
         if (SPIx == SPI0) {
             tmp_value = REG_RD(DUTE_IRQ_EN_REG) & (~SPI0_IRQ_BIT);
             REG_WR(DUTE_IRQ_EN_REG, (tmp_value | (SPI0_IRQ_BIT)));
@@ -244,13 +244,13 @@ int32_t duet_spi_finalize(duet_spi_dev_t *spi)
         return EIO;
     }
 
-    //disable all spi interrupt
+    // disable all spi interrupt
     SPIx->IMSC  = SPI_DISABLE_INTERRUPT_ALL;
-    //disable all spi config
+    // disable all spi config
     SPIx->CR0 = 0;
     SPIx->CR1 = 0;
 
-    //disable cm4 interrupt
+    // disable cm4 interrupt
     if (SPI0 == SPIx) {
         tmp_value = REG_RD(DUTE_IRQ_DIS_REG) & (~SPI0_IRQ_BIT);
         REG_WR(DUTE_IRQ_DIS_REG, (tmp_value | (SPI0_IRQ_BIT)));
@@ -265,7 +265,7 @@ int32_t duet_spi_finalize(duet_spi_dev_t *spi)
         NVIC_DisableIRQ(SPI2_IRQn);
     }
 
-    //spi sclk disable, fpga no effect, soc need
+    // spi sclk disable, fpga no effect, soc need
     if (SPI0 == SPIx) {
         tmp_value = REG_RD(PERI_CLK_DIS_REG1) & (~(SPI0_BUS_CLK_EN | SPI0_PERI_CLK_EN));
         REG_WR(PERI_CLK_DIS_REG1, (tmp_value | (SPI0_BUS_CLK_EN | SPI0_PERI_CLK_EN)));
@@ -294,21 +294,21 @@ int32_t duet_spi_send(duet_spi_dev_t *spi, const uint8_t *data, uint16_t size, u
         return EIO;
     }
     while (size--) {
-        while ( !(duet_spi_get_flag_status(SPIx, SPI_FLAG_TX_FIFO_NOT_FULL)) ); //wait till tx fifo is not full
+        while ( !(duet_spi_get_flag_status(SPIx, SPI_FLAG_TX_FIFO_NOT_FULL)) ); // wait till tx fifo is not full
         SPIx->DR = *data++;
     }
     return 0;
 }
 
-//void duet_spi_receive(SPI_TypeDef * SPIx, void * rx_data, uint16_t len)
-//{
+// void duet_spi_receive(SPI_TypeDef * SPIx, void * rx_data, uint16_t len)
+// {
 //    while(len--)
 //    {
-//        while( !(spi_get_flag_status(SPIx, SPI_FLAG_RX_FIFO_NOT_EMPTY)) ); //wait till rx fifo is not empty, change to timeout mechanism???
+//        while( !(spi_get_flag_status(SPIx, SPI_FLAG_RX_FIFO_NOT_EMPTY)) ); // wait till rx fifo is not empty, change to timeout mechanism???
 
 //        *rx_data++ = SPIx->DR ;
 //    }
-//}
+// }
 
 SPI_TypeDef *getSpixViaIdx(uint8_t spi_idx)
 {

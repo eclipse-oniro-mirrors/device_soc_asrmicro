@@ -25,13 +25,13 @@ void TIMER_IRQHandler(void)
 {
     //    duet_intrpt_enter();
     if (TIMER1->MIS) {
-        TIMER1->INTCLR = 1; //clear irq
+        TIMER1->INTCLR = 1; // clear irq
         if (g_duet_timer_handler[DUET_TIMER1_INDEX].cb) {
             g_duet_timer_handler[DUET_TIMER1_INDEX].cb(g_duet_timer_handler[DUET_TIMER1_INDEX].arg);
         }
     }
     if (TIMER2->MIS) {
-        TIMER2->INTCLR = 1; //clear irq
+        TIMER2->INTCLR = 1; // clear irq
         if (g_duet_timer_handler[DUET_TIMER2_INDEX].cb) {
             g_duet_timer_handler[DUET_TIMER2_INDEX].cb(g_duet_timer_handler[DUET_TIMER2_INDEX].arg);
         }
@@ -74,13 +74,13 @@ int32_t duet_timer_init(duet_timer_dev_t *tim)
     g_duet_timer_handler[tim->port].cb = tim->config.cb;
     g_duet_timer_handler[tim->port].arg = tim->config.arg;
     if (DUET_TIMER1_INDEX == tim->port) {
-        TIMER1->CONTROL = TIMER_DISABLE; //disable timer first
-        TIMER1->LOAD = tim->config.period * (system_clock / 1000000); //1000000 for us
-        TIMER1->CONTROL |= (TIMER_PRESCALE | TIMER_SIZE | timer_mode); //timer control
-    } else { //if(DUET_TIMER2_INDEX == tim->port)
-        TIMER2->CONTROL = TIMER_DISABLE; //disable timer first
-        TIMER2->LOAD = tim->config.period * (system_clock / 1000000); //1000000 for us
-        TIMER2->CONTROL |= (TIMER_PRESCALE | TIMER_SIZE | timer_mode); //timer control
+        TIMER1->CONTROL = TIMER_DISABLE; // disable timer first
+        TIMER1->LOAD = tim->config.period * (system_clock / 1000000); // 1000000 for us
+        TIMER1->CONTROL |= (TIMER_PRESCALE | TIMER_SIZE | timer_mode); // timer control
+    } else { // if(DUET_TIMER2_INDEX == tim->port)
+        TIMER2->CONTROL = TIMER_DISABLE; // disable timer first
+        TIMER2->LOAD = tim->config.period * (system_clock / 1000000); // 1000000 for us
+        TIMER2->CONTROL |= (TIMER_PRESCALE | TIMER_SIZE | timer_mode); // timer control
     }
     return 0;
 }
@@ -97,13 +97,13 @@ int32_t duet_timer_start(duet_timer_dev_t *tim)
         return EIO;
     }
     if (DUET_TIMER1_INDEX == tim->port) {
-        TIMER1->CONTROL |= (TIMER_ENABLE | INTERRUPT_EN); //timer control
+        TIMER1->CONTROL |= (TIMER_ENABLE | INTERRUPT_EN); // timer control
     } else if (DUET_TIMER2_INDEX == tim->port) {
-        TIMER2->CONTROL |= (TIMER_ENABLE | INTERRUPT_EN); //timer control
+        TIMER2->CONTROL |= (TIMER_ENABLE | INTERRUPT_EN); // timer control
     } else {
         return EIO;
     }
-    //open TIMER interrupt
+    // open TIMER interrupt
     reg_value = REG_RD(DUTE_IRQ_EN_REG) & (~TIMER_IRQ_BIT);
     REG_WR(DUTE_IRQ_EN_REG, (reg_value | (TIMER_IRQ_BIT)));
     NVIC_EnableIRQ(TIMER_IRQn); // 0x20
@@ -124,11 +124,11 @@ int32_t duet_timer_get(duet_timer_dev_t *tim)
         return -1;
     }
     if (DUET_TIMER1_INDEX == tim->port) {
-        reg_value = TIMER1->VALUE; //timer current value
-        return (reg_value / (system_clock / 1000000)); //time for us
+        reg_value = TIMER1->VALUE; // timer current value
+        return (reg_value / (system_clock / 1000000)); // time for us
     } else if (DUET_TIMER2_INDEX == tim->port) {
-        reg_value = TIMER2->VALUE; //timer current value
-        return (reg_value / (system_clock / 1000000)); //time for us
+        reg_value = TIMER2->VALUE; // timer current value
+        return (reg_value / (system_clock / 1000000)); // time for us
     } else {
         return -1;
     }
@@ -151,9 +151,9 @@ int32_t duet_timer_reload(duet_timer_dev_t *tim)
         return -1;
     }
     if (DUET_TIMER1_INDEX == tim->port) {
-        TIMER1->LOAD = tim->config.period * (system_clock / 1000000); //1000000 for us
-    } else { //if(DUET_TIMER2_INDEX == tim->port)
-        TIMER2->LOAD = tim->config.period * (system_clock / 1000000); //1000000 for us
+        TIMER1->LOAD = tim->config.period * (system_clock / 1000000); // 1000000 for us
+    } else { // if(DUET_TIMER2_INDEX == tim->port)
+        TIMER2->LOAD = tim->config.period * (system_clock / 1000000); // 1000000 for us
     }
     return 0;
 }
@@ -172,15 +172,15 @@ void duet_timer_stop(duet_timer_dev_t *tim)
     }
 
     if (DUET_TIMER1_INDEX == tim->port) {
-        TIMER1->CONTROL = TIMER_DISABLE; //timer control
+        TIMER1->CONTROL = TIMER_DISABLE; // timer control
     } else if (DUET_TIMER2_INDEX == tim->port) {
-        TIMER2->CONTROL = TIMER_DISABLE; //timer control
+        TIMER2->CONTROL = TIMER_DISABLE; // timer control
     } else {
         return;
     }
 
-    //two timers use same IRQ
-    //NVIC_DisableIRQ(TIMER_IRQn);
+    // two timers use same IRQ
+    // NVIC_DisableIRQ(TIMER_IRQn);
     g_duet_timer_handler[tim->port].cb = NULL;
     g_duet_timer_handler[tim->port].arg = NULL;
 }
@@ -194,11 +194,11 @@ void duet_timer_stop(duet_timer_dev_t *tim)
  */
 int32_t duet_timer_finalize(duet_timer_dev_t *tim)
 {
-    //uint32_t reg_value;
+    // uint32_t reg_value;
     duet_timer_stop(tim);
     // Set Timer Clock Disable
-    //one clk enable for 2 timer
-    //reg_value = REG_RD(PERI_CLK_DIS_REG1) & (~TIMER_BUS_CLK_BIT);
-    //REG_WR(PERI_CLK_DIS_REG1, (reg_value | (TIMER_BUS_CLK_BIT)));
+    // one clk enable for 2 timer
+    // reg_value = REG_RD(PERI_CLK_DIS_REG1) & (~TIMER_BUS_CLK_BIT);
+    // REG_WR(PERI_CLK_DIS_REG1, (reg_value | (TIMER_BUS_CLK_BIT)));
     return 0;
 }

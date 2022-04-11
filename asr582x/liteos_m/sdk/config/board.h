@@ -31,4 +31,4 @@ typedef enum {
     PORT_UART_INVALID = 255
 } PORT_UART_TYPE;
 
-#endif //__BOARD__H__
+#endif // __BOARD__H__

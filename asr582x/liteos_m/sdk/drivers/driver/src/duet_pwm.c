@@ -26,41 +26,41 @@ void PWM_IRQHandler(void)
     //    duet_intrpt_exit();
 }
 
-//pwm pinmux init
+// pwm pinmux init
 void duet_pwm_pinmux_init(duet_pwm_dev_t *pwm)
 {
     switch (pwm->port) {
         case PWM_OUTPUT_CH0:
-            //pin mux control
-            //PWM0_PAD PAD14 1
+            // pin mux control
+            // PWM0_PAD PAD14 1
             duet_pinmux_config(PAD14, PF_PWM0);
             break;
         case PWM_OUTPUT_CH1:
-            //PWM1_PAD PAD10 1
+            // PWM1_PAD PAD10 1
             duet_pinmux_config(PAD10, PF_PWM1);
             break;
         case PWM_OUTPUT_CH2:
-            //PWM2_PAD PAD15 1
+            // PWM2_PAD PAD15 1
             duet_pinmux_config(PAD15, PF_PWM2);
             break;
         case PWM_OUTPUT_CH3:
-            //PWM3_PAD PAD11 1
+            // PWM3_PAD PAD11 1
             duet_pinmux_config(PAD11, PF_PWM3);
             break;
         case PWM_OUTPUT_CH4:
-            //PWM4_PAD PAD6  4
+            // PWM4_PAD PAD6  4
             duet_pinmux_config(PAD6, PF_PWM4);
             break;
         case PWM_OUTPUT_CH5:
-            //PWM5_PAD PAD0  4
+            // PWM5_PAD PAD0  4
             duet_pinmux_config(PAD0, PF_PWM5);
             break;
         case PWM_OUTPUT_CH6:
-            //PWM6_PAD PAD7  4
+            // PWM6_PAD PAD7  4
             duet_pinmux_config(PAD7, PF_PWM6);
             break;
         case PWM_OUTPUT_CH7:
-            //PWM7_PAD PAD1  4
+            // PWM7_PAD PAD1  4
             duet_pinmux_config(PAD1, PF_PWM7);
             break;
         default:
@@ -68,7 +68,7 @@ void duet_pwm_pinmux_init(duet_pwm_dev_t *pwm)
     }
 }
 
-//pwm freq and duty cycle config
+// pwm freq and duty cycle config
 void duet_pwm_cfg(duet_pwm_dev_t *pwm)
 {
     uint32_t tmp_value;
@@ -183,17 +183,17 @@ int32_t duet_pwm_init(duet_pwm_dev_t *pwm)
     if (pwm->port >= DUET_PWM_CH_NUM) {
         return EIO;
     }
-    //pinmux
+    // pinmux
     duet_pwm_pinmux_init(pwm);
 
-    //pwm clock enable
+    // pwm clock enable
     reg_value = REG_RD(PERI_CLK_EN_REG1) & (~PWM_BUS_CLK_BIT);
     REG_WR(PERI_CLK_EN_REG1, (reg_value | (PWM_BUS_CLK_BIT)));
 
     PWM->PWMCFG &= ~(1 << pwm->port);
-    //PWM->PWMCFG |= (CNT_CLK_DIV_EN | CLK_DIV_CFG);
+    // PWM->PWMCFG |= (CNT_CLK_DIV_EN | CLK_DIV_CFG);
     duet_pwm_cfg(pwm);
-    PWM->PWMINVERTTRIG = 0; //invert control
+    PWM->PWMINVERTTRIG = 0; // invert control
     return 0;
 }
 
@@ -251,10 +251,10 @@ int32_t duet_pwm_para_chg(duet_pwm_dev_t *pwm, duet_pwm_config_t para)
     if (pwm->port >= DUET_PWM_CH_NUM) {
         return EIO;
     }
-    //duet_pwm_stop(pwm);
+    // duet_pwm_stop(pwm);
     pwm->config = para;
     duet_pwm_cfg(pwm);
-    //duet_pwm_start(pwm);
+    // duet_pwm_start(pwm);
     return 0;
 }
 
@@ -267,17 +267,17 @@ int32_t duet_pwm_para_chg(duet_pwm_dev_t *pwm, duet_pwm_config_t para)
  */
 int32_t duet_pwm_finalize(duet_pwm_dev_t *pwm)
 {
-    //pwm clock disable
-    //uint32_t reg_value;
+    // pwm clock disable
+    // uint32_t reg_value;
     if (NULL == pwm) {
         return EIO;
     }
     if (pwm->port >= DUET_PWM_CH_NUM) {
         return EIO;
     }
-    //one clk enable for 8 pwm channel
-    //reg_value = REG_RD(PERI_CLK_CFG);
-    //REG_WR(PERI_CLK_CFG, (reg_value&(~PWM_CLK_EN)));
+    // one clk enable for 8 pwm channel
+    // reg_value = REG_RD(PERI_CLK_CFG);
+    // REG_WR(PERI_CLK_CFG, (reg_value&(~PWM_CLK_EN)));
     return duet_pwm_stop(pwm);
 }
 

@@ -97,4 +97,4 @@ int32_t duet_adc_finalize(duet_adc_dev_t *adc_config);
 
 int32_t duet_tempr_get(duet_adc_dev_t *adc_config);
 #endif
-#endif //_duet_ADC_H_
+#endif // _duet_ADC_H_

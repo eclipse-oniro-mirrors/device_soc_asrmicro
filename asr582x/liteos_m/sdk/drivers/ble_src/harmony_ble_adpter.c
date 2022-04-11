@@ -113,7 +113,7 @@ int app_core_evt_ind_cb_h(app_core_evt_ind_t evt, void *p_param)
     return 0;
 }
 
-/* Initialize the Bluetooth protocol stack.*/
+/* Initialize the Bluetooth protocol stack. */
 int InitBtStack(void)
 {
     return BT_STATUS_SUCCESS;

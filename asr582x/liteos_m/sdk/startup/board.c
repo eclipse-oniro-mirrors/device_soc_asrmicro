@@ -55,7 +55,7 @@ extern void UART2_IRQHandler(void);
 extern void GPIO_IRQHandler(void);
 void NVIC_init(void)
 {
-    //set irq priority, default set configLIBRARY_NORMAL_INTERRUPT_PRIORITY
+    // set irq priority, default set configLIBRARY_NORMAL_INTERRUPT_PRIORITY
     /*
         NVIC_SetPriority(UART0_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
         NVIC_SetPriority(UART1_IRQn,configLIBRARY_NORMAL_INTERRUPT_PRIORITY);
@@ -96,7 +96,7 @@ void NVIC_init(void)
 
 void NVIC_deinit(void)
 {
-    //disable NVIC irq before kernel reloc IRQ interface
+    // disable NVIC irq before kernel reloc IRQ interface
     NVIC_DisableIRQ(CEVA_RW_IP_IRQn);
     NVIC_DisableIRQ(D_APLL_UNLOCK_IRQn);
     NVIC_DisableIRQ(D_SX_UNLOCK_IRQn);
@@ -114,16 +114,16 @@ void os_post_init_hook(void)
 {
     lega_rtos_declare_critical();
     lega_rtos_enter_critical();
-    *(volatile UINT32 *)OS_NVIC_CCR &= ~(UNALIGNFAULT); //allow unalign access
+    *(volatile UINT32 *)OS_NVIC_CCR &= ~(UNALIGNFAULT); // allow unalign access
     lega_rtos_exit_critical();
 }
 
-//static duet_uart_dev_t uart_config_struct  = {0};
+// static duet_uart_dev_t uart_config_struct  = {0};
 uart_dev_t uart_0;
 void board_uart_init(void)
 {
 #if (LOSCFG_USE_SHELL == 1)
-    uart_0.port = PORT_UART_STD;  /*logic port*/
+    uart_0.port = PORT_UART_STD;  /* logic port */
     uart_0.config.baud_rate = UART_BAUDRATE_115200;
     uart_0.config.data_width = DATA_8BIT;
     uart_0.config.flow_control = FLOW_CTRL_DISABLED;
@@ -138,10 +138,10 @@ void board_uart_init(void)
     duet_uart_struct_init(&uart_config_struct);
     uart_config_struct.port = UART1_INDEX;
     uart_config_struct.priv = at_handle_uartirq;
-    //set user define config
+    // set user define config
     uart_config_struct.config.baud_rate = UART_BAUDRATE_115200;
     uart_config_struct.config.flow_control = FLOW_CTRL_DISABLED;
-    //make config take effect
+    // make config take effect
     duet_uart_init(&uart_config_struct);
 #endif
     printf_uart_register(UART1_INDEX);
@@ -166,7 +166,7 @@ void lega_devInit()
     lega_drv_rco_cal();
 #endif
 
-    //init uart
+    // init uart
     board_uart_init();
 
 #if (LOSCFG_USE_SHELL == 1)
@@ -186,13 +186,13 @@ void lega_devInit()
     duet_recovery_phy_fsm_config();
 #endif
 #ifdef CFG_MIMO_UF
-    //config to support smartconfig in MIMO scenario
-    //lega_wlan_smartconfig_mimo_enable();
+    // config to support smartconfig in MIMO scenario
+    // lega_wlan_smartconfig_mimo_enable();
 #endif
 
 #ifdef CFG_TMMT_DETECT
-    //config to enable temperature compensation
-    //lega_wlan_enable_tmmt_compensation(60);
+    // config to enable temperature compensation
+    // lega_wlan_enable_tmmt_compensation(60);
 #endif
 #ifdef SECURITY_ENGINE_INIT
     lega_security_engine_init();
@@ -222,9 +222,9 @@ void board_before_init(void)
 
 #ifdef WIFI_BLE_INIT_ENABLE
     lega_reset_rw_rf();
-    //turn off all wifi/ble clock
+    // turn off all wifi/ble clock
     lega_soc_wifi_ble_clk_disable();
-    //enable all soc interrupt
+    // enable all soc interrupt
     lega_enable_all_soc_interrupt();
 #endif
 }
@@ -236,7 +236,7 @@ int board_after_init(void)
 {
     lega_devInit();
 #ifdef MS_RELEASE_DOMAIN
-    //LOG("log_disable");
+    // LOG("log_disable");
     lega_log_disable();
 #endif
 #ifdef WIFI_BLE_INIT_ENABLE

@@ -67,10 +67,10 @@
 #define PRI      (SONATA_PERM(RI, ENABLE))
 
 /** * @brief       Minimum advertising interval.The range is from 0x0020 to 0x4000. */
-#define BLE_MCRC_MIN_INTERVAL              192//(0x01E0)
-/*0.3s*//** * @brief       Maximum advertising interval.The range is from 0x0020 to 0x4000 and should be greater than the minimum advertising interval. */
-#define BLE_MCRC_MAX_INTERVAL              192//(0x01E0)
-/*0.3s*//** * @brief       Advertising channel map */
+#define BLE_MCRC_MIN_INTERVAL              192 // (0x01E0)
+/* 0.3s *//** * @brief       Maximum advertising interval.The range is from 0x0020 to 0x4000 and should be greater than the minimum advertising interval. */
+#define BLE_MCRC_MAX_INTERVAL              192 // (0x01E0)
+/* 0.3s *//** * @brief       Advertising channel map */
 #define MS_BLE_CHANNEL_NUM               (7)
 /** * @brief       Advertising filter policy */
 #define MS_BLE_FILTER_POLICY             (0)
@@ -123,14 +123,14 @@ typedef struct BLE_ADV_PARAM_T {
 } ble_adv_param_t;
 
 typedef struct BLE_ADV_DATA_T {
-    uint8_t ble_advdata[32];     /*!< ??????*/
-    uint8_t ble_advdataLen;     /*!< ??????*/
+    uint8_t ble_advdata[32];     /* !< ?????? */
+    uint8_t ble_advdataLen;     /* !< ?????? */
 
 } ble_adv_data_t;
 
 typedef struct BLE_SCAN_DATA_T {
-    uint8_t ble_respdata[32];     /*!< ??????????*/
-    uint8_t ble_respdataLen;     /*!< ??????????*/
+    uint8_t ble_respdata[32];     /* !< ?????????? */
+    uint8_t ble_respdataLen;     /* !< ?????????? */
 
 } ble_scan_data_t;
 
@@ -154,10 +154,10 @@ typedef struct BLE_ADV_ENABLE_T {
 typedef enum MS_BLE_STACK_EVENT_T {
     MS_BLE_STACK_EVENT_STACK_READY = 0,
     MS_BLE_STACK_EVENT_STACK_FAIL,
-    MS_BLE_STACK_EVENT_ADV_ON,                  /*!< ???????????г??*/
-    MS_BLE_STACK_EVENT_ADV_OFF,                /*!< ???????????г??*/
+    MS_BLE_STACK_EVENT_ADV_ON,                  /* !< ???????????г?? */
+    MS_BLE_STACK_EVENT_ADV_OFF,                /* !< ???????????г?? */
     MS_BLE_STACK_EVENT_DISCONNECT, /* !< ?????? */
-    MS_BLE_STACK_EVENT_CONNECTED,  /*!< ??????*/
+    MS_BLE_STACK_EVENT_CONNECTED,  /* !< ?????? */
 } ms_ble_stack_event_t;
 
 typedef void (*ble_gatt_service_att_wirte_cb)(uint8_t *data, uint16_t size);

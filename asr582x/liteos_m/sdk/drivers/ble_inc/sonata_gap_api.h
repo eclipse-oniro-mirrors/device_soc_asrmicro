@@ -31,9 +31,9 @@
  ****************************************************************************************
  */
 #include "sonata_config.h"
-///@cond
+/// @cond
 #if defined(STACK_BLE_HOST_PRESENT) || defined(BLE_HOST_PRESENT)
-///@endcond
+/// @endcond
 #include "sonata_utils_api.h"
 #include "sonata_gap.h"
 
@@ -513,121 +513,121 @@ typedef enum {
 
 /// profiles id define
 typedef enum {
-    SONATA_PRF_ID_DISS         = 20,    /**< Device Information Service Server Task  */
-    SONATA_PRF_ID_DISC         = 21,    /**< Device Information Service Client Task  */
+    SONATA_PRF_ID_DISS         = 20,    /* *< Device Information Service Server Task  */
+    SONATA_PRF_ID_DISC         = 21,    /* *< Device Information Service Client Task  */
 
-    SONATA_PRF_ID_PROXM        = 22,    /**< Proximity Monitor Task  */
-    SONATA_PRF_ID_PROXR        = 23,    /**< Proximity Reporter Task  */
+    SONATA_PRF_ID_PROXM        = 22,    /* *< Proximity Monitor Task  */
+    SONATA_PRF_ID_PROXR        = 23,    /* *< Proximity Reporter Task  */
 
-    SONATA_PRF_ID_FINDL        = 24,    /**< Find Me Locator Task  */
-    SONATA_PRF_ID_FINDT        = 25,    /**< Find Me Target Task  */
+    SONATA_PRF_ID_FINDL        = 24,    /* *< Find Me Locator Task  */
+    SONATA_PRF_ID_FINDT        = 25,    /* *< Find Me Target Task  */
 
-    SONATA_PRF_ID_HTPC         = 26,    /**< Health Thermometer Collector Task  */
-    SONATA_PRF_ID_HTPT         = 27,    /**< Health Thermometer Sensor Task  */
+    SONATA_PRF_ID_HTPC         = 26,    /* *< Health Thermometer Collector Task  */
+    SONATA_PRF_ID_HTPT         = 27,    /* *< Health Thermometer Sensor Task  */
 
-    SONATA_PRF_ID_BLPS         = 28,    /**< Blood Pressure Sensor Task  */
-    SONATA_PRF_ID_BLPC         = 29,    /**< Blood Pressure Collector Task  */
+    SONATA_PRF_ID_BLPS         = 28,    /* *< Blood Pressure Sensor Task  */
+    SONATA_PRF_ID_BLPC         = 29,    /* *< Blood Pressure Collector Task  */
 
-    SONATA_PRF_ID_HRPS         = 30,    /**< Heart Rate Sensor Task  */
-    SONATA_PRF_ID_HRPC         = 31,    /**< Heart Rate Collector Task  */
+    SONATA_PRF_ID_HRPS         = 30,    /* *< Heart Rate Sensor Task  */
+    SONATA_PRF_ID_HRPC         = 31,    /* *< Heart Rate Collector Task  */
 
-    SONATA_PRF_ID_TIPS         = 32,    /**< Time Server Task  */
-    SONATA_PRF_ID_TIPC         = 33,    /**< Time Client Task  */
+    SONATA_PRF_ID_TIPS         = 32,    /* *< Time Server Task  */
+    SONATA_PRF_ID_TIPC         = 33,    /* *< Time Client Task  */
 
-    SONATA_PRF_ID_SCPPS        = 34,    /**< Scan Parameter Profile Server Task  */
-    SONATA_PRF_ID_SCPPC        = 35,    /**< Scan Parameter Profile Client Task  */
+    SONATA_PRF_ID_SCPPS        = 34,    /* *< Scan Parameter Profile Server Task  */
+    SONATA_PRF_ID_SCPPC        = 35,    /* *< Scan Parameter Profile Client Task  */
 
-    SONATA_PRF_ID_BASS         = 36,    /**< Battery Service Server Task  */
-    SONATA_PRF_ID_BASC         = 37,    /**< Battery Service Client Task  */
+    SONATA_PRF_ID_BASS         = 36,    /* *< Battery Service Server Task  */
+    SONATA_PRF_ID_BASC         = 37,    /* *< Battery Service Client Task  */
 
-    SONATA_PRF_ID_HOGPD        = 38,    /**< HID Device Task  */
-    SONATA_PRF_ID_HOGPBH       = 39,    /**< HID Boot Host Task  */
-    SONATA_PRF_ID_HOGPRH       = 40,    /**< HID Report Host Task  */
+    SONATA_PRF_ID_HOGPD        = 38,    /* *< HID Device Task  */
+    SONATA_PRF_ID_HOGPBH       = 39,    /* *< HID Boot Host Task  */
+    SONATA_PRF_ID_HOGPRH       = 40,    /* *< HID Report Host Task  */
 
-    SONATA_PRF_ID_GLPS         = 41,    /**< Glucose Profile Sensor Task  */
-    SONATA_PRF_ID_GLPC         = 42,    /**< Glucose Profile Collector Task  */
+    SONATA_PRF_ID_GLPS         = 41,    /* *< Glucose Profile Sensor Task  */
+    SONATA_PRF_ID_GLPC         = 42,    /* *< Glucose Profile Collector Task  */
 
-    SONATA_PRF_ID_RSCPS        = 43,    /**< Running Speed and Cadence Profile Server Task  */
-    SONATA_PRF_ID_RSCPC        = 44,    /**< Running Speed and Cadence Profile Collector Task  */
+    SONATA_PRF_ID_RSCPS        = 43,    /* *< Running Speed and Cadence Profile Server Task  */
+    SONATA_PRF_ID_RSCPC        = 44,    /* *< Running Speed and Cadence Profile Collector Task  */
 
-    SONATA_PRF_ID_CSCPS        = 45,    /**< Cycling Speed and Cadence Profile Server Task  */
-    SONATA_PRF_ID_CSCPC        = 46,    /**< Cycling Speed and Cadence Profile Client Task  */
+    SONATA_PRF_ID_CSCPS        = 45,    /* *< Cycling Speed and Cadence Profile Server Task  */
+    SONATA_PRF_ID_CSCPC        = 46,    /* *< Cycling Speed and Cadence Profile Client Task  */
 
-    SONATA_PRF_ID_ANPS         = 47,    /**< Alert Notification Profile Server Task  */
-    SONATA_PRF_ID_ANPC         = 48,    /**< Alert Notification Profile Client Task  */
+    SONATA_PRF_ID_ANPS         = 47,    /* *< Alert Notification Profile Server Task  */
+    SONATA_PRF_ID_ANPC         = 48,    /* *< Alert Notification Profile Client Task  */
 
-    SONATA_PRF_ID_PASPS        = 49,    /**< Phone Alert Status Profile Server Task  */
-    SONATA_PRF_ID_PASPC        = 50,    /**< Phone Alert Status Profile Client Task  */
+    SONATA_PRF_ID_PASPS        = 49,    /* *< Phone Alert Status Profile Server Task  */
+    SONATA_PRF_ID_PASPC        = 50,    /* *< Phone Alert Status Profile Client Task  */
 
-    SONATA_PRF_ID_CPPS         = 51,    /**< Cycling Power Profile Server Task  */
-    SONATA_PRF_ID_CPPC         = 52,    /**< Cycling Power Profile Client Task  */
+    SONATA_PRF_ID_CPPS         = 51,    /* *< Cycling Power Profile Server Task  */
+    SONATA_PRF_ID_CPPC         = 52,    /* *< Cycling Power Profile Client Task  */
 
-    SONATA_PRF_ID_LANS         = 53,    /**< Location and Navigation Profile Server Task  */
-    SONATA_PRF_ID_LANC         = 54,    /**< Location and Navigation Profile Client Task  */
+    SONATA_PRF_ID_LANS         = 53,    /* *< Location and Navigation Profile Server Task  */
+    SONATA_PRF_ID_LANC         = 54,    /* *< Location and Navigation Profile Client Task  */
 
-    SONATA_PRF_ID_IPSS         = 55,    /**< Internet Protocol Support Profile Server Task  */
-    SONATA_PRF_ID_IPSC         = 56,    /**< Internet Protocol Support Profile Client Task  */
+    SONATA_PRF_ID_IPSS         = 55,    /* *< Internet Protocol Support Profile Server Task  */
+    SONATA_PRF_ID_IPSC         = 56,    /* *< Internet Protocol Support Profile Client Task  */
 
-    SONATA_PRF_ID_ENVS         = 57,    /**< Environmental Sensing Profile Server Task  */
-    SONATA_PRF_ID_ENVC         = 58,    /**< Environmental Sensing Profile Client Task  */
+    SONATA_PRF_ID_ENVS         = 57,    /* *< Environmental Sensing Profile Server Task  */
+    SONATA_PRF_ID_ENVC         = 58,    /* *< Environmental Sensing Profile Client Task  */
 
-    SONATA_PRF_ID_WSCS         = 59,    /**< Weight Scale Profile Server Task  */
-    SONATA_PRF_ID_WSCC         = 60,    /**< Weight Scale Profile Client Task  */
+    SONATA_PRF_ID_WSCS         = 59,    /* *< Weight Scale Profile Server Task  */
+    SONATA_PRF_ID_WSCC         = 60,    /* *< Weight Scale Profile Client Task  */
 
-    SONATA_PRF_ID_UDSS         = 61,    /**< User Data Service Server Task  */
-    SONATA_PRF_ID_UDSC         = 62,    /**< User Data Service Client Task  */
+    SONATA_PRF_ID_UDSS         = 61,    /* *< User Data Service Server Task  */
+    SONATA_PRF_ID_UDSC         = 62,    /* *< User Data Service Client Task  */
 
-    SONATA_PRF_ID_BCSS         = 63,    /**< Body Composition Server Task  */
-    SONATA_PRF_ID_BCSC         = 64,    /**< Body Composition Client Task  */
+    SONATA_PRF_ID_BCSS         = 63,    /* *< Body Composition Server Task  */
+    SONATA_PRF_ID_BCSC         = 64,    /* *< Body Composition Client Task  */
 
-    SONATA_PRF_ID_WPTS         = 65,    /**< Wireless Power Transfer Profile Server Task  */
-    SONATA_PRF_ID_WPTC         = 66,    /**< Wireless Power Transfer Profile Client Task  */
+    SONATA_PRF_ID_WPTS         = 65,    /* *< Wireless Power Transfer Profile Server Task  */
+    SONATA_PRF_ID_WPTC         = 66,    /* *< Wireless Power Transfer Profile Client Task  */
 
-    SONATA_PRF_ID_PLXS         = 67,    /**< Pulse Oximeter Profile Server Task  */
-    SONATA_PRF_ID_PLXC         = 68,    /**< Pulse Oximeter Profile Client Task  */
+    SONATA_PRF_ID_PLXS         = 67,    /* *< Pulse Oximeter Profile Server Task  */
+    SONATA_PRF_ID_PLXC         = 68,    /* *< Pulse Oximeter Profile Client Task  */
 
-    SONATA_PRF_ID_CGMS         = 69,    /**< Continuous Glucose Monitoring Server Task  */
-    SONATA_PRF_ID_CGMC         = 70,    /**< Continuous Glucose Monitoring Client Task  */
+    SONATA_PRF_ID_CGMS         = 69,    /* *< Continuous Glucose Monitoring Server Task  */
+    SONATA_PRF_ID_CGMC         = 70,    /* *< Continuous Glucose Monitoring Client Task  */
 
     SONATA_PRF_ID_OTAS         = 80,
 
-    SONATA_PRF_ID_MESH         = 200,   /**<Mesh Task  */
+    SONATA_PRF_ID_MESH         = 200,   /* *<Mesh Task  */
 
-    /* 240 -> 241 reserved for Audio Mode 0 */
-    SONATA_PRF_ID_AM0          = 240,  /**< BLE Audio Mode 0 Task  */
-    SONATA_PRF_ID_AM0_HAS      = 241,  /**< BLE Audio Mode 0 Hearing Aid Service Task  */
+    /*  240 -> 241 reserved for Audio Mode 0 */
+    SONATA_PRF_ID_AM0          = 240,  /* *< BLE Audio Mode 0 Task  */
+    SONATA_PRF_ID_AM0_HAS      = 241,  /* *< BLE Audio Mode 0 Hearing Aid Service Task  */
 
-    SONATA_PRF_ID_THPP         = 242,  /**< Throughput profile tester used for debugging */
+    SONATA_PRF_ID_THPP         = 242,  /* *< Throughput profile tester used for debugging */
 } sonata_ble_profile_id;
 
 /// peer information type
 typedef enum {
-    /// Retrieve name of peer device.   //Will show in @see sonata_gap_peer_att_info_ind_handler
+    /// Retrieve name of peer device.   // Will show in @see sonata_gap_peer_att_info_ind_handler
     SONATA_GET_PEER_NAME                            = 0x02,
-    /// Retrieve peer device version info. //Will show in  @see sonata_gap_peer_version_ind_handler
+    /// Retrieve peer device version info. // Will show in  @see sonata_gap_peer_version_ind_handler
     SONATA_GET_PEER_VERSION                         = 0x03,
-    /// Retrieve peer device features. //Will show in  @see sonata_gap_peer_features_ind_handler
+    /// Retrieve peer device features. // Will show in  @see sonata_gap_peer_features_ind_handler
     SONATA_GET_PEER_FEATURES                        = 0x04,
-    /// Get Peer device appearance //Will show in   @see sonata_gap_peer_att_info_ind_handler
+    /// Get Peer device appearance // Will show in   @see sonata_gap_peer_att_info_ind_handler
     SONATA_GET_PEER_APPEARANCE                      = 0x05,
-    /// Get Peer device Slaved Preferred Parameters //Will show in  @see sonata_gap_peer_att_info_ind_handler
+    /// Get Peer device Slaved Preferred Parameters // Will show in  @see sonata_gap_peer_att_info_ind_handler
     SONATA_GET_PEER_SLV_PREF_PARAMS                 = 0x06,
-    /// Retrieve connection RSSI. //Will show in  @see sonata_gap_con_rssi_ind_handler
+    /// Retrieve connection RSSI. // Will show in  @see sonata_gap_con_rssi_ind_handler
     SONATA_GET_PEER_CON_RSSI                        = 0x07,
-    /// Retrieve Connection Channel MAP. //Will show in  @see sonata_gap_con_channel_map_ind_handler
+    /// Retrieve Connection Channel MAP. // Will show in  @see sonata_gap_con_channel_map_ind_handler
     SONATA_GET_PEER_CON_CHANNEL_MAP                 = 0x08,
-    //Will show in  @see sonata_gap_le_ping_to_val_ind_handler and @see sonata_gap_le_ping_to_ind_handler
+    // Will show in  @see sonata_gap_le_ping_to_val_ind_handler and @see sonata_gap_le_ping_to_ind_handler
     SONATA_GET_LE_PING_TO                           = 0x12,
-    //Will show in  @see sonata_gap_peer_att_info_ind_handler
+    // Will show in  @see sonata_gap_peer_att_info_ind_handler
     SONATA_GET_PEER_ADDR_RESOL_SUPP                 = 0x15,
-    //Will show in @see sonata_gap_le_phy_ind_handler
+    // Will show in @see sonata_gap_le_phy_ind_handler
     SONATA_GET_PHY                                  = 0x18,
-    //Will show in @see sonata_gap_chan_sel_algo_ind_handler
+    // Will show in @see sonata_gap_chan_sel_algo_ind_handler
     SONATA_GET_CHAN_SEL_ALGO                        = 0x19,
 } sonata_peer_info_type;
 
 /// Bond event type.
-/*@TRACE*/
+/* @TRACE */
 typedef enum {
     /// Bond Pairing request
     SONATA_GAP_PAIRING_REQ,
@@ -811,16 +811,16 @@ typedef struct sonata_gap_connection_req_ind {
 /// device information data
 typedef union sonata_gap_dev_info_val {
     /// Device name
-    //@trc_union parent.req == SONATA_GAP_DEV_NAME
+    // @trc_union parent.req == SONATA_GAP_DEV_NAME
     struct sonata_gap_dev_name name;
     /// Appearance Icon
-    //@trc_union parent.req == SONATA_GAP_DEV_APPEARANCE
+    // @trc_union parent.req == SONATA_GAP_DEV_APPEARANCE
     uint16_t appearance;
     /// Slave preferred parameters
-    //@trc_union parent.req == SONATA_GAP_DEV_SLV_PREF_PARAMS
+    // @trc_union parent.req == SONATA_GAP_DEV_SLV_PREF_PARAMS
     struct sonata_gap_slv_pref slv_pref_params;
     /// Central address resolution
-    //@trc_union parent.req == SONATA_GAP_DEV_CTL_ADDR_RESOL
+    // @trc_union parent.req == SONATA_GAP_DEV_CTL_ADDR_RESOL
     uint8_t ctl_addr_resol;
 } sonata_gap_dev_info_val_t;
 
@@ -840,7 +840,7 @@ typedef struct sonata_gap_peer_att_info_ind {
 } sonata_gap_peer_att_info_ind_t;
 
 /// Indication of peer version info
-/*@TRACE*/
+/* @TRACE */
 typedef struct sonata_gap_peer_version_ind {
     /// Manufacturer name
     uint16_t compid;
@@ -851,35 +851,35 @@ typedef struct sonata_gap_peer_version_ind {
 } sonata_gap_peer_version_ind_t;
 /// Indication of peer features info
 
-/*@TRACE*/
+/* @TRACE */
 typedef struct sonata_gap_peer_features_ind {
     /// 8-byte array for LE features
     uint8_t features[SONATA_GAP_LE_FEATS_LEN];
 } sonata_gap_peer_features_ind_t;
 
 /// Indication of ongoing connection RSSI
-/*@TRACE*/
+/* @TRACE */
 typedef struct sonata_gap_con_rssi_ind {
     /// RSSI value
     int8_t rssi;
 } sonata_gap_con_rssi_ind_t;
 
 /// Indication of ongoing connection Channel Map
-/*@TRACE*/
+/* @TRACE */
 typedef struct sonata_gap_con_channel_map_ind {
     /// channel map value
     sonata_le_chnl_map_t ch_map;
 } sonata_gap_con_channel_map_ind_t;
 
 /// Indication of LE Ping
-/*@TRACE*/
+/* @TRACE */
 typedef struct sonata_gap_le_ping_to_val_ind {
-    ///Authenticated payload timeout
+    /// Authenticated payload timeout
     uint16_t timeout;
 } sonata_gap_le_ping_to_val_ind_t;
 
 /// Active link PHY configuration. Triggered when configuration is read or during an update.
-/*@TRACE*/
+/* @TRACE */
 typedef struct sonata_gap_le_phy_ind {
     /// LE PHY for data transmission (@see enum gap_phy_val)
     uint8_t tx_phy;
@@ -888,7 +888,7 @@ typedef struct sonata_gap_le_phy_ind {
 } sonata_gap_le_phy_ind_t;
 
 /// Parameters of the @ref SONATA_GAP_CHAN_SEL_ALGO_IND
-/*@TRACE*/
+/* @TRACE */
 typedef struct sonata_gap_chan_sel_algo_ind {
     /// Used channel selection algorithm
     uint8_t chan_sel_algo;
@@ -953,9 +953,9 @@ typedef struct  {
     uint16_t att_cfg;
 
     //    /// -------------- LE Data Length Extension -----------------------
-    //    ///Suggested value for the Controller's maximum transmitted number of payload octets to be used
+    //    /// Suggested value for the Controller's maximum transmitted number of payload octets to be used
     //    uint16_t sugg_max_tx_octets;
-    //    ///Suggested value for the Controller's maximum packet transmission time to be used
+    //    /// Suggested value for the Controller's maximum packet transmission time to be used
     //    uint16_t sugg_max_tx_time;
 
     /// --------------- L2CAP Configuration ---------------------------
@@ -982,10 +982,10 @@ typedef struct  {
 
     ///------------------ Miscellaneou 3 -----------------------------
     bool hl_trans_dbg;
-    ///<host layer transport debug
+    /// <host layer transport debug
     uint8_t pa_en;
-    ///<pa enable  1:pa enable 0:pa disable  default:0
-    ///<pinmux: rxcore->pad12 txcore->pad17
+    /// <pa enable  1:pa enable 0:pa disable  default:0
+    /// <pinmux: rxcore->pad12 txcore->pad17
 } sonata_gap_set_dev_config_cmd;
 
 /// create directed advertising
@@ -1262,23 +1262,23 @@ typedef struct sonata_gap_oob {
 /// Bond procedure requested information data
 typedef union sonata_gap_bond_req_data {
     /// Authentication level (@see gap_auth) (if request = SONATA_GAP_PAIRING_REQ)
-    //@trc_union parent.request == SONATA_GAP_PAIRING_REQ
+    // @trc_union parent.request == SONATA_GAP_PAIRING_REQ
     uint8_t auth_req;
     /// LTK Key Size (if request = SONATA_GAP_LTK_EXCH)
-    //@trc_union parent.request == SONATA_GAP_LTK_EXCH
+    // @trc_union parent.request == SONATA_GAP_LTK_EXCH
     uint8_t key_size;
     /// Device IO used to get TK: (if request = SONATA_GAP_TK_EXCH)
     ///  - GAP_TK_OOB:       TK get from out of band method
     ///  - GAP_TK_DISPLAY:   TK generated and shall be displayed by local device
     ///  - GAP_TK_KEY_ENTRY: TK shall be entered by user using device keyboard
-    //@trc_union parent.request == SONATA_GAP_TK_EXCH
+    // @trc_union parent.request == SONATA_GAP_TK_EXCH
     uint8_t tk_type;
 
     /// Addition OOB Data for the OOB Conf and Rand values
-    //@trc_union parent.request == SONATA_GAP_OOB_EXCH
+    // @trc_union parent.request == SONATA_GAP_OOB_EXCH
     struct sonata_gap_oob  oob_data;
     /// Numeric Comparison Data
-    //@trc_union parent.request == SONATA_GAP_NC_EXCH
+    // @trc_union parent.request == SONATA_GAP_NC_EXCH
     struct sonata_gap_nc   nc_data;
 } sonata_gap_bond_req_data_t;
 
@@ -1324,19 +1324,19 @@ typedef struct sonata_gap_bond_auth {
 typedef union sonata_gap_bond_data {
     /// Authentication information (@see gap_auth)
     /// (if info = SONATA_GAP_PAIRING_SUCCEED)
-    //@trc_union parent.info == SONATA_GAP_PAIRING_SUCCEED
+    // @trc_union parent.info == SONATA_GAP_PAIRING_SUCCEED
     struct sonata_gap_bond_auth auth;
     /// Pairing failed reason  (if info = SONATA_GAP_PAIRING_FAILED)
-    //@trc_union parent.info == SONATA_GAP_PAIRING_FAILED
+    // @trc_union parent.info == SONATA_GAP_PAIRING_FAILED
     uint8_t reason;
     /// Long Term Key information (if info = SONATA_GAP_LTK_EXCH)
-    //@trc_union parent.info == SONATA_GAP_LTK_EXCH
+    // @trc_union parent.info == SONATA_GAP_LTK_EXCH
     struct sonata_gap_ltk ltk;
     /// Identity Resolving Key information (if info = SONATA_GAP_IRK_EXCH)
-    //@trc_union parent.info == SONATA_GAP_IRK_EXCH
+    // @trc_union parent.info == SONATA_GAP_IRK_EXCH
     struct sonata_gap_irk irk;
     /// Connection Signature Resolving Key information (if info = SONATA_GAP_CSRK_EXCH)
-    //@trc_union parent.info == SONATA_GAP_CSRK_EXCH
+    // @trc_union parent.info == SONATA_GAP_CSRK_EXCH
     struct sonata_gap_sec_key csrk;
 } sonata_gap_bond_data_t;
 
@@ -1362,21 +1362,21 @@ typedef struct sonata_gap_list_size_ind {
 
 /// Indicates suggested default data length
 typedef struct sonata_gap_sugg_dflt_data_len_ind {
-    ///Host's suggested value for the Controller's maximum transmitted number of payload octets
+    /// Host's suggested value for the Controller's maximum transmitted number of payload octets
     uint16_t suggted_max_tx_octets;
-    ///Host's suggested value for the Controller's maximum packet transmission time
+    /// Host's suggested value for the Controller's maximum packet transmission time
     uint16_t suggted_max_tx_time;
 } sonata_gap_sugg_dflt_data_len_ind_t;
 
 /// Indicates maximum data length
 typedef struct sonata_gap_max_data_len_ind {
-    ///Maximum number of payload octets that the local Controller supports for transmission
+    /// Maximum number of payload octets that the local Controller supports for transmission
     uint16_t suppted_max_tx_octets;
-    ///Maximum time, in microseconds, that the local Controller supports for transmission
+    /// Maximum time, in microseconds, that the local Controller supports for transmission
     uint16_t suppted_max_tx_time;
-    ///Maximum number of payload octets that the local Controller supports for reception
+    /// Maximum number of payload octets that the local Controller supports for reception
     uint16_t suppted_max_rx_octets;
-    ///Maximum time, in microseconds, that the local Controller supports for reception
+    /// Maximum time, in microseconds, that the local Controller supports for reception
     uint16_t suppted_max_rx_time;
 } sonata_gap_max_data_len_ind_t;
 
@@ -1420,9 +1420,9 @@ typedef struct sonata_gap_pairing {
     uint8_t auth;
     /// Encryption key size (7 to 16)
     uint8_t key_size;
-    ///Initiator key distribution (@see gap_kdist)
+    /// Initiator key distribution (@see gap_kdist)
     uint8_t ikey_dist;
-    ///Responder key distribution (@see gap_kdist)
+    /// Responder key distribution (@see gap_kdist)
     uint8_t rkey_dist;
 
     /// Device security requirements (minimum security level). (@see gap_sec_req)
@@ -1456,7 +1456,7 @@ typedef struct sonata_gap_connection_cfm {
 } sonata_gap_connection_cfm_t;
 
 /// Indicate reception of a IQ Report event over a BLE connection
-/*@TRACE*/
+/* @TRACE */
 typedef struct sonata_gap_cte_iq_report_ind {
     /// Rx PHY  (@see enum gap_phy_val)
     uint8_t  rx_phy;
@@ -1534,22 +1534,22 @@ typedef struct sonata_gap_per_adv_iq_report_ind {
 
 union sonata_gap_bond_cfm_data {
     /// Pairing Features (request = SONATA_GAP_PAIRING_RSP)
-    //@trc_union parent.request == SONATA_GAP_PAIRING_RSP
+    // @trc_union parent.request == SONATA_GAP_PAIRING_RSP
     struct sonata_gap_pairing pairing_feat;
     /// LTK (request = SONATA_GAP_LTK_EXCH)
-    //@trc_union parent.request == SONATA_GAP_LTK_EXCH
+    // @trc_union parent.request == SONATA_GAP_LTK_EXCH
     struct sonata_gap_ltk ltk;
     /// CSRK (request = SONATA_GAP_CSRK_EXCH)
-    //@trc_union parent.request == SONATA_GAP_CSRK_EXCH
+    // @trc_union parent.request == SONATA_GAP_CSRK_EXCH
     struct sonata_gap_sec_key csrk;
     /// TK (request = SONATA_GAP_TK_EXCH)
-    //@trc_union parent.request == SONATA_GAP_TK_EXCH
+    // @trc_union parent.request == SONATA_GAP_TK_EXCH
     struct sonata_gap_sec_key tk;
     /// IRK (request = SONATA_GAP_IRK_EXCH)
-    //@trc_union parent.request == SONATA_GAP_IRK_EXCH
+    // @trc_union parent.request == SONATA_GAP_IRK_EXCH
     struct sonata_gap_irk irk;
     /// OOB Confirm and Random from the peer (request = SONATA_GAP_OOB_EXCH)
-    //@trc_union parent.request == SONATA_GAP_OOB_EXCH
+    // @trc_union parent.request == SONATA_GAP_OOB_EXCH
     struct sonata_gap_oob oob;
 };
 
@@ -1568,7 +1568,7 @@ extern PF_NOTIFY_MESH_PRF_READY pf_notify_mesh_prf_ready;
 
 ///  Ble complete event type
 typedef enum {
-    //Sonata event                       Sonata
+    // Sonata event                       Sonata
     /// Ble module on complete
     SONATA_GAP_CMP_BLE_ON                                    = 0x0F01,
     /// Config advertising mode complete
@@ -1604,7 +1604,7 @@ typedef enum {
     /// Delete period sync mode complete
     SONATA_GAP_CMP_PERIOD_SYNC_DELETE                        = 0x0F11,
 
-    //System event                           GAPM
+    // System event                           GAPM
     /// Reset BLE subsystem: LL and HL.
     SONATA_GAP_CMP_RESET                                     = 0x0101,
     /// Set device configuration
@@ -1660,7 +1660,7 @@ typedef enum {
     /// Get the RF Path Compensation values used in the TX Power Level and RSSI calculation
     SONATA_GAP_CMP_GET_DEV_RF_PATH_COMP                      = 0x01AF,
 
-    //System event                           GAPC
+    // System event                           GAPC
     /// Disconnect
     SONATA_GAP_CMP_DISCONNECT                               = 0x0201,
     /// Retrieve name of peer device.
@@ -1685,7 +1685,7 @@ typedef enum {
     SONATA_GAP_CMP_GET_LE_PING_TO                           = 0x0212,
     /// set timer timeout value
     SONATA_GAP_CMP_SET_LE_PING_TO                           = 0x0213,
-    /* LE Data Length extension*/
+    /* LE Data Length extension */
     /// LE Set Data Length
     SONATA_GAP_CMP_SET_LE_PKT_SIZE                          = 0x0214,
     /// Central Address resolution supported
@@ -1701,9 +1701,9 @@ typedef enum {
     /// Constant Tone Extension Response control (enable / disable)
     SONATA_GAP_CMP_CTE_RSP_CTRL                              = 0x0223,
 
-    //System event                           GATTM
+    // System event                           GATTM
 
-    //System event                           GATTC
+    // System event                           GATTC
     /// Discover all services
     SONATA_GATT_CMP_DISC_ALL_SVC                            = 0x0402,
     /// Read attribute
@@ -1727,41 +1727,41 @@ typedef enum {
 
 typedef struct {
     /*************** GAP Manager  ***************/
-    ///@deprecated use @see ble_complete_callback
+    /// @deprecated use @see ble_complete_callback
     void (*ble_on_complete)(uint16_t status);
-    ///@deprecated use @see ble_complete_callback
+    /// @deprecated use @see ble_complete_callback
     void (*advertising_config_complete)(uint16_t status);
-    ///@deprecated use @see ble_complete_callback
+    /// @deprecated use @see ble_complete_callback
     void (*initiating_config_complete)(uint16_t status);
-    ///@deprecated use @see ble_complete_callback
+    /// @deprecated use @see ble_complete_callback
     void (*scanning_config_complete)(uint16_t status);
-    ///@deprecated use @see ble_complete_callback
+    /// @deprecated use @see ble_complete_callback
     void (*advertising_start_complete)(uint16_t status);
-    ///@deprecated use @see ble_complete_callback
+    /// @deprecated use @see ble_complete_callback
     void (*initiating_start_complete)(uint16_t status);
-    ///@deprecated use @see ble_complete_callback
+    /// @deprecated use @see ble_complete_callback
     void (*scanning_start_complete)(uint16_t status);
-    ///@deprecated use @see ble_complete_callback
+    /// @deprecated use @see ble_complete_callback
     void (*advertising_stopped_complete)(uint16_t reason);
-    ///@deprecated use @see ble_complete_callback
+    /// @deprecated use @see ble_complete_callback
     void (*initiating_stopped_complete)(uint16_t reason);
-    ///@deprecated use @see ble_complete_callback
+    /// @deprecated use @see ble_complete_callback
     void (*scanning_stopped_complete)(uint16_t reason);
-    ///@deprecated use @see ble_complete_callback
+    /// @deprecated use @see ble_complete_callback
     void (*advertising_deleted_complete)(uint16_t status);
-    ///@deprecated use @see ble_complete_callback
+    /// @deprecated use @see ble_complete_callback
     void (*initiating_deleted_complete)(uint16_t status);
-    ///@deprecated use @see ble_complete_callback
+    /// @deprecated use @see ble_complete_callback
     void (*scanning_deleted_complete)(uint16_t status);
-    ///@deprecated use @see ble_complete_callback
+    /// @deprecated use @see ble_complete_callback
     void (*set_advertising_data)(uint16_t status);
-    ///@deprecated use @see ble_complete_callback
+    /// @deprecated use @see ble_complete_callback
     void (*set_white_list_complete)(uint16_t status);
-    ///@deprecated use @see ble_complete_callback
+    /// @deprecated use @see ble_complete_callback
 
     /// Callback for getting device version, BT address, advertising TX power, antenna inf.
     uint16_t (*get_local_dev_info)(sonata_gap_local_dev_info info_type,
-                                   void *info);//gap_dev_version,gap_dev_bdaddr,gap_dev_adv_tx_power,gap_antenna_inf,gap_dbg_mem_info
+                                   void *info); // gap_dev_version,gap_dev_bdaddr,gap_dev_adv_tx_power,gap_antenna_inf,gap_dbg_mem_info
 
     /// Callback for scan result
     uint16_t (*gap_scan_result)(sonata_gap_ext_adv_report_ind_t *result);
@@ -1801,11 +1801,11 @@ typedef struct {
                                      uint8_t clk_acc, uint16_t serv_data, uint8_t addr_type, uint8_t *addr);
 
     /*************** GAP Controller  ***************/
-    ///@deprecated use @see ble_complete_callback
+    /// @deprecated use @see ble_complete_callback
     uint16_t (*gap_disconnect_complete)(uint8_t conidx, uint16_t status);
-    ///@deprecated use @see ble_complete_callback
+    /// @deprecated use @see ble_complete_callback
     void (*gap_params_updated_complete)(uint8_t conidx, uint16_t status);
-    ///@deprecated use @see ble_complete_callback
+    /// @deprecated use @see ble_complete_callback
     void (*gap_bond_complete)(uint8_t conidx, uint16_t status);
 
     /// Callback for disconnect IND message
@@ -1942,7 +1942,7 @@ uint16_t sonata_ble_config_legacy_advertising(uint8_t own_addr_type, sonata_gap_
  */
 uint16_t sonata_ble_config_extended_advertising(uint8_t own_addr_type, sonata_gap_extended_adv_create_param_t *param);
 
-//uint16_t sonata_ble_config_periodic_advertising(uint8_t own_addr_type, sonata_gap_periodic_adv_create_param_t *param);
+// uint16_t sonata_ble_config_periodic_advertising(uint8_t own_addr_type, sonata_gap_periodic_adv_create_param_t *param);
 /*!
  * @brief Config scanning data
  * @param own_addr_type: device's address type, @see sonata_gap_own_addr
@@ -2370,21 +2370,21 @@ uint8_t *sonata_ble_get_peer_addr(uint8_t connection_id);
  */
 uint16_t sonata_ble_gap_send_connection_cfm(uint8_t conidx, sonata_gap_connection_cfm_t *cfm);
 
-///@hide
+/// @hide
 void sonata_ble_show_connection_info(void);
 
 struct sonata_gap_bdaddr *sonata_ble_gap_get_bdaddr(uint8_t conidx, uint8_t src);
 
-///@hide
+/// @hide
 uint16_t sonata_ble_gap_cte_set_tx_config(uint8_t conidx, uint8_t cte_types, uint8_t switching_pattern_len,
         uint8_t *antenna_id);
 
-///@hide
+/// @hide
 uint16_t sonata_ble_gap_cte_response_control(uint8_t conidx, bool enable);
 
 /** @}*/
 
 #endif // BLE_HOST_PRESENT
 
-#endif//_SONATA_GAP_API_H_
+#endif // _SONATA_GAP_API_H_
 

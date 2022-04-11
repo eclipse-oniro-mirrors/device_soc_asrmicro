@@ -155,9 +155,9 @@ struct FlashDevice  {
 #define FLASH_DRIVER_SEG __attribute__((section("seg_flash_driver")))
 
 void duet_flash_alg_read_buf_clr(void);
-//void duet_flash_alg_cache_bypass(void);
+// void duet_flash_alg_cache_bypass(void);
 void duet_flash_alg_cache_enable(void);
-//void duet_flash_alg_cache_flush(void);
+// void duet_flash_alg_cache_flush(void);
 int  duet_flash_alg_init (void);
 int duet_flash_alg_erase(unsigned int cmd, unsigned long adr);
 int  duet_flash_alg_programpage (unsigned long adr,   // Program Page Function
@@ -168,4 +168,4 @@ void duet_flash_alg_set_clk_240(unsigned char en_240m);
 #elif defined  _SPI_FLASH_120MHz_
 void duet_flash_alg_set_clk_120(unsigned char en_120m);
 #endif
-#endif //_LEGA_FLASH_ALG_H_
+#endif // _LEGA_FLASH_ALG_H_

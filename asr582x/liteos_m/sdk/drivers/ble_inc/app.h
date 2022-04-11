@@ -61,14 +61,14 @@
 #define APP_TRC    printf
 #else
 #define APP_TRC(...)
-#endif //APP_DBG
+#endif // APP_DBG
 
 #define APP_DBG_ERROR    1
 #if APP_DBG_ERROR
 #define APP_TRC_ERROR    printf
 #else
 #define APP_TRC_ERROR(...)
-#endif //APP_DBG_HIGH
+#endif // APP_DBG_HIGH
 /*
  * ENUMERATIONS
  ****************************************************************************************
@@ -83,7 +83,7 @@
 #define KEY_LEN                          0x10
 
 enum app_connect_state {
-    ///Connection succeeded
+    /// Connection succeeded
     APP_STATE_CONNECTED = 0,
     // Link is disconnected
     APP_STATE_DISCONNECTED,
@@ -210,7 +210,7 @@ typedef enum {
  */
 extern sonata_ble_hook_t app_hook;
 
-///app Core Event indicate Callback
+/// app Core Event indicate Callback
 typedef int (*app_core_evt_ind_cb)(app_core_evt_ind_t evt, void *p_param);
 
 typedef int (*app_sec_req_cb)(uint8_t *addr);
@@ -232,7 +232,7 @@ typedef struct app_uuid_t {
 } app_uuids;
 typedef struct actives_t {
     uint8_t assign_id ;
-    uint8_t type;//A0:Adv  A1:Scan  A2:Peer
+    uint8_t type; // A0:Adv  A1:Scan  A2:Peer
     bool runing;
     uint8_t peer[SONATA_GAP_BD_ADDR_LEN];
     uint8_t name[20];

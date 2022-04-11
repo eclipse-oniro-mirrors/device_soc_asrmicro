@@ -51,7 +51,7 @@ OSBool lega_rtos_is_in_interrupt_context(void)
 {
     unsigned int state = 0;
 
-    state = (*(unsigned int *) CM4_ICSR) & 0x3FF; //bit0:9 is IRQ NO.
+    state = (*(unsigned int *) CM4_ICSR) & 0x3FF; // bit0:9 is IRQ NO.
 
     if (state != 0) {
         return TRUE;
@@ -88,8 +88,8 @@ OSStatus lega_rtos_task_cfg_get(uint32_t index, lega_task_config_t *cfg)
 * output param: thread
 * return: OSSatus value
 *******************************************************************/
-OSStatus lega_rtos_create_thread( lega_thread_t *thread, uint8_t priority, const char *name,
-                                  lega_thread_function_t function, uint32_t stack_size, lega_thread_arg_t arg )
+OSStatus lega_rtos_create_thread(lega_thread_t *thread, uint8_t priority, const char *name,
+                                  lega_thread_function_t function, uint32_t stack_size, lega_thread_arg_t arg)
 {
     uint8_t autorun = 1;
     osThreadAttr_t attr = {0};
@@ -106,7 +106,7 @@ OSStatus lega_rtos_create_thread( lega_thread_t *thread, uint8_t priority, const
     attr.cb_size = 0U;
     attr.stack_mem = NULL;
     attr.stack_size = stack_size;
-    //here should add bound check!
+    // here should add bound check!
     attr.priority = priority;
     if (autorun == 1) {
         threadId = osThreadNew((osThreadFunc_t)function, (void *)arg, &attr);
@@ -126,7 +126,7 @@ OSStatus lega_rtos_create_thread( lega_thread_t *thread, uint8_t priority, const
 * output param: none
 * return:  OSStatus
 *******************************************************************/
-OSStatus lega_rtos_delete_thread( lega_thread_t *thread )
+OSStatus lega_rtos_delete_thread(lega_thread_t *thread)
 {
     osThreadId_t threadId;
     if (thread == NULL) {
@@ -154,7 +154,7 @@ OSStatus lega_rtos_delete_thread( lega_thread_t *thread )
 * output param: lega_semaphore_t* semaphore
 * return: kNoErr or kGeneralErr;
 *******************************************************************/
-OSStatus lega_rtos_init_semaphore( lega_semaphore_t *semaphore, int count )
+OSStatus lega_rtos_init_semaphore(lega_semaphore_t *semaphore, int count)
 {
     osSemaphoreId_t semId;
 
@@ -174,7 +174,7 @@ OSStatus lega_rtos_init_semaphore( lega_semaphore_t *semaphore, int count )
 * output param: semaphore
 * return: kNoErr or kGeneralErr
 *******************************************************************/
-OSStatus lega_rtos_get_semaphore( lega_semaphore_t *semaphore, uint32_t timeout_ms )
+OSStatus lega_rtos_get_semaphore(lega_semaphore_t *semaphore, uint32_t timeout_ms)
 {
     osStatus_t ret;
 
@@ -187,7 +187,7 @@ OSStatus lega_rtos_get_semaphore( lega_semaphore_t *semaphore, uint32_t timeout_
     return kNoErr;
 }
 
-FLASH_COMMON2_SEG OSStatus lega_rtos_set_semaphore( lega_semaphore_t *semaphore )
+FLASH_COMMON2_SEG OSStatus lega_rtos_set_semaphore(lega_semaphore_t *semaphore)
 {
     osStatus_t ret;
 
@@ -200,7 +200,7 @@ FLASH_COMMON2_SEG OSStatus lega_rtos_set_semaphore( lega_semaphore_t *semaphore 
     return kNoErr;
 }
 
-OSStatus lega_rtos_deinit_semaphore( lega_semaphore_t *semaphore )
+OSStatus lega_rtos_deinit_semaphore(lega_semaphore_t *semaphore)
 {
     osStatus_t ret;
 
@@ -213,7 +213,7 @@ OSStatus lega_rtos_deinit_semaphore( lega_semaphore_t *semaphore )
     return kNoErr;
 }
 
-OSBool lega_rtos_semaphore_pending_task_null( lega_semaphore_t *semaphore )
+OSBool lega_rtos_semaphore_pending_task_null(lega_semaphore_t *semaphore)
 {
     osStatus_t ret;
 
@@ -225,7 +225,7 @@ OSBool lega_rtos_semaphore_pending_task_null( lega_semaphore_t *semaphore )
     }
 }
 
-OSStatus lega_rtos_init_mutex( lega_mutex_t *mutex )
+OSStatus lega_rtos_init_mutex(lega_mutex_t *mutex)
 {
     osMutexId_t mutexId;
     mutexId = osMutexNew(0);
@@ -238,7 +238,7 @@ OSStatus lega_rtos_init_mutex( lega_mutex_t *mutex )
     return kNoErr;
 }
 
-OSStatus lega_rtos_lock_mutex( lega_mutex_t *mutex, uint32_t timeout_ms )
+OSStatus lega_rtos_lock_mutex(lega_mutex_t *mutex, uint32_t timeout_ms)
 {
     osStatus_t ret;
 
@@ -251,7 +251,7 @@ OSStatus lega_rtos_lock_mutex( lega_mutex_t *mutex, uint32_t timeout_ms )
     return kNoErr;
 }
 
-OSStatus lega_rtos_unlock_mutex( lega_mutex_t *mutex )
+OSStatus lega_rtos_unlock_mutex(lega_mutex_t *mutex)
 {
     osStatus_t ret;
 
@@ -264,7 +264,7 @@ OSStatus lega_rtos_unlock_mutex( lega_mutex_t *mutex )
     return kNoErr;
 }
 
-OSStatus lega_rtos_deinit_mutex( lega_mutex_t *mutex )
+OSStatus lega_rtos_deinit_mutex(lega_mutex_t *mutex)
 {
     osStatus_t ret;
 
@@ -278,8 +278,8 @@ OSStatus lega_rtos_deinit_mutex( lega_mutex_t *mutex )
     return kNoErr;
 }
 
-OSStatus lega_rtos_init_queue( lega_queue_t *queue, const char *name, uint32_t message_size,
-                               uint32_t number_of_messages )
+OSStatus lega_rtos_init_queue(lega_queue_t *queue, const char *name, uint32_t message_size,
+                              uint32_t number_of_messages)
 {
     osMessageQueueId_t queId;
 
@@ -294,7 +294,7 @@ OSStatus lega_rtos_init_queue( lega_queue_t *queue, const char *name, uint32_t m
     return kNoErr;
 }
 
-OSStatus lega_rtos_push_to_queue( lega_queue_t *queue, void *message, uint32_t timeout_ms )
+OSStatus lega_rtos_push_to_queue(lega_queue_t *queue, void *message, uint32_t timeout_ms)
 {
     osStatus_t ret;
 
@@ -311,7 +311,7 @@ OSStatus lega_rtos_push_to_queue( lega_queue_t *queue, void *message, uint32_t t
     return kNoErr;
 }
 
-OSStatus lega_rtos_pop_from_queue( lega_queue_t *queue, void *message, uint32_t timeout_ms )
+OSStatus lega_rtos_pop_from_queue(lega_queue_t *queue, void *message, uint32_t timeout_ms)
 {
     osStatus_t ret;
 
@@ -326,7 +326,7 @@ OSStatus lega_rtos_pop_from_queue( lega_queue_t *queue, void *message, uint32_t 
     return kNoErr;
 }
 
-OSStatus lega_rtos_deinit_queue( lega_queue_t *queue )
+OSStatus lega_rtos_deinit_queue(lega_queue_t *queue)
 {
     osStatus_t ret;
 
@@ -339,7 +339,7 @@ OSStatus lega_rtos_deinit_queue( lega_queue_t *queue )
     return kNoErr;
 }
 
-OSBool lega_rtos_is_queue_empty( lega_queue_t *queue )
+OSBool lega_rtos_is_queue_empty(lega_queue_t *queue)
 {
     OSBool ret;
     lega_rtos_declare_critical();
@@ -361,7 +361,7 @@ OSBool lega_rtos_is_queue_empty( lega_queue_t *queue )
     return ret;
 }
 
-OSBool lega_rtos_is_queue_full( lega_queue_t *queue )
+OSBool lega_rtos_is_queue_full(lega_queue_t *queue)
 {
     OSBool ret;
     lega_rtos_declare_critical();
@@ -399,7 +399,7 @@ uint32_t lega_rtos_ms_to_ticks(uint32_t ms)
 }
 
 #if 1
-OSStatus lega_rtos_init_timer( lega_timer_t *timer, uint32_t time_ms, timer_handler_t function, void *arg)
+OSStatus lega_rtos_init_timer(lega_timer_t *timer, uint32_t time_ms, timer_handler_t function, void *arg)
 {
     timer->function = function;
     timer->arg      = arg;
@@ -417,8 +417,8 @@ OSStatus lega_rtos_init_timer( lega_timer_t *timer, uint32_t time_ms, timer_hand
     return kNoErr;
 }
 #else
-OSStatus lega_rtos_init_timer_name( lega_timer_t *timer, uint32_t time_ms, timer_handler_t function, void *arg,
-                                    uint8_t  *name)
+OSStatus lega_rtos_init_timer_name(lega_timer_t *timer, uint32_t time_ms, timer_handler_t function, void *arg,
+                                   uint8_t  *name)
 {
     if (!timer) {
         printf("%s %s timer err\n", __FUNCTION__, name);
@@ -445,7 +445,7 @@ OSStatus lega_rtos_init_timer_name( lega_timer_t *timer, uint32_t time_ms, timer
 }
 #endif
 
-OSStatus lega_rtos_start_timer( lega_timer_t *timer )
+OSStatus lega_rtos_start_timer(lega_timer_t *timer)
 {
     if (!timer) {
         printf("%s timer err\n", __FUNCTION__);
@@ -458,21 +458,21 @@ OSStatus lega_rtos_start_timer( lega_timer_t *timer )
     return kGeneralErr;
 }
 
-OSStatus lega_rtos_stop_timer( lega_timer_t *timer )
+OSStatus lega_rtos_stop_timer(lega_timer_t *timer)
 {
     if (!timer) {
         printf("%s timer err\n", __FUNCTION__);
         return kGeneralErr;
     }
     if (KalTimerStop((KalTimerId)(timer->handle)) == KAL_OK) {
-        //printf("rtos_stop_timer\r\n");
+        // printf("rtos_stop_timer\r\n");
         return kNoErr;
     }
 
     return kGeneralErr;
 }
 
-OSStatus lega_rtos_reload_timer( lega_timer_t *timer )
+OSStatus lega_rtos_reload_timer(lega_timer_t *timer)
 {
     if (!timer) {
         printf("%s timer err\n", __FUNCTION__);
@@ -491,7 +491,7 @@ OSStatus lega_rtos_reload_timer( lega_timer_t *timer )
     return kNoErr;
 }
 
-OSStatus lega_rtos_deinit_timer( lega_timer_t *timer )
+OSStatus lega_rtos_deinit_timer(lega_timer_t *timer)
 {
     if (!timer) {
         printf("%s timer err\n", __FUNCTION__);
@@ -511,7 +511,7 @@ OSStatus lega_rtos_deinit_timer( lega_timer_t *timer )
     return kGeneralErr;
 }
 
-OSBool lega_rtos_is_timer_running( lega_timer_t *timer )
+OSBool lega_rtos_is_timer_running(lega_timer_t *timer)
 {
     if (!timer) {
         printf("%s timer err\n", __FUNCTION__);
@@ -538,7 +538,7 @@ uint32_t lega_rtos_ticks_to_ms(uint32_t ticks)
     return time;
 }
 
-uint32_t lega_rtos_get_time( void )
+uint32_t lega_rtos_get_time(void)
 {
     return (uint32_t)lega_rtos_ticks_to_ms((unsigned int)osKernelGetTickCount());
 }
@@ -548,7 +548,7 @@ uint32_t lega_rtos_get_system_ticks(void)
     return (uint32_t)osKernelGetTickCount();
 }
 
-OSStatus lega_rtos_delay_milliseconds( uint32_t num_ms )
+OSStatus lega_rtos_delay_milliseconds(uint32_t num_ms)
 {
     uint32_t ticks;
 
@@ -572,7 +572,7 @@ void *_lega_rtos_malloc(uint32_t xWantedSize, const char *function, uint32_t lin
         lega_malloc_cnt++;
     } else {
         if (size_cache != 0) {
-            printf("rtos malloc %d fail  %s:%d\r\n", (unsigned int)xWantedSize, function, (unsigned int)line);
+            printf("rtos malloc %u fail  %s:%u\r\n", (unsigned int)xWantedSize, function, (unsigned int)line);
         }
     }
     while (size_cache) {
@@ -609,12 +609,12 @@ void lega_rtos_realloc(void *mem, uint32_t xWantedSize)
     return;
 }
 
-void *pvPortMalloc( uint32_t xWantedSize )
+void *pvPortMalloc(uint32_t xWantedSize)
 {
     return lega_rtos_malloc(xWantedSize);
 }
 
-void vPortFree( void *pv )
+void vPortFree(void *pv)
 {
     lega_rtos_free(pv);
 }
@@ -626,7 +626,7 @@ void vPortFree( void *pv )
 * output param: none
 * return:none
 *******************************************************************/
-lega_cpsr_t _lega_rtos_enter_critical( void )
+lega_cpsr_t _lega_rtos_enter_critical(void)
 {
     lega_cpsr_t cpsr_save = LOS_IntLock();
     return cpsr_save;
@@ -639,9 +639,9 @@ lega_cpsr_t _lega_rtos_enter_critical( void )
 * output param:none
 * return:none
 *******************************************************************/
-void _lega_rtos_exit_critical( lega_cpsr_t cpsr_store)
+void _lega_rtos_exit_critical(lega_cpsr_t cpsr_store)
 {
-    LOS_IntRestore( cpsr_store );
+    LOS_IntRestore(cpsr_store);
 }
 
 void lega_intrpt_enter(void)

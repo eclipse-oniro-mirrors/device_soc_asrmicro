@@ -52,4 +52,4 @@ void duet_wdg_reload(duet_wdg_dev_t *wdg);
  */
 int32_t duet_wdg_finalize(duet_wdg_dev_t *wdg);
 
-#endif //_LEGA_WDG_H_
+#endif // _LEGA_WDG_H_

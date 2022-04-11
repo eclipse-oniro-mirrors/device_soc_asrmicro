@@ -85,4 +85,4 @@ int32_t duet_pwm_para_chg(duet_pwm_dev_t *pwm, duet_pwm_config_t para);
  */
 int32_t duet_pwm_finalize(duet_pwm_dev_t *pwm);
 
-#endif //_DUET_PWM_H_
+#endif // _DUET_PWM_H_

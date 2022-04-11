@@ -22,10 +22,10 @@
 #include "lwip/inet.h"
 #include "lega_rtos.h"
 #define TCP_MAX_TXPERF_CONNECTION 1
-#define IPERF_OUTPUT_INTERVIEW 1 //1s
+#define IPERF_OUTPUT_INTERVIEW 1 // 1s
 #define TCP_SEND_BUFSIZE (TCP_MSS)
 #define UDP_SEND_BUFSIZE (TCP_MSS+12)
-#define SEND_BUFSIZE UDP_SEND_BUFSIZE//(TCP_SEND_BUFSIZE>UDP_SEND_BUFSIZE?TCP_SEND_BUFSIZE:UDP_SEND_BUFSIZE)
+#define SEND_BUFSIZE UDP_SEND_BUFSIZE // (TCP_SEND_BUFSIZE>UDP_SEND_BUFSIZE?TCP_SEND_BUFSIZE:UDP_SEND_BUFSIZE)
 typedef unsigned long long   u64_t;
 
 extern char iperf_send_buf[SEND_BUFSIZE];
@@ -71,13 +71,13 @@ extern volatile IPERF_TCP_SERVER_STATUS iperf_tcp_server_status;
 extern volatile IPERF_UDP_SERVER_STATUS iperf_udp_server_status;
 extern volatile IPERF_TCP_CLINET_STATUS iperf_tcp_client_status;
 extern volatile IPERF_UDP_CLIENT_STATUS iperf_udp_client_status;
-//extern volatile int iperf_tcp_server_term;
-//extern volatile int iperf_udp_server_term;
-//extern volatile int iperf_tcp_client_running;
-//extern volatile int iperf_udp_client_term;
+// extern volatile int iperf_tcp_server_term;
+// extern volatile int iperf_udp_server_term;
+// extern volatile int iperf_tcp_client_running;
+// extern volatile int iperf_udp_client_term;
 
 struct lwip_iperf_outputInfo {
-    int seconds; //start time
+    int seconds; // start time
     u64_t lastByte;
     u64_t currentByte;
     u64_t lastPacketNum;

@@ -31,9 +31,9 @@
  ****************************************************************************************
  */
 
-///@cond
+/// @cond
 #if BLE_HOST_PRESENT
-///@endcond
+/// @endcond
 
 #include "sonata_utils_api.h"
 
@@ -122,9 +122,9 @@ enum sonata_hogprh_info {
     SONATA_HOGPRH_INFO_MAX,
 };
 
-///Parameters of the @ref HOGPRH_READ_INFO_RSP message
+/// Parameters of the @ref HOGPRH_READ_INFO_RSP message
 typedef struct sonata_hogprh_read_info_req {
-    ///Characteristic info @see enum hogprh_info
+    /// Characteristic info @see enum hogprh_info
     uint8_t info;
     /// HID Service Instance - From 0 to HOGPRH_NB_HIDS_INST_MAX-1
     uint8_t hid_idx;
@@ -195,7 +195,7 @@ union sonata_hogprh_data {
     ///  - info = HOGPRH_REPORT
     struct sonata_hogprh_report report;
 
-    ///Notification Configuration Value
+    /// Notification Configuration Value
     ///  - info = HOGPRH_REPORT_NTF_CFG
     uint16_t report_cfg;
 
@@ -212,9 +212,9 @@ union sonata_hogprh_data {
     struct sonata_hogprh_report_map_ref report_map_ref;
 };
 
-///Parameters of the @ref HOGPRH_WRITE_REQ message
+/// Parameters of the @ref HOGPRH_WRITE_REQ message
 typedef struct sonata_hogprh_write_req {
-    ///Characteristic info @see enum hogprh_info
+    /// Characteristic info @see enum hogprh_info
     uint8_t info;
     /// HID Service Instance - From 0 to HOGPRH_NB_HIDS_INST_MAX-1
     uint8_t hid_idx;
@@ -290,9 +290,9 @@ extern const sonata_api_subtask_handlers_t prf_hogprh_api_ke_msg_handlers;
 
 /** @}*/
 
-///@cond
+/// @cond
 #endif // BLE_HOST_PRESENT
-///@endcond
+/// @endcond
 
-#endif //_SONATA_PRF_HOGPRH_API_H_
+#endif // _SONATA_PRF_HOGPRH_API_H_
 

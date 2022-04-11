@@ -236,7 +236,7 @@ enum {
     SONATA_ATT_SVC_MESH_PROVISIONING                   = SONATA_ATT_UUID_16(0x1827),
     /// Mesh Proxy Service
     SONATA_ATT_SVC_MESH_PROXY                          = SONATA_ATT_UUID_16(0x1828),
-    ///OTA Service
+    /// OTA Service
     SONATA_ATT_SVC_OTA                                 = SONATA_ATT_UUID_16(0x1850),
 
     /*------------------- UNITS ---------------------*/
@@ -244,215 +244,215 @@ enum {
     SONATA_ATT_UNIT_UNITLESS                           = SONATA_ATT_UUID_16(0x2700),
     /// Length Unit - Metre
     SONATA_ATT_UNIT_METRE                              = SONATA_ATT_UUID_16(0x2701),
-    ///Mass unit - Kilogram
+    /// Mass unit - Kilogram
     SONATA_ATT_UNIT_KG                                 = SONATA_ATT_UUID_16(0x2702),
-    ///Time unit - second
+    /// Time unit - second
     SONATA_ATT_UNIT_SECOND                             = SONATA_ATT_UUID_16(0x2703),
-    ///Electric current unit - Ampere
+    /// Electric current unit - Ampere
     SONATA_ATT_UNIT_AMPERE                             = SONATA_ATT_UUID_16(0x2704),
-    ///Thermodynamic Temperature unit - Kelvin
+    /// Thermodynamic Temperature unit - Kelvin
     SONATA_ATT_UNIT_KELVIN                             = SONATA_ATT_UUID_16(0x2705),
     /// Amount of substance unit - mole
     SONATA_ATT_UNIT_MOLE                               = SONATA_ATT_UUID_16(0x2706),
-    ///Luminous intensity unit - candela
+    /// Luminous intensity unit - candela
     SONATA_ATT_UNIT_CANDELA                            = SONATA_ATT_UUID_16(0x2707),
-    ///Area unit - square metres
+    /// Area unit - square metres
     SONATA_ATT_UNIT_SQ_METRE                           = SONATA_ATT_UUID_16(0x2710),
-    ///Colume unit - cubic metres
+    /// Colume unit - cubic metres
     SONATA_ATT_UNIT_CUBIC_METRE                        = SONATA_ATT_UUID_16(0x2710),
-    ///Velocity unit - metres per second
+    /// Velocity unit - metres per second
     SONATA_ATT_UNIT_METRE_PER_SECOND                   = SONATA_ATT_UUID_16(0x2711),
-    ///Acceleration unit - metres per second squared
+    /// Acceleration unit - metres per second squared
     SONATA_ATT_UNIT_METRES_PER_SEC_SQ                  = SONATA_ATT_UUID_16(0x2712),
-    ///Wavenumber unit - reciprocal metre
+    /// Wavenumber unit - reciprocal metre
     SONATA_ATT_UNIT_RECIPROCAL_METRE                   = SONATA_ATT_UUID_16(0x2713),
-    ///Density unit - kilogram per cubic metre
+    /// Density unit - kilogram per cubic metre
     SONATA_ATT_UNIT_DENS_KG_PER_CUBIC_METRE            = SONATA_ATT_UUID_16(0x2714),
-    ///Surface density unit - kilogram per square metre
+    /// Surface density unit - kilogram per square metre
     SONATA_ATT_UNIT_KG_PER_SQ_METRE                    = SONATA_ATT_UUID_16(0x2715),
-    ///Specific volume unit - cubic metre per kilogram
+    /// Specific volume unit - cubic metre per kilogram
     SONATA_ATT_UNIT_CUBIC_METRE_PER_KG                 = SONATA_ATT_UUID_16(0x2716),
-    ///Current density unit - ampere per square metre
+    /// Current density unit - ampere per square metre
     SONATA_ATT_UNIT_AMPERE_PER_SQ_METRE                = SONATA_ATT_UUID_16(0x2717),
-    ///Magnetic field strength unit - Ampere per metre
+    /// Magnetic field strength unit - Ampere per metre
     SONATA_ATT_UNIT_AMPERE_PER_METRE                   = SONATA_ATT_UUID_16(0x2718),
-    ///Amount concentration unit - mole per cubic metre
+    /// Amount concentration unit - mole per cubic metre
     SONATA_ATT_UNIT_MOLE_PER_CUBIC_METRE               = SONATA_ATT_UUID_16(0x2719),
-    ///Mass Concentration unit - kilogram per cubic metre
+    /// Mass Concentration unit - kilogram per cubic metre
     SONATA_ATT_UNIT_MASS_KG_PER_CUBIC_METRE            = SONATA_ATT_UUID_16(0x271A),
-    ///Luminance unit - candela per square metre
+    /// Luminance unit - candela per square metre
     SONATA_ATT_UNIT_CANDELA_PER_SQ_METRE               = SONATA_ATT_UUID_16(0x271B),
-    ///Refractive index unit
+    /// Refractive index unit
     SONATA_ATT_UNIT_REFRACTIVE_INDEX                   = SONATA_ATT_UUID_16(0x271C),
-    ///Relative permeability unit
+    /// Relative permeability unit
     SONATA_ATT_UNIT_RELATIVE_PERMEABILITY              = SONATA_ATT_UUID_16(0x271D),
-    ///Plane angle unit - radian
+    /// Plane angle unit - radian
     SONATA_ATT_UNIT_RADIAN                             = SONATA_ATT_UUID_16(0x2720),
-    ///Solid angle unit - steradian
+    /// Solid angle unit - steradian
     SONATA_ATT_UNIT_STERADIAN                          = SONATA_ATT_UUID_16(0x2721),
-    ///Frequency unit - Hertz
+    /// Frequency unit - Hertz
     SONATA_ATT_UNIT_HERTZ                              = SONATA_ATT_UUID_16(0x2722),
-    ///Force unit - Newton
+    /// Force unit - Newton
     SONATA_ATT_UNIT_NEWTON                             = SONATA_ATT_UUID_16(0x2723),
-    ///Pressure unit - Pascal
+    /// Pressure unit - Pascal
     SONATA_ATT_UNIT_PASCAL                             = SONATA_ATT_UUID_16(0x2724),
-    ///Energy unit - Joule
+    /// Energy unit - Joule
     SONATA_ATT_UNIT_JOULE                              = SONATA_ATT_UUID_16(0x2725),
-    ///Power unit - Watt
+    /// Power unit - Watt
     SONATA_ATT_UNIT_WATT                               = SONATA_ATT_UUID_16(0x2726),
-    ///electric Charge unit - Coulomb
+    /// electric Charge unit - Coulomb
     SONATA_ATT_UNIT_COULOMB                            = SONATA_ATT_UUID_16(0x2727),
-    ///Electric potential difference - Volt
+    /// Electric potential difference - Volt
     SONATA_ATT_UNIT_VOLT                               = SONATA_ATT_UUID_16(0x2728),
-    ///Capacitance unit - Farad
+    /// Capacitance unit - Farad
     SONATA_ATT_UNIT_FARAD                              = SONATA_ATT_UUID_16(0x2729),
-    ///electric resistance unit - Ohm
+    /// electric resistance unit - Ohm
     SONATA_ATT_UNIT_OHM                                = SONATA_ATT_UUID_16(0x272A),
-    ///Electric conductance - Siemens
+    /// Electric conductance - Siemens
     SONATA_ATT_UNIT_SIEMENS                            = SONATA_ATT_UUID_16(0x272B),
-    ///Magnetic flux unit - Weber
+    /// Magnetic flux unit - Weber
     SONATA_ATT_UNIT_WEBER                              = SONATA_ATT_UUID_16(0x272C),
-    ///Magnetic flux density unit - Tesla
+    /// Magnetic flux density unit - Tesla
     SONATA_ATT_UNIT_TESLA                              = SONATA_ATT_UUID_16(0x272D),
-    ///Inductance unit - Henry
+    /// Inductance unit - Henry
     SONATA_ATT_UNIT_HENRY                              = SONATA_ATT_UUID_16(0x272E),
-    ///Temperature unit - degree Celsius
+    /// Temperature unit - degree Celsius
     SONATA_ATT_UNIT_CELSIUS                            = SONATA_ATT_UUID_16(0x272F),
-    ///Luminous flux unit - lumen
+    /// Luminous flux unit - lumen
     SONATA_ATT_UNIT_LUMEN                              = SONATA_ATT_UUID_16(0x2730),
-    ///Illuminance unit - lux
+    /// Illuminance unit - lux
     SONATA_ATT_UNIT_LUX                                = SONATA_ATT_UUID_16(0x2731),
-    ///Activity referred to a radionuclide unit - becquerel
+    /// Activity referred to a radionuclide unit - becquerel
     SONATA_ATT_UNIT_BECQUEREL                          = SONATA_ATT_UUID_16(0x2732),
-    ///Absorbed dose unit - Gray
+    /// Absorbed dose unit - Gray
     SONATA_ATT_UNIT_GRAY                               = SONATA_ATT_UUID_16(0x2733),
-    ///Dose equivalent unit - Sievert
+    /// Dose equivalent unit - Sievert
     SONATA_ATT_UNIT_SIEVERT                            = SONATA_ATT_UUID_16(0x2734),
-    ///Catalytic activity unit - Katal
+    /// Catalytic activity unit - Katal
     SONATA_ATT_UNIT_KATAL                              = SONATA_ATT_UUID_16(0x2735),
-    ///Synamic viscosity unit - Pascal second
+    /// Synamic viscosity unit - Pascal second
     SONATA_ATT_UNIT_PASCAL_SECOND                      = SONATA_ATT_UUID_16(0x2740),
-    ///Moment of force unit - Newton metre
+    /// Moment of force unit - Newton metre
     SONATA_ATT_UNIT_NEWTON_METRE                       = SONATA_ATT_UUID_16(0x2741),
-    ///surface tension unit - Newton per metre
+    /// surface tension unit - Newton per metre
     SONATA_ATT_UNIT_NEWTON_PER_METRE                   = SONATA_ATT_UUID_16(0x2742),
-    ///Angular velocity unit - radian per second
+    /// Angular velocity unit - radian per second
     SONATA_ATT_UNIT_RADIAN_PER_SECOND                  = SONATA_ATT_UUID_16(0x2743),
-    ///Angular acceleration unit - radian per second squared
+    /// Angular acceleration unit - radian per second squared
     SONATA_ATT_UNIT_RADIAN_PER_SECOND_SQ               = SONATA_ATT_UUID_16(0x2744),
-    ///Heat flux density unit - Watt per square metre
+    /// Heat flux density unit - Watt per square metre
     SONATA_ATT_UNIT_WSONATA_ATT_PER_SQ_METRE           = SONATA_ATT_UUID_16(0x2745),
-    ///HEat capacity unit - Joule per Kelvin
+    /// HEat capacity unit - Joule per Kelvin
     SONATA_ATT_UNIT_JOULE_PER_KELVIN                   = SONATA_ATT_UUID_16(0x2746),
-    ///Specific heat capacity unit - Joule per kilogram kelvin
+    /// Specific heat capacity unit - Joule per kilogram kelvin
     SONATA_ATT_UNIT_JOULE_PER_KG_KELVIN                = SONATA_ATT_UUID_16(0x2747),
-    ///Specific Energy unit - Joule per kilogram
+    /// Specific Energy unit - Joule per kilogram
     SONATA_ATT_UNIT_JOULE_PER_KG                       = SONATA_ATT_UUID_16(0x2748),
-    ///Thermal conductivity - Watt per metre Kelvin
+    /// Thermal conductivity - Watt per metre Kelvin
     SONATA_ATT_UNIT_WSONATA_ATT_PER_METRE_KELVIN       = SONATA_ATT_UUID_16(0x2749),
-    ///Energy Density unit - joule per cubic metre
+    /// Energy Density unit - joule per cubic metre
     SONATA_ATT_UNIT_JOULE_PER_CUBIC_METRE              = SONATA_ATT_UUID_16(0x274A),
-    ///Electric field strength unit - volt per metre
+    /// Electric field strength unit - volt per metre
     SONATA_ATT_UNIT_VOLT_PER_METRE                     = SONATA_ATT_UUID_16(0x274B),
-    ///Electric charge density unit - coulomb per cubic metre
+    /// Electric charge density unit - coulomb per cubic metre
     SONATA_ATT_UNIT_COULOMB_PER_CUBIC_METRE            = SONATA_ATT_UUID_16(0x274C),
-    ///Surface charge density unit - coulomb per square metre
+    /// Surface charge density unit - coulomb per square metre
     SONATA_ATT_UNIT_SURF_COULOMB_PER_SQ_METRE          = SONATA_ATT_UUID_16(0x274D),
-    ///Electric flux density unit - coulomb per square metre
+    /// Electric flux density unit - coulomb per square metre
     SONATA_ATT_UNIT_FLUX_COULOMB_PER_SQ_METRE          = SONATA_ATT_UUID_16(0x274E),
-    ///Permittivity unit - farad per metre
+    /// Permittivity unit - farad per metre
     SONATA_ATT_UNIT_FARAD_PER_METRE                    = SONATA_ATT_UUID_16(0x274F),
-    ///Permeability unit - henry per metre
+    /// Permeability unit - henry per metre
     SONATA_ATT_UNIT_HENRY_PER_METRE                    = SONATA_ATT_UUID_16(0x2750),
-    ///Molar energy unit - joule per mole
+    /// Molar energy unit - joule per mole
     SONATA_ATT_UNIT_JOULE_PER_MOLE                     = SONATA_ATT_UUID_16(0x2751),
-    ///Molar entropy unit - joule per mole kelvin
+    /// Molar entropy unit - joule per mole kelvin
     SONATA_ATT_UNIT_JOULE_PER_MOLE_KELVIN              = SONATA_ATT_UUID_16(0x2752),
-    ///Exposure unit - coulomb per kilogram
+    /// Exposure unit - coulomb per kilogram
     SONATA_ATT_UNIT_COULOMB_PER_KG                     = SONATA_ATT_UUID_16(0x2753),
-    ///Absorbed dose rate unit - gray per second
+    /// Absorbed dose rate unit - gray per second
     SONATA_ATT_UNIT_GRAY_PER_SECOND                    = SONATA_ATT_UUID_16(0x2754),
-    ///Radiant intensity unit - watt per steradian
+    /// Radiant intensity unit - watt per steradian
     SONATA_ATT_UNIT_WSONATA_ATT_PER_STERADIAN          = SONATA_ATT_UUID_16(0x2755),
-    ///Radiance unit - watt per square meter steradian
+    /// Radiance unit - watt per square meter steradian
     SONATA_ATT_UNIT_WSONATA_ATT_PER_SQ_METRE_STERADIAN = SONATA_ATT_UUID_16(0x2756),
-    ///Catalytic activity concentration unit - katal per cubic metre
+    /// Catalytic activity concentration unit - katal per cubic metre
     SONATA_ATT_UNIT_KATAL_PER_CUBIC_METRE              = SONATA_ATT_UUID_16(0x2757),
-    ///Time unit - minute
+    /// Time unit - minute
     SONATA_ATT_UNIT_MINUTE                             = SONATA_ATT_UUID_16(0x2760),
-    ///Time unit - hour
+    /// Time unit - hour
     SONATA_ATT_UNIT_HOUR                               = SONATA_ATT_UUID_16(0x2761),
-    ///Time unit - day
+    /// Time unit - day
     SONATA_ATT_UNIT_DAY                                = SONATA_ATT_UUID_16(0x2762),
-    ///Plane angle unit - degree
+    /// Plane angle unit - degree
     SONATA_ATT_UNIT_ANGLE_DEGREE                       = SONATA_ATT_UUID_16(0x2763),
-    ///Plane angle unit - minute
+    /// Plane angle unit - minute
     SONATA_ATT_UNIT_ANGLE_MINUTE                       = SONATA_ATT_UUID_16(0x2764),
-    ///Plane angle unit - second
+    /// Plane angle unit - second
     SONATA_ATT_UNIT_ANGLE_SECOND                       = SONATA_ATT_UUID_16(0x2765),
-    ///Area unit - hectare
+    /// Area unit - hectare
     SONATA_ATT_UNIT_HECTARE                            = SONATA_ATT_UUID_16(0x2766),
-    ///Volume unit - litre
+    /// Volume unit - litre
     SONATA_ATT_UNIT_LITRE                              = SONATA_ATT_UUID_16(0x2767),
-    ///Mass unit - tonne
+    /// Mass unit - tonne
     SONATA_ATT_UNIT_TONNE                              = SONATA_ATT_UUID_16(0x2768),
-    ///Pressure unit - bar
+    /// Pressure unit - bar
     SONATA_ATT_UNIT_BAR                                = SONATA_ATT_UUID_16(0x2780),
-    ///Pressure unit - millimetre of mercury
+    /// Pressure unit - millimetre of mercury
     SONATA_ATT_UNIT_MM_MERCURY                         = SONATA_ATT_UUID_16(0x2781),
-    ///Length unit - angstrom
+    /// Length unit - angstrom
     SONATA_ATT_UNIT_ANGSTROM                           = SONATA_ATT_UUID_16(0x2782),
-    ///Length unit - nautical mile
+    /// Length unit - nautical mile
     SONATA_ATT_UNIT_NAUTICAL_MILE                      = SONATA_ATT_UUID_16(0x2783),
-    ///Area unit - barn
+    /// Area unit - barn
     SONATA_ATT_UNIT_BARN                               = SONATA_ATT_UUID_16(0x2784),
-    ///Velocity unit - knot
+    /// Velocity unit - knot
     SONATA_ATT_UNIT_KNOT                               = SONATA_ATT_UUID_16(0x2785),
-    ///Logarithmic radio quantity unit - neper
+    /// Logarithmic radio quantity unit - neper
     SONATA_ATT_UNIT_NEPER                              = SONATA_ATT_UUID_16(0x2786),
-    ///Logarithmic radio quantity unit - bel
+    /// Logarithmic radio quantity unit - bel
     SONATA_ATT_UNIT_BEL                                = SONATA_ATT_UUID_16(0x2787),
-    ///Length unit - yard
+    /// Length unit - yard
     SONATA_ATT_UNIT_YARD                               = SONATA_ATT_UUID_16(0x27A0),
-    ///Length unit - parsec
+    /// Length unit - parsec
     SONATA_ATT_UNIT_PARSEC                             = SONATA_ATT_UUID_16(0x27A1),
-    ///length unit - inch
+    /// length unit - inch
     SONATA_ATT_UNIT_INCH                               = SONATA_ATT_UUID_16(0x27A2),
-    ///length unit - foot
+    /// length unit - foot
     SONATA_ATT_UNIT_FOOT                               = SONATA_ATT_UUID_16(0x27A3),
-    ///length unit - mile
+    /// length unit - mile
     SONATA_ATT_UNIT_MILE                               = SONATA_ATT_UUID_16(0x27A4),
-    ///pressure unit - pound-force per square inch
+    /// pressure unit - pound-force per square inch
     SONATA_ATT_UNIT_POUND_FORCE_PER_SQ_INCH            = SONATA_ATT_UUID_16(0x27A5),
-    ///velocity unit - kilometre per hour
+    /// velocity unit - kilometre per hour
     SONATA_ATT_UNIT_KM_PER_HOUR                        = SONATA_ATT_UUID_16(0x27A6),
-    ///velocity unit - mile per hour
+    /// velocity unit - mile per hour
     SONATA_ATT_UNIT_MILE_PER_HOUR                      = SONATA_ATT_UUID_16(0x27A7),
-    ///angular velocity unit - revolution per minute
+    /// angular velocity unit - revolution per minute
     SONATA_ATT_UNIT_REVOLUTION_PER_MINUTE              = SONATA_ATT_UUID_16(0x27A8),
-    ///energy unit - gram calorie
+    /// energy unit - gram calorie
     SONATA_ATT_UNIT_GRAM_CALORIE                       = SONATA_ATT_UUID_16(0x27A9),
-    ///energy unit - kilogram calorie
+    /// energy unit - kilogram calorie
     SONATA_ATT_UNIT_KG_CALORIE                         = SONATA_ATT_UUID_16(0x27AA),
     /// energy unit - kilowatt hour
     SONATA_ATT_UNIT_KILOWSONATA_ATT_HOUR               = SONATA_ATT_UUID_16(0x27AB),
-    ///thermodynamic temperature unit - degree Fahrenheit
+    /// thermodynamic temperature unit - degree Fahrenheit
     SONATA_ATT_UNIT_FAHRENHEIT                         = SONATA_ATT_UUID_16(0x27AC),
-    ///percentage
+    /// percentage
     SONATA_ATT_UNIT_PERCENTAGE                         = SONATA_ATT_UUID_16(0x27AD),
-    ///per mille
+    /// per mille
     SONATA_ATT_UNIT_PER_MILLE                          = SONATA_ATT_UUID_16(0x27AE),
-    ///period unit - beats per minute)
+    /// period unit - beats per minute)
     SONATA_ATT_UNIT_BEATS_PER_MINUTE                   = SONATA_ATT_UUID_16(0x27AF),
-    ///electric charge unit - ampere hours
+    /// electric charge unit - ampere hours
     SONATA_ATT_UNIT_AMPERE_HOURS                       = SONATA_ATT_UUID_16(0x27B0),
-    ///mass density unit - milligram per decilitre
+    /// mass density unit - milligram per decilitre
     SONATA_ATT_UNIT_MILLIGRAM_PER_DECILITRE            = SONATA_ATT_UUID_16(0x27B1),
-    ///mass density unit - millimole per litre
+    /// mass density unit - millimole per litre
     SONATA_ATT_UNIT_MILLIMOLE_PER_LITRE                = SONATA_ATT_UUID_16(0x27B2),
-    ///time unit - year
+    /// time unit - year
     SONATA_ATT_UNIT_YEAR                               = SONATA_ATT_UUID_16(0x27B3),
-    ////time unit - month
+    //// time unit - month
     SONATA_ATT_UNIT_MONTH                              = SONATA_ATT_UUID_16(0x27B4),
 
     /*---------------- DECLARATIONS -----------------*/
@@ -526,7 +526,7 @@ enum {
     SONATA_ATT_CHAR_TIME_WITH_DST                      = SONATA_ATT_UUID_16(0x2A11),
     /// Time Accuracy
     SONATA_ATT_CHAR_TIME_ACCURACY                      = SONATA_ATT_UUID_16(0x2A12),
-    ///Time Source
+    /// Time Source
     SONATA_ATT_CHAR_TIME_SOURCE                        = SONATA_ATT_UUID_16(0x2A13),
     /// Reference Time Information
     SONATA_ATT_CHAR_REFERENCE_TIME_INFO                = SONATA_ATT_UUID_16(0x2A14),

@@ -110,7 +110,7 @@ void sonata_ll_rf_test_end(void);
  */
 void sonata_ll_df_init(void);
 
-///@cond
+/// @cond
 /**
  ****************************************************************************************
  * @brief ll_pa_test
@@ -119,13 +119,13 @@ void sonata_ll_df_init(void);
  ****************************************************************************************
  */
 void sonata_ll_pa_enable(void);
-///@endcond
+/// @endcond
 /** @}*/
 void sonata_ll_df_cal(void);
 
-///@cond
+/// @cond
 extern bool sonata_rw_df_dbg_enable;
-///@endcond
+/// @endcond
 
-#endif //_SONATA_LL_API_H_
+#endif // _SONATA_LL_API_H_
 

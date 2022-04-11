@@ -23,4 +23,4 @@
 UINT32 LOS_SemPendingNoTask(UINT32 semHandle);
 osStatus_t osSemaphorePendingNoTask(osSemaphoreId_t semaphore_id);
 
-#endif //__LITEOS_PATCH_H__
+#endif // __LITEOS_PATCH_H__

@@ -928,7 +928,7 @@ int printf2(const char *format, ...)
 #endif
 
 #if 0
-//it's supported, but not used yet
+// it's supported, but not used yet
 int fctprintf(void (*out)(char character, void *arg), void *arg, const char *format, ...)
 {
     va_list va;

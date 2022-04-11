@@ -23,11 +23,11 @@
 #include "FreeRTOSConfig.h"
 #include "portmacro.h"
 #endif
-//void jumpToApp(int addr)
-//{
+// void jumpToApp(int addr)
+// {
 //    __asm("LDR SP, [R0]");
 //    __asm("LDR PC, [R0, #4]");
-//}
+// }
 
 void duet_memset(char *buf, int value, int size)
 {
@@ -56,13 +56,13 @@ FLASH_COMMON2_SEG void delay(unsigned int cycles)
     }
 }
 
-/*please open flash cache when using this function.
-otherwise, it is not accurate*/
+/* please open flash cache when using this function.
+otherwise, it is not accuratd */
 void udelay_pl(unsigned int us)
 {
     unsigned int us2cycles = us * (SYSTEM_CLOCK / 1000000) / 9;
     us2cycles = (us2cycles >= 6) ? (us2cycles - 6) : 0;
-    /*9 clock cycles*/
+    /* 9 clock cycles */
     while (us2cycles > 0) {
         us2cycles--;
         asm("nop");
@@ -131,9 +131,9 @@ int convert_str_to_int(char *str)
     return val;
 }
 #endif
-//type = 1, val is uint8
-//type = 2, val is uint16
-//type = 4, val is uint32
+// type = 1, val is uint8
+// type = 2, val is uint16
+// type = 4, val is uint32
 void convert_int_to_str(unsigned int val, unsigned int type, char *ch)
 {
     int i = 0, tempVal;
@@ -162,7 +162,7 @@ void duet_write32_bit(uint32_t reg, uint8_t start_bit, uint8_t len, uint32_t src
     if ((start_bit < 32) && (len <= 32) && (src_val <= ((1 << len) - 1))) {
         tmp = REG_RD(reg);
 
-        mask = (1 << len) - 1;      //eg: len=4, mask = 0xf, 1111
+        mask = (1 << len) - 1;      // eg: len=4, mask = 0xf, 1111
         mask = ~(mask << start_bit);
 
         val = tmp & mask;
@@ -183,7 +183,7 @@ uint32_t duet_read32_bit(uint32_t reg, uint8_t start_bit, uint8_t len)
     if ((start_bit < 32) && (len <= 32)) {
         val = REG_RD(reg);
 
-        mask = (1 << len) - 1;      //eg: len =4, 0xf,1111
+        mask = (1 << len) - 1;      // eg: len =4, 0xf,1111
         mask = mask << start_bit;
         val = val & mask;
 

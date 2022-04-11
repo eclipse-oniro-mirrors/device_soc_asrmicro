@@ -119,7 +119,7 @@ int sonata_prf_bas_send_battery_level(uint8_t batt_id, uint8_t batt_lvl);
  */
 uint16_t sonata_prf_bas_register_callback(prf_bas_callback_t *cb);
 
-// #endif //(BLE_APP_BATT)
+// #endif // (BLE_APP_BATT)
 
 /** @}*/
 

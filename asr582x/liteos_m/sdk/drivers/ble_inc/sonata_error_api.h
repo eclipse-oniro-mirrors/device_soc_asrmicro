@@ -105,14 +105,14 @@
 #define SONATA_UTILS_API_TRC    printf
 #else
 #define SONATA_UTILS_API_TRC(...)
-#endif //SONATA_API_TASK_DBG
+#endif // SONATA_API_TASK_DBG
 
 /*
  * ENUM DEFINITIONS
  ****************************************************************************************
  */
 
-//C error
+// C error
 #define SONATA_CO_ERROR_NO_ERROR                        (0x00)
 #define SONATA_CO_ERROR_UNKNOWN_HCI_COMMAND             (0x01)
 #define SONATA_CO_ERROR_UNKNOWN_CONNECTION_ID           (0x02)
@@ -181,9 +181,9 @@
 #define SONATA_CO_ERROR_UNDEFINED                       (0xFF)
 #define SONATA_CO_ERROR_HW_UART_OUT_OF_SYNC             (0x00)
 #define SONATA_CO_ERROR_HW_MEM_ALLOC_FAIL               (0x01)
-//C error end
+// C error end
 
-//hl_err
+// hl_err
 enum stack_hl_err {
     /// No error
     SONATA_HL_GAP_ERR_NO_ERROR                                                               = 0x00,
@@ -583,6 +583,6 @@ enum stack_hl_err {
     /// Packet Too Long
     SONATA_HL_LL_ERR_PKT_TOO_LONG = 0xD5,
 };
-//hl_err end
-#endif //_SONATA_ERROR_API_H_
+// hl_err end
+#endif // _SONATA_ERROR_API_H_
 

@@ -85,7 +85,7 @@ void macChar2Value(uint8_t *chars, uint8_t *mac, bool colon)
         d3 = char2HexValue(chars[9]) * 16 + char2HexValue(chars[10]);
         d4 = char2HexValue(chars[12]) * 16 + char2HexValue(chars[13]);
         d5 = char2HexValue(chars[15]) * 16 + char2HexValue(chars[16]);
-        mac[0] = d5;//MAC in stack should reverse with Real MAC
+        mac[0] = d5; // MAC in stack should reverse with Real MAC
         mac[1] = d4;
         mac[2] = d3;
         mac[3] = d2;
@@ -98,7 +98,7 @@ void macChar2Value(uint8_t *chars, uint8_t *mac, bool colon)
         d3 = char2HexValue(chars[6]) * 16 + char2HexValue(chars[7]);
         d4 = char2HexValue(chars[8]) * 16 + char2HexValue(chars[9]);
         d5 = char2HexValue(chars[10]) * 16 + char2HexValue(chars[11]);
-        mac[0] = d5;//MAC in stack should reverse with Real MAC
+        mac[0] = d5; // MAC in stack should reverse with Real MAC
         mac[1] = d4;
         mac[2] = d3;
         mac[3] = d2;
@@ -218,7 +218,7 @@ int atcmdplus_uuid(int argc, char **argv)
 int atcmdplus_discovery(int argc, char **argv)
 {
     uint8_t conidx = char2HexValue(argv[PARA_ID_1][0]);
-    sonata_ble_gatt_disc_all_svc(conidx);//--->app_gatt_disc_svc_callback()
+    sonata_ble_gatt_disc_all_svc(conidx); // --->app_gatt_disc_svc_callback()
     return CONFIG_OK;
 }
 
@@ -227,7 +227,7 @@ int atcmdplus_lesend(int argc, char **argv)
     apcmdplue_print_command(argc, argv);
 
     uint8_t conidx = char2HexValue(argv[PARA_ID_1][0]);
-    uint16_t dataLen = char2HexValue(argv[PARA_ID_2][0]); //Todo only support 1 char now.
+    uint16_t dataLen = char2HexValue(argv[PARA_ID_2][0]); // Todo only support 1 char now.
     uint8_t *data = (uint8_t *)argv[PARA_ID_3];
     app_ble_master_write_data(conidx, dataLen, data);
     return CONFIG_OK;

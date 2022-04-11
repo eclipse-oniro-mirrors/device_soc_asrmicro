@@ -122,5 +122,5 @@ void sonata_genc_secret_key(uint8_t *secret_key256);
 
 void sonata_genc_session_key(uint8_t *secret_key, uint8_t *skd, sonata_sec_ecdh_session_key_complete callback);
 
-#endif //_SONATA_SEC_API_H_
+#endif // _SONATA_SEC_API_H_
 

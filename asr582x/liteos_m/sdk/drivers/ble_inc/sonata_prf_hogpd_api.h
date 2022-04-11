@@ -30,9 +30,9 @@
  * INCLUDE FILES
  ****************************************************************************************
  */
-///@cond
+/// @cond
 #if BLE_HOST_PRESENT
-///@endcond
+/// @endcond
 #include "sonata_utils_api.h"
 #include "gapc_task.h"
 #include "sonata_api_task.h"
@@ -208,7 +208,7 @@
 #define    HID_CONSUMER_MAIL           0xAB  // Mail
 #define    HID_CONSUMER_CALCULATOR     0xAC  // Calculate
 #define    HID_CONSUMER_MY_COMPUTER    0xAD  // My Computor
-#define    HID_CONSUMER_STOP           0xB0  //Stop
+#define    HID_CONSUMER_STOP           0xB0  // Stop
 #define    HID_CONSUMER_SCAN_NEXT_TRK  0xB5  // Scan Next Track
 #define    HID_CONSUMER_SCAN_PREV_TRK  0xB6  // Scan Previous Track
 #define    HID_CONSUMER_PLAY_PAUSE     0xCD  // Play/Pause
@@ -220,15 +220,15 @@
 #define    HID_CONSUMER_WWW_BACK       ((0x02 << 8 & 0xFF) | 0x24) // WWW Back 0x0224
 
 typedef enum {
-    //HID Information
+    // HID Information
     SONATA_HOGPD_HID_INFORMATION_CHAR,
-    //HID Control Point
+    // HID Control Point
     SONATA_HOGPD_HID_CONTROL_POINT_CHAR,
-    //HID Report Map
+    // HID Report Map
     SONATA_HOGPD_HID_REPORT_MAP_CHAR,
-    //Boot Mouse Input Report
+    // Boot Mouse Input Report
     SONATA_HOGPD_HID_MOUSE_INPUT_REPORT_CHAR,
-    //Report
+    // Report
     SONATA_HOGPD_HID_REPORT_CHAR,
 } sonata_hogpd_info;
 
@@ -287,7 +287,7 @@ typedef enum {
     /// device address
     SONATA_LEN_BD_ADDRESS                 = 6,
     /// bonded dev info len
-    SONATA_LEN_BONDED_DEV_INFO            = 218, //218: 3, 290:4,
+    SONATA_LEN_BONDED_DEV_INFO            = 218, // 218: 3, 290:4,
     /// start pair on boot
     SONATA_LEN_PAIR_ON_BOOT               = 1,
 } sonata_app_nvds_len;
@@ -318,33 +318,33 @@ typedef enum {
  * @brief
  */
 typedef enum {
-    //up
+    // up
     MOTION_UP = 'U',
-    //down
+    // down
     MOTION_DOWN = 'D',
-    //left
+    // left
     MOTION_LEFT = 'L',
-    //right
+    // right
     MOTION_RIGHT = 'R',
-    //diagonal
+    // diagonal
     MOTION_DIAGONAL = 'I',
     //wheel
     MOTION_WHEEL = 'W',
-    //button
+    // button
     BUTTON_EVENT = 'B',
-    //multiple motion
+    // multiple motion
     MOTION_MULTIPLE = 'M',
-    //ADC
+    // ADC
     MOTION_ADC = 'A',
 } sonata_mouse_motion;
 
-/// Report Char. Configuration Flag Values   //Report's read and write property
+/// Report Char. Configuration Flag Values   // Report's read and write property
 typedef enum {
     /// Input Report
     SONATA_HOGPD_CFG_REPORT_IN     = 0x01,
     /// Output Report , Report will be Writeable
     SONATA_HOGPD_CFG_REPORT_OUT    = 0x02,
-    //HOGPD_CFG_REPORT_FEAT can be used as a mask to check Report type
+    // HOGPD_CFG_REPORT_FEAT can be used as a mask to check Report type
     /// Feature Report
     SONATA_HOGPD_CFG_REPORT_FEAT   = 0x03,
     /// Input report with Write capabilities
@@ -378,7 +378,7 @@ typedef enum {
 } sonata_hogpd_op;
 
 /// Messages for HID Over GATT Profile Device Role
-/*@TRACE*/
+/* @TRACE */
 enum sonata_hogpd_msg_id {
     /// Restore bond data the HID Over GATT Profile Device Role Task
     SONATA_HOGPD_ENABLE_REQ = STACK_TASK_FIRST_MSG(SONATA_TASK_ID_HOGPD),
@@ -505,8 +505,8 @@ typedef struct {
  *  --------------------------------------------------------------------------
  */
 typedef struct ps_mouse_report {
-    int16_t   repX;    //x-quaddec of the mouse
-    int16_t   repY;    //y-quaddec of the mouse
+    int16_t   repX;    // x-quaddec of the mouse
+    int16_t   repY;    // y-quaddec of the mouse
 } ps_mouse_report_t;
 
 /*!
@@ -660,9 +660,9 @@ void sonata_hogpd_send_error_code(uint8_t conidx, uint8_t operation, uint8_t hid
 
 /** @}*/
 
-///@cond
+/// @cond
 #endif // BLE_HOST_PRESENT
-///@endcond
+/// @endcond
 
-#endif //_SONATA_PRF_HOGPD_API_H_
+#endif // _SONATA_PRF_HOGPD_API_H_
 

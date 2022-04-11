@@ -98,10 +98,10 @@ void duet_i2s_master_clock_cmd(I2S_TypeDef *I2Sx, uint32_t new_state)
 {
     if ( new_state == ENABLE) {
         I2Sx->CER |= ENABLE;
-        REG_WR(0X40000844, (0x1 << 13) | (0x1 << 24)); //open clock source of i2s
+        REG_WR(0X40000844, (0x1 << 13) | (0x1 << 24)); // open clock source of i2s
     } else {
         I2Sx->CER &= DISABLE;
-        REG_WR(0X4000084C, (0x1 << 13) | (0x1 << 24)); //close clock source of i2s
+        REG_WR(0X4000084C, (0x1 << 13) | (0x1 << 24)); // close clock source of i2s
     }
 }
 
@@ -177,9 +177,9 @@ int duet_i2s_init(I2S_TypeDef *I2Sx, duet_i2s_dev_t *pI2S_struct)
         I2S_CLK_DIV->i2s_mclk_divider = mclk_divider - 1;
         I2S_CLK_DIV->i2s_sclk_divider = sclk_divider - 1;
         I2S_CLK_DIV->i2s_lrclk_divider = lrclk_divider - 1;
-        I2S_CLK_DIV->i2s_slave_mode = 0; //set to I2S master
+        I2S_CLK_DIV->i2s_slave_mode = 0; // set to I2S master
     } else {
-        I2S_CLK_DIV->i2s_slave_mode = 1; //set to I2S slave
+        I2S_CLK_DIV->i2s_slave_mode = 1; // set to I2S slave
     }
 
     return 0;
@@ -187,7 +187,7 @@ int duet_i2s_init(I2S_TypeDef *I2Sx, duet_i2s_dev_t *pI2S_struct)
 
 uint32_t duet_i2s_receive_data(I2S_TypeDef *I2Sx, uint8_t lr)
 {
-    if (lr == 0) { //left channel
+    if (lr == 0) { // left channel
         return I2Sx->LRBR_LTHR;
     } else { // right channel
         return I2Sx->RRBR_RTHR;

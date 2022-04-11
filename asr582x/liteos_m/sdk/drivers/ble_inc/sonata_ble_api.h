@@ -50,7 +50,7 @@
 #define SONATA_BLE_API_TRC    printf
 #else
 #define SONATA_BLE_API_TRC(...)
-#endif //SONATA_BLE_API_DBG
+#endif // SONATA_BLE_API_DBG
 
 #define SONATA_TASK_FIRST_MSG(task) ((uint16_t)((task) << 8))
 
@@ -61,8 +61,8 @@
 
 // App callback status
 typedef enum {
-    CB_DONE           = 0, //Done in callback
-    CB_REJECT         = 1, //Do nothing in callback, SDK will do it
+    CB_DONE           = 0, // Done in callback
+    CB_REJECT         = 1, // Do nothing in callback, SDK will do it
     CB_MAX            = 0xFF,
 } CBStatus;
 
@@ -144,5 +144,5 @@ void sonata_ble_isr(void);
 
 /** @}*/
 
-#endif //_SONATA_BLE_API_H_
+#endif // _SONATA_BLE_API_H_
 

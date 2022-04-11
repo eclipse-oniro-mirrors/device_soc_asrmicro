@@ -47,47 +47,46 @@
 #include <stddef.h>         // for NULL and size_t
 #include "compiler.h"       // for __INLINE
 
-
 /*
  * DEFINES
  ****************************************************************************************
  */
 
-/// structure of a list element header
-/*@TRACE*/
+// structure of a list element header
+/* @TRACE */
 struct util_list_hdr {
-    /// Pointer to next util_list_hdr
+    // Pointer to next util_list_hdr
     struct util_list_hdr *next;
 };
 
-/// simplify type name of list element header
+// simplify type name of list element header
 typedef struct util_list_hdr util_list_hdr_t;
 
-/// structure of a list
+// structure of a list
 struct util_list {
-    /// pointer to first element of the list
+    // pointer to first element of the list
     struct util_list_hdr *first;
-    /// pointer to the last element
+    // pointer to the last element
     struct util_list_hdr *last;
 
-    //#if (KE_PROFILING) //removed for rom code 20200224
-    /// number of element in the list
+    // #if (KE_PROFILING) //removed for rom code 20200224
+    // number of element // rthe list
     uint32_t cnt;
-    /// max number of element in the list
+    // max number of element in the list
     uint32_t maxcnt;
-    /// min number of element in the list
+    // min number of element in the list
     uint32_t mincnt;
-    //#endif //KE_PROFILING //removed for rom code 20200224s
-};
+     // #endif // KE_PROFILING // removed for rom code 20200224s
+}; // r
 
-/// simplify type name of list
+// simplify type name of list
 typedef struct util_list util_list_t;
 
 /*
  * MACROS
  ****************************************************************************************
  */
-/// pop a specific element from the list
+// pop a specific element from the list
 #define UTIL_LIST_POP_ELT(list, elt) util_list_extract(&(list), &((elt)->hdr))
 
 /*
@@ -254,7 +253,6 @@ void util_list_insert_before(struct util_list *list,
 void util_list_insert_after(struct util_list *list,
                             struct util_list_hdr *elt_ref_hdr, struct util_list_hdr *elt_to_add_hdr);
 
-
 /**
  ****************************************************************************************
  * @brief Count number of elements present in the list
@@ -294,7 +292,6 @@ __INLINE struct util_list_hdr *util_list_pick(const struct util_list *const list
     return (list->first);
 }
 
-
 /**
  ****************************************************************************************
  * @brief Return following element of a list element.
@@ -309,5 +306,5 @@ __INLINE struct util_list_hdr *util_list_next(const struct util_list_hdr *const 
     return (list_hdr->next);
 }
 
-/// @} UTIL_LIST
+// @} UTIL_LIST
 #endif // _UTIL_LIST_H_

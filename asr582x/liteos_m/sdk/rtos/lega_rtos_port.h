@@ -18,4 +18,4 @@
 
 #include "los_arch_context.h"
 
-#endif //__LEGA_RTOS_PORT_H__
+#endif // __LEGA_RTOS_PORT_H__
