@@ -22,7 +22,7 @@
 #include "duet_dma.h"
 #include "duet_i2c.h"
 
-//duet_i2c_slv_callback_t g_duet_i2c_slv_callback_handler[DUET_I2C_NUM];
+// duet_i2c_slv_callback_t g_duet_i2c_slv_callback_handler[DUET_I2C_NUM];
 duet_timer_dev_t g_duet_timer1;
 volatile int g_duet_i2c_timeout = 0;
 duet_i2c_priv_cfg_t duet_i2c_priv_cfg = {
@@ -99,8 +99,8 @@ int32_t duet_i2c_reset( I2C_TypeDef *I2Cx)
     }
 
     if ( temp ) {
-        I2Cx->CR &= I2C_UNIT_RESET; //clear rest of CR
-        I2Cx->CR |= I2C_UNIT_RESET;  //set RESET bit
+        I2Cx->CR &= I2C_UNIT_RESET; // clear rest of CR
+        I2Cx->CR |= I2C_UNIT_RESET;  // set RESET bit
         I2Cx->SR = 0;
         I2Cx->CR &= ~I2C_UNIT_RESET; // clear RESET bit
     } else {
@@ -215,7 +215,7 @@ int32_t duet_i2c_init(duet_i2c_dev_t *i2c)
 
         duet_i2c_interrupt_config(I2Cx, I2C_INTERRUPT_SLAVE_ADDR_DET_EN | I2C_INTERRUPT_TRANS_DONE_EN |
                                   I2C_INTERRUPT_RX_FIFO_FULL_EN | I2C_INTERRUPT_BUS_ERROR_DET_EN \
-                                  | I2C_INTERRUPT_MASTER_STOP_DET_EN, ENABLE);//master
+                                  | I2C_INTERRUPT_MASTER_STOP_DET_EN, ENABLE); // master
     } else {
         /* i2c as slave */
         I2Cx->SAR = i2c->config.dev_addr; // set unit address as slave
@@ -223,12 +223,12 @@ int32_t duet_i2c_init(duet_i2c_dev_t *i2c)
         I2Cx->CR |= (duet_i2c_priv_cfg.speed_mode << I2C_MODE_SET_POS); // set speed mode
         //            I2Cx->CR |= pI2C_InitStrcut->i2c_mst_fifo_mode;  // FIFO mode is not for slave mode, so this has no effect
         I2Cx->CR |= I2C_INTERRUPT_SLAVE_ADDR_DET_EN | I2C_INTERRUPT_RX_FIFO_FULL_EN | I2C_INTERRUPT_RX_BUFER_FULL_EN |
-                    I2C_INTERRUPT_SLAVE_STOP_DET_EN | I2C_INTERRUPT_TRANS_DONE_EN | I2C_INTERRUPT_TX_BUFFER_EMPTY_EN; //master read
+                    I2C_INTERRUPT_SLAVE_STOP_DET_EN | I2C_INTERRUPT_TRANS_DONE_EN | I2C_INTERRUPT_TX_BUFFER_EMPTY_EN; // master read
         I2Cx->CR |= I2C_UNIT_ENABLE; // unit enable
 
         duet_i2c_interrupt_config(I2Cx, I2C_INTERRUPT_SLAVE_ADDR_DET_EN | I2C_INTERRUPT_RX_FIFO_FULL_EN |
                                   I2C_INTERRUPT_RX_BUFER_FULL_EN | I2C_INTERRUPT_SLAVE_STOP_DET_EN \
-                                  | I2C_INTERRUPT_TRANS_DONE_EN | I2C_INTERRUPT_TX_BUFFER_EMPTY_EN, ENABLE);//slave
+                                  | I2C_INTERRUPT_TRANS_DONE_EN | I2C_INTERRUPT_TX_BUFFER_EMPTY_EN, ENABLE); // slave
     }
     if (duet_i2c_priv_cfg.dma_mode == I2C_DMA_ENABLE) {
         I2Cx->CR |= I2C_DMA_ENABLE;
@@ -236,9 +236,9 @@ int32_t duet_i2c_init(duet_i2c_dev_t *i2c)
 
     // I2C interrupt enable should be put before I2C enable
     if (I2C_DEVICE0 == i2c->port) { // I2C_DEVICE0
-        NVIC_EnableIRQ(I2C0_IRQn); //enable I2C0 interrupt
+        NVIC_EnableIRQ(I2C0_IRQn); // enable I2C0 interrupt
     } else {
-        NVIC_EnableIRQ(I2C1_IRQn); //enable I2C1 interrupt
+        NVIC_EnableIRQ(I2C1_IRQn); // enable I2C1 interrupt
     }
 
     /* check the bus busy after unit enable */
@@ -279,7 +279,7 @@ int32_t duet_i2c_master_send(duet_i2c_dev_t *i2c, uint16_t dev_addr, const uint8
         g_duet_timer1.config.cb = duet_timer1_irq_handler;
         g_duet_timer1.config.arg = NULL;
 
-        g_duet_timer1.config.period = timeout * 1000; //us
+        g_duet_timer1.config.period = timeout * 1000; // us
 
         duet_timer_init(&g_duet_timer1);
         g_duet_i2c_timeout = 0;
@@ -303,7 +303,7 @@ int32_t duet_i2c_master_send(duet_i2c_dev_t *i2c, uint16_t dev_addr, const uint8
         }
 
         if (size > I2C_TX_FIFO_DEPTH) {
-            //send 8 bytes
+            // send 8 bytes
             for (temp = 0; temp < I2C_TX_FIFO_DEPTH; temp++) {
                 if (g_duet_i2c_timeout) {
                     g_duet_i2c_timeout = 0;
@@ -312,7 +312,7 @@ int32_t duet_i2c_master_send(duet_i2c_dev_t *i2c, uint16_t dev_addr, const uint8
                 }
 
                 if ( i2c_get_flag_status(I2Cx, I2C_STATUS_BUS_ERROR_DET) ) {
-                    ret = -EBUSERR; //bus error
+                    ret = -EBUSERR; // bus error
                     goto EXIT;
                 } else {
                     I2Cx->WFIFO = (*data++) | I2C_TB;
@@ -320,7 +320,7 @@ int32_t duet_i2c_master_send(duet_i2c_dev_t *i2c, uint16_t dev_addr, const uint8
             }
             size -= I2C_TX_FIFO_DEPTH;
         } else {
-            //send remaining bytes
+            // send remaining bytes
             for (temp = 0; temp < size; temp++) {
                 if (g_duet_i2c_timeout) {
                     g_duet_i2c_timeout = 0;
@@ -329,7 +329,7 @@ int32_t duet_i2c_master_send(duet_i2c_dev_t *i2c, uint16_t dev_addr, const uint8
                 }
 
                 if ( i2c_get_flag_status(I2Cx, I2C_STATUS_BUS_ERROR_DET) ) {
-                    ret =  -EBUSERR; //bus error
+                    ret =  -EBUSERR; // bus error
                     goto EXIT;
                 } else {
                     if (temp == size - 1) {
@@ -376,7 +376,7 @@ int32_t duet_i2c_master_recv(duet_i2c_dev_t *i2c, uint16_t dev_addr, uint8_t *da
         g_duet_timer1.config.cb = duet_timer1_irq_handler;
         g_duet_timer1.config.arg = NULL;
 
-        g_duet_timer1.config.period = timeout * 1000; //us
+        g_duet_timer1.config.period = timeout * 1000; // us
 
         duet_timer_init(&g_duet_timer1);
         g_duet_i2c_timeout = 0;
@@ -445,20 +445,20 @@ int8_t duet_i2c_master_repeated_write_read(I2C_TypeDef *I2Cx, uint8_t slave_addr
         while ( !i2c_get_flag_status(I2Cx, I2C_STATUS_TX_FIFO_EMPTY) );
 
         if (wlen > I2C_TX_FIFO_DEPTH) {
-            //send 8 bytes
+            // send 8 bytes
             for (temp = 0; temp < I2C_TX_FIFO_DEPTH; temp++) {
                 if ( i2c_get_flag_status(I2Cx, I2C_STATUS_BUS_ERROR_DET) ) {
-                    return EIO;    //bus error
+                    return EIO;    // bus error
                 } else {
                     I2Cx->WFIFO = (*pwdata++) | I2C_TB;
                 }
             }
             wlen -= I2C_TX_FIFO_DEPTH;
         } else {
-            //send remaining bytes
+            // send remaining bytes
             for (temp = 0; temp < wlen; temp++) {
                 if ( i2c_get_flag_status(I2Cx, I2C_STATUS_BUS_ERROR_DET) ) {
-                    return EIO;    //bus error
+                    return EIO;    // bus error
                 } else {
                     if (temp == wlen - 1) {
                         I2Cx->WFIFO = (*pwdata) | I2C_TB;   // no need to send STOP for repeated read
@@ -524,7 +524,7 @@ int32_t duet_i2c_mem_write(duet_i2c_dev_t *i2c, uint16_t dev_addr, uint16_t mem_
         g_duet_timer1.config.cb = duet_timer1_irq_handler;
         g_duet_timer1.config.arg = NULL;
 
-        g_duet_timer1.config.period = timeout * 1000; //us
+        g_duet_timer1.config.period = timeout * 1000; // us
 
         duet_timer_init(&g_duet_timer1);
         g_duet_i2c_timeout = 0;
@@ -559,7 +559,7 @@ int32_t duet_i2c_mem_write(duet_i2c_dev_t *i2c, uint16_t dev_addr, uint16_t mem_
         }
 
         if (len > I2C_TX_FIFO_DEPTH) {
-            //send 8 bytes
+            // send 8 bytes
             for (temp = 0; temp < I2C_TX_FIFO_DEPTH; temp++) {
                 if (g_duet_i2c_timeout) {
                     g_duet_i2c_timeout = 0;
@@ -568,7 +568,7 @@ int32_t duet_i2c_mem_write(duet_i2c_dev_t *i2c, uint16_t dev_addr, uint16_t mem_
                 }
 
                 if ( i2c_get_flag_status(I2Cx, I2C_STATUS_BUS_ERROR_DET) ) {
-                    ret = -EBUSERR; //bus error
+                    ret = -EBUSERR; // bus error
                     goto EXIT;
                 } else {
                     i2c_write_byte(I2Cx, (*data++) | I2C_TB);
@@ -576,7 +576,7 @@ int32_t duet_i2c_mem_write(duet_i2c_dev_t *i2c, uint16_t dev_addr, uint16_t mem_
             }
             len -= I2C_TX_FIFO_DEPTH;
         } else {
-            //send remaining bytes
+            // send remaining bytes
             for (temp = 0; temp < len; temp++) {
                 if (g_duet_i2c_timeout) {
                     g_duet_i2c_timeout = 0;
@@ -585,7 +585,7 @@ int32_t duet_i2c_mem_write(duet_i2c_dev_t *i2c, uint16_t dev_addr, uint16_t mem_
                 }
 
                 if ( i2c_get_flag_status(I2Cx, I2C_STATUS_BUS_ERROR_DET) ) {
-                    ret = -EBUSERR; //bus error
+                    ret = -EBUSERR; // bus error
                     goto EXIT;
                 } else {
                     if (temp == len - 1) {
@@ -633,7 +633,7 @@ int32_t duet_i2c_mem_read(duet_i2c_dev_t *i2c, uint16_t dev_addr, uint16_t mem_a
         g_duet_timer1.config.cb = duet_timer1_irq_handler;
         g_duet_timer1.config.arg = NULL;
 
-        g_duet_timer1.config.period = timeout * 1000; //us
+        g_duet_timer1.config.period = timeout * 1000; // us
 
         duet_timer_init(&g_duet_timer1);
         g_duet_i2c_timeout = 0;
@@ -674,7 +674,7 @@ int32_t duet_i2c_mem_read(duet_i2c_dev_t *i2c, uint16_t dev_addr, uint16_t mem_a
         }
 
         if ( i2c_get_flag_status(I2Cx, I2C_STATUS_BUS_ERROR_DET) ) {
-            ret = -EBUSERR; //bus error
+            ret = -EBUSERR; // bus error
             goto EXIT;
         } else {
             if (i == size - 1) {
@@ -739,9 +739,9 @@ int32_t duet_i2c_finalize(duet_i2c_dev_t *i2c)
     I2Cx = I2Cx;
     // disable i2c cm4 irq
     if (I2C_DEVICE0 == i2c->port) { // I2C_DEVICE0
-        NVIC_DisableIRQ(I2C0_IRQn); //disable I2C0 interrupt
+        NVIC_DisableIRQ(I2C0_IRQn); // disable I2C0 interrupt
     } else {
-        NVIC_DisableIRQ(I2C1_IRQn); //disable I2C1 interrupt
+        NVIC_DisableIRQ(I2C1_IRQn); // disable I2C1 interrupt
     }
 
     // I2C IRQ disable
@@ -753,19 +753,19 @@ int32_t duet_i2c_finalize(duet_i2c_dev_t *i2c)
         REG_WR(DUTE_IRQ_DIS_REG, (reg_val | I2C1_IRQ_DISABLE));
     }
 
-    //i2c clk disable
+    // i2c clk disable
     if (I2C_DEVICE0 == i2c->port) { // I2C_DEVICE0
-        //I2C0 clock disable
+        // I2C0 clock disable
         reg_val = REG_RD(PERI_CLK_DIS_REG1);
         REG_WR(PERI_CLK_DIS_REG1, (reg_val & ((I2C0_BUS_CLOCK_DISABLE | I2C0_PERI_CLOCK_DISABLE))));
     } else { // I2C_DEVICE1
-        //I2C1 clock disable
+        // I2C1 clock disable
         reg_val = REG_RD(PERI_CLK_DIS_REG1);
         REG_WR(PERI_CLK_DIS_REG1, (reg_val & ((I2C1_BUS_CLOCK_DISABLE | I2C1_PERI_CLOCK_DISABLE))));
     }
-    //callback function pointer clear
-    //g_duet_i2c_slv_callback_handler[i2c->port].tx_func = NULL;
-    //g_duet_i2c_slv_callback_handler[i2c->port].rx_func = NULL;
+    // callback function pointer clear
+    // g_duet_i2c_slv_callback_handler[i2c->port].tx_func = NULL;
+    // g_duet_i2c_slv_callback_handler[i2c->port].rx_func = NULL;
 
     return 0;
 }
@@ -783,7 +783,7 @@ void duet_i2c_master_dma_send(uint8_t iic_idx, uint32_t *data, uint16_t len)
     Chan_Ctl_Data_TypeDef ch_ctl_data;
     Chan_Cfg_TypeDef ch_cfg;
 
-    ch_ctl_data.cycle_ctl = DMA_OP_MODE_BASIC;//DMA_OP_MODE_AUTO_REQ;
+    ch_ctl_data.cycle_ctl = DMA_OP_MODE_BASIC; // DMA_OP_MODE_AUTO_REQ;
     ch_ctl_data.n_minus_1 = len - 1;
     ch_ctl_data.R_pow = 0;
     ch_ctl_data.src_inc = DMA_SRC_ADDR_INC_WORD;
@@ -801,7 +801,7 @@ void duet_i2c_master_dma_send(uint8_t iic_idx, uint32_t *data, uint16_t len)
 
     //    NVIC_EnableIRQ(DMA_IRQn);
     // set dma_wationreq to high for I2C single req, handshake rule 16
-    //DMA_WAIT_ON_REQ |= (1<<dma_chan);
+    // DMA_WAIT_ON_REQ |= (1<<dma_chan);
     DMA->CFG |= 0x1; // dma enable
     DMA_INT_MASK |= (1 << dma_chan); // dma interrupt unmask, write 1
     // set channel to use primary data struct only for basic/auto-request type
@@ -823,7 +823,7 @@ void duet_i2c_master_dma_recv(uint8_t iic_idx, uint32_t *data, uint16_t len)
     Chan_Ctl_Data_TypeDef ch1_ctl_data;
     Chan_Cfg_TypeDef ch1_cfg;
 
-    ch1_ctl_data.cycle_ctl = DMA_OP_MODE_BASIC;//DMA_OP_MODE_AUTO_REQ;
+    ch1_ctl_data.cycle_ctl = DMA_OP_MODE_BASIC; // DMA_OP_MODE_AUTO_REQ;
     ch1_ctl_data.n_minus_1 = len - 1;
     ch1_ctl_data.R_pow = 0;
     ch1_ctl_data.src_inc = DMA_SRC_ADDR_INC_FIX;

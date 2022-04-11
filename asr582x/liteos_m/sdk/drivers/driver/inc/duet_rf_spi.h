@@ -35,4 +35,4 @@ void spi_sw_protect_write(uint16_t addr, uint16_t data);
 void rf_set_reg_bit(uint16_t reg, uint8_t start_bit, uint8_t len, uint16_t src_val);
 uint16_t rf_get_reg_bit(uint16_t reg, uint8_t start_bit, uint8_t len);
 
-#endif //__RF_SPI_H__
+#endif // __RF_SPI_H__

@@ -24,7 +24,7 @@ const duet_logic_partition_t duet_partitions[] = {
         .partition_owner            = FLASH_EMBEDDED,
         .partition_description      = "Bootloader",
         .partition_start_addr       = BOOTLOADER_FLASH_START_ADDR,
-        .partition_length           = BOOTLOADER_MAX_SIZE,    //64k bytes
+        .partition_length           = BOOTLOADER_MAX_SIZE,    // 64k bytes
         .partition_options          = PAR_OPT_READ_EN | PAR_OPT_WRITE_DIS,
     },
     [PARTITION_PARAMETER_1] =
@@ -40,7 +40,7 @@ const duet_logic_partition_t duet_partitions[] = {
         .partition_owner            = FLASH_EMBEDDED,
         .partition_description      = "KV",
         .partition_start_addr       = KV_FLASH_START_ADDR,
-        .partition_length           = KV_MAX_SIZE, //12k bytes
+        .partition_length           = KV_MAX_SIZE, // 12k bytes
         .partition_options          = PAR_OPT_READ_EN | PAR_OPT_WRITE_EN,
     },
     [PARTITION_PARAMETER_3] =
@@ -48,7 +48,7 @@ const duet_logic_partition_t duet_partitions[] = {
         .partition_owner            = FLASH_EMBEDDED,
         .partition_description      = "MIDEA_INFO",
         .partition_start_addr       = MIDEA_INFO_START_ADDR,
-        .partition_length           = MIDEA_INFO_MAX_SIZE, //4k bytes
+        .partition_length           = MIDEA_INFO_MAX_SIZE, // 4k bytes
         .partition_options          = PAR_OPT_READ_EN | PAR_OPT_WRITE_EN,
     },
     [PARTITION_PARAMETER_4] =
@@ -56,7 +56,7 @@ const duet_logic_partition_t duet_partitions[] = {
         .partition_owner            = FLASH_EMBEDDED,
         .partition_description      = "MIDEA_INFO_BKUP",
         .partition_start_addr       = MIDEA_INFO_BKUP_START_ADDR,
-        .partition_length           = MIDEA_INFO_BKUP_MAX_SIZE, //4k bytes
+        .partition_length           = MIDEA_INFO_BKUP_MAX_SIZE, // 4k bytes
         .partition_options          = PAR_OPT_READ_EN | PAR_OPT_WRITE_EN,
     },
     [PARTITION_APPLICATION] =
@@ -64,7 +64,7 @@ const duet_logic_partition_t duet_partitions[] = {
         .partition_owner            = FLASH_EMBEDDED,
         .partition_description      = "Application",
         .partition_start_addr       = APP_FLASH_START_ADDR,
-        .partition_length           = APP_MAX_SIZE, //768k bytes
+        .partition_length           = APP_MAX_SIZE, // 768k bytes
         .partition_options          = PAR_OPT_READ_EN | PAR_OPT_WRITE_EN,
     },
     [PARTITION_OTA_TEMP] =
@@ -72,7 +72,7 @@ const duet_logic_partition_t duet_partitions[] = {
         .partition_owner           = FLASH_EMBEDDED,
         .partition_description     = "OTA Storage",
         .partition_start_addr      = OTA_FLASH_START_ADDR,
-        .partition_length          = OTA_MAX_SIZE, //768k bytes
+        .partition_length          = OTA_MAX_SIZE, // 768k bytes
         .partition_options         = PAR_OPT_READ_EN | PAR_OPT_WRITE_EN,
     },
     [PARTITION_CUSTOM_1] =
@@ -80,7 +80,7 @@ const duet_logic_partition_t duet_partitions[] = {
         .partition_owner           = FLASH_EMBEDDED,
         .partition_description     = "FLASH Customer1",
         .partition_start_addr      = CUST1_FLASH_START_ADDR,
-        .partition_length          = CUST1_MAX_SIZE, //12k bytes
+        .partition_length          = CUST1_MAX_SIZE, // 12k bytes
         .partition_options         = PAR_OPT_READ_EN | PAR_OPT_WRITE_EN,
     },
 #ifdef MS_CONFIG_OTA_SUPPORT
@@ -89,7 +89,7 @@ const duet_logic_partition_t duet_partitions[] = {
         .partition_owner           = FLASH_EMBEDDED,
         .partition_description     = "OTA MCU",
         .partition_start_addr      = OTA_MCU_FLASH_START_ADDR,
-        .partition_length          = OTA_MCU_MAX_SIZE, //192k bytes
+        .partition_length          = OTA_MCU_MAX_SIZE, // 192k bytes
         .partition_options         = PAR_OPT_READ_EN | PAR_OPT_WRITE_EN,
     },
     [PARTITION_OTA_PARA] =
@@ -97,7 +97,7 @@ const duet_logic_partition_t duet_partitions[] = {
         .partition_owner           = FLASH_EMBEDDED,
         .partition_description     = "OTA PARA",
         .partition_start_addr      = OTA_PARA_START_ADDR,
-        .partition_length          = OTA_PARA_MAX_SIZE, //4k bytes
+        .partition_length          = OTA_PARA_MAX_SIZE, // 4k bytes
         .partition_options         = PAR_OPT_READ_EN | PAR_OPT_WRITE_EN,
     },
     [PARTITION_OTA_HEAD_PARA] =
@@ -105,16 +105,16 @@ const duet_logic_partition_t duet_partitions[] = {
         .partition_owner           = FLASH_EMBEDDED,
         .partition_description     = "OTA HEAD PARA",
         .partition_start_addr      = OTA_HEAD_PARA_START_ADDR,
-        .partition_length          = OTA_HEAD_PARA_MAX_SIZE, //4k bytes
+        .partition_length          = OTA_HEAD_PARA_MAX_SIZE, // 4k bytes
         .partition_options         = PAR_OPT_READ_EN | PAR_OPT_WRITE_EN,
     },
 #endif
     [PARTITION_PARAMETER_5] =
     {
         .partition_owner            = FLASH_EMBEDDED,
-        .partition_description      = "NVDS", //offline log
+        .partition_description      = "NVDS", // offline log
         .partition_start_addr       = NVDS_FLASH_START_ADDR,
-        .partition_length           = NVDS_MAX_SIZE, //8k bytes
+        .partition_length           = NVDS_MAX_SIZE, // 8k bytes
         .partition_options          = PAR_OPT_READ_EN | PAR_OPT_WRITE_EN,
     },
 };

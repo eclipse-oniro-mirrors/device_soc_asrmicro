@@ -40,12 +40,12 @@
  *
  */
 typedef enum {
-    SONATA_LOG_NONE,       /*!< No log output */
-    SONATA_LOG_ERROR,      /*!< Critical errors, software module can not recover on its own */
-    SONATA_LOG_WARN,       /*!< Error conditions from which recovery measures have been taken */
-    SONATA_LOG_INFO,       /*!< Information messages which describe normal flow of events */
-    SONATA_LOG_DEBUG,      /*!< Extra information which is not necessary for normal use (values, pointers, sizes, etc). */
-    SONATA_LOG_VERBOSE     /*!< Bigger chunks of debugging information, or frequent messages which can potentially flood the output. */
+    SONATA_LOG_NONE,       /* !< No log output */
+    SONATA_LOG_ERROR,      /* !< Critical errors, software module can not recover on its own */
+    SONATA_LOG_WARN,       /* !< Error conditions from which recovery measures have been taken */
+    SONATA_LOG_INFO,       /* !< Information messages which describe normal flow of events */
+    SONATA_LOG_DEBUG,      /* !< Extra information which is not necessary for normal use (values, pointers, sizes, etc). */
+    SONATA_LOG_VERBOSE     /* !< Bigger chunks of debugging information, or frequent messages which can potentially flood the output. */
 } sonata_log_level;
 
 /*
@@ -110,7 +110,7 @@ typedef int (*vprintf_like_t)(const char *, va_list);
 #define LOGD( format, ... ) SONATA_LOG_LEVEL_LOCAL_SIMPLE(SONATA_LOG_DEBUG,   format, ##__VA_ARGS__)
 #define LOGV( format, ... ) SONATA_LOG_LEVEL_LOCAL_SIMPLE(SONATA_LOG_VERBOSE, format, ##__VA_ARGS__)
 
-#else //CFG_SONATA_LOG
+#else // CFG_SONATA_LOG
 
 #define LOGTE( tag, format, ... )
 #define LOGTW( tag, format, ... )
@@ -123,7 +123,7 @@ typedef int (*vprintf_like_t)(const char *, va_list);
 #define LOGD( format, ... )
 #define LOGV( format, ... )
 
-#endif //CFG_SONATA_LOG
+#endif // CFG_SONATA_LOG
 
 /*
 * FUNCTION DEFINITIONS
@@ -142,7 +142,7 @@ vprintf_like_t sonata_log_set_vprintf(vprintf_like_t func);
  */
 void sonata_log_level_set(sonata_log_level level);
 
-//Internal use
+// Internal use
 void sonata_logt_write(sonata_log_level level, const char *tag, const char *format, ...);
 
 #endif // _SONATA_LOG_H_

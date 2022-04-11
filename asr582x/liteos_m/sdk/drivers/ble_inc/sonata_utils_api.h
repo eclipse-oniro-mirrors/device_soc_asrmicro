@@ -52,7 +52,7 @@
 #define SONATA_UTILS_API_TRC    printf
 #else
 #define SONATA_UTILS_API_TRC(...)
-#endif //SONATA_API_TASK_DBG
+#endif // SONATA_API_TASK_DBG
 
 /// file system first tag id for application
 #define APP_DATA_SAVE_TAG_FIRST              (0x90)
@@ -114,9 +114,9 @@ typedef uint8_t sonata_fs_tag_t;
 * @brief ble addr priority return result
 */
 typedef enum {
-    ///efuse > nvds
+    /// efuse > nvds
     SONATA_MAC_USE_EFUSE,
-    ///nvds > efuse
+    /// nvds > efuse
     SONATA_MAC_USE_NVDS,
 } SONATA_MAC_PRIORITY;
 
@@ -188,13 +188,13 @@ uint16_t sonata_api_send_app_msg(uint8_t op, void *p_param);
 */
 uint16_t sonata_api_app_msg_register(const sonata_api_app_msg_t *msg);
 
-///@hide
+/// @hide
 uint8_t sonata_api_app_ke_msg_handler(void *p_param);
 
-///@hide
+/// @hide
 void sonata_api_util_gap_status_print(uint8_t status);
 
-///@hide
+/// @hide
 void sonata_api_util_gatt_status_print(uint8_t operation, uint8_t status);
 
 /**
@@ -449,5 +449,5 @@ __INLINE uint32_t util_read32p(void const *ptr32)
 void sonata_platform_reset(void);
 
 /** @}*/
-#endif //_SONATA_UTILS_API_H_
+#endif // _SONATA_UTILS_API_H_
 

@@ -32,16 +32,16 @@
  *  @brief  wlan network interface enumeration definition.
  */
 typedef enum {
-    SOFTAP,   /*Act as an access point, and other station can connect, 4 stations Max*/
-    STA,      /*Act as a station which can connect to an access point*/
+    SOFTAP,   /*Act as an access point, and other station can connect, 4 stations Max */
+    STA,      /*Act as a station which can connect to an access point */
 } lega_wlan_type_e;
 
 typedef enum {
-    EVENT_STATION_UP = 1,  /*used in station mode,
-                            indicate station associated in open mode or 4-way-handshake done in WPA/WPA2*/
-    EVENT_STATION_DOWN,    /*used in station mode, indicate station deauthed*/
-    EVENT_AP_UP,           /*used in softap mode, indicate softap enabled*/
-    EVENT_AP_DOWN,         /*used in softap mode, indicate softap disabled*/
+    EVENT_STATION_UP = 1,  /* used in station mode,
+                            indicate station associated in open mode or 4-way-handshake done in WPA/WPA2 */
+    EVENT_STATION_DOWN,    /* used in station mode, indicate station deauthed */
+    EVENT_AP_UP,           /* used in softap mode, indicate softap enabled */
+    EVENT_AP_DOWN,         /* used in softap mode, indicate softap disabled */
 } lega_wifi_event_e;
 typedef enum {
     CONNECT_SUCC,
@@ -56,7 +56,7 @@ typedef struct {
     uint8_t is_scan_adv;
     char ap_num;       /**< The number of access points found in scanning. */
     struct {
-        char    ssid[32 + 1]; /*ssid max len:32. +1 is for '\0'. when ssidlen is 32  */
+        char    ssid[32 + 1]; /* ssid max len:32. +1 is for '\0'. when ssidlen is 32  */
         char    ap_power;   /**< Signal strength, min:0, max:100. */
         char    bssid[6];     /* The BSSID of an access point. */
         char    channel;      /* The RF frequency, 1-13 */
@@ -65,41 +65,41 @@ typedef struct {
 } lega_wlan_scan_result_t;
 
 typedef enum {
-    WLAN_SECURITY_OPEN,                   //NONE
-    WLAN_SECURITY_WEP,                    //WEP
-    WLAN_SECURITY_WPA,                    //WPA
-    WLAN_SECURITY_WPA2,                   //WPA2
-    WLAN_SECURITY_AUTO,                   //WPA or WPA2
+    WLAN_SECURITY_OPEN,                   // NONE
+    WLAN_SECURITY_WEP,                    // WEP
+    WLAN_SECURITY_WPA,                    // WPA
+    WLAN_SECURITY_WPA2,                   // WPA2
+    WLAN_SECURITY_AUTO,                   // WPA or WPA2
     WLAN_SECURITY_MAX,
 } lega_wlan_security_e;
 
-/*used in event callback of station mode, indicate softap informatino which is connected*/
+/* used in event callback of station mode, indicate softap informatino which is connected */
 typedef struct {
     int     rssi;           /* rssi */
     char    ssid[32 + 1];   /* ssid max len:32. +1 is for '\0' when ssidlen is 32  */
     char    pwd[64 + 1];    /* pwd max len:64. +1 is for '\0' when pwdlen is 64 */
-    char    bssid[6];       /* BSSID of the wlan needs to be connected.*/
+    char    bssid[6];       /* BSSID of the wlan needs to be connected. */
 #ifdef CFG_NAN_CONFIG
     char    pmk[32];
 #endif
-    char    ssid_len;       /*ssid length*/
-    char    pwd_len;        /*password length*/
-    char    channel;       /* wifi channel 0-13.*/
-    char    security;      /*refer to lega_wlan_security_e*/
+    char    ssid_len;       /* ssid length */
+    char    pwd_len;        /* password length */
+    char    channel;       /* wifi channel 0-13. */
+    char    security;      /* refer to lega_wlan_security_d */
 } lega_wlan_ap_info_adv_t;
 
-/*only used in station mode*/
+/* only used in station modd */
 typedef struct {
     char    dhcp;             /* no use currently */
-    char    macaddr[16];      /* mac address on the target wlan interface, ASCII*/
-    char    ip[16];           /* Local IP address on the target wlan interface, ASCII*/
+    char    macaddr[16];      /* mac address on the target wlan interface, ASCII */
+    char    ip[16];           /* Local IP address on the target wlan interface, ASCII */
     char    gate[16];         /* Router IP address on the target wlan interface, ASCII */
-    char    mask[16];         /* Netmask on the target wlan interface, ASCII*/
-    char    dns[16];          /* no use currently , ASCII*/
-    char    broadcastip[16];  /* no use currently , ASCII*/
+    char    mask[16];         /* Netmask on the target wlan interface, ASCII */
+    char    dns[16];          /* no use currently , ASCII */
+    char    broadcastip[16];  /* no use currently , ASCII */
 } lega_wlan_ip_stat_t;
 
-/*only used in station mode*/
+/* only used in station modd */
 typedef struct {
     int     is_connected;  /* The link to wlan is established or not, 0: disconnected, 1: connected. */
     int     wifi_strength; /* Signal strength of the current connected AP */
@@ -114,15 +114,15 @@ typedef struct {
     char    pwd[64 + 1];    /* pwd max len:64. +1 is for '\0' when pwdlen is 64 */
     int     interval;       /* beacon listen interval */
     int     hide;           /* hidden SSID */
-    int     channel;       /* Channel*/
+    int     channel;       /* Channel */
 } lega_wlan_ap_init_t;
 
-/*used in open cmd of hal_wifi_module_t*/
+/* used in open cmd of hal_wifi_module_t */
 typedef struct {
-    char    wifi_mode;              /* refer to hal_wifi_type_t*/
+    char    wifi_mode;              /* refer to hal_wifi_type_t */
     char    security;               /* security mode */
     char    wifi_ssid[32];          /* in station mode, indicate SSID of the wlan needs to be connected.
-                                       in softap mode, indicate softap SSID*/
+                                       in softap mode, indicate softap SSID */
     char    wifi_key[64];           /* in station mode, indicate Security key of the wlan needs to be connected,
                                        in softap mode, indicate softap password.(ignored in an open system.) */
     char    local_ip_addr[16];      /* used in softap mode to config ip for dut */
@@ -130,8 +130,8 @@ typedef struct {
     char    gateway_ip_addr[16];    /* used in softap mode to config netmask for dut */
     char    dns_server_ip_addr[16]; /* no use currently */
     char    dhcp_mode;              /* no use currently */
-    char    channel;                /* softap channel in softap mode; connect channel in sta mode*/
-    char    mac_addr[6];            /* connect bssid in sta mode*/
+    char    channel;                /* softap channel in softap mode; connect channel in sta modd */
+    char    mac_addr[6];            /* connect bssid in sta modd */
     char    reserved[32];           /* no use currently */
 #ifdef CFG_NAN_CONFIG
     uint8_t pmk[32];
@@ -139,14 +139,14 @@ typedef struct {
     int     wifi_retry_interval;    /* no use currently */
 } lega_wlan_init_type_t;
 
-/*WLAN error status*/
+/*WLAN error status */
 typedef enum {
-    WLAN_STA_MODE_BEACON_LOSS = 1,           //in sta mode, cannot receive beacon of peer connected AP for a long time
-    WLAN_STA_MODE_AUTH_FAIL,                 //in sta mode, connect fail during auth
-    WLAN_STA_MODE_ASSOC_FAIL,                //in sta mode, connect fail during association
-    WLAN_STA_MODE_PASSWORD_ERR,              //in sta mode, connect fail as password error
-    WLAN_STA_MODE_NO_AP_FOUND,               //in sta mode, connect fail as cannot find the connecting AP during scan
-    WLAN_STA_MODE_DHCP_FAIL,                 //in sta mode, connect fail as dhcp fail
+    WLAN_STA_MODE_BEACON_LOSS = 1,           // in sta mode, cannot receive beacon of peer connected AP for a long time
+    WLAN_STA_MODE_AUTH_FAIL,                 // in sta mode, connect fail during auth
+    WLAN_STA_MODE_ASSOC_FAIL,                // in sta mode, connect fail during association
+    WLAN_STA_MODE_PASSWORD_ERR,              // in sta mode, connect fail as password error
+    WLAN_STA_MODE_NO_AP_FOUND,               // in sta mode, connect fail as cannot find the connecting AP during scan
+    WLAN_STA_MODE_DHCP_FAIL,                 // in sta mode, connect fail as dhcp fail
 } lega_wlan_err_status_e;
 
 typedef struct {
@@ -172,7 +172,7 @@ typedef struct {
     uint8_t  sta_mac_addr[6];                       /* station mac addr */
 } lega_wlan_client_addr_info_t;
 
-/*store linked station info*/
+/* store linked station info */
 typedef struct {
     int client_num;                                 /* linked station number */
     lega_wlan_client_addr_info_t sta[4];            /* linked station entry, max client number is 4 */
@@ -202,7 +202,7 @@ typedef struct ms_hal_realtime_info_s {
     uint32_t byte_recv_speed;           /* bytes receive from associate AP per second */
     uint32_t packet_send_speed;         /* packets sent to associate AP per second */
     uint32_t packet_recv_speed;         /* packets receive from associate AP per second */
-    uint32_t errors_send_speed;         /* error packet AP transmit to STA per second (retry limit and other)*/
+    uint32_t errors_send_speed;         /* error packet AP transmit to STA per second (retry limit and other) */
     uint32_t errors_recv_speed;         /* error packet STA transmit to AP per second */
     uint32_t retrains_count;            /* total retransmission include same packted retransmit in hw */
     uint8_t  chn_utilization;           /* measure by the radio on the scanned 20MHZ channel */
@@ -380,13 +380,13 @@ int lega_wlan_get_link_status(lega_wlan_link_stat_t *link_status);
  */
 lega_wlan_ap_info_adv_t *lega_wlan_get_associated_apinfo(void);
 
-/*used in sniffer mode, open sniffer mode
+/* used in sniffer mode, open sniffer mode
 *  @return    0       : on success.
 *  @return    other   : error occurred
 */
 int lega_wlan_start_monitor(void);
 
-/*used in sniffer mode, close sniffer mode
+/* used in sniffer mode, close sniffer mode
 *  @return    0       : on success.
 *  @return    other   : error occurred
 */
@@ -417,10 +417,10 @@ int lega_wlan_set_ps_options(uint8_t listen_bc_mc, uint16_t listen_interval);
  */
 int lega_wlan_set_ps_mode(uint8_t ps_on);
 
-/*when use monitor mode, user should register this type of callback function to get the received MPDU*/
+/* when use monitor mode, user should register this type of callback function to get the received MPDU */
 typedef void (*monitor_cb_t)(uint8_t *data, int len, int rssi);
 
-/*when use monitor-ap mode, user should register this type of callback function to turn off monitor */
+/* when use monitor-ap mode, user should register this type of callback function to turn off monitor */
 typedef void (*monitor_ap_cb_t)(void);
 
 /** @brief  used in sniffer mode, callback function to get received MPDU, should register before start_monitor
@@ -441,7 +441,7 @@ int lega_wlan_register_monitor_cb(monitor_cb_t fn);
  */
 int lega_wlan_register_monitor_ap_cb(monitor_ap_cb_t fn);
 
-/* start adv callback function, notify the connect results*/
+/* start adv callback function, notify the connect results */
 typedef void (*start_adv_cb_t)(lega_start_adv_results_e status);
 
 /** @brief  used in sta mode, callback function to notify the connecting results
@@ -476,14 +476,14 @@ int lega_wlan_nan_set_scan_channel(uint8_t channel, uint32_t duration);
 int lega_wlan_disable_nanconfig(void);
 #endif
 
-/*enable WIFI stack log, will be output by uart
+/* enable WIFI stack log, will be output by uart
 *
 * @return    0       : on success.
 * @return    other   : error occurred
 */
 int lega_wlan_start_debug_mode(void);
 
-/*disable WIFI stack log
+/* disable WIFI stack log
 *
 * @return    0       : on success.
 * @return    other   : error occurred
@@ -608,4 +608,4 @@ void lega_log_enable(void);
 void lega_log_disable(void);
 bool lega_log_is_enable(void);
 
-#endif  //_LEGA_WIFI_API_H_
+#endif  // _LEGA_WIFI_API_H_

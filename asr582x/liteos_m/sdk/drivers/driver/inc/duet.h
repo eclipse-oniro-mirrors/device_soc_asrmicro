@@ -17,43 +17,43 @@
 #define _DUET_H_
 #include <stdint.h>
 #include <stdio.h>
-#if 0 //use duet_cm33.h
+#if 0 // use duet_cm33.h
 typedef enum { RESET = 0, SET = !RESET} FlagStatus, ITstatus;
 typedef enum { DISABLE = 0, ENABLE = !DISABLE } State;
 
 typedef enum IRQn {
     /**************   Processor Exceptions Numbers ******************************************/
-    NonMaskableInt_IRQn           = -14,      /*!< 2 Non Maskable Interrupt                         */
-    MemoryManagement_IRQn         = -12,      /*!< 4 Cortex-M3 Memory Management Interrupt          */
-    BusFault_IRQn                 = -11,      /*!< 5 Cortex-M3 Bus Fault Interrupt                  */
-    UsageFault_IRQn               = -10,      /*!< 6 Cortex-M3 Usage Fault Interrupt                */
-    SVCall_IRQn                   = -5,       /*!< 11 Cortex-M3 SV Call Interrupt                   */
-    DebugMonitor_IRQn             = -4,       /*!< 12 Cortex-M3 Debug Monitor Interrupt             */
-    PendSV_IRQn                   = -2,       /*!< 14 Cortex-M3 Pend SV Interrupt                   */
-    SysTick_IRQn                  = -1,       /*!< 15 Cortex-M3 System Tick Interrupt               */
+    NonMaskableInt_IRQn           = -14,      /* !< 2 Non Maskable Interrupt                         */
+    MemoryManagement_IRQn         = -12,      /* !< 4 Cortex-M3 Memory Management Interrupt          */
+    BusFault_IRQn                 = -11,      /* !< 5 Cortex-M3 Bus Fault Interrupt                  */
+    UsageFault_IRQn               = -10,      /* !< 6 Cortex-M3 Usage Fault Interrupt                */
+    SVCall_IRQn                   = -5,       /* !< 11 Cortex-M3 SV Call Interrupt                   */
+    DebugMonitor_IRQn             = -4,       /* !< 12 Cortex-M3 Debug Monitor Interrupt             */
+    PendSV_IRQn                   = -2,       /* !< 14 Cortex-M3 Pend SV Interrupt                   */
+    SysTick_IRQn                  = -1,       /* !< 15 Cortex-M3 System Tick Interrupt               */
     /******   Interrupt Numbers *******************************************************/
-    CEVA_RW_IP_IRQn               = 0,        /*!< CEVA RW IP Interrupt                             */
-    SLEEP_IRQn                    = 1,        /*!< Sleep Wake-Up Interrupt                          */
-    WDG_IRQn                      = 2,        /*!< Window WatchDog                                  */
-    FLASH_IRQn                    = 3,        /*!< FLASH Interrupt                                  */
-    GPIO_IRQn                     = 4,        /*!< GPIO Interrupt                                   */
-    TIMER_IRQn                    = 5,        /*!< Timer Interrupt                                  */
-    CRYPTOCELL310_IRQn            = 6,        /*!< CryptoCell 310 Interrupt                         */
-    DMA_IRQn                      = 7,        /*!< Generic DMA Ctrl Interrupt                       */
-    UART0_IRQn                    = 8,        /*!< UART0 Interrupt                                  */
-    UART1_IRQn                    = 9,        /*!< UART1 Interrupt                                  */
-    UART2_IRQn                    = 10,       /*!< UART2 Interrupt                                  */
-    SPI0_IRQn                     = 11,       /*!< SPI0 Interrupt                                   */
-    SPI1_IRQn                     = 12,       /*!< SPI1 Interrupt                                   */
-    SPI2_IRQn                     = 13,       /*!< SPI2                                             */
-    I2C0_IRQn                     = 14,       /*!< I2C0 Interrupt                                   */
-    I2C1_IRQn                     = 15,       /*!< I2C1 Interrupt                                   */
-    SDIO_IRQn                     = 16,       /*!< SDIO Combined Interrupt                          */
-    D_APLL_UNLOCK_IRQn            = 17,       /*!< RF added: D_APLL_UNLOCK Interrupt                */
-    D_SX_UNLOCK_IRQn              = 18,       /*!< RF added: D_SX_UNLOCK Interrupt                  */
-    PLF_WAKEUP_IRQn               = 23,       /*!< WiFi Platform Wake-Up Interrupt                  */
-    I2S_IRQn                      = 24,       /*!< I2S Interrupt                                    */
-    RW_BLE_IRQn                   = 25,       /*!< BLE Interrupt                                    */
+    CEVA_RW_IP_IRQn               = 0,        /* !< CEVA RW IP Interrupt                             */
+    SLEEP_IRQn                    = 1,        /* !< Sleep Wake-Up Interrupt                          */
+    WDG_IRQn                      = 2,        /* !< Window WatchDog                                  */
+    FLASH_IRQn                    = 3,        /* !< FLASH Interrupt                                  */
+    GPIO_IRQn                     = 4,        /* !< GPIO Interrupt                                   */
+    TIMER_IRQn                    = 5,        /* !< Timer Interrupt                                  */
+    CRYPTOCELL310_IRQn            = 6,        /* !< CryptoCell 310 Interrupt                         */
+    DMA_IRQn                      = 7,        /* !< Generic DMA Ctrl Interrupt                       */
+    UART0_IRQn                    = 8,        /* !< UART0 Interrupt                                  */
+    UART1_IRQn                    = 9,        /* !< UART1 Interrupt                                  */
+    UART2_IRQn                    = 10,       /* !< UART2 Interrupt                                  */
+    SPI0_IRQn                     = 11,       /* !< SPI0 Interrupt                                   */
+    SPI1_IRQn                     = 12,       /* !< SPI1 Interrupt                                   */
+    SPI2_IRQn                     = 13,       /* !< SPI2                                             */
+    I2C0_IRQn                     = 14,       /* !< I2C0 Interrupt                                   */
+    I2C1_IRQn                     = 15,       /* !< I2C1 Interrupt                                   */
+    SDIO_IRQn                     = 16,       /* !< SDIO Combined Interrupt                          */
+    D_APLL_UNLOCK_IRQn            = 17,       /* !< RF added: D_APLL_UNLOCK Interrupt                */
+    D_SX_UNLOCK_IRQn              = 18,       /* !< RF added: D_SX_UNLOCK Interrupt                  */
+    PLF_WAKEUP_IRQn               = 23,       /* !< WiFi Platform Wake-Up Interrupt                  */
+    I2S_IRQn                      = 24,       /* !< I2S Interrupt                                    */
+    RW_BLE_IRQn                   = 25,       /* !< BLE Interrupt                                    */
 } IRQn_Type;
 #endif
 #include "duet_cm4.h"
@@ -70,17 +70,17 @@ typedef enum IRQn {
 typedef struct Sys_Con_Block {
     union {
         struct {
-            __IO uint32_t hclk_src_sel: 2;
-            __IO uint32_t pclk_div_sel: 3;
-            __IO uint32_t kp_sclk_sel: 1;
-            __IO uint32_t timer1_sclk_sel: 1;
-            __IO uint32_t timer2_sclk_sel: 1;
-            __IO uint32_t timer3_sclk_sel: 1;
-            __IO uint32_t timer4_sclk_sel: 1;
+            __IO uint32_t hclk_src_sel : 2;
+            __IO uint32_t pclk_div_sel : 3;
+            __IO uint32_t kp_sclk_sel : 1;
+            __IO uint32_t timer1_sclk_sel : 1;
+            __IO uint32_t timer2_sclk_sel : 1;
+            __IO uint32_t timer3_sclk_sel : 1;
+            __IO uint32_t timer4_sclk_sel : 1;
             __IO uint32_t rw_mst_clk_freq_sel: 6;
-            __I  uint32_t rsv0: 1;
-            __IO uint32_t pwm_pclk_sel: 1;
-            __I  uint32_t rsv1: 14;
+            __I  uint32_t rsv0 : 1;
+            __IO uint32_t pwm_pclk_sel : 1;
+            __I  uint32_t rsv1 : 14;
         } BITS_CLK_SEL;
         __IO uint32_t REG_00;
     };
@@ -94,10 +94,10 @@ typedef struct Sys_Con_Block {
     /* I2S clock divider */
     union {
         struct {
-            __IO uint32_t i2s_ws_div: 8;
-            __IO uint32_t i2s_sclk_div: 8;
-            __IO uint32_t i2s_mclk_div: 8;
-            __IO uint32_t RESV3: 8;
+            __IO uint32_t i2s_ws_div : 8;
+            __IO uint32_t i2s_sclk_div : 8;
+            __IO uint32_t i2s_mclk_div : 8;
+            __IO uint32_t RESV3 : 8;
         } BITS_REG_20;
         __IO uint32_t REG_20;
     };
@@ -120,53 +120,53 @@ typedef struct Sys_Con_Block {
     __IO uint32_t REG_64;
     union {
         struct {
-            __IO uint32_t zr_gp0_sel: 4;
-            __IO uint32_t zr_gp1_sel: 4;
-            __IO uint32_t zr_gp2_sel: 4;
-            __IO uint32_t zr_gp3_sel: 4;
-            __IO uint32_t zr_gp4_sel: 4;
-            __IO uint32_t zr_gp5_sel: 4;
-            __IO uint32_t zr_gp6_sel: 4;
-            __IO uint32_t zr_gp7_sel: 4;
+            __IO uint32_t zr_gp0_sel : 4;
+            __IO uint32_t zr_gp1_sel : 4;
+            __IO uint32_t zr_gp2_sel : 4;
+            __IO uint32_t zr_gp3_sel : 4;
+            __IO uint32_t zr_gp4_sel : 4;
+            __IO uint32_t zr_gp5_sel : 4;
+            __IO uint32_t zr_gp6_sel : 4;
+            __IO uint32_t zr_gp7_sel : 4;
         } BITS_REG_68;
         __IO uint32_t REG_68;    /* pinmux control */
     };
     union {
         struct {
-            __IO uint32_t zr_gp8_sel: 4;
-            __IO uint32_t zr_gp9_sel: 4;
-            __IO uint32_t zr_gp10_sel: 4;
-            __IO uint32_t zr_gp11_sel: 4;
-            __IO uint32_t zr_gp12_sel: 4;
-            __IO uint32_t zr_gp13_sel: 4;
-            __IO uint32_t zr_gp14_sel: 4;
-            __IO uint32_t zr_gp15_sel: 4;
+            __IO uint32_t zr_gp8_sel : 4;
+            __IO uint32_t zr_gp9_sel : 4;
+            __IO uint32_t zr_gp10_sel : 4;
+            __IO uint32_t zr_gp11_sel : 4;
+            __IO uint32_t zr_gp12_sel : 4;
+            __IO uint32_t zr_gp13_sel : 4;
+            __IO uint32_t zr_gp14_sel : 4;
+            __IO uint32_t zr_gp15_sel : 4;
         } BITS_REG_6C;
         __IO uint32_t REG_6C;    /* pinmux control */
     };
     union {
         struct {
-            __IO uint32_t zr_gp16_sel: 4;
-            __IO uint32_t zr_gp17_sel: 4;
-            __IO uint32_t zr_gp18_sel: 4;
-            __IO uint32_t zr_gp19_sel: 4;
-            __IO uint32_t zr_gp20_sel: 4;
-            __IO uint32_t zr_gp21_sel: 4;
-            __IO uint32_t zr_gp22_sel: 4;
-            __IO uint32_t zr_gp23_sel: 4;
+            __IO uint32_t zr_gp16_sel : 4;
+            __IO uint32_t zr_gp17_sel : 4;
+            __IO uint32_t zr_gp18_sel : 4;
+            __IO uint32_t zr_gp19_sel : 4;
+            __IO uint32_t zr_gp20_sel : 4;
+            __IO uint32_t zr_gp21_sel : 4;
+            __IO uint32_t zr_gp22_sel : 4;
+            __IO uint32_t zr_gp23_sel : 4;
         } BITS_REG_70;
         __IO uint32_t REG_70;    /* pinmux control */
     };
     union {
         struct {
-            __IO uint32_t zr_gp24_sel: 4;
-            __IO uint32_t zr_gp25_sel: 4;
-            __IO uint32_t zr_gp26_sel: 4;
-            __IO uint32_t zr_gp27_sel: 4;
-            __IO uint32_t zr_gp28_sel: 4;
-            __IO uint32_t zr_gp29_sel: 4;
-            __IO uint32_t zr_gp30_sel: 4;
-            __I  uint32_t rsv7: 4;
+            __IO uint32_t zr_gp24_sel : 4;
+            __IO uint32_t zr_gp25_sel : 4;
+            __IO uint32_t zr_gp26_sel : 4;
+            __IO uint32_t zr_gp27_sel : 4;
+            __IO uint32_t zr_gp28_sel : 4;
+            __IO uint32_t zr_gp29_sel : 4;
+            __IO uint32_t zr_gp30_sel : 4;
+            __I  uint32_t rsv7 : 4;
         } BITS_REG_74;
         __IO uint32_t REG_74;    /* pinmux control */
     };
@@ -261,17 +261,17 @@ typedef struct __DMACR {
     __I uint32_t RESV1[0x3ec];           /* 0x50 - 0xffc */
 } DMA_TypeDef;
 
-#define DMA                   ( (DMA_TypeDef *)DMA_REG_BASE )
-#define DMA_ERROR             ( *(volatile uint32_t *)(SYS_CON_REG_BASE + 0x70) )
-#define DMA_INT_STAT          ( *(volatile uint32_t *)(SYS_CON_REG_BASE + 0x74) )
-#define DMA_RAW_INT_STAT      ( *(volatile uint32_t *)(SYS_CON_REG_BASE + 0x78) )
-#define DMA_WAIT_ON_REQ       ( *(volatile uint32_t *)(SYS_CON_REG_BASE + 0x7C) )
-#define DMA_REQ_DONE_EN       ( *(volatile uint32_t *)(SYS_CON_REG_BASE + 0x80) )
-#define DMA_STALL             ( *(volatile uint32_t *)(SYS_CON_REG_BASE + 0x84) )
-#define DMA_INT_CLR           ( *(volatile uint32_t *)(SYS_CON_REG_BASE + 0x88) )
-#define DMA_INT_MASK          ( *(volatile uint32_t *)(SYS_CON_REG_BASE + 0x8C) )
-#define DMA_HANDSHAKE_CFG0    ( *(volatile uint32_t *)(SYS_CON_REG_BASE + 0x90) )
-#define DMA_HANDSHAKE_CFG1    ( *(volatile uint32_t *)(SYS_CON_REG_BASE + 0x94) )
+#define DMA                   ((DMA_TypeDef *)DMA_REG_BASE)
+#define DMA_ERROR             (*(volatile uint32_t *)(SYS_CON_REG_BASE + 0x70))
+#define DMA_INT_STAT          (*(volatile uint32_t *)(SYS_CON_REG_BASE + 0x74))
+#define DMA_RAW_INT_STAT      (*(volatile uint32_t *)(SYS_CON_REG_BASE + 0x78))
+#define DMA_WAIT_ON_REQ       (*(volatile uint32_t *)(SYS_CON_REG_BASE + 0x7C))
+#define DMA_REQ_DONE_EN       (*(volatile uint32_t *)(SYS_CON_REG_BASE + 0x80))
+#define DMA_STALL             (*(volatile uint32_t *)(SYS_CON_REG_BASE + 0x84))
+#define DMA_INT_CLR           (*(volatile uint32_t *)(SYS_CON_REG_BASE + 0x88))
+#define DMA_INT_MASK          (*(volatile uint32_t *)(SYS_CON_REG_BASE + 0x8C))
+#define DMA_HANDSHAKE_CFG0    (*(volatile uint32_t *)(SYS_CON_REG_BASE + 0x90))
+#define DMA_HANDSHAKE_CFG1    (*(volatile uint32_t *)(SYS_CON_REG_BASE + 0x94))
 
 #define DMA_IRQ_BIT            (0X01<<7)
 #define DMA_CLK_EN             (0X01<<13)
@@ -326,12 +326,12 @@ typedef struct __I2S {
 
 /* I2S clock divider */
 typedef struct {
-    __IO uint32_t i2s_lrclk_divider: 9;
-    __IO uint32_t i2s_lrclk_delay_sel: 1;
-    __IO uint32_t i2s_sclk_divider: 10;
-    __IO uint32_t i2s_mclk_divider: 10;
-    __IO uint32_t i2s_slave_mode: 1;
-    __IO uint32_t reserved: 1;
+    __IO uint32_t i2s_lrclk_divider : 9;
+    __IO uint32_t i2s_lrclk_delay_sel : 1;
+    __IO uint32_t i2s_sclk_divider : 10;
+    __IO uint32_t i2s_mclk_divider : 10;
+    __IO uint32_t i2s_slave_mode : 1;
+    __IO uint32_t reserved : 1;
 } I2S_CLK_DIV_TypeDef;
 
 #define I2S_CLK_DIV         ((I2S_CLK_DIV_TypeDef *)0x40000810 )
@@ -443,18 +443,18 @@ typedef struct  __I2C {
     __IO uint32_t  SAR; // 0x08
     __IO uint32_t  DBR;
     __IO uint32_t  LCR;
-    __IO uint32_t  WCR;  //0x14
+    __IO uint32_t  WCR;  // 0x14
     __IO uint32_t  RST_CYCL; // 0x18
-    __I  uint32_t  BMR;  //0x1c
+    __I  uint32_t  BMR;  // 0x1c
     __IO uint32_t  WFIFO; // 0x20
     __IO uint32_t  WFIFO_WPTR; // 0x24
     __IO uint32_t  WFIFO_RPTR; // 0x28
     __IO uint32_t  RFIFO; // 0x2c
     __IO uint32_t  RFIFO_WPTR;
-    __IO uint32_t  RFIFO_RPTR;  //0x34
-    __IO uint32_t  RESV[2];       //0x38 0x3C
-    __I uint32_t   WFIFO_STATUS;  //0x40
-    __I uint32_t   RFIFO_STATUS;  //0x44
+    __IO uint32_t  RFIFO_RPTR;  // 0x34
+    __IO uint32_t  RESV[2];       // 0x38 0x3C
+    __I uint32_t   WFIFO_STATUS;  // 0x40
+    __I uint32_t   RFIFO_STATUS;  // 0x44
 } I2C_TypeDef;
 
 #define I2C0_BASE                   0x4008A000
@@ -505,7 +505,7 @@ typedef struct  __I2C {
 /*
     DUET PWM BEGIN
 */
-////////////////////to do////////////////////////////
+//////////////////// to do////////////////////////////
 /*
     DUET PWM END
 */
@@ -531,23 +531,23 @@ typedef struct __RTC {
 
 #define RTC_CNT_CYCLE_ENABLE    (1 << 15)
 #define RTC_ENABLE              (1 << 14)
-#define CLK32K_SEL              (1 << 12) //A0V1 bug, sel ext XO no function, same as internal RC clk
+#define CLK32K_SEL              (1 << 12) // A0V1 bug, sel ext XO no function, same as internal RC clk
 #define RTC_INT_ENABLE          (1 << 11)
 #define SW_OVERRIDE_REG_POR     (1 << 4)
 
-#define RTC_TICK_CNT            32768 //1s for asic
+#define RTC_TICK_CNT            32768 // 1s for asic
 
 #define GET_RTC_CURRENT_DATE()  (RTC->CURRENT_DATE)
 
-#define RTC_INIT_YEAR           118 //2018
-#define RTC_INIT_MONTH          8 //month 9
+#define RTC_INIT_YEAR           118 // 2018
+#define RTC_INIT_MONTH          8 // month 9
 #define RTC_INIT_DATE           12
 #define RTC_INIT_HOUR           8
 #define RTC_INIT_MINUTE         0
 #define RTC_INIT_SECOND         0
-#define RTC_INIT_WEEKDAY        0 //auto modify
+#define RTC_INIT_WEEKDAY        0 // auto modify
 
-#define RTC_REFRESH_DAY         255 //255 max unit: day
+#define RTC_REFRESH_DAY         255 // 255 max unit: day
 #define RTC_REFRESH_HOUR        23 // 0 - 23
 #define RTC_REFRESH_MINUTE      59 // 0 - 59
 #define RTC_REFRESH_SECOND      59 // 0 - 59
@@ -557,7 +557,7 @@ typedef struct __RTC {
 
 #define DUET_IRQ_STS_REG_ADDR           0x40000AA0
 
-//retention ram addr need to be planned
+// retention ram addr need to be planned
 #define RTC_TIME_RETENTION_RAM_ADDR     0x40008000
 #define RTC_FLAG_RETENTION_RAM_ADDR     0x40008008
 
@@ -618,7 +618,7 @@ typedef struct __UART {
     __O       uint32_t  ICR         ; /* 0x44 */
     __IO      uint32_t  DMACR       ; /* 0x48 */
     __I       uint32_t  RSV2[997]   ; /* 0x04C~0xFDC */
-    __I       uint32_t  ID[8]         ; /* 0xFE0~0xFFC*/
+    __I       uint32_t  ID[8]         ; /* 0xFE0~0xFFC */
 } UART_TypeDef;
 
 #define UART0_BASE (0x40080000+0x1000)
@@ -909,4 +909,4 @@ struct DUET_EFUSE {
 /*
     DUET LPUART END
 */
-#endif //_DUET_H_
+#endif // _DUET_H_

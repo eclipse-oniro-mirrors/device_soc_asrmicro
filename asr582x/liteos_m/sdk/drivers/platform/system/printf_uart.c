@@ -46,7 +46,7 @@ void printf_uart_register(uint8_t uart_idx)
     }
 #endif
     g_printf_uart = uart_idx;
-    //printf("printf use uart %d\n",uart_idx);
+    // printf("printf use uart %d\n",uart_idx);
     return;
 #if 0
 ERR:

@@ -61,7 +61,7 @@ typedef struct sonata_ble_hook {
     int (*pf_init_semaphore)(void **semaphore, int value);
     int (*pf_get_semaphore)(void **semaphore, uint32_t timeout_ms);
     int (*pf_set_semaphore)(void **semaphore);
-#endif //(SONATA_RTOS_SUPPORT)
+#endif // (SONATA_RTOS_SUPPORT)
 } sonata_ble_hook_t;
 
 /*

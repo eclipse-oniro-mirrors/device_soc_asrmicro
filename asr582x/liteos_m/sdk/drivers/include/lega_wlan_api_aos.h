@@ -77,5 +77,5 @@ extern void wifi_event_cb(lega_wlan_event_e evt, void *info);
 }
 #endif
 
-#endif //_LEGA_WIFI_API_AOS_H_
+#endif // _LEGA_WIFI_API_AOS_H_
 

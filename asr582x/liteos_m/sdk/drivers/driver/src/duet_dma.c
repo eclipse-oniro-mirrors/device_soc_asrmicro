@@ -27,10 +27,10 @@ void duet_dma_init(void)
     uint32_t tmp_value = 0;
     DMA_HANDSHAKE_CFG0 = 0XFFFFFFFF;
     DMA_HANDSHAKE_CFG1 = 0XFFFFFFFF;
-    //OPEN DMA CLOCK
+    // OPEN DMA CLOCK
     tmp_value = REG_RD(PERI_CLK_EN_REG0) & (~DMA_CLK_EN);
     REG_WR(PERI_CLK_EN_REG0, (tmp_value | (DMA_CLK_EN)));
-    //open DMA interrupt
+    // open DMA interrupt
     tmp_value = REG_RD(DUTE_IRQ_EN_REG) & (~DMA_IRQ_BIT);
     REG_WR(DUTE_IRQ_EN_REG, (tmp_value | (DMA_IRQ_BIT)));
 }
@@ -115,7 +115,7 @@ void duet_dma_mem2mem(uint8_t chan_num, uint8_t *mem_src, uint8_t *mem_dst, uint
     DMA->CHAN_EN_SET |= (1 << dma_chan); // enbale channel 0
     NVIC_EnableIRQ(DMA_IRQn);
     DMA_INT_MASK |= (1 << dma_chan); // dma interrupt unmask, write 1
-    //manually generate software request for channel 0 for mem2mem transfer
+    // manually generate software request for channel 0 for mem2mem transfer
     DMA->CHAN_SW_REQ |= (1 << dma_chan);
 }
 
@@ -126,13 +126,13 @@ void duet_dma_uart_rx(uint8_t uart_idx, uint8_t *data, uint16_t len)
     UARTx = NULL;
     dma_chan = 0;
     if ( uart_idx == 2) {
-        dma_chan = 5; //uart2 rx channel
+        dma_chan = 5; // uart2 rx channel
         UARTx = UART2;
     } else if ( uart_idx == 1) {
-        dma_chan = 3; //uart1 rx channel
+        dma_chan = 3; // uart1 rx channel
         UARTx = UART1;
     } else if ( uart_idx == 0) {
-        dma_chan = 1; //uart0 rx channel
+        dma_chan = 1; // uart0 rx channel
         UARTx = UART0;
     } else {
         return;
@@ -173,13 +173,13 @@ void duet_dma_uart_tx(uint8_t uart_idx, uint8_t *data, uint16_t len)
     UART_TypeDef *UARTx = NULL;
 
     if ( uart_idx == 2) {
-        dma_chan = 4; //uart2 tx channel
+        dma_chan = 4; // uart2 tx channel
         UARTx = UART2;
     } else if ( uart_idx == 1) {
-        dma_chan = 2; //uart1 tx channel
+        dma_chan = 2; // uart1 tx channel
         UARTx = UART1;
     } else if ( uart_idx == 0) {
-        dma_chan = 0; //uart0 tx channel
+        dma_chan = 0; // uart0 tx channel
         UARTx = UART0;
     } else {
         return;
@@ -220,13 +220,13 @@ void duet_dma_spi_tx(uint8_t ssp_idx, uint8_t *data, uint16_t len)
     Chan_Cfg_TypeDef *pChan_Cfg_Align = duet_dma_ctrl_block_init();
     SPI_TypeDef *SPIx = NULL;
     if ( ssp_idx == 0) {
-        dma_chan = 6; //SPI0 tx channel
+        dma_chan = 6; // SPI0 tx channel
         SPIx = SPI0;
     } else if ( ssp_idx == 1) {
-        dma_chan = 8; //SPI1 tx channel
+        dma_chan = 8; // SPI1 tx channel
         SPIx = SPI1;
     } else if ( ssp_idx == 2) {
-        dma_chan = 10; //SPI2 tx channel
+        dma_chan = 10; // SPI2 tx channel
         SPIx = SPI2;
     } else {
         return;
@@ -269,13 +269,13 @@ void duet_dma_spi_rx(uint8_t ssp_idx, uint8_t *data, uint16_t len)
     Chan_Cfg_TypeDef ch_cfg;
     SPI_TypeDef *SPIx = NULL;
     if ( ssp_idx == 0) {
-        dma_chan = 7; //SPI0 Rx channel
+        dma_chan = 7; // SPI0 Rx channel
         SPIx = SPI0;
     } else if ( ssp_idx == 1) {
-        dma_chan = 9; //SPI1 Rx channel
+        dma_chan = 9; // SPI1 Rx channel
         SPIx = SPI1;
     } else if ( ssp_idx == 2) {
-        dma_chan = 11; //SPI2 Rx channel
+        dma_chan = 11; // SPI2 Rx channel
         SPIx = SPI2;
     } else {
         return;

@@ -33,4 +33,4 @@
  */
 const char *lega_get_wifi_version(void);
 
-#endif //__SYSTEM_VERSION_H__
+#endif // __SYSTEM_VERSION_H__

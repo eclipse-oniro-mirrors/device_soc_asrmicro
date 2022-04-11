@@ -196,4 +196,4 @@ int32_t duet_gpio_clear_irq(duet_gpio_dev_t *gpio);
  */
 int32_t duet_gpio_finalize(duet_gpio_dev_t *gpio);
 
-#endif //_DUET_GPIO_H_
+#endif // _DUET_GPIO_H_

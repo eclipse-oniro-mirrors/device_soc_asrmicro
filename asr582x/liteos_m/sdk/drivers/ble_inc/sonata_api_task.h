@@ -47,7 +47,7 @@
 #define SONATA_API_TASK_TRC    printf
 #else
 #define SONATA_API_TASK_TRC(...)
-#endif //SONATA_API_TASK_DBG
+#endif // SONATA_API_TASK_DBG
 
 /*
  * ENUM DEFINITIONS
@@ -109,5 +109,5 @@ extern const sonata_api_subtask_handlers_t *p_prf_otas_api_ke_msg_handlers;
 extern const sonata_api_subtask_handlers_t *p_prf_hogpd_api_ke_msg_handlers;
 extern const sonata_api_subtask_handlers_t *p_prf_hogprh_api_ke_msg_handlers;
 
-#endif //_SONATA_API_TASK_H_
+#endif // _SONATA_API_TASK_H_
 

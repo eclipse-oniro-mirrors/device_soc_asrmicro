@@ -112,5 +112,5 @@ inline static uint16_t __fswap16(uint16_t x)
 #define wlan_htons(x) __cpu_to_be16(x)
 // #define ntohs(x) __be16_to_cpu(x)
 
-#endif //_TYPES_H_
+#endif // _TYPES_H_
 

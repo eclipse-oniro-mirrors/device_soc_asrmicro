@@ -38,7 +38,7 @@
 #if (LOSCFG_KERNEL_PRINTF != 0)
 #define TASKLIST_SUPPORT
 #define HEAPSHOW_SUPPORT
-//LOS_TaskInfoMonitor
+// LOS_TaskInfoMonitor
 #endif
 
 #define LEGA_AT_VERSION        "AT-V2.1.3"
@@ -94,8 +94,8 @@ typedef enum {
 } lega_at_rsp_status_t;
 
 typedef struct {
-    char *command;  /*at cmd string*/
-    int (*function)(int argc, char **argv); /*at cmd proccess function*/
+    char *command;  /* at cmd string */
+    int (*function)(int argc, char **argv); /* at cmd proccess function */
 } lega_at_cmd_entry;
 
 #ifdef CFG_SDIO_SUPPORT
@@ -165,5 +165,5 @@ extern int printf2(const char *format, ...);
 #define at_rspinfor(Fmt, ...)    printf2(Fmt "\r\n", ## __VA_ARGS__)
 #define at_rspinfornn(Fmt, ...)  printf2(Fmt, ## __VA_ARGS__)
 
-#endif  //_LEGA_AT_API_H_
+#endif  // _LEGA_AT_API_H_
 

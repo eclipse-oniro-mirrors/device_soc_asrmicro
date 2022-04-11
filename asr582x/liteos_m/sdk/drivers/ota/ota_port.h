@@ -38,7 +38,7 @@
 #define FLASH_REMAPPING_BANK0_VALUE        0xFFFFFFFF
 #define FLASH_REMAPPING_BANK1_VALUE        0x00000000
 
-//size of image header
+// size of image header
 #define IMAGE_HEADER_SIZE               128
 #define IMAGE_TOKEN_SIZE                32
 #define IMAGE_APP_VERSION_MAX_SIZE      32
@@ -58,19 +58,19 @@
         - IMAGE_LENGTH_SIZE - IMAGE_CRC_SIZE - APP_LENGTH_SIZE - APP_CRC_SIZE \
         - OTA_REGION_DIRTY_FLAG_SIZE - IMAGE_ROLL_BACK_FLAG_SIZE - IMAGE_VERIFY_DONE_SIZE)
 
-//size of image
-#define IMAGE_APP_VERSION_SIZE          24 //e.g. app-1.0.2-20181115.1553
+// size of image
+#define IMAGE_APP_VERSION_SIZE          24 // e.g. app-1.0.2-20181115.1553
 
-//offset in image header
+// offset in image header
 #define TOKEN_OFFSET                    0
 #define APP_VERSION_OFFSET              (TOKEN_OFFSET + IMAGE_TOKEN_SIZE)
 
-#define IMAGE_HEADER_OFFSET             0x0 //offset in flash region
+#define IMAGE_HEADER_OFFSET             0x0 // offset in flash region
 #define OTA_IMAGE_CRC_OFFSET            (IMAGE_TOKEN_SIZE + IMAGE_APP_VERSION_MAX_SIZE \
         + FLASH_REMAPPING_EN_SIZE + FLASH_REMAPPING_BANK_SIZE + OTA_FLAG_SIZE + IMAGE_COMPRESS_EN_SIZE \
         + IMAGE_LENGTH_SIZE)
 
-//offset in pure image
+// offset in pure image
 #define IMAGE_APP_VERSION_OFFSET            0x100
 
 #define OTA_VERIFY_TOKEN 0xACDF160B
@@ -83,8 +83,8 @@ struct OTA_INFO {
     uint32_t image_compress_en;
     uint32_t ota_image_size;
     uint32_t ota_image_crc;
-    uint32_t app_image_size; //for image compress, image length after de-compress
-    uint32_t app_image_crc; //for image compress, image length after de-compress
+    uint32_t app_image_size; // for image compress, image length after de-compress
+    uint32_t app_image_crc; // for image compress, image length after de-compress
     uint32_t ota_region_dirty_flag;
     uint32_t image_roll_back_flag;
     uint32_t verify_done;
@@ -107,9 +107,9 @@ typedef struct  {
     unsigned char boot_count;
     unsigned int  rec_size;
     unsigned int  splict_size;
-    int off_bp;               /*Break point offset*/
-    LEGA_OTA_RES_TYPE_E  res_type; /*result type: OTA_FINISH, OTA_BREAKPOINT*/
-    unsigned short param_crc; /*Parameter crc*/
+    int off_bp;               /*Break point offset */
+    LEGA_OTA_RES_TYPE_E  res_type; /* result type: OTA_FINISH, OTA_BREAKPOINT */
+    unsigned short param_crc; /* Parameter crc */
 } __attribute__((packed)) lega_ota_boot_param_t;
 
 /**
@@ -166,4 +166,4 @@ const char *lega_ota_get_version(unsigned char dev_type);
 #ifdef AOS_COMP_MSMART
 void lega_ota_clear_ota_flag(void);
 #endif
-#endif //_OTA_PORT_H_
+#endif // _OTA_PORT_H_

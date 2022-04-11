@@ -31,9 +31,9 @@
 #include "duet_flash_kv.h"
 #include "lwip/inet.h"
 #ifdef HARMONYOS_TEMP
-//uint8_t wifi_ready = 0;
-//uint8_t ble_open = 0;
-//uint16_t ble_con_interval = 50;
+// uint8_t wifi_ready = 0;
+// uint8_t ble_open = 0;
+// uint16_t ble_con_interval = 50;
 #endif
 
 typedef enum {
@@ -148,10 +148,10 @@ int IsWifiActive(void)
 
 typedef struct {
     uint8_t is_scan_adv;
-    char ap_num;       /**< The number of access points found in scanning. */
+    char ap_num;       /* *< The number of access points found in scanning. */
     struct {
-        char    ssid[32 + 1]; /*ssid max len:32. +1 is for '\0'. when ssidlen is 32  */
-        char    ap_power;   /**< Signal strength, min:0, max:100. */
+        char    ssid[32 + 1]; /* ssid max len:32. +1 is for '\0'. when ssidlen is 32  */
+        char    ap_power;     /* *< Signal strength, min:0, max:100. */
         char    bssid[6];     /* The BSSID of an access point. */
         char    channel;      /* The RF frequency, 1-13 */
         uint8_t security;     /* Security type, @ref wlan_sec_type_t */
@@ -230,8 +230,8 @@ WifiErrorCode AdvanceScan(WifiScanParams *params)
     }
 
     if ((params->scanType < WIFI_FREQ_SCAN) || (params->scanType > WIFI_BAND_SCAN)) {
-        //return WIFI_SUCCESS;
-        //adapter for xts
+        // return WIFI_SUCCESS;
+        // adapter for xts
         params->scanType = WIFI_BAND_SCAN;
     }
 
@@ -322,7 +322,7 @@ WifiErrorCode GetScanInfoList(WifiScanInfo *result, unsigned int *size)
 
 uint8_t lega_wifi_device_config_flag_array[WIFI_MAX_CONFIG_SIZE] = {0};
 WifiDeviceConfig lega_wifi_device_config_array[WIFI_MAX_CONFIG_SIZE] = {0};
-//"wifi_device_config_flag_array"  "wifi_device_config_array"
+// "wifi_device_config_flag_array"  "wifi_device_config_array"
 WifiErrorCode AddDeviceConfig(const WifiDeviceConfig *config, int *result)
 {
     int i;
@@ -348,7 +348,7 @@ WifiErrorCode AddDeviceConfig(const WifiDeviceConfig *config, int *result)
 
     lega_wifi_device_config_flag_array[i] = 1;
     memcpy(&lega_wifi_device_config_array[i], config, sizeof(WifiDeviceConfig));
-    //netID == 0, means invalid
+    // netID == 0, means invalid
     lega_wifi_device_config_array[i].netId = i + 1;;
     *result = i + 1;
 
@@ -633,8 +633,8 @@ void wifi_event_cb(lega_wlan_event_e evt, void *info)
         }
         break;
         default:
-            //lega_wifi_event_ptr->OnHotspotStaJoin
-            //lega_wifi_event_ptr->OnHotspotStaLeave
+            // lega_wifi_event_ptr->OnHotspotStaJoin
+            // lega_wifi_event_ptr->OnHotspotStaLeave
             printf("WiFi HAL %s EVENT[%d] not implemeted yet!\r\n", __func__, evt);
             break;
     }
@@ -699,7 +699,7 @@ WifiErrorCode DisableHotspot(void)
     lega_rtos_init_semaphore(&lega_wlan_vendor_close_ap_semaphore, 0);
     lega_wlan_close();
     if (lega_rtos_get_semaphore(&lega_wlan_vendor_close_ap_semaphore, LEGA_NEVER_TIMEOUT)) {
-        //MS_LOGI("%s timeout\n",__FUNCTION__);
+        // MS_LOGI("%s timeout\n",__FUNCTION__);
     }
     lega_rtos_deinit_semaphore(&lega_wlan_vendor_close_ap_semaphore);
     lega_wlan_vendor_close_ap_semaphore = 0;

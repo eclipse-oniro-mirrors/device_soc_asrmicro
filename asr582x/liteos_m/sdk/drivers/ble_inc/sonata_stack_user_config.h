@@ -30,5 +30,5 @@
 
 #define SONATA_CFG_DBG
 
-#endif /*SONATA_STACK_USER_CONFIG_H_*/
+#endif /* SONATA_STACK_USER_CONFIG_H_ */
 

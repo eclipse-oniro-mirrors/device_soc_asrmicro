@@ -23,7 +23,7 @@
 #else
 #error No any psram chip defined!!!
 #endif
-#define PSRAM_AMBA_BASE          0x30000000 //AHB base addr
+#define PSRAM_AMBA_BASE          0x30000000 // AHB base addr
 #define PSRAM_FLASH_A1_BASE      PSRAM_AMBA_BASE
 #define PSRAM_FLASH_A1_TOP       (PSRAM_FLASH_A1_BASE + PSRAM_FLASH_SIZE)
 #define PSRAM_FLASH_A2_BASE      PSRAM_FLASH_A1_TOP

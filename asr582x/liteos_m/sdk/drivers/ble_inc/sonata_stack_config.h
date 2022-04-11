@@ -26,12 +26,12 @@
  ****************************************************************************************
  */
 //////////////////////////////////////////
-/*user configurable*/
+/* user configurabld */
 #ifdef SONATA_CFG_APP
 #ifndef CFG_APP
 #define CFG_APP
 #endif
-#endif //SONATA_CFG_APP
+#endif // SONATA_CFG_APP
 
 #ifdef SONATA_CFG_HOST
 #ifndef CFG_HOST
@@ -55,25 +55,25 @@
 
 #ifdef SONATA_CFG_BLE_TRANSPORT
 #define CFG_AHITL
-#endif //SONATA_CFG_BLE_TRANSPORT
+#endif // SONATA_CFG_BLE_TRANSPORT
 
-#endif //SONATA_CFG_HOST
+#endif // SONATA_CFG_HOST
 
 #ifdef SONATA_CFG_BLE_TRANSPORT
 #define CFG_HCITL
-#endif //SONATA_CFG_BLE_TRANSPORT
+#endif // SONATA_CFG_BLE_TRANSPORT
 
 #ifdef SONATA_CFG_OTAS
 #define CFG_PRF_OTAS
-#endif //SONATA_CFG_OTAS
+#endif // SONATA_CFG_OTAS
 
 #ifdef SONATA_CFG_DIS
 #define CFG_PRF_DISS
-#endif //SONATA_CFG_DIS
+#endif // SONATA_CFG_DIS
 
 #ifdef SONATA_CFG_BASS
 #define CFG_PRF_BASS
-#endif //SONATA_CFG_BASS
+#endif // SONATA_CFG_BASS
 
 #ifdef SONATA_CFG_MESH
 #define CFG_BLE_MESH
@@ -84,7 +84,7 @@
 
 #if ( (defined SONATA_CFG_MESH_DBG) && (defined SONATA_CFG_DBG) )
 #define CFG_BLE_MESH_DBG
-#endif //( (defined SONATA_CFG_MESH_DBG) && (defined SONATA_CFG_DBG) )
+#endif // ( (defined SONATA_CFG_MESH_DBG) && (defined SONATA_CFG_DBG) )
 
 #define CFG_BLE_MESH_RELAY
 
@@ -108,15 +108,15 @@
 
 #define CFG_BLE_MESH_MDL_LIGHTS
 
-#endif //SONATA_CFG_MESH
+#endif // SONATA_CFG_MESH
 
 #ifdef SONATA_CFG_NVDS
 #define CFG_NVDS
-#endif //SONATA_CFG_NVDS
+#endif // SONATA_CFG_NVDS
 
 #ifdef SONATA_CFG_DISPLAY
 #define CFG_DISPLAY
-#endif //SONATA_CFG_DISPLAY
+#endif // SONATA_CFG_DISPLAY
 
 #ifdef SONATA_CFG_DBG
 #define CFG_DBG
@@ -132,7 +132,7 @@
 #define CFG_TRC_EN
 
 #define CFG_TRC_ALL
-#endif //SONATA_CFG_TRC
+#endif // SONATA_CFG_TRC
 
-#endif /*SONATA_STACK_CONFIG_H_*/
+#endif /* SONATA_STACK_CONFIG_H_ */
 

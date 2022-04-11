@@ -46,11 +46,11 @@
  ****************************************************************************************
  */
 
-///BD address type
+/// BD address type
 enum sonata_addr_type {
-    ///Public BD address
+    /// Public BD address
     SONATA_ADDR_PUBLIC                   = 0x00,
-    ///Random BD Address
+    /// Random BD Address
     SONATA_ADDR_RAND,
     /// Controller generates Resolvable Private Address based on the
     /// local IRK from resolving list. If resolving list contains no matching
@@ -70,15 +70,15 @@ enum sonata_addr_type {
     SONATA_ADDR_NONE                     = 0xFF,
 };
 
-///Advertising filter policy
+/// Advertising filter policy
 enum stack_adv_filter_policy {
-    ///Allow both scan and connection requests from anyone
+    /// Allow both scan and connection requests from anyone
     SONATA_ADV_ALLOW_SCAN_ANY_CON_ANY    = 0x00,
-    ///Allow both scan req from White List devices only and connection req from anyone
+    /// Allow both scan req from White List devices only and connection req from anyone
     SONATA_ADV_ALLOW_SCAN_WLST_CON_ANY,
-    ///Allow both scan req from anyone and connection req from White List devices only
+    /// Allow both scan req from anyone and connection req from White List devices only
     SONATA_ADV_ALLOW_SCAN_ANY_CON_WLST,
-    ///Allow scan and connection requests from White List devices only
+    /// Allow scan and connection requests from White List devices only
     SONATA_ADV_ALLOW_SCAN_WLST_CON_WLST,
 };
 
@@ -97,17 +97,17 @@ enum stack_random_addr_type {
 
 /// Constant defining the role
 enum {
-    ///Master role
+    /// Master role
     SONATA_ROLE_MASTER,
-    ///Slave role
+    /// Slave role
     SONATA_ROLE_SLAVE,
 };
 
-///Privacy mode type
+/// Privacy mode type
 enum {
-    ///Network privacy mode
+    /// Network privacy mode
     SONATA_PRIV_TYPE_NETWORK = 0x00,
-    ///Device privacy mode
+    /// Device privacy mode
     SONATA_PRIV_TYPE_DEVICE  = 0x01,
 };
 
@@ -130,4 +130,4 @@ enum {
 
 #define STACK_TASK_FIRST_MSG(task) ((uint16_t)((task) << 8))
 
-#endif //_SONATA_CONFIG_H_
+#endif // _SONATA_CONFIG_H_

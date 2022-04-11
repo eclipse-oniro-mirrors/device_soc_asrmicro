@@ -50,4 +50,4 @@ void lega_exit_critical_expble(void);
 
 void duet_write32_bit(uint32_t reg, uint8_t start_bit, uint8_t len, uint32_t src_val);
 uint32_t duet_read32_bit(uint32_t reg, uint8_t start_bit, uint8_t len);
-#endif //_LEGA_COMM_H_
+#endif // _LEGA_COMM_H_

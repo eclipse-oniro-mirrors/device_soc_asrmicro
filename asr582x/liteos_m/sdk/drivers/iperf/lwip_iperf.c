@@ -142,7 +142,7 @@ void lega_wifi_iperf(int argc, char **argv)
     }
     if ((iperf_config.mode == IPERF_MODE_CLIENT) && (iperf_Semaphore != NULL)) {
         if (lega_rtos_set_semaphore(&iperf_Semaphore) == kNoErr) {
-            //iperf_printf("Begin to run iperf client:\n");
+            // iperf_printf("Begin to run iperf client:\n");
         } else {
             iperf_printf("Run iperf client fail for semaphore error\n");
         }
@@ -150,10 +150,10 @@ void lega_wifi_iperf(int argc, char **argv)
     }
     if (iperf_config.protocol == IPERF_PROTOCOL_TCP) {
         if (iperf_config.mode == IPERF_MODE_SERVER) {
-            //tcp server
+            // tcp server
             if (iperf_config.termFlag == 1) {
-                //iperf_printf("Terminate iperf tcp server");
-                //terminate_rxperf();
+                // iperf_printf("Terminate iperf tcp server");
+                // terminate_rxperf();
                 do_iperf_terminate("tcp server", &rxperf_outinfo, clear_rxperf);
             } else {
                 if (iperf_tcp_server_status <= IPERF_TCP_SERVER_INIT) {
@@ -167,7 +167,7 @@ void lega_wifi_iperf(int argc, char **argv)
         }
     } else {
         if (iperf_config.mode == IPERF_MODE_SERVER) {
-            //udp server
+            // udp server
             if (iperf_config.termFlag == 1) {
 
                 do_iperf_terminate("udp server", &urxperf_outinfo, clear_urxperf);
@@ -231,7 +231,7 @@ void lega_wifi_iperf_client_start()
     }
     for ( ;; ) {
         if (lega_rtos_get_semaphore(&iperf_Semaphore, IPERF_CLIENT_TIMEOUT_MS) == kNoErr) {
-            //AT command set lwip_iperf_config over and begin to run
+            // AT command set lwip_iperf_config over and begin to run
 
             if (iperf_config.mode != IPERF_MODE_CLIENT) {
                 continue;

@@ -34,7 +34,7 @@ int HalFileOpen(const char *path, int oflag, int mode)
     duet_kv_key = path;
 
     if (oflag & O_CREAT_FS) {
-        return 0;    //new item
+        return 0;    // new item
     }
 
     retval = HalFileRead(0, temp, 128);
@@ -62,7 +62,7 @@ int HalFileRead(int fd, char *buf, unsigned int len)
     if (retval == KV_OK) {
         return (templen - 1);
     }
-    //printf("kv error %d\n",retval);
+    // printf("kv error %d\n",retval);
     return EC_FAILURE;
 }
 

@@ -45,7 +45,7 @@
  */
 extern void sonata_ble_rom_init(uint8_t init);
 
-#endif //BLE_ROM
+#endif // BLE_ROM
 
 #endif // _SONATA_BLE_ROM_H_
 

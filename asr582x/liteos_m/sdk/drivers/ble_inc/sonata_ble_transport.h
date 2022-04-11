@@ -65,5 +65,5 @@ extern void sonata_ble_transport_init(sonata_ble_transport_pad_config_t *config)
 
 extern void sonata_ble_transport_wkup(void);
 
-#endif //_SONATA_BLE_TRANSPORT_H_
+#endif // _SONATA_BLE_TRANSPORT_H_
 

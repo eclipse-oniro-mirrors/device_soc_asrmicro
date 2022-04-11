@@ -51,4 +51,4 @@
  */
 void atcmdplus_ble_register(void);
 
-#endif //MEDIA_ATCMDPULS_BLE_H
+#endif // MEDIA_ATCMDPULS_BLE_H

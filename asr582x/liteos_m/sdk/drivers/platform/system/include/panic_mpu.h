@@ -18,20 +18,20 @@
 
 #ifdef STAR_MPU_ENABLE
 typedef struct {
-    unsigned int type;              /*!< Offset: 0x000 (R/ )  MPU Type Register            */
-    unsigned int ctrl;              /*!< Offset: 0x004 (R/W)  MPU Control Register         */
-    unsigned int rnr;               /*!< Offset: 0x008 (R/W)  MPU Region RNRber Register                  */
-    unsigned int rbar;              /*!< Offset: 0x00C (R/W)  MPU Region Base Address Register            */
-    unsigned int rlar;              /*!< Offset: 0x010 (R/W)  MPU Region Limit Address and Size Register    */
-    unsigned int rbar_a;            /*!< Offset: 0x014 (R/W)  MPU Alias 1 Region Base Address Register       */
-    unsigned int rlar_a;            /*!< Offset: 0x018 (R/W)  MPU Region Base Address Register            */
-    unsigned int reserve1;          /*!< Offset: 0x01C  */
-    unsigned int reserve2;          /*!< Offset: 0x020  */
-    unsigned int reserve3;          /*!< Offset: 0x024  */
-    unsigned int reserve4;          /*!< Offset: 0x028  */
-    unsigned int reserve5;          /*!< Offset: 0x02C  */
-    unsigned int mair0;             /*!< Offset: 0x030 (R/W)  MPU Memory Attribute Indirection Register 0     */
-    unsigned int mair1;             /*!< Offset: 0x034 (R/W)  MPU Memory Attribute Indirection Register 1     */
+    unsigned int type;              /* !< Offset: 0x000 (R/ )  MPU Type Register            */
+    unsigned int ctrl;              /* !< Offset: 0x004 (R/W)  MPU Control Register         */
+    unsigned int rnr;               /* !< Offset: 0x008 (R/W)  MPU Region RNRber Register                  */
+    unsigned int rbar;              /* !< Offset: 0x00C (R/W)  MPU Region Base Address Register            */
+    unsigned int rlar;              /* !< Offset: 0x010 (R/W)  MPU Region Limit Address and Size Register    */
+    unsigned int rbar_a;            /* !< Offset: 0x014 (R/W)  MPU Alias 1 Region Base Address Register       */
+    unsigned int rlar_a;            /* !< Offset: 0x018 (R/W)  MPU Region Base Address Register            */
+    unsigned int reserve1;          /* !< Offset: 0x01C  */
+    unsigned int reserve2;          /* !< Offset: 0x020  */
+    unsigned int reserve3;          /* !< Offset: 0x024  */
+    unsigned int reserve4;          /* !< Offset: 0x028  */
+    unsigned int reserve5;          /* !< Offset: 0x02C  */
+    unsigned int mair0;             /* !< Offset: 0x030 (R/W)  MPU Memory Attribute Indirection Register 0     */
+    unsigned int mair1;             /* !< Offset: 0x034 (R/W)  MPU Memory Attribute Indirection Register 1     */
 } MPU_t;
 
 /* System Handler Control and State register */
@@ -194,7 +194,7 @@ void debug_memory_access_err_check(unsigned long addr_start, unsigned long addr_
                                    unsigned int mode, unsigned int cacheable, unsigned int rnr);
 void mpu_init(void);
 
-#else //STAR_MPU_ENABLE
+#else // STAR_MPU_ENABLE
 typedef struct {
     // MPU type register
     unsigned int type;
@@ -367,7 +367,7 @@ typedef struct {
 void debug_memory_access_err_check(unsigned long addr_start, unsigned long addr_size, unsigned int mode);
 #endif
 
-#endif //STAR_MPU_ENABLE
+#endif // STAR_MPU_ENABLE
 
 #endif // MPU_H
 

@@ -33,7 +33,7 @@ extern "C" {
 #define DUET_UART2_INDEX    2
 #define DUET_UART_NUM       3
 
-/* UART BAUDRATE*/
+/* UART BAUDRATE */
 #define UART_BAUDRATE_110                       (110)
 #define UART_BAUDRATE_300                       (300)
 #define UART_BAUDRATE_600                       (600)
@@ -131,11 +131,11 @@ typedef enum {
  * TX/RX FIFO Level, both FIFO of depth 16
 */
 typedef enum {
-    FIFO_1_8_FULL = 0, //1/8
-    FIFO_1_4_FULL = 1, //1/4
-    FIFO_HALF_FULL = 2, //1/2
-    FIFO_3_4_FULL = 3, //3/4
-    FIFO_7_8_FULL = 4,  //7/8
+    FIFO_1_8_FULL = 0, // 1/8
+    FIFO_1_4_FULL = 1, // 1/4
+    FIFO_HALF_FULL = 2, // 1/2
+    FIFO_3_4_FULL = 3, // 3/4
+    FIFO_7_8_FULL = 4,  // 7/8
     FIFO_NULL
 } uart_fifo_threshold_t;
 
@@ -216,4 +216,4 @@ uint8_t UART_ReceiveData(UART_TypeDef *UARTx);
 #ifdef __cplusplus
 }
 #endif
-#endif //__DUET_UART_H
+#endif // __DUET_UART_H

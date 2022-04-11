@@ -74,7 +74,7 @@
 // P256 Key Len
 #define SONATA_GAP_P256_KEY_LEN      (0x20)
 
-///***** AD Type Flag - Bit set *******/
+/***** AD Type Flag - Bit set *******/
 // Limited discovery flag - AD Flag
 #define SONATA_GAP_LE_LIM_DISCOVERABLE_FLG             0x01
 // General discovery flag - AD Flag
@@ -96,17 +96,17 @@
 #define SONATA_GAP_INVALID_CONHDL                      0xFFFF
 
 // Connection interval min (N*1.250ms)
-#define SONATA_GAP_CNX_INTERVAL_MIN            6       //(0x06)
+#define SONATA_GAP_CNX_INTERVAL_MIN            6       // (0x06)
 // Connection interval Max (N*1.250ms)
-#define SONATA_GAP_CNX_INTERVAL_MAX            3200    //(0xC80)
+#define SONATA_GAP_CNX_INTERVAL_MAX            3200    // (0xC80)
 // Connection latency min (N*cnx evt)
-#define SONATA_GAP_CNX_LATENCY_MIN             0       //(0x00)
+#define SONATA_GAP_CNX_LATENCY_MIN             0       // (0x00)
 // Connection latency Max (N*cnx evt
-#define SONATA_GAP_CNX_LATENCY_MAX             499     //(0x1F3)
+#define SONATA_GAP_CNX_LATENCY_MAX             499     // (0x1F3)
 // Supervision TO min (N*10ms)
-#define SONATA_GAP_CNX_SUP_TO_MIN              10      //(0x0A)
+#define SONATA_GAP_CNX_SUP_TO_MIN              10      // (0x0A)
 // Supervision TO Max (N*10ms)
-#define SONATA_GAP_CNX_SUP_TO_MAX              3200    //(0xC80)
+#define SONATA_GAP_CNX_SUP_TO_MAX              3200    // (0xC80)
 
 // Length of resolvable random address prand part
 #define SONATA_GAP_ADDR_PRAND_LEN            (3)
@@ -228,10 +228,10 @@
 // GAP Appearance or Icon Characteristic - 2 octets
 // Current appearance value is 0x0000 (unknown appearance)
 // Description:
-// http://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.gap.appearance.xml
+// http:// developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.gap.appearance.xml
 #define SONATA_GAP_APPEARANCE                                      0x0000
 
-///GAP Peripheral Preferred Connection Parameter - 8 octets
+/// GAP Peripheral Preferred Connection Parameter - 8 octets
 #define SONATA_GAP_PPCP_CONN_INTV_MAX                              0x0064
 #define SONATA_GAP_PPCP_CONN_INTV_MIN                              0x00C8
 #define SONATA_GAP_PPCP_SLAVE_LATENCY                              0x0000
@@ -514,7 +514,7 @@ enum sonata_gap_pkt_pld_type { // PRBS9 sequence "11111111100000111101..." (in t
 /*************** GAP Structures ********************/
 
 // Device name
-/*@TRACE*/
+/* @TRACE */
 struct sonata_gap_dev_name {
     // name length
     uint16_t length;
@@ -523,7 +523,7 @@ struct sonata_gap_dev_name {
 };
 
 // Slave preferred connection parameters
-/*@TRACE*/
+/* @TRACE */
 struct sonata_gap_slv_pref {
     // Connection interval minimum
     uint16_t con_intv_min;
@@ -535,29 +535,29 @@ struct sonata_gap_slv_pref {
     uint16_t conn_timeout;
 };
 
-///BD Address structure
-/*@TRACE*/
+/// BD Address structure
+/* @TRACE */
 typedef struct {
-    ///6-byte array address value
+    /// 6-byte array address value
     uint8_t  addr[SONATA_GAP_BD_ADDR_LEN];
 } sonata_bd_addr_t;
 
-///Channel map structure
-/*@TRACE*/
+/// Channel map structure
+/* @TRACE */
 typedef struct {
-    ///5-byte channel map array
+    /// 5-byte channel map array
     uint8_t map[SONATA_GAP_LE_CHNL_MAP_LEN];
 } sonata_le_chnl_map_t;
 
-///Random number structure
-/*@TRACE*/
+/// Random number structure
+/* @TRACE */
 typedef struct {
-    ///8-byte array for random number
+    /// 8-byte array for random number
     uint8_t     nb[SONATA_GAP_RAND_NB_LEN];
 } sonata_rand_nb_t;
 
 // Address information about a device address
-/*@TRACE*/
+/* @TRACE */
 struct sonata_gap_bdaddr {
     // BD Address of device
     sonata_bd_addr_t addr;
@@ -566,7 +566,7 @@ struct sonata_gap_bdaddr {
 };
 
 // Resolving list device information
-/*@TRACE*/
+/* @TRACE */
 struct sonata_gap_ral_dev_info {
     // Device identity
     struct sonata_gap_bdaddr addr;
@@ -579,14 +579,14 @@ struct sonata_gap_ral_dev_info {
 };
 
 // Generic Security key structure
-/*@TRACE*/
+/* @TRACE */
 struct sonata_gap_sec_key {
     // Key value MSB -> LSB
     uint8_t key[SONATA_GAP_KEY_LEN];
 };
 
 // I/Q sample
-/*@TRACE*/
+/* @TRACE */
 struct sonata_gap_iq_sample {
     // I sample
     int8_t i;

@@ -21,7 +21,7 @@
  ****************************************************************************************
  */
 //////////////////////////////////////////
-/*do not alter*/
+/* do not alter */
 #ifndef CFG_BLE
 #define CFG_BLE
 #endif
@@ -55,4 +55,4 @@
 
 #define CFG_NB_PRF         10
 
-#endif /*SONATA_STACK_FIXED_CONFIG_H_*/
+#endif /* SONATA_STACK_FIXED_CONFIG_H_ */

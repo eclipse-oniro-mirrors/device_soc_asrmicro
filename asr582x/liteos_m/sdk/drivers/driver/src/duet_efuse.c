@@ -25,24 +25,24 @@ void efuse_ldo25_open(void)
     uint16_t tmp_16;
     uint32_t tmp_32;
     // ----- Change APLL clock to 80MHz -----
-    //SYS_CRM_WIFI_BLK_CLK = 0x1; // Enable WiFi core clock
-    //delay(5); // wait for a few cycles for WiFi core clock settle
-    //MDM_CLKGATEFCTRL0 = (0x1<<27);  // Force RC clock open
+    // SYS_CRM_WIFI_BLK_CLK = 0x1; // Enable WiFi core clock
+    // delay(5); // wait for a few cycles for WiFi core clock settle
+    // MDM_CLKGATEFCTRL0 = (0x1<<27);  // Force RC clock open
 
-    //open 10uA current
+    // open 10uA current
     tmp_16 = spi_mst_read(TRX_PD_CTRL1_REG_ADDR);
-    tmp_16 &= (~(0x0001 << 13)); //clear bit13 (D_PD_BG)
+    tmp_16 &= (~(0x0001 << 13)); // clear bit13 (D_PD_BG)
     spi_mst_write(TRX_PD_CTRL1_REG_ADDR, tmp_16);
 
     tmp_16 = spi_mst_read(TRX_PD_CTRL2_REG_ADDR);
-    tmp_16 &= (~(0x0003 << 2)); //clear bit<3:2> (D_PD_TRXTOP_BIAS, D_PD_TRXTOP_LDO)
+    tmp_16 &= (~(0x0003 << 2)); // clear bit<3:2> (D_PD_TRXTOP_BIAS, D_PD_TRXTOP_LDO)
     spi_mst_write(TRX_PD_CTRL2_REG_ADDR, tmp_16);
 
-    //open PU LDO25: set D_AON_RCO32K_REG1<13> to 1
+    // open PU LDO25: set D_AON_RCO32K_REG1<13> to 1
     tmp_32 = RTC_REG_RCO32K;
     RTC_REG_RCO32K = tmp_32 | (0x00000001 << (13 + 16));
 
-    //adjust PU LDO25 voltage: set D_AON_RCO32K_REG1<12:9> to 4'b0011
+    // adjust PU LDO25 voltage: set D_AON_RCO32K_REG1<12:9> to 4'b0011
     tmp_32 = RTC_REG_RCO32K;
     tmp_32 &= ~(0x0000000F << (9 + 16));
     tmp_32 |= (0x00000003 << (9 + 16));
@@ -132,10 +132,10 @@ void duet_efuse_word_write(uint16_t addr, uint32_t data)
 void duet_efuse_multi_read(uint16_t start_addr, uint16_t size_in_bytes, uint8_t *pData)
 {
     uint16_t i;
-    //efuse init
+    // efuse init
     duet_efuse_init(EFUSE_LDO25_CLOSE);
 
-    //efuse byte read
+    // efuse byte read
     for (i = 0; i < size_in_bytes; i++) {
         *(pData + i) = duet_efuse_byte_read(start_addr + i);
     }

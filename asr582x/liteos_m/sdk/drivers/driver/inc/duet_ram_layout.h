@@ -21,13 +21,13 @@ extern "C" {
 #endif
 
 typedef enum {
-    ITCM_DTCM_32_192,   //default
+    ITCM_DTCM_32_192,   // default
     ITCM_DTCM_96_128,
     ITCM_DTCM_NUM
 } Tcm_Config_Type;
 
 typedef enum {
-    WIFI_RAM_0,         //default
+    WIFI_RAM_0,         // default
     WIFI_RAM_32,
     WIFI_RAM_64,
     WIFI_RAM_96,
@@ -35,7 +35,7 @@ typedef enum {
 } Wifi_Ram_Config_Type;
 
 typedef enum {
-    BT_RAM_0,           //default
+    BT_RAM_0,           // default
     BT_RAM_16,
     BT_RAM_32,
     BT_RAM_NUM

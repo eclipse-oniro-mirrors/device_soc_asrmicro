@@ -165,7 +165,7 @@ int32_t duet_uart_dma_config(duet_uart_dev_t *uart, uint8_t dma_tx_rx_sel, uint8
  */
 int32_t duet_uart_init(duet_uart_dev_t *uart)
 {
-    //uart sclk enable and sclk root clk setting (XTAL)
+    // uart sclk enable and sclk root clk setting (XTAL)
     uint32_t tmp_value;
     UART_TypeDef *UARTx = NULL;
     if (DUET_UART0_INDEX == uart->port) {
@@ -177,7 +177,7 @@ int32_t duet_uart_init(duet_uart_dev_t *uart)
     } else {
         return EIO;
     }
-    //enable uart clk
+    // enable uart clk
     if (UARTx == UART0) {
         tmp_value = REG_RD(PERI_CLK_EN_REG1) & (~(UART0_BUS_CLK_EN | UART0_PERI_CLK_EN));
         REG_WR(PERI_CLK_EN_REG1, (tmp_value | (UART0_BUS_CLK_EN | UART0_PERI_CLK_EN)));
@@ -189,12 +189,12 @@ int32_t duet_uart_init(duet_uart_dev_t *uart)
         REG_WR(PERI_CLK_EN_REG1, (tmp_value | (UART2_BUS_CLK_EN | UART2_PERI_CLK_EN)));
     }
 
-    //fpga no effect, soc need
+    // fpga no effect, soc need
 
     // wait for the end of current charater
     while (duet_uart_get_flag_status(UARTx, UART_FLAG_BUSY));
 
-    //disable UART
+    // disable UART
     UARTx->CR &= ~1;
 
     // flush fifo by setting FEN = 0
@@ -231,14 +231,14 @@ int32_t duet_uart_init(duet_uart_dev_t *uart)
     // enable fifo
     UARTx->LCR_H |= (ENABLE << 4);
     UARTx->IFLS &= ~(0x7);
-    UARTx->IFLS |= FIFO_HALF_FULL;  //tx fifo threshold
+    UARTx->IFLS |= FIFO_HALF_FULL;  // tx fifo threshold
     UARTx->IFLS &= ~(0x7 << 3);
-    UARTx->IFLS |= (FIFO_HALF_FULL << 3); //rx fifo threshold
+    UARTx->IFLS |= (FIFO_HALF_FULL << 3); // rx fifo threshold
 
     if (uart->priv) {
-        //enable rx interrupt
+        // enable rx interrupt
         UARTx->IMSC |= (UART_RX_TIMEOUT_INTERRUPT | UART_RX_INTERRUPT);
-        //enable cm4 interrupt
+        // enable cm4 interrupt
         if (UARTx == UART0) {
             tmp_value = REG_RD(DUTE_IRQ_EN_REG) & (~UART0_IRQ_BIT);
             REG_WR(DUTE_IRQ_EN_REG, (tmp_value | (UART0_IRQ_BIT)));
@@ -372,13 +372,13 @@ int32_t duet_uart_finalize(duet_uart_dev_t *uart)
         return EIO;
     }
 
-    //disable all uart interrupt
+    // disable all uart interrupt
     UARTx->IMSC  = UART_DISABLE_ALL_IRQ;
-    //disable all uart config
+    // disable all uart config
     UARTx->LCR_H = 0;
     UARTx->CR = 0;
 
-    //disable cm4 interrupt
+    // disable cm4 interrupt
     if (UART0 == UARTx) {
         tmp_value = REG_RD(DUTE_IRQ_DIS_REG) & (~UART0_IRQ_BIT);
         REG_WR(DUTE_IRQ_DIS_REG, (tmp_value | (UART0_IRQ_BIT)));
@@ -393,7 +393,7 @@ int32_t duet_uart_finalize(duet_uart_dev_t *uart)
         NVIC_DisableIRQ(UART2_IRQn);
     }
 
-    //uart sclk disable, fpga no effect, soc need
+    // uart sclk disable, fpga no effect, soc need
     if (UART0 == UARTx) {
         tmp_value = REG_RD(PERI_CLK_DIS_REG1) & (~(UART0_BUS_CLK_EN | UART0_PERI_CLK_EN));
         REG_WR(PERI_CLK_DIS_REG1, (tmp_value | (UART0_BUS_CLK_EN | UART0_PERI_CLK_EN)));

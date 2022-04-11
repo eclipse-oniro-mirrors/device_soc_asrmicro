@@ -33,4 +33,4 @@ int board_after_init(void);
 void board_uart_init(void);
 void NVIC_deinit(void);
 
-#endif //__BOARD_H__
+#endif // __BOARD_H__

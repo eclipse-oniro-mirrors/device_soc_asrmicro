@@ -57,25 +57,25 @@ static void sys_init(void)
     os_post_init_hook();
 
 #ifdef MS_RELEASE_DOMAIN
-    //LOG("log_disable");
+    // LOG("log_disable");
     lega_log_disable();
 #endif
 
     duet_flash_kv_init();
 
     board_after_init();
-    //debug_memory_access_err_check(0x0, 0x10000, MPU_AP_NA_NA);
+    // debug_memory_access_err_check(0x0, 0x10000, MPU_AP_NA_NA);
 
 #ifdef SYSTEM_COREDUMP
-    //coredump_command_register(0, NULL);
+    // coredump_command_register(0, NULL);
 #endif
 
 #ifdef CFG_DUAL_AP
     comm_wifi_command_register(0, NULL);
 #endif
 
-    //lega_at_init(AT_TASK_NAME,AT_TASK_PRIORITY,AT_TASK_STACK_SIZE);
-    //lega_at_cmd_register_all();
+    // lega_at_init(AT_TASK_NAME,AT_TASK_PRIORITY,AT_TASK_STACK_SIZE);
+    // lega_at_cmd_register_all();
     lega_at_user_cmd_register();
 
 #ifdef BLE_APP_AT_CMD

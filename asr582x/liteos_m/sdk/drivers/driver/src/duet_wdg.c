@@ -23,7 +23,7 @@
 #else
 #include "lega_rtos.h"
 #endif
-//WDG APB CLOCK 0-15 BIT 4-7
+// WDG APB CLOCK 0-15 BIT 4-7
 #define APB_DIV_1   0
 #define APB_DIV_2   1
 #define APB_DIV_3   2
@@ -105,15 +105,15 @@ int32_t duet_wdg_init(duet_wdg_dev_t *wdg)
         return EIO;
     }
     if (0 == wdg->port) {
-        //OPEN WDG CLOCK
+        // OPEN WDG CLOCK
         reg_value = REG_RD(PERI_CLK_EN_REG1) & (~WDG_BUS_CLK_BIT);
         REG_WR(PERI_CLK_EN_REG1, (reg_value | (WDG_BUS_CLK_BIT)));
-        //WDG CLOCK DIV SET
+        // WDG CLOCK DIV SET
         reg_value = REG_RD(WDG_APB_DIV_REG);
         REG_WR(WDG_APB_DIV_REG, (reg_value | (WDG_APB_DIV << 4)));
         hw_watchdog_reset(wdg->config.timeout * (SYSTEM_CLOCK / (WDG_APB_DIV + 1) / 1000 /
-                          2)); //1000 for ms, 2 for watchdog feature
-        //ENABLE WDG IRQ
+                          2)); // 1000 for ms, 2 for watchdog feature
+        // ENABLE WDG IRQ
         reg_value = REG_RD(DUTE_IRQ_EN_REG) & (~WDG_IRQ_BIT);
         REG_WR(DUTE_IRQ_EN_REG, (reg_value | (WDG_IRQ_BIT)));
         NVIC_EnableIRQ(WDG_IRQn);
@@ -157,7 +157,7 @@ int32_t duet_wdg_finalize(duet_wdg_dev_t *wdg)
         return EIO;
     }
     if (0 == wdg->port) {
-        //DIS WDG IRQ
+        // DIS WDG IRQ
         reg_value = REG_RD(DUTE_IRQ_DIS_REG) & (~WDG_IRQ_BIT);
         REG_WR(DUTE_IRQ_DIS_REG, (reg_value | (WDG_IRQ_BIT)));
         NVIC_DisableIRQ(WDG_IRQn);

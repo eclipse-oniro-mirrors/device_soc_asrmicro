@@ -30,9 +30,9 @@
  * INCLUDE FILES
  ****************************************************************************************
  */
-///@cond
+/// @cond
 #if BLE_HOST_PRESENT
-///@endcond
+/// @endcond
 #include "sonata_utils_api.h"
 #include "sonata_api_task.h"
 
@@ -128,5 +128,5 @@ extern const sonata_api_subtask_handlers_t prf_diss_api_ke_msg_handlers;
 
 #endif // BLE_HOST_PRESENT
 
-#endif //_SONATA_PRF_DISS_API_H_
+#endif // _SONATA_PRF_DISS_API_H_
 

@@ -28,4 +28,4 @@ extern "C" {
 #ifdef __cplusplus
 }
 #endif
-#endif //__DUET_UART_INDEX_H
+#endif // __DUET_UART_INDEX_H

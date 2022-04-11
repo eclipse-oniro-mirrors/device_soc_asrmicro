@@ -46,7 +46,7 @@
 #define CRITICAL_FUNC_SEG __attribute__((section("seg_critical_function")))
 #else
 #define CRITICAL_FUNC_SEG
-#endif //CFG_SEG
+#endif // CFG_SEG
 
 // ARM is a 32-bit CPU
 #define CPU_WORD_SIZE      4
@@ -57,9 +57,9 @@
 // debug configuration
 #if defined(CFG_DBG)
 #define PLF_DEBUG          1
-#else //CFG_DBG
+#else // CFG_DBG
 #define PLF_DEBUG          0
-#endif //CFG_DBG
+#endif // CFG_DBG
 
 // NVDS configuration
 #ifdef CFG_NVDS
@@ -229,7 +229,7 @@ extern void (*pf_sonata_assert_warn)(uint16_t id, int param0, int param1);
 
 // DUMP data array present in the SW.
 #define DUMP_DATA(data, length)
-#endif //PLF_DEBUG
+#endif // PLF_DEBUG
 
 // required to define GLOBAL_INT_** macros as inline assembly. This file is included after
 // definition of ASSERT macros as they are used inside ll.h
@@ -245,7 +245,7 @@ int rtos_get_semaphore(void **semaphore, uint32_t timeout_ms);
 /* Set (post/put/increment) a semaphore */
 int rtos_set_semaphore(void **semaphore);
 
-#endif //(SONATA_RTOS_SUPPORT)
+#endif // (SONATA_RTOS_SUPPORT)
 
 // @} DRIVERS
 #endif // _ARCH_H_

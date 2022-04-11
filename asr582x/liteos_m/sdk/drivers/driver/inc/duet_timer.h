@@ -31,7 +31,7 @@ typedef struct {
 } duet_timer_cb_t;
 
 typedef struct {
-    uint32_t       period;   /*us*/
+    uint32_t       period;   /* us */
     uint8_t        reload_mode;
     duet_timer_cb_handler_t cb;
     void          *arg;
@@ -92,4 +92,4 @@ void duet_timer_stop(duet_timer_dev_t *tim);
  */
 int32_t duet_timer_finalize(duet_timer_dev_t *tim);
 
-#endif //_DUET_TIMER_H_
+#endif // _DUET_TIMER_H_

@@ -98,7 +98,7 @@ static int32_t refresh_flash_sector(duet_partition_t current_partition, uint32_t
     uint32_t end_offset = start_offset + len;
     memset(tmpbuf, 0, SPI_FLASH_SEC_SIZE);
     if ((FLASH_ACCESS_CONTROL0_DEFAULT_VALUE == FLASH_ACCESS_CONTROL0)
-        && (FLASH_ACCESS_CONTROL1_DEFAULT_VALUE == FLASH_ACCESS_CONTROL1) ) { //default flash remapping
+        && (FLASH_ACCESS_CONTROL1_DEFAULT_VALUE == FLASH_ACCESS_CONTROL1) ) { // default flash remapping
         tran_partition = current_partition;
     } else {
         if (current_partition == PARTITION_OTA_TEMP) {
@@ -231,7 +231,7 @@ int32_t duet_flash_erase(duet_partition_t in_partition, uint32_t off_set, uint32
     addr = start_addr;
     while (size) {
         if (!(addr % SPI_FLASH_BLOCK_64K_SIZE) && (size > (SPI_FLASH_BLOCK_64K_SIZE - SPI_FLASH_SEC_SIZE))) {
-            ret = duet_flash_alg_erase(BLOCK64_ERASE_CMD, addr); //250ms
+            ret = duet_flash_alg_erase(BLOCK64_ERASE_CMD, addr); // 250ms
             if (ret != 0) {
                 return ret;
             }
@@ -242,7 +242,7 @@ int32_t duet_flash_erase(duet_partition_t in_partition, uint32_t off_set, uint32
                 size = 0;
             }
         } else if (!(addr % SPI_FLASH_BLOCK_32K_SIZE) && (size > (SPI_FLASH_BLOCK_32K_SIZE - SPI_FLASH_SEC_SIZE))) {
-            ret = duet_flash_alg_erase(BLOCK32_ERASE_CMD, addr); //170ms
+            ret = duet_flash_alg_erase(BLOCK32_ERASE_CMD, addr); // 170ms
             if (ret != 0) {
                 return ret;
             }
@@ -253,7 +253,7 @@ int32_t duet_flash_erase(duet_partition_t in_partition, uint32_t off_set, uint32
                 size = 0;
             }
         } else {
-            ret = duet_flash_alg_erase(SECTOR_ERASE_CMD, addr); //100ms
+            ret = duet_flash_alg_erase(SECTOR_ERASE_CMD, addr); // 100ms
             if (ret != 0) {
                 return ret;
             }

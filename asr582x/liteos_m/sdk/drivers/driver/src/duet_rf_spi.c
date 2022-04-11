@@ -21,14 +21,14 @@
 void spi_sw_protect_write(uint16_t addr, uint16_t data)
 {
     *((volatile int *) (SPI_COMMAND + TRANS_MODE_OFT))   = 0;
-    *((volatile int *) (SPI_COMMAND + PRESCALER_OFT))    = 3;//8:80M/16=5M, 2:80M/4=20M
+    *((volatile int *) (SPI_COMMAND + PRESCALER_OFT))    = 3; // 8:80M/16=5M, 2:80M/4=20M
     *((volatile int *) (SPI_COMMAND + ADDR_REG_OFT))     = addr;
     *((volatile int *) (SPI_COMMAND + READNOTWRITE_OFT)) = 0;
     *((volatile int *) (SPI_COMMAND + WDATA_REG_OFT))     = data;
     *((volatile int *) (SPI_COMMAND + START_FLAG_OFT))   = 1;
 
     while (1) {
-        //printf("\n rdate:%08x\n",((uint32_t)*((volatile uint32_t *)(SPI_RDATA + RDATA_REG_OFT)) &0x00010000));
+        // printf("\n rdate:%08x\n",((uint32_t)*((volatile uint32_t *)(SPI_RDATA + RDATA_REG_OFT)) &0x00010000));
         if (((uint32_t) * ((volatile uint32_t *)(SPI_RDATA + RDATA_REG_OFT)) & 0x00010000) == 0) {
             break;
         } else {
@@ -53,7 +53,7 @@ uint16_t spi_sw_protect_read(uint16_t addr)
     *((volatile int *)(SPI_COMMAND + START_FLAG_OFT))   = 1;
 
     while (1) {
-        //printf("\n rdate:%08x\n",((uint32_t)*((volatile uint32_t *)(SPI_RDATA + RDATA_REG_OFT)) &0x00010000));
+        // printf("\n rdate:%08x\n",((uint32_t)*((volatile uint32_t *)(SPI_RDATA + RDATA_REG_OFT)) &0x00010000));
         if (((uint32_t) * ((volatile uint32_t *)(SPI_RDATA + RDATA_REG_OFT)) & 0x00010000) == 0) {
             break;
         } else {
@@ -76,13 +76,13 @@ void rf_sw_set_reg_bit(uint16_t reg, uint8_t start_bit, uint8_t len, uint16_t sr
     if ((reg < 0xFF) && (start_bit < 16) && (len <= 16) && (src_val < (1 << len))) {
         tmp = spi_sw_protect_read(reg);
 
-        mask = (1 << len) - 1;      //1. clear dst bit. eg: len=4, mask = 0xf, 1111
-        mask = ~(mask << start_bit); //~(mask<<4):0xff0f: 1111 1111 0000 1111
+        mask = (1 << len) - 1;      // 1. clear dst bit. eg: len=4, mask = 0xf, 1111
+        mask = ~(mask << start_bit); // ~(mask<<4):0xff0f: 1111 1111 0000 1111
 
-        val = tmp & mask;           //2.val =spi_read() & 0xff0f, clear [7:4]
+        val = tmp & mask;           // 2.val =spi_read() & 0xff0f, clear [7:4]
 
         src_val = (src_val << start_bit);
-        val = val | src_val;        //3. val spi_read & 0xff0f | val << 4
+        val = val | src_val;        // 3. val spi_read & 0xff0f | val << 4
 
         spi_sw_protect_write(reg, val);
     } else {
@@ -98,7 +98,7 @@ uint16_t rf_sw_get_reg_bit(uint16_t reg, uint8_t start_bit, uint8_t len)
     if ((reg < 0xFF) && (start_bit < 16) && (len <= 16)) {
         val = spi_sw_protect_read(reg);    // 1. read reg val
 
-        mask = (1 << len) - 1;      //eg: len =4, 0xf,1111
+        mask = (1 << len) - 1;      // eg: len =4, 0xf,1111
         mask = mask << start_bit;   // 0x0f00;
         val = val & mask;           // 2. get dst bit
 
@@ -118,7 +118,7 @@ FLASH_COMMON2_SEG void spi_mst_write(uint16_t addr, uint16_t data)
     uint32_t var = 0;
 
     *((volatile int *) (SPI_COMMAND + TRANS_MODE_OFT))   = 0;
-    *((volatile int *) (SPI_COMMAND + PRESCALER_OFT))    = 8;//8:80M/16=5M, 2:80M/4=20M
+    *((volatile int *) (SPI_COMMAND + PRESCALER_OFT))    = 8; // 8:80M/16=5M, 2:80M/4=20M
     *((volatile int *) (SPI_COMMAND + ADDR_REG_OFT))     = addr;
     *((volatile int *) (SPI_COMMAND + READNOTWRITE_OFT)) = 0;
     *((volatile int *) (SPI_COMMAND + WDATA_REG_OFT))     = data;
@@ -130,7 +130,7 @@ FLASH_COMMON2_SEG void spi_mst_write(uint16_t addr, uint16_t data)
         } while (var);
     } else if (hw_spi_pta == 1) {
         while (1) {
-            //printf("\n rdate:%08x\n",((uint32_t)*((volatile uint32_t *)(SPI_RDATA + RDATA_REG_OFT)) &0x00010000));
+            // printf("\n rdate:%08x\n",((uint32_t)*((volatile uint32_t *)(SPI_RDATA + RDATA_REG_OFT)) &0x00010000));
             if (((uint32_t) * ((volatile uint32_t *)(SPI_RDATA + RDATA_REG_OFT)) & 0x00010000) == 0) {
                 break;
             } else {
@@ -190,13 +190,13 @@ FLASH_COMMON2_SEG void rf_set_reg_bit(uint16_t reg, uint8_t start_bit, uint8_t l
     if ((reg < 0xFF) && (start_bit < 16) && (len <= 16) && (src_val < (1 << len))) {
         tmp = spi_mst_read(reg);
 
-        mask = (1 << len) - 1;      //1. clear dst bit. eg: len=4, mask = 0xf, 1111
-        mask = ~(mask << start_bit); //~(mask<<4):0xff0f: 1111 1111 0000 1111
+        mask = (1 << len) - 1;      // 1. clear dst bit. eg: len=4, mask = 0xf, 1111
+        mask = ~(mask << start_bit); // ~(mask<<4):0xff0f: 1111 1111 0000 1111
 
-        val = tmp & mask;           //2.val =spi_read() & 0xff0f, clear [7:4]
+        val = tmp & mask;           // 2.val =spi_read() & 0xff0f, clear [7:4]
 
         src_val = (src_val << start_bit);
-        val = val | src_val;        //3. val spi_read & 0xff0f | val << 4
+        val = val | src_val;        // 3. val spi_read & 0xff0f | val << 4
 
         spi_mst_write(reg, val);
     } else {
@@ -212,7 +212,7 @@ uint16_t rf_get_reg_bit(uint16_t reg, uint8_t start_bit, uint8_t len)
     if ((reg < 0xFF) && (start_bit < 16) && (len <= 16)) {
         val = spi_mst_read(reg);    // 1. read reg val
 
-        mask = (1 << len) - 1;      //eg: len =4, 0xf,1111
+        mask = (1 << len) - 1;      // eg: len =4, 0xf,1111
         mask = mask << start_bit;   // 0x0f00;
         val = val & mask;           // 2. get dst bit
 

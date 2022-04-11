@@ -54,7 +54,7 @@
 #define     LEGA_UWIFI_RX_TASK_PRIORITY              (28)
 #define     LEGA_UWIFI_TASK_PRIORITY                 (26)
 #define     LEGA_BLE_SCHEDULER_PRIORITY              (29) // for testing
-#endif //ALIOS_SUPPORT
+#endif // ALIOS_SUPPORT
 
 #ifdef ALIOS_SUPPORT
 #define CONFIG_KV_BUFFER_SIZE KV_CONFIG_TOTAL_SIZE
@@ -62,7 +62,7 @@
 #define CONFIG_KV_BUFFER_SIZE 0x8000
 #else
 #define CONFIG_KV_BUFFER_SIZE 0
-#endif //ALIOS_SUPPORT
+#endif // ALIOS_SUPPORT
 
 #define lega_cpsr_t UINTPTR
 #define MS_PER_SECONED  1000
@@ -500,4 +500,4 @@ void lega_rtos_systick_reconfig(void);
 int lega_rtos_running(void);
 OSStatus lega_rtos_get_threadinfo(lega_thread_t *thread, lega_threadinfo_t *info);
 
-#endif //__LEGARTOS_H__
+#endif // __LEGARTOS_H__

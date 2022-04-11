@@ -214,4 +214,4 @@ __STATIC_INLINE void i2c_set_tb(I2C_TypeDef *I2Cx)
     I2Cx->CR |= I2C_CR_TB;
 }
 
-#endif //_DUET_I2C_H_
+#endif // _DUET_I2C_H_

@@ -227,4 +227,4 @@ typedef struct {
 int32_t duet_flash_get_wifi_mac(flash_mac_addr_t *addr);
 int32_t duet_flash_set_wifi_mac(flash_mac_addr_t *addr);
 #endif
-#endif //_LEGA_FLASH_H_
+#endif // _LEGA_FLASH_H_
