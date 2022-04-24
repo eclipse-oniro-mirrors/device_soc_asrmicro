@@ -240,7 +240,7 @@ int board_after_init(void)
     lega_log_disable();
 #endif
 #ifdef WIFI_BLE_INIT_ENABLE
-    tcpip_init( NULL, NULL );
+    tcpip_init(NULL, NULL);
     lega_wlan_init();
 #endif
 #if 0

@@ -52,7 +52,7 @@
 #define PRD_AU   (SONATA_PERM(RD, ENABLE)        | SONATA_PERM(RP, AUTH))
 /// GATT write perm  auth   (0x0808)
 #define PWR_AU   (SONATA_PERM(WRITE_REQ, ENABLE) | SONATA_PERM(WP, AUTH))
-/// GATT ind perm  auth(    0X2020)
+/// GATT ind perm  auth     (0X2020)
 #define PIND_AU  (SONATA_PERM(IND, ENABLE)       | SONATA_PERM(IP, AUTH))
 /// GATT notify perm  auth  (0x1080)
 #define PNTF_AU  (SONATA_PERM(NTF, ENABLE)       | SONATA_PERM(NP, AUTH))

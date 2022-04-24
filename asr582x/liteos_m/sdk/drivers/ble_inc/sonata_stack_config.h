@@ -82,9 +82,9 @@
 
 #define CFG_BLE_ADV_TEST_MODE
 
-#if ( (defined SONATA_CFG_MESH_DBG) && (defined SONATA_CFG_DBG) )
+#if ((defined SONATA_CFG_MESH_DBG) && (defined SONATA_CFG_DBG))
 #define CFG_BLE_MESH_DBG
-#endif // ( (defined SONATA_CFG_MESH_DBG) && (defined SONATA_CFG_DBG) )
+#endif // ((defined SONATA_CFG_MESH_DBG) && (defined SONATA_CFG_DBG))
 
 #define CFG_BLE_MESH_RELAY
 

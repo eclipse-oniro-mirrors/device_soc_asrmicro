@@ -91,14 +91,14 @@ void UART_SendData(UART_TypeDef *UARTx, unsigned char Data)
         return;
     }
     /* wait till tx fifo is not full */
-    while ( duet_uart_get_flag_status(UARTx, UART_FLAG_TX_FIFO_FULL) == SET );
+    while (duet_uart_get_flag_status(UARTx, UART_FLAG_TX_FIFO_FULL) == SET);
     UARTx->DR = Data;
 }
 
 uint8_t UART_ReceiveData(UART_TypeDef *UARTx)
 {
     /* wait till rx fifo is not empty */
-    while ( duet_uart_get_flag_status(UARTx, UART_FLAG_RX_FIFO_EMPTY) == SET);
+    while (duet_uart_get_flag_status(UARTx, UART_FLAG_RX_FIFO_EMPTY) == SET);
     return UARTx->DR;
 }
 
@@ -113,7 +113,7 @@ void duet_uart_interrupt_config(UART_TypeDef *UARTx, uint32_t uart_int, bool new
 
 ITstatus duet_uart_get_interrupt_status(UART_TypeDef *UARTx, uint32_t uart_interrupt)
 {
-    if ( UARTx->MIS & uart_interrupt ) {
+    if (UARTx->MIS & uart_interrupt) {
         return SET;
     } else {
         return RESET;
@@ -122,7 +122,7 @@ ITstatus duet_uart_get_interrupt_status(UART_TypeDef *UARTx, uint32_t uart_inter
 
 ITstatus duet_uart_get_raw_interrupt_status(UART_TypeDef *UARTx, uint32_t uart_interrupt)
 {
-    if ( UARTx->RIS & uart_interrupt ) {
+    if (UARTx->RIS & uart_interrupt) {
         return SET;
     } else {
         return RESET;
@@ -416,14 +416,14 @@ static void UARTX_IRQHandler(uint8_t uart_idx)
 {
     char tmp;
     UART_TypeDef *UARTx = getUartxViaIdx(uart_idx);
-    if ( duet_uart_get_interrupt_status(UARTx, UART_RX_INTERRUPT)
+    if (duet_uart_get_interrupt_status(UARTx, UART_RX_INTERRUPT)
          ||  duet_uart_get_interrupt_status(UARTx, UART_RX_TIMEOUT_INTERRUPT)) {
         duet_uart_interrupt_config(UARTx, UART_RX_INTERRUPT | UART_RX_TIMEOUT_INTERRUPT, DISABLE);
         duet_uart_clear_interrupt(UARTx, UART_RX_INTERRUPT | UART_RX_TIMEOUT_INTERRUPT);
 
         /* read rx fifo till it's empty */
-        while ( ! duet_uart_get_flag_status(UARTx, UART_FLAG_RX_FIFO_EMPTY) ) {
-            tmp = (char)(UARTx->DR); // uart_receive_data(UART );
+        while (! duet_uart_get_flag_status(UARTx, UART_FLAG_RX_FIFO_EMPTY)) {
+            tmp = (char)(UARTx->DR); // uart_receive_data(UART);
             if (g_duet_uart_callback_handler[uart_idx] != NULL) {
                 g_duet_uart_callback_handler[uart_idx](tmp);
             }
@@ -441,7 +441,7 @@ static void UARTX_Shell_IRQHandler(uint8_t uart_idx)
 {
     // char tmp;
     UART_TypeDef *UARTx = getUartxViaIdx(uart_idx);
-    if ( duet_uart_get_interrupt_status(UARTx, UART_RX_INTERRUPT)
+    if (duet_uart_get_interrupt_status(UARTx, UART_RX_INTERRUPT)
          ||  duet_uart_get_interrupt_status(UARTx, UART_RX_TIMEOUT_INTERRUPT)) {
         duet_uart_interrupt_config(UARTx, UART_RX_INTERRUPT | UART_RX_TIMEOUT_INTERRUPT, DISABLE);
         duet_uart_clear_interrupt(UARTx, UART_RX_INTERRUPT | UART_RX_TIMEOUT_INTERRUPT);

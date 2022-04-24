@@ -31,11 +31,11 @@ typedef enum pmu_state {
     Wait For Interrupt is a hint instruction that suspends execution
     until one of a number of events occurs.
  */
-__attribute__( ( always_inline ) ) static inline void __WFI__(void)
+__attribute__((always_inline)) static inline void __WFI__(void)
 {
-    __asm volatile( "dsb" );
-    __asm volatile( "wfi" );
-    __asm volatile( "isb" );
+    __asm volatile("dsb");
+    __asm volatile("wfi");
+    __asm volatile("isb");
 }
 
 /** @brief  get current RTC counter, only used when RTC enabled.

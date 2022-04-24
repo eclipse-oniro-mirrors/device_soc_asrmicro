@@ -90,7 +90,7 @@ static void psram_init_lut_ps_mode_register_read(unsigned int seq_id)
            ((PSRAM_CMD_ADDR << 26) | (0x0 << 24) | (0x18 << 16) | (PSRAM_CMD_CMD << 10) | (0x0 << 8) | FLASH_CMD_MODE_REG_READ));
     REG_WR((PSRAM_LUT1 + 0x10 * seq_id),
            ((PSRAM_CMD_READ << 26) | (0x0 << 24) | (0x2 << 16) | (PSRAM_CMD_DUMMY << 10) | (0x0 << 8) | (8 - 1)));
-    REG_WR((PSRAM_LUT2 + 0x10 * seq_id), ( (PSRAM_CMD_JMP_ON_CS << 10) | (0x0 << 8) | 0x0));
+    REG_WR((PSRAM_LUT2 + 0x10 * seq_id), ((PSRAM_CMD_JMP_ON_CS << 10) | (0x0 << 8) | 0x0));
     REG_WR((PSRAM_LUT3 + 0x10 * seq_id), 0);
 }
 
@@ -126,7 +126,7 @@ static void psram_init_lut_ps_read_4x(unsigned int seq_id)
            ((PSRAM_CMD_ADDR << 26) | (0x2 << 24) | (0x18 << 16) | (PSRAM_CMD_CMD << 10) | (0x2 << 8) | FLASH_CMD_FAST_READ_QUAD));
     REG_WR((PSRAM_LUT1 + 0x10 * seq_id),
            ((PSRAM_CMD_READ << 26) | (0x2 << 24) | (0x20 << 16) | (PSRAM_CMD_DUMMY << 10) | (0x2 << 8) | (6 - 1)));
-    REG_WR((PSRAM_LUT2 + 0x10 * seq_id), ((PSRAM_CMD_JMP_ON_CS << 10) | (0x2 << 8) | 0x00) );
+    REG_WR((PSRAM_LUT2 + 0x10 * seq_id), ((PSRAM_CMD_JMP_ON_CS << 10) | (0x2 << 8) | 0x00));
     REG_WR((PSRAM_LUT3 + 0x10 * seq_id), 0);
 }
 
@@ -152,8 +152,8 @@ static void psram_init_lut_ps_write_evict_4x(unsigned int seq_id)
 static void psram_init_lut_ps_readid(unsigned int seq_id)
 {
     REG_WR((PSRAM_LUT0 + 0x10 * seq_id),
-           ( (PSRAM_CMD_ADDR << 26) | (0x0 << 24) | (0x18 << 16) | (PSRAM_CMD_CMD << 10) | (0x0 << 8) | FLASH_CMD_READ_ID));
-    REG_WR((PSRAM_LUT1 + 0x10 * seq_id), ( (PSRAM_CMD_READ << 10) | (0x0 << 8) | 0x9));
+           ((PSRAM_CMD_ADDR << 26) | (0x0 << 24) | (0x18 << 16) | (PSRAM_CMD_CMD << 10) | (0x0 << 8) | FLASH_CMD_READ_ID));
+    REG_WR((PSRAM_LUT1 + 0x10 * seq_id), ((PSRAM_CMD_READ << 10) | (0x0 << 8) | 0x9));
     REG_WR((PSRAM_LUT2 + 0x10 * seq_id), 0);
     REG_WR((PSRAM_LUT3 + 0x10 * seq_id), 0);
 }
@@ -239,13 +239,13 @@ int psram_config(duet_psram_mode mode)
     // REG_WR(PSRAM_FLSHCR, REG_RD(PSRAM_FLSHCR)| 0x00010000);
 
     // MCR SCLKCFG 0, dqs en =1
-    REG_WR(PSRAM_MCR, REG_RD(PSRAM_MCR) & 0xfbffffff );
+    REG_WR(PSRAM_MCR, REG_RD(PSRAM_MCR) & 0xfbffffff);
 
     // dqs_loopback_en = 1, dqs_loopback_from_pad = 1
     REG_WR(PSRAM_MCR, REG_RD(PSRAM_MCR) | (3 << 24));
 
     // ddr_en = 1, enable 2x and 4x clock
-    /// REG_WR(PSRAM_MCR, REG_RD(PSRAM_MCR)| 1<<7 );
+    /// REG_WR(PSRAM_MCR, REG_RD(PSRAM_MCR)| 1<<7);
 
     // MDIS = 0, enable psram clocks,must clear MDIS to enable clock for transfer.
     REG_WR(PSRAM_MCR, REG_RD(PSRAM_MCR) & 0xffffbfff);

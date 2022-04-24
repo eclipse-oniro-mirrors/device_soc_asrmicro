@@ -158,7 +158,7 @@ void apcmdplue_print_command(int argc, char **argv)
 int atcmdplus_adv(int argc, char **argv)
 {
     apcmdplue_print_command(argc, argv);
-    if (strcmp(argv[PARA_ID_1], "1") == 0 ) {
+    if (strcmp(argv[PARA_ID_1], "1") == 0) {
         app_ble_config_legacy_advertising();
     } else if (strcmp(argv[PARA_ID_1], "0") == 0) {
         app_ble_advertising_stop(0);
@@ -169,7 +169,7 @@ int atcmdplus_adv(int argc, char **argv)
 int atcmdplus_scan(int argc, char **argv)
 {
     apcmdplue_print_command(argc, argv);
-    if (strcmp(argv[PARA_ID_1], "1") == 0 ) {
+    if (strcmp(argv[PARA_ID_1], "1") == 0) {
         app_ble_config_scanning();
     } else if (strcmp(argv[PARA_ID_1], "0") == 0) {
         app_ble_stop_scanning();
@@ -242,7 +242,7 @@ int atcmdplus_ntf(int argc, char **argv)
     }
     uint8_t idValue = *argv[PARA_ID_1] - '0';
 
-    if (strcmp(argv[PARA_ID_2], "1") == 0 ) {
+    if (strcmp(argv[PARA_ID_2], "1") == 0) {
         app_ble_master_turn_ntf(idValue, true);
     } else if (strcmp(argv[PARA_ID_2], "0") == 0) {
         app_ble_master_turn_ntf(idValue, false);

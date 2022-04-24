@@ -940,11 +940,11 @@ struct sonata_att_incl128_desc {
 // --------------------------- Database permissions -----------------------------
 
 /// Macro used to retrieve access permission rights
-#define SONATA_PERM_GET(perm, access)\
+#define SONATA_PERM_GET(perm, access) \
     (((perm) & (SONATA_PERM_MASK_ ## access)) >> (SONATA_PERM_POS_ ## access))
 
 /// Macro used to set a permission value
-#define SONATA_PERM_SET(perm, access, value)\
+#define SONATA_PERM_SET(perm, access, value) \
     perm = (((perm) & ~(SONATA_PERM_MASK_ ## access)) | (((value) << (SONATA_PERM_POS_ ## access)) & (SONATA_PERM_MASK_ ## access)))
 
 /// Macro used to retrieve permission value from access and rights on attribute.

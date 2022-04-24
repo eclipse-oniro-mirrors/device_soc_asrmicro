@@ -58,7 +58,7 @@ int32_t duet_adc_init(duet_adc_dev_t *adc_config)
     reg_value = REG_RD(HW_CTRL_PE_PS);
     REG_WR(HW_CTRL_PE_PS, (reg_value & (~(1 << config_gpio.port)))); // cfg by// user
     reg_value = REG_RD(PAD_PE_REG);                                  //
-    // REG_WR(PAD_PE_REG, (reg_value|( (1 << gpio->port))));
+    // REG_WR(PAD_PE_REG, (reg_value|((1 << gpio->port))));
     REG_WR(PAD_PE_REG, (reg_value & (~(1 << config_gpio.port))));
     //    adc_config->duet_adc_handler_struct.cb = adc_config->priv;
     if (adc_config->priv) {

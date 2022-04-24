@@ -85,16 +85,16 @@ typedef enum {
 typedef void (*duet_dma_callback_func)(uint32_t);
 
 typedef struct {
-    uint32_t cycle_ctl: 3;
+    uint32_t cycle_ctl : 3;
     uint32_t next_useburst : 1;
-    uint32_t n_minus_1: 10;
-    uint32_t R_pow: 4;
-    uint32_t src_prot: 3;
-    uint32_t dest_prot: 3;
-    uint32_t src_size: 2;
-    uint32_t src_inc: 2;
-    uint32_t dst_size: 2;
-    uint32_t dst_inc: 2;
+    uint32_t n_minus_1 : 10;
+    uint32_t R_pow : 4;
+    uint32_t src_prot : 3;
+    uint32_t dest_prot : 3;
+    uint32_t src_size : 2;
+    uint32_t src_inc : 2;
+    uint32_t dst_size : 2;
+    uint32_t dst_inc : 2;
 
 } Chan_Ctl_Data_TypeDef;
 

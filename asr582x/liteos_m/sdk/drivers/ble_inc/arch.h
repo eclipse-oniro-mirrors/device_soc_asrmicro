@@ -188,7 +188,7 @@ extern void (*pf_sonata_assert_warn)(uint16_t id, int param0, int param1);
                 pf_sonata_assert_err(id,1);                            \
             }                                                \
         }                                                    \
-    } while(0)
+    } while (0)
 
 // Assertions showing a critical error that could require a full system reset
 #define ASSERT_INFO(id, cond, param0, param1)                             \
@@ -199,7 +199,7 @@ extern void (*pf_sonata_assert_warn)(uint16_t id, int param0, int param1);
                 pf_sonata_assert_param(id, (int)(param0), (int)(param1));            \
             }                                                         \
         }                                                             \
-    } while(0)
+    } while (0)
 
 // Assertions showing a non-critical problem that has to be fixed by the SW
 #define ASSERT_WARN(id, cond, param0, param1)                                      \
@@ -210,7 +210,7 @@ extern void (*pf_sonata_assert_warn)(uint16_t id, int param0, int param1);
                 pf_sonata_assert_warn(id, (int)(param0), (int)(param1));                       \
             }                                                                   \
         }                                                                       \
-    } while(0)
+    } while (0)
 
 // modified for rom code 20200224
 

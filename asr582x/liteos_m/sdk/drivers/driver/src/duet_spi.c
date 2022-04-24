@@ -294,7 +294,7 @@ int32_t duet_spi_send(duet_spi_dev_t *spi, const uint8_t *data, uint16_t size, u
         return EIO;
     }
     while (size--) {
-        while ( !(duet_spi_get_flag_status(SPIx, SPI_FLAG_TX_FIFO_NOT_FULL)) ); // wait till tx fifo is not full
+        while (!(duet_spi_get_flag_status(SPIx, SPI_FLAG_TX_FIFO_NOT_FULL))); // wait till tx fifo is not full
         SPIx->DR = *data++;
     }
     return 0;
@@ -302,9 +302,9 @@ int32_t duet_spi_send(duet_spi_dev_t *spi, const uint8_t *data, uint16_t size, u
 
 // void duet_spi_receive(SPI_TypeDef * SPIx, void * rx_data, uint16_t len)
 // {
-//    while(len--)
+//    while (len--)
 //    {
-//        while( !(spi_get_flag_status(SPIx, SPI_FLAG_RX_FIFO_NOT_EMPTY)) ); // wait till rx fifo is not empty, change to timeout mechanism???
+//        while (!(spi_get_flag_status(SPIx, SPI_FLAG_RX_FIFO_NOT_EMPTY))); // wait till rx fifo is not empty, change to timeout mechanism???
 
 //        *rx_data++ = SPIx->DR ;
 //    }
@@ -329,16 +329,16 @@ void SPIX_IRQHandler(uint8_t spi_idx)
 {
     uint16_t tmp;
     SPI_TypeDef *SPIx = getSpixViaIdx(spi_idx);
-    if ( duet_spi_get_interrupt_status(SPIx, SPI_INTERRUPT_TX_FIFO_TRIGGER)) {
+    if (duet_spi_get_interrupt_status(SPIx, SPI_INTERRUPT_TX_FIFO_TRIGGER)) {
         duet_spi_interrupt_config(SPIx, SPI_INTERRUPT_TX_FIFO_TRIGGER, DISABLE); // disable
         duet_spi_interrupt_clear(SPIx, SPI_INTERRUPT_TX_FIFO_TRIGGER); // clear
         duet_spi_interrupt_config(SPIx, SPI_INTERRUPT_TX_FIFO_TRIGGER, ENABLE); // enable
     }
-    if ( duet_spi_get_interrupt_status(SPIx, SPI_INTERRUPT_RX_FIFO_TRIGGER)
-         || duet_spi_get_interrupt_status(SPIx, SPI_INTERRUPT_RX_TIMEOUT) ) {
+    if (duet_spi_get_interrupt_status(SPIx, SPI_INTERRUPT_RX_FIFO_TRIGGER)
+         || duet_spi_get_interrupt_status(SPIx, SPI_INTERRUPT_RX_TIMEOUT)) {
         duet_spi_interrupt_config(SPIx, SPI_INTERRUPT_RX_FIFO_TRIGGER | SPI_INTERRUPT_RX_TIMEOUT, DISABLE); // disable
         duet_spi_interrupt_clear(SPIx, SPI_INTERRUPT_RX_FIFO_TRIGGER | SPI_INTERRUPT_RX_TIMEOUT); // clear
-        while ( SPIx->SR & SPI_FLAG_RX_FIFO_NOT_EMPTY) {
+        while (SPIx->SR & SPI_FLAG_RX_FIFO_NOT_EMPTY) {
             tmp = (uint16_t)(SPIx->DR);
             if (g_duet_spi_callback_handler[spi_idx] != NULL) {
                 g_duet_spi_callback_handler[spi_idx](tmp);

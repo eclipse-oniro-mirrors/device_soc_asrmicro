@@ -18,7 +18,7 @@
 
 #ifdef STAR_MPU_ENABLE
 typedef struct {
-    unsigned int type;              /* !< Offset: 0x000 (R/ )  MPU Type Register            */
+    unsigned int type;              /* !< Offset: 0x000 (R/)  MPU Type Register            */
     unsigned int ctrl;              /* !< Offset: 0x004 (R/W)  MPU Control Register         */
     unsigned int rnr;               /* !< Offset: 0x008 (R/W)  MPU Region RNRber Register                  */
     unsigned int rbar;              /* !< Offset: 0x00C (R/W)  MPU Region Base Address Register            */

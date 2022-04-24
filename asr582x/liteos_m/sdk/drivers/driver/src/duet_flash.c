@@ -98,7 +98,7 @@ static int32_t refresh_flash_sector(duet_partition_t current_partition, uint32_t
     uint32_t end_offset = start_offset + len;
     memset(tmpbuf, 0, SPI_FLASH_SEC_SIZE);
     if ((FLASH_ACCESS_CONTROL0_DEFAULT_VALUE == FLASH_ACCESS_CONTROL0)
-        && (FLASH_ACCESS_CONTROL1_DEFAULT_VALUE == FLASH_ACCESS_CONTROL1) ) { // default flash remapping
+        && (FLASH_ACCESS_CONTROL1_DEFAULT_VALUE == FLASH_ACCESS_CONTROL1)) { // default flash remapping
         tran_partition = current_partition;
     } else {
         if (current_partition == PARTITION_OTA_TEMP) {
@@ -219,7 +219,7 @@ int32_t duet_flash_erase(duet_partition_t in_partition, uint32_t off_set, uint32
     int32_t ret = 0;
     duet_logic_partition_t *partition_info;
 
-    partition_info = duet_flash_get_info( in_partition );
+    partition_info = duet_flash_get_info(in_partition);
     if (size + off_set > partition_info->partition_length) {
         return EIO;
     }
@@ -294,7 +294,7 @@ int32_t duet_flash_write(duet_partition_t in_partition, uint32_t *off_set,
     uint32_t prg_size;
     uint32_t left_buf_len = in_buf_len;
 
-    partition_info = duet_flash_get_info( in_partition );
+    partition_info = duet_flash_get_info(in_partition);
     if (off_set == NULL || in_buf == NULL || ((*off_set + in_buf_len) > partition_info->partition_length)) {
         // ptr and size over range check
         return EIO;
@@ -365,7 +365,7 @@ int32_t duet_flash_read(duet_partition_t in_partition, uint32_t *off_set,
     uint32_t start_addr;
     duet_logic_partition_t *partition_info;
 
-    partition_info = duet_flash_get_info( in_partition );
+    partition_info = duet_flash_get_info(in_partition);
 
     if (off_set == NULL || out_buf == NULL || *off_set + in_buf_len > partition_info->partition_length) {
         return EIO;
@@ -389,7 +389,7 @@ int32_t duet_flash_read_common(uint32_t addr,
         return -1;
     }
     partition_info = duet_flash_get_info(current_partition);
-    if (addr == 0 || ((addr + in_buf_len) > ( partition_info->partition_start_addr + partition_info->partition_length)) \
+    if (addr == 0 || ((addr + in_buf_len) > (partition_info->partition_start_addr + partition_info->partition_length)) \
         || (addr < partition_info->partition_start_addr)) {
         return -1;
     }
@@ -427,7 +427,7 @@ int32_t duet_flash_erase_common(uint32_t addr, uint32_t len)
         return -1;
     }
     partition_info = duet_flash_get_info(current_partition);
-    if (addr == 0 || ((addr + len) > ( partition_info->partition_start_addr + partition_info->partition_length)) \
+    if (addr == 0 || ((addr + len) > (partition_info->partition_start_addr + partition_info->partition_length)) \
         || (addr < partition_info->partition_start_addr)) {
         return -1;
     }
@@ -490,7 +490,7 @@ int32_t duet_flash_write_common(uint32_t addr, const void *in_buff, uint32_t len
     }
     partition_info = duet_flash_get_info(current_partition);
     if (addr == 0 || in_buff == NULL
-        || ((addr + len) > ( partition_info->partition_start_addr + partition_info->partition_length)) \
+        || ((addr + len) > (partition_info->partition_start_addr + partition_info->partition_length)) \
         || (addr < partition_info->partition_start_addr)) {
         return -1;
     }
@@ -550,7 +550,7 @@ int32_t duet_flash_write_saved(duet_partition_t in_partition, uint32_t *off_set,
     uint8_t *buf_malloc = NULL;
     uint32_t off_set_tmp = 0;
     uint32_t len_tmp = 0;
-    partition_info = duet_flash_get_info( in_partition );
+    partition_info = duet_flash_get_info(in_partition);
     if (off_set == NULL || in_buf == NULL || ((*off_set + in_buf_len) > partition_info->partition_length)) {
         return -1;
     }

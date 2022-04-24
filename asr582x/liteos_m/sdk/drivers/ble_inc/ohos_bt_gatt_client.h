@@ -107,7 +107,7 @@ typedef struct {
  * @param[in] <appUuid> specified by upper layer
  * @return 0-success, other-fail
  */
-int BleGattcRegister(       BtUuid appUuid);
+int BleGattcRegister(      BtUuid appUuid);
 
 /*
  * @brief gatt client deregister

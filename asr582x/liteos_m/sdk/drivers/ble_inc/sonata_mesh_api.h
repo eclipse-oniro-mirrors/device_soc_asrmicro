@@ -1234,15 +1234,15 @@ typedef struct {
     /// Publish Friendship CredentialFlag
     uint16_t credentialFlag : 1;
     /// Reserved for Future Use
-    uint16_t rfu: 3;
+    uint16_t rfu : 3;
     /// Default TTL value for the outgoing messages
     uint8_t  ttl;
     /// Period for periodic status publishing
     uint8_t  period;
     /// Number of retransmissions for each published message
-    uint8_t  retransmitCount: 3;
+    uint8_t  retransmitCount : 3;
     /// Number of 50-millisecond steps between retransmissions
-    uint8_t  retransmitIntervalSteps: 5;
+    uint8_t  retransmitIntervalSteps : 5;
     /// Model Identifier
     uint32_t model_id;
 } provisioner_pub_set_status_t;
@@ -1252,9 +1252,9 @@ typedef struct {
     /// Source Address
     uint16_t src_addr;
     /// Network Transmit Count
-    uint8_t  retransmitCount: 3;
+    uint8_t  retransmitCount : 3;
     /// Network Transmit Interval Steps
-    uint8_t  retransmitIntervalSteps: 5;
+    uint8_t  retransmitIntervalSteps : 5;
 } provisioner_nettransmit_status_t;
 
 // Mesh Core Provision Event Indicate Parameter union
@@ -1332,15 +1332,15 @@ typedef struct mesh_local_pub_set {
     /// Publish Friendship CredentialFlag
     uint16_t credentialFlag : 1;
     /// Reserved for Future Use
-    uint16_t rfu: 3;
+    uint16_t rfu : 3;
     /// Default TTL value for the outgoing messages
     uint8_t  ttl;
     /// Period for periodic status publishing
     uint8_t  period;
     /// Number of retransmissions for each published message
-    uint8_t  retransmitCount: 3;
+    uint8_t  retransmitCount : 3;
     /// Number of 50-millisecond steps between retransmissions
-    uint8_t  retransmitIntervalSteps: 5;
+    uint8_t  retransmitIntervalSteps : 5;
     /// Model Identifier
     uint32_t model_id;
 } mesh_local_pub_set_t;
@@ -1645,15 +1645,15 @@ typedef struct mesh_provisioner_set_pub_param {
     /// Value of the Friendship Credential Flag
     uint16_t credentialFlag : 1;
     /// Reserved for Future Use
-    uint16_t rfu: 3;
+    uint16_t rfu : 3;
     /// Default TTL value for the outgoing messages
     uint8_t  ttl;
     /// Period for periodic status publishing
     uint8_t  period;
     /// Number of retransmissions for each published message
-    uint8_t  retransmitCount: 3;
+    uint8_t  retransmitCount : 3;
     /// Number of 50-millisecond steps between retransmissions
-    uint8_t  retransmitIntervalSteps: 5;
+    uint8_t  retransmitIntervalSteps : 5;
     /// Model Identifier
     uint32_t model_id;
     /// Index of the Network key
@@ -1667,9 +1667,9 @@ typedef struct mesh_provisioner_set_nettransmit_param {
     /// Index of Netkey
     uint16_t netkey_index;
     /// Number of transmissions for each Network PDU originating from the node
-    uint8_t  retransmitCount: 3;
+    uint8_t  retransmitCount : 3;
     /// Number of 10-millisecond steps between transmissions
-    uint8_t  retransmitIntervalSteps: 5;
+    uint8_t  retransmitIntervalSteps : 5;
 } mesh_provisioner_set_nettransmit_param_t;
 
 // Mesh Core Provisioner Event Callback Parameter Union
@@ -1764,7 +1764,7 @@ typedef struct mesh_model_publish_param {
 typedef  STATUS (* msg_published_cb)(mesh_model_publish_param_t *p_param, STATUS status) ;
 
 // Sig Nodel State callback
-typedef  void (* sig_model_state_cb)(mesh_state_ind_t *p_state ) ;
+typedef  void (* sig_model_state_cb)(mesh_state_ind_t *p_state) ;
 /**@}*/
 
 /**

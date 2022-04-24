@@ -20,8 +20,8 @@
 #include "lega_rnd.h"
 #include "lega_hw_common.h"
 
-int mbedtls_hardware_poll( void *data,
-                           unsigned char *output, size_t len, size_t *olen )
+int mbedtls_hardware_poll(void *data,
+                          unsigned char *output, size_t len, size_t *olen)
 {
     int ret = 0;
     lega_rnd_init();
@@ -54,7 +54,7 @@ uint32_t mbedtls_hw_rand()
     uint32_t ret = 0;
     uint8_t buffer[RND_MAX_LEN] = {0};
     uint32_t olen = 0;
-    mbedtls_hardware_poll( "0", &buffer[0], RND_TEST_LEN, &olen );
+    mbedtls_hardware_poll("0", &buffer[0], RND_TEST_LEN, &olen);
     printf("data len = %d, data = \n", (int)olen);
     for (ret = 0; ret < RND_TEST_LEN; ret++) {
         printf("0x%x ", buffer[ret]);

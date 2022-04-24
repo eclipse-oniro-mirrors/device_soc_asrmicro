@@ -594,7 +594,7 @@ struct sonata_gap_iq_sample {
     int8_t q;
 };
 
-typedef  uint16_t (*sonata_gap_check_pkt_type_t )(uint8_t pkt_type);
+typedef  uint16_t (*sonata_gap_check_pkt_type_t)(uint8_t pkt_type);
 
 // @} GAP
 #endif // SONATA_SONATA_GAP_H_

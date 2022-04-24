@@ -52,7 +52,7 @@ int switch_flash_encrypt(void)
 
 int duet_flash_encrypt(void)
 {
-    if ( duet_flash_encrypt_status()) {
+    if (duet_flash_encrypt_status()) {
         return 0;
     }
 
