@@ -1767,10 +1767,10 @@ typedef struct {
     uint16_t (*gap_scan_result)(sonata_gap_ext_adv_report_ind_t *result);
 
     /// Callback for get peer name
-    uint16_t (*gap_get_peer_name)( uint8_t addr_type, uint8_t *peer_addr, uint8_t name_len, uint8_t *name);
+    uint16_t (*gap_get_peer_name)(uint8_t addr_type, uint8_t *peer_addr, uint8_t name_len, uint8_t *name);
 
     /// Callback for random address has been solved
-    uint16_t (*gap_addr_solved)( uint8_t *addr, uint8_t *key);
+    uint16_t (*gap_addr_solved)(uint8_t *addr, uint8_t *key);
 
     /// Callback for AES-128 block result indication
     uint16_t (*gap_use_enc_block)(uint8_t *result);

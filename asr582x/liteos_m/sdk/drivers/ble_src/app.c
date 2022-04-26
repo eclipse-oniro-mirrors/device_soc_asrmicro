@@ -251,7 +251,7 @@ static sonata_app_timer_callback_t app_timer_callbacks = {
     .timeout                  = app_timer_handler,
 };
 
-static void app_print_hex(uint8_t *hex, uint8_t len )
+static void app_print_hex(uint8_t *hex, uint8_t len)
 {
     for (int i = 0; i < len; i++) {
         APP_TRC("%x%x", hex[i] >> 4, hex[i] & 0xf);
@@ -302,7 +302,7 @@ static uint8_t  app_get_conidx_by_addr(uint8_t *addr)
 static uint8_t  *app_get_addr_by_conidx(uint8_t  conidx)
 {
     for (int idx = 0; idx < APP_BLE_CONNECT_MAX; idx++) {
-        if (connect_req_list[idx].conidx == conidx ) {
+        if (connect_req_list[idx].conidx == conidx) {
             return connect_req_list[idx].bd_addr;
         }
     }
@@ -1272,7 +1272,7 @@ static uint16_t app_gap_scan_result_callback(sonata_gap_ext_adv_report_ind_t *re
 void app_active_delete(uint8_t conIdx)
 {
     if (conIdx > APP_ACTIVE_MAX) {
-        APP_TRC("APP: %s,ERROR:ACTIVE overflow\r\n", __FUNCTION__ );
+        APP_TRC("APP: %s,ERROR:ACTIVE overflow\r\n", __FUNCTION__);
         return;
     }
     gAppEnv.act[conIdx].runing = false;
@@ -1600,10 +1600,10 @@ int app_ble_gatt_add_svc_helper(uint16_t *start_hdl, uint8_t nb_att, ble_gatt_at
         }
     }
     APP_TRC("struc %d %d\r\n", sizeof(ble_gatt_att_reg_list_t), sizeof(ble_gatt_att_manager_t));
-    ble_gatt_att_reg_list_t *p_list = ( ble_gatt_att_reg_list_t * ) sonata_api_malloc(sizeof(ble_gatt_att_opr_t) *
+    ble_gatt_att_reg_list_t *p_list = (ble_gatt_att_reg_list_t *) sonata_api_malloc(sizeof(ble_gatt_att_opr_t) *
                                       (nb_att - 1) + sizeof(ble_gatt_att_reg_list_t));
     memset(p_list, 0, sizeof(ble_gatt_att_opr_t) * (nb_att - 1) + sizeof(ble_gatt_att_reg_list_t));
-    p_list->att_opr_list  = (ble_gatt_att_opr_t *)( (uint8_t *)p_list + sizeof(ble_gatt_att_reg_list_t));
+    p_list->att_opr_list  = (ble_gatt_att_opr_t *)((uint8_t *)p_list + sizeof(ble_gatt_att_reg_list_t));
     p_list->nb_att = nb_att - 1;
     APP_TRC("nb_att %d\r\n", p_list->nb_att);
 
@@ -1678,7 +1678,7 @@ static void print_peer_bond_request(struct sonata_gap_bond_req_ind *request)
     switch (request->request) {
         case SONATA_GAP_PAIRING_REQ:
             APP_TRC("PEER_PAIR: SONATA_GAP_PAIRING_REQ,auth_req=%02X(X)", request->data.auth_req);
-            switch (request->data.auth_req ) {
+            switch (request->data.auth_req) {
                 case SONATA_GAP_AUTH_REQ_NO_MITM_NO_BOND:
                     APP_TRC(" (GAP_AUTH_REQ_NO_MITM_NO_BOND)\r\n");
                     break;
@@ -1705,7 +1705,7 @@ static void print_peer_bond_request(struct sonata_gap_bond_req_ind *request)
             break;
         case SONATA_GAP_TK_EXCH:
             APP_TRC("PEER_PAIR: SONATA_GAP_TK_EXCH,tk_type=%02X(X)\r\n", request->data.tk_type);
-            switch (request->data.auth_req ) {
+            switch (request->data.auth_req) {
                 case SONATA_GAP_TK_OOB:
                     APP_TRC(" (GAP_TK_OOB)\r\n");
                     break;
@@ -2293,11 +2293,11 @@ void app_gap_connect_confirm(uint8_t *addr, uint8_t auth)
 void app_active_update(uint8_t conIdx, uint8_t *mac)
 {
     if (conIdx > APP_ACTIVE_MAX) {
-        APP_TRC("APP: %s,ERROR:ACTIVE overflow\r\n", __FUNCTION__ );
+        APP_TRC("APP: %s,ERROR:ACTIVE overflow\r\n", __FUNCTION__);
         return;
     }
     if (gAppEnv.act[conIdx].runing == true) {
-        APP_TRC("APP: %s,ERROR:ACTIVE id error\r\n", __FUNCTION__ );
+        APP_TRC("APP: %s,ERROR:ACTIVE id error\r\n", __FUNCTION__);
         return;
     }
     gAppEnv.act[conIdx].runing = true;

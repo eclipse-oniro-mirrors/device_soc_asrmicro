@@ -22,16 +22,16 @@
 extern "C" {
 #endif
 
-#define PAR_OPT_READ_POS  ( 0 )
-#define PAR_OPT_WRITE_POS ( 1 )
+#define PAR_OPT_READ_POS  (0)
+#define PAR_OPT_WRITE_POS (1)
 
-#define PAR_OPT_READ_MASK  ( 0x1u << PAR_OPT_READ_POS )
-#define PAR_OPT_WRITE_MASK ( 0x1u << PAR_OPT_WRITE_POS )
+#define PAR_OPT_READ_MASK  (0x1u << PAR_OPT_READ_POS)
+#define PAR_OPT_WRITE_MASK (0x1u << PAR_OPT_WRITE_POS)
 
-#define PAR_OPT_READ_DIS  ( 0x0u << PAR_OPT_READ_POS )
-#define PAR_OPT_READ_EN   ( 0x1u << PAR_OPT_READ_POS )
-#define PAR_OPT_WRITE_DIS ( 0x0u << PAR_OPT_WRITE_POS )
-#define PAR_OPT_WRITE_EN  ( 0x1u << PAR_OPT_WRITE_POS )
+#define PAR_OPT_READ_DIS  (0x0u << PAR_OPT_READ_POS)
+#define PAR_OPT_READ_EN   (0x1u << PAR_OPT_READ_POS)
+#define PAR_OPT_WRITE_DIS (0x0u << PAR_OPT_WRITE_POS)
+#define PAR_OPT_WRITE_EN  (0x1u << PAR_OPT_WRITE_POS)
 
 typedef enum {
     HAL_PARTITION_ERROR = -1,

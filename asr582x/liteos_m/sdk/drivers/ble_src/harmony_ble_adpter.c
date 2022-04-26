@@ -307,9 +307,9 @@ ble_gatt_att_reg_t *ble_ohos_add_char(ble_gatt_att_reg_t *dst_attr, BleGattAttr 
     dst_attr->att_desc.ext_perm |= PRI;
     dst_attr->att_desc.max_len = 512;
 
-    if (((char_attr->properties  & OHOS_GATT_CHARACTER_PROPERTY_BIT_INDICATE) == OHOS_GATT_CHARACTER_PROPERTY_BIT_INDICATE
-         ||  (char_attr->properties  & OHOS_GATT_CHARACTER_PROPERTY_BIT_NOTIFY) == OHOS_GATT_CHARACTER_PROPERTY_BIT_NOTIFY )
-        && isLast) {
+    if (((char_attr->properties & OHOS_GATT_CHARACTER_PROPERTY_BIT_INDICATE) == OHOS_GATT_CHARACTER_PROPERTY_BIT_INDICATE
+         || (char_attr->properties & OHOS_GATT_CHARACTER_PROPERTY_BIT_NOTIFY) == OHOS_GATT_CHARACTER_PROPERTY_BIT_NOTIFY)
+         && isLast) {
         dst_attr++;
 
         uint8_t char_uuid2[ATT_SIG_UUID_128_LEN] = {0x02, 0x29, 0x0};
@@ -477,11 +477,11 @@ int BleGattsStartServiceEx(int *srvcHandle, BleGattService *srvcInfo)
     if ((srvcInfo->attrList[att_nb - 1].properties  & OHOS_GATT_CHARACTER_PROPERTY_BIT_INDICATE) ==
         OHOS_GATT_CHARACTER_PROPERTY_BIT_INDICATE
         ||  (srvcInfo->attrList[att_nb - 1].properties  & OHOS_GATT_CHARACTER_PROPERTY_BIT_NOTIFY) ==
-        OHOS_GATT_CHARACTER_PROPERTY_BIT_NOTIFY ) {
+        OHOS_GATT_CHARACTER_PROPERTY_BIT_NOTIFY) {
         indicate_is_exit = 1;
     }
     att_nb =  get_service_num(srvcInfo->attrNum, indicate_is_exit);
-    uint32_t len = (att_nb ) * sizeof(ble_gatt_att_reg_t) ;
+    uint32_t len = (att_nb) * sizeof(ble_gatt_att_reg_t) ;
     ble_gatt_att_reg_t *att_list;
     ble_gatt_att_reg_t *att_temp;
     att_list = (ble_gatt_att_reg_t *)malloc(len);
@@ -537,7 +537,7 @@ int BleGattRegisterCallbacks(BtGattCallbacks *func)
 {
     print_log("harmony  : %s \r\n", __FUNCTION__);
     memmove(&bt_gattcallback, func, sizeof(BtGattCallbacks));
-    app_register_sec_cb((app_sec_req_cb )bt_gattcallback.securityRespondCb);
+    app_register_sec_cb((app_sec_req_cb)bt_gattcallback.securityRespondCb);
     return BT_STATUS_SUCCESS;
 
 }

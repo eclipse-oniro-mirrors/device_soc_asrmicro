@@ -198,7 +198,7 @@ static struct cli_command write_cmd = {
 void lega_ble_disconnect_test(char *pwbuf, int blen, int argc, char **argv)
 {
     int c = 1;
-    if (argc == 2 ) {
+    if (argc == 2) {
         app_ble_disconnect(0);
     }
 }

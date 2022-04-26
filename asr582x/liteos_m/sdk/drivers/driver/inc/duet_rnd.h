@@ -44,7 +44,7 @@ int duet_RND_Instantiation(CRYS_RND_Context_t
                                            parameter to any API that uses the RND module.
                                            \note the context must be cleared before sent to the function. */
                            CRYS_RND_WorkBuff_t *rndWorkBuff_ptr       /* !< [in/out] Scratchpad for the RND module's work. */
-                          );
+                         );
 
 /*!
 @brief Clears existing RNG instantiation state.
@@ -65,7 +65,7 @@ It implements referenced standard [SP800-90] - 10.2.1.4.2 - CTR-DRBG Reseeding a
 */
 int duet_RND_Reseeding(CRYS_RND_Context_t *rndContext_ptr,      /* !< [in/out] Pointer to the RND context buffer. */
                        CRYS_RND_WorkBuff_t *rndWorkBuff_ptr      /* !< [in/out] Scratchpad for the RND module's work. */
-                      );
+                     );
 
 /****************************************************************************************/
 /*!
@@ -86,7 +86,7 @@ int duet_RND_GenerateVector(CRYS_RND_State_t
                                      Use rndContext->rndState field of the context for this parameter. */
                             uint16_t outSizeBytes,            /* !< [in]  The size in bytes of the random vector required. The maximal size is 2^16 -1 bytes. */
                             uint8_t *out_ptr                  /* !< [out] The pointer to output buffer. */
-                           );
+                          );
 
 /****************************************************************************************/
 /*!
@@ -106,7 +106,7 @@ int duet_RND_SetGenerateVectorFunc(CRYS_RND_Context_t
                                               to the functions used for random vector generation. */
                                    SaSiRndGenerateVectWorkFunc_t rndGenerateVectFunc       /* !< [in] Pointer to the random vector generation function.
                                               The pointer should point to the ::CRYS_RND_GenerateVector function. */
-                                  );
+                                 );
 
 /**********************************************************************************************************/
 /*!
@@ -144,7 +144,7 @@ int duet_RND_AddAdditionalInput(CRYS_RND_Context_t
                                 *rndContext_ptr,     /* !< [in/out] Pointer to the RND context buffer. */
                                 uint8_t *additonalInput_ptr,            /* !< [in]  The Additional Input buffer. */
                                 uint16_t additonalInputSize             /* !< [in]  The size of the Additional Input buffer. Must be <= 48, and a multiple of 4. */
-                               );
+                              );
 
 /*!
 @brief The CRYS_RND_EnterKatMode function sets KAT mode bit into StateFlag of global CRYS_RND_WorkingState structure.
@@ -164,7 +164,7 @@ int duet_RND_EnterKatMode(CRYS_RND_Context_t *rndContext_ptr,     /* !< [in/out]
                           CRYS_RND_WorkBuff_t
                           *workBuff_ptr      /* !< [out] RND working buffer, must be the same buffer, which should be passed into
                             Instantiation/Reseeding functions. */
-                         );
+                        );
 
 /**********************************************************************************************************/
 /*!
@@ -176,6 +176,6 @@ The user must call this function after KAT tests before actual using RND module 
 @return A non-zero value from crys_rnd_error.h on failure.
 */
 void duet_RND_DisableKatMode(CRYS_RND_Context_t *rndContext_ptr     /* !< [in/out] Pointer to the RND context buffer. */
-                            );
+                           );
 
 #endif // _DUET_RND_H_

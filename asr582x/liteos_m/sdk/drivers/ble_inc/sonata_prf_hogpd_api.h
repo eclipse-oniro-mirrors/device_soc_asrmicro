@@ -118,7 +118,7 @@
 #define    HID_BUTTON_7            0x24      // Keyboard 7 and &
 #define    HID_BUTTON_8            0x25      // Keyboard 8 and *
 #define    HID_BUTTON_9            0x26      // Keyboard 9 and (
-#define    HID_BUTTON_0            0x27      // Keyboard 0 and )
+#define    HID_BUTTON_0            0x27      // Keyboard 0 and)
 #define    HID_BUTTON_ENTER        0x28      // Keyboard Return and Enter
 #define    HID_BUTTON_ESC          0x29      // Keyboard ESPACE
 #define    HID_BUTTON_BACKSPACE    0x2A      // Keyboard DELET (Backspace)

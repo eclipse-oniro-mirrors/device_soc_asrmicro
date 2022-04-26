@@ -56,7 +56,7 @@ unsigned int IoTGpioGetDir(unsigned int id, IotGpioDir *dir)
 
     duet_cfg = g_duet_gpio[id].config;
 
-    if ( duet_cfg >= DUET_OUTPUT_PUSH_PULL) {
+    if (duet_cfg >= DUET_OUTPUT_PUSH_PULL) {
         return IOT_GPIO_DIR_OUT;
     } else {
         return IOT_GPIO_DIR_IN;
@@ -157,7 +157,7 @@ unsigned int IoTGpioSetIsrMode(unsigned int id, IotGpioIntType intType, IotGpioI
         trigger = DUET_IRQ_TRIGGER_RISING_EDGE;
     }
 
-    if (duet_gpio_disable_irq(&g_duet_gpio[id]) != 0 ) {
+    if (duet_gpio_disable_irq(&g_duet_gpio[id]) != 0) {
         return IOT_FAILURE;
     }
 

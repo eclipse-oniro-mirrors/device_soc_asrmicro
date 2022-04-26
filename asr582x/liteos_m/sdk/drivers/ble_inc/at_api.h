@@ -76,7 +76,7 @@ void at_command_process_ble(void);
  * @param cmd_entry    : user at cmd array pointer
  * @param cmd_num      : user at cmd number
  */
-void at_cmd_register( const cmd_entry *cmd);
+void at_cmd_register(const cmd_entry *cmd);
 
 /** @brief  at init functin, user should call it before use at cmd
  *  @return    0       : on success.
@@ -117,8 +117,8 @@ extern char at_dbgflg;
 
 #define at_printf printf
 
-#define dbg_at(Fmt, ...)         do{if(at_dbgflg) at_printf(Fmt "\r\n", ## __VA_ARGS__);}while(0)
-#define dbg_atnn(Fmt, ...)       do{if(at_dbgflg) at_printf(Fmt, ## __VA_ARGS__);}while(0)
+#define dbg_at(Fmt, ...)         do {if (at_dbgflg) at_printf(Fmt "\r\n", ## __VA_ARGS__);} while (0)
+#define dbg_atnn(Fmt, ...)       do {if (at_dbgflg) at_printf(Fmt, ## __VA_ARGS__);} while (0)
 
 #define at_rspdata(Fmt, ...)     at_printf("+" Fmt "\r\n", ## __VA_ARGS__)
 #define at_rspdatann(Fmt, ...)   at_printf("+" Fmt, ## __VA_ARGS__)

@@ -229,7 +229,7 @@ void lega_wifi_iperf_client_start()
     if (lega_rtos_init_timer(&iperf_output_timer, IPERF_OUTPUT_INTERVIEW * 1000, iperf_output, NULL) != kNoErr) {
         iperf_printf("iperf timer fail!\r\n");
     }
-    for ( ;; ) {
+    for (;;) {
         if (lega_rtos_get_semaphore(&iperf_Semaphore, IPERF_CLIENT_TIMEOUT_MS) == kNoErr) {
             // AT command set lwip_iperf_config over and begin to run
 

@@ -77,7 +77,7 @@ typedef struct Sys_Con_Block {
             __IO uint32_t timer2_sclk_sel : 1;
             __IO uint32_t timer3_sclk_sel : 1;
             __IO uint32_t timer4_sclk_sel : 1;
-            __IO uint32_t rw_mst_clk_freq_sel: 6;
+            __IO uint32_t rw_mst_clk_freq_sel : 6;
             __I  uint32_t rsv0 : 1;
             __IO uint32_t pwm_pclk_sel : 1;
             __I  uint32_t rsv1 : 14;
@@ -200,8 +200,8 @@ typedef struct Sys_Con_Block {
 
 #define PERI_CG_REG_BASE    (SYS_CON_REG_BASE + 0x14)
 #define PERI_SOFT_RESET_REG_BASE    (SYS_CON_REG_BASE + 0x18)
-#define REG_PERI_CG_EN    (*( (volatile uint32_t *)(PERI_CG_REG_BASE) ))
-#define REG_PERI_SOFT_RESET_REG    (*( (volatile uint32_t *)(PERI_SOFT_RESET_REG_BASE) ))
+#define REG_PERI_CG_EN    (*((volatile uint32_t *)(PERI_CG_REG_BASE)))
+#define REG_PERI_SOFT_RESET_REG    (*((volatile uint32_t *)(PERI_SOFT_RESET_REG_BASE)))
 
 #define SYSCTRL_BASE SYS_CON_REG_BASE
 #define SYS_CON_00    *(volatile int unsigned *)(SYSCTRL_BASE + (0x000*4))
@@ -317,9 +317,9 @@ typedef struct __I2S {
     __I  uint32_t I2S_COMP_TYPE;
 } I2S_TypeDef;
 
-#define REG_I2S_HW_SHFIT_SET       ( *(volatile uint32_t *)(SYS_CON_REG_BASE + 0xC0) )
-#define REG_I2S_HW_SHIFT_DATAIN    ( *(volatile uint32_t *)(SYS_CON_REG_BASE + 0xC4) )
-#define REG_I2S_HW_SHIFT_DATAOUT   ( *(volatile uint32_t *)(SYS_CON_REG_BASE + 0xC8) )
+#define REG_I2S_HW_SHFIT_SET       (*(volatile uint32_t *)(SYS_CON_REG_BASE + 0xC0))
+#define REG_I2S_HW_SHIFT_DATAIN    (*(volatile uint32_t *)(SYS_CON_REG_BASE + 0xC4))
+#define REG_I2S_HW_SHIFT_DATAOUT   (*(volatile uint32_t *)(SYS_CON_REG_BASE + 0xC8))
 
 #define I2S_BASE    (0x4008D000)
 #define I2S         ((I2S_TypeDef *)I2S_BASE)
@@ -334,7 +334,7 @@ typedef struct {
     __IO uint32_t reserved : 1;
 } I2S_CLK_DIV_TypeDef;
 
-#define I2S_CLK_DIV         ((I2S_CLK_DIV_TypeDef *)0x40000810 )
+#define I2S_CLK_DIV         ((I2S_CLK_DIV_TypeDef *)0x40000810)
 
 /*
     DUET SPI definitions
@@ -359,9 +359,9 @@ typedef struct __SPI {
 #define SPI1_BASE (0x40080000+0x5000)
 #define SPI2_BASE (0x40080000+0x6000)
 
-#define SPI0    ( (SPI_TypeDef *)SPI0_BASE )
-#define SPI1    ( (SPI_TypeDef *)SPI1_BASE )
-#define SPI2    ( (SPI_TypeDef *)SPI2_BASE )
+#define SPI0    ((SPI_TypeDef *)SPI0_BASE)
+#define SPI1    ((SPI_TypeDef *)SPI1_BASE)
+#define SPI2    ((SPI_TypeDef *)SPI2_BASE)
 
 #define SPI0_BUS_CLK_EN        (0X01<<4)
 #define SPI0_PERI_CLK_EN       (0X01<<17)
@@ -400,7 +400,7 @@ typedef struct __KEYPAD {
 } KEYPAD_TypeDef;
 
 #define KEYPAD_BASE  (0x40015000)
-#define KEYPAD       ( (KEYPAD_TypeDef *)KEYPAD_BASE )
+#define KEYPAD       ((KEYPAD_TypeDef *)KEYPAD_BASE)
 /*
     DUET GPIO definitons
 */

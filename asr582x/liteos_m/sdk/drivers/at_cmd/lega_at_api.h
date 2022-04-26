@@ -158,8 +158,8 @@ extern int printf2(const char *format, ...);
 #define printf2 printf
 #endif
 
-#define dbg_at(Fmt, ...)         do{if(at_dbgflg) printf2(Fmt "\r\n", ## __VA_ARGS__);}while(0)
-#define dbg_atnn(Fmt, ...)       do{if(at_dbgflg) printf2(Fmt, ## __VA_ARGS__);}while(0)
+#define dbg_at(Fmt, ...)         do {if (at_dbgflg) printf2(Fmt "\r\n", ## __VA_ARGS__);} while (0)
+#define dbg_atnn(Fmt, ...)       do {if (at_dbgflg) printf2(Fmt, ## __VA_ARGS__);} while (0)
 #define at_rspdata(Fmt, ...)     printf2("+" Fmt "\r\n", ## __VA_ARGS__)
 #define at_rspdatann(Fmt, ...)   printf2("+" Fmt, ## __VA_ARGS__)
 #define at_rspinfor(Fmt, ...)    printf2(Fmt "\r\n", ## __VA_ARGS__)

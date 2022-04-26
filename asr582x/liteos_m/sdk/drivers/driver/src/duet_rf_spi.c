@@ -63,7 +63,7 @@ uint16_t spi_sw_protect_read(uint16_t addr)
 
     while (1) {
         if (*((volatile int *)(SPI_COMMAND + START_FLAG_OFT)) == 0) {
-            return (  (uint16_t) * ((volatile uint32_t *)(SPI_RDATA + RDATA_REG_OFT)));
+            return ((uint16_t) *((volatile uint32_t *)(SPI_RDATA + RDATA_REG_OFT)));
         }
     }
 

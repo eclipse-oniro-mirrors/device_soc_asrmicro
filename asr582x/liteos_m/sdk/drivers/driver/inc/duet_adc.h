@@ -57,7 +57,7 @@ typedef struct {
     };
     __IO uint32_t ADC_DATA;
 }                    duet_ADC;
-#define ADC  (( duet_ADC *)(SYS_REG_BASE_AUXADC))
+#define ADC  ((duet_ADC *)(SYS_REG_BASE_AUXADC))
 #define BIT(pos) (1U<<(pos))
 /* Modem Config */
 #define MDM_CLKGATEFCTRL0_ADDR          0x60C00874

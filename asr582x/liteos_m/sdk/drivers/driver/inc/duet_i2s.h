@@ -115,26 +115,26 @@ extern "c" {
         uint8_t i2s_mode;
     } duet_i2s_dev_t;
 
-    __STATIC_INLINE ITstatus i2s_get_interrupt_status(I2S_TypeDef * I2Sx, uint32_t i2s_interrupt)
+    __STATIC_INLINE ITstatus i2s_get_interrupt_status(I2S_TypeDef *I2Sx, uint32_t i2s_interrupt)
     {
         return (I2Sx->ISR & i2s_interrupt) ? SET : RESET;
     }
 
-    void duet_i2s_send_data(I2S_TypeDef * I2Sx, uint32_t *left_chan_data, uint32_t *right_chan_data, uint32_t len);
+    void duet_i2s_send_data(I2S_TypeDef *I2Sx, uint32_t *left_chan_data, uint32_t *right_chan_data, uint32_t len);
 
     void duet_i2s_struct_init(duet_i2s_dev_t *pI2S_struct);
 
-    void duet_i2s_interrupt_config(I2S_TypeDef * I2Sx, uint32_t i2s_interrupt, uint32_t new_state);
-    void duet_i2s_interrupt_clear(I2S_TypeDef * I2Sx, uint32_t i2s_interrupt);
-    void duet_i2s_cmd(I2S_TypeDef * I2Sx, uint32_t new_state);
+    void duet_i2s_interrupt_config(I2S_TypeDef *I2Sx, uint32_t i2s_interrupt, uint32_t new_state);
+    void duet_i2s_interrupt_clear(I2S_TypeDef *I2Sx, uint32_t i2s_interrupt);
+    void duet_i2s_cmd(I2S_TypeDef *I2Sx, uint32_t new_state);
 
-    void duet_i2s_tx_block_cmd(I2S_TypeDef * I2Sx, uint32_t new_state);
-    void duet_i2s_rx_block_cmd(I2S_TypeDef * I2Sx, uint32_t new_state);
-    void duet_i2s_tx_channel_cmd(I2S_TypeDef * I2Sx, uint32_t new_state);
-    void duet_i2s_rx_channel_cmd(I2S_TypeDef * I2Sx, uint32_t new_state);
-    void duet_i2s_master_clock_cmd(I2S_TypeDef * I2Sx, uint32_t new_state);
-    int  duet_i2s_init(I2S_TypeDef * I2Sx, duet_i2s_dev_t *pI2S_struct);
-    uint32_t duet_i2s_receive_data(I2S_TypeDef * I2Sx, uint8_t lr);
+    void duet_i2s_tx_block_cmd(I2S_TypeDef *I2Sx, uint32_t new_state);
+    void duet_i2s_rx_block_cmd(I2S_TypeDef *I2Sx, uint32_t new_state);
+    void duet_i2s_tx_channel_cmd(I2S_TypeDef *I2Sx, uint32_t new_state);
+    void duet_i2s_rx_channel_cmd(I2S_TypeDef *I2Sx, uint32_t new_state);
+    void duet_i2s_master_clock_cmd(I2S_TypeDef *I2Sx, uint32_t new_state);
+    int  duet_i2s_init(I2S_TypeDef *I2Sx, duet_i2s_dev_t *pI2S_struct);
+    uint32_t duet_i2s_receive_data(I2S_TypeDef *I2Sx, uint8_t lr);
 
 #ifdef __cplusplus
 }

@@ -33,16 +33,16 @@ duet_i2c_priv_cfg_t duet_i2c_priv_cfg = {
 void I2C0_IRQHandler(void)
 {
     duet_intrpt_enter();
-    if ( (I2C0->SR) & I2C_STATUS_TRANS_DONE) {
+    if ((I2C0->SR) & I2C_STATUS_TRANS_DONE) {
         //        printf("I2C0 trans done interrupt\n");
         I2C0->CR &= (~I2C_CR_SEND_STOP);
         I2C0->SR |= I2C_STATUS_TRANS_DONE;
     }
-    if ( (I2C0->SR) & I2C_STATUS_SLAVE_ADDR_DET) {
+    if ((I2C0->SR) & I2C_STATUS_SLAVE_ADDR_DET) {
         printf("I2C0 slave addr det\n");
         I2C0->SR |= I2C_STATUS_SLAVE_ADDR_DET;
     }
-    if ( (I2C0->SR) & I2C_STATUS_RX_FIFO_FULL) {
+    if ((I2C0->SR) & I2C_STATUS_RX_FIFO_FULL) {
         printf("I2C0 I2C_STATUS_RX_FIFO_FULL\n");
         I2C0->SR |= I2C_STATUS_RX_FIFO_FULL;
     }
@@ -52,15 +52,15 @@ void I2C1_IRQHandler(void)
 {
     duet_intrpt_enter();
 
-    if ( (I2C1->SR) & I2C_STATUS_TRANS_DONE) {
+    if ((I2C1->SR) & I2C_STATUS_TRANS_DONE) {
         printf("I2C1 trans done interrupt\n");
         I2C1->SR |= I2C_STATUS_TRANS_DONE;
     }
-    if ( (I2C1->SR) & I2C_STATUS_SLAVE_ADDR_DET) {
+    if ((I2C1->SR) & I2C_STATUS_SLAVE_ADDR_DET) {
         printf("I2C1 slave addr det\n");
         I2C1->SR |= I2C_STATUS_SLAVE_ADDR_DET;
     }
-    if ( (I2C1->SR) & I2C_STATUS_RX_FIFO_HALF_FULL) {
+    if ((I2C1->SR) & I2C_STATUS_RX_FIFO_HALF_FULL) {
         printf("I2C1 RX_FIFO_HALF_FULL\n");
         I2C1->SR |= I2C_STATUS_RX_FIFO_HALF_FULL;
     }
@@ -69,14 +69,14 @@ void I2C1_IRQHandler(void)
 ITstatus i2c_get_flag_status(I2C_TypeDef *I2Cx, uint32_t I2C_flag)
 {
     if (I2C_flag == I2C_STATUS_TX_FIFO_EMPTY) {
-        if ( I2Cx->WFIFO_WPTR != I2Cx->WFIFO_RPTR) {
+        if (I2Cx->WFIFO_WPTR != I2Cx->WFIFO_RPTR) {
             return RESET;
         } else {
             return SET;
         }
     } else if (I2C_flag == I2C_STATUS_TX_FIFO_FULL) {
-        if ( (I2Cx->WFIFO_WPTR > I2Cx->WFIFO_RPTR) ? (I2Cx->WFIFO_WPTR - I2Cx->WFIFO_RPTR) :
-             (I2Cx->WFIFO_RPTR - I2Cx->WFIFO_WPTR) != I2C_TX_FIFO_DEPTH ) {
+        if ((I2Cx->WFIFO_WPTR > I2Cx->WFIFO_RPTR) ? (I2Cx->WFIFO_WPTR - I2Cx->WFIFO_RPTR) :
+             (I2Cx->WFIFO_RPTR - I2Cx->WFIFO_WPTR) != I2C_TX_FIFO_DEPTH) {
             return RESET;
         } else {
             return SET;
@@ -90,15 +90,15 @@ ITstatus i2c_get_flag_status(I2C_TypeDef *I2Cx, uint32_t I2C_flag)
     }
 }
 
-int32_t duet_i2c_reset( I2C_TypeDef *I2Cx)
+int32_t duet_i2c_reset(I2C_TypeDef *I2Cx)
 {
     /* check unit busy */
     int32_t temp = I2C_WAIT_FOREVER;
-    while ( i2c_get_flag_status(I2Cx, I2C_STATUS_UNIT_BUSY) ) {
+    while (i2c_get_flag_status(I2Cx, I2C_STATUS_UNIT_BUSY)) {
         temp --;
     }
 
-    if ( temp ) {
+    if (temp) {
         I2Cx->CR &= I2C_UNIT_RESET; // clear rest of CR
         I2Cx->CR |= I2C_UNIT_RESET;  // set RESET bit
         I2Cx->SR = 0;
@@ -242,7 +242,7 @@ int32_t duet_i2c_init(duet_i2c_dev_t *i2c)
     }
 
     /* check the bus busy after unit enable */
-    if ( i2c_get_flag_status(I2Cx, I2C_STATUS_BUS_BUSY) ) {
+    if (i2c_get_flag_status(I2Cx, I2C_STATUS_BUS_BUSY)) {
         return EIO;
     } else {
         return 0;
@@ -294,7 +294,7 @@ int32_t duet_i2c_master_send(duet_i2c_dev_t *i2c, uint16_t dev_addr, const uint8
     // send write cmd
     while (1) {
         //wait till tx fifo is empty to avoid overflowing tx fifo
-        while ( !i2c_get_flag_status(I2Cx, I2C_STATUS_TX_FIFO_EMPTY) ) {
+        while (!i2c_get_flag_status(I2Cx, I2C_STATUS_TX_FIFO_EMPTY)) {
             if (g_duet_i2c_timeout) {
                 g_duet_i2c_timeout = 0;
                 ret = -ETIMEOUT;
@@ -311,7 +311,7 @@ int32_t duet_i2c_master_send(duet_i2c_dev_t *i2c, uint16_t dev_addr, const uint8
                     goto EXIT;
                 }
 
-                if ( i2c_get_flag_status(I2Cx, I2C_STATUS_BUS_ERROR_DET) ) {
+                if (i2c_get_flag_status(I2Cx, I2C_STATUS_BUS_ERROR_DET)) {
                     ret = -EBUSERR; // bus error
                     goto EXIT;
                 } else {
@@ -328,7 +328,7 @@ int32_t duet_i2c_master_send(duet_i2c_dev_t *i2c, uint16_t dev_addr, const uint8
                     goto EXIT;
                 }
 
-                if ( i2c_get_flag_status(I2Cx, I2C_STATUS_BUS_ERROR_DET) ) {
+                if (i2c_get_flag_status(I2Cx, I2C_STATUS_BUS_ERROR_DET)) {
                     ret =  -EBUSERR; // bus error
                     goto EXIT;
                 } else {
@@ -394,7 +394,7 @@ int32_t duet_i2c_master_recv(duet_i2c_dev_t *i2c, uint16_t dev_addr, uint8_t *da
             ret = -ETIMEOUT;
             goto EXIT;
         }
-        while ( !i2c_get_flag_status(I2Cx, I2C_STATUS_TX_FIFO_EMPTY) ) {
+        while (!i2c_get_flag_status(I2Cx, I2C_STATUS_TX_FIFO_EMPTY)) {
             if (g_duet_i2c_timeout) {
                 g_duet_i2c_timeout = 0;
                 ret = -ETIMEOUT;
@@ -442,12 +442,12 @@ int8_t duet_i2c_master_repeated_write_read(I2C_TypeDef *I2Cx, uint8_t slave_addr
     // send write cmd
     while (1) {
         //wait till tx fifo is empty to avoid overflowing tx fifo
-        while ( !i2c_get_flag_status(I2Cx, I2C_STATUS_TX_FIFO_EMPTY) );
+        while (!i2c_get_flag_status(I2Cx, I2C_STATUS_TX_FIFO_EMPTY));
 
         if (wlen > I2C_TX_FIFO_DEPTH) {
             // send 8 bytes
             for (temp = 0; temp < I2C_TX_FIFO_DEPTH; temp++) {
-                if ( i2c_get_flag_status(I2Cx, I2C_STATUS_BUS_ERROR_DET) ) {
+                if (i2c_get_flag_status(I2Cx, I2C_STATUS_BUS_ERROR_DET)) {
                     return EIO;    // bus error
                 } else {
                     I2Cx->WFIFO = (*pwdata++) | I2C_TB;
@@ -457,7 +457,7 @@ int8_t duet_i2c_master_repeated_write_read(I2C_TypeDef *I2Cx, uint8_t slave_addr
         } else {
             // send remaining bytes
             for (temp = 0; temp < wlen; temp++) {
-                if ( i2c_get_flag_status(I2Cx, I2C_STATUS_BUS_ERROR_DET) ) {
+                if (i2c_get_flag_status(I2Cx, I2C_STATUS_BUS_ERROR_DET)) {
                     return EIO;    // bus error
                 } else {
                     if (temp == wlen - 1) {
@@ -473,15 +473,15 @@ int8_t duet_i2c_master_repeated_write_read(I2C_TypeDef *I2Cx, uint8_t slave_addr
     }
 
     /**** master read ****/
-    while ( !i2c_get_flag_status(I2Cx, I2C_STATUS_TX_FIFO_EMPTY) );
+    while (!i2c_get_flag_status(I2Cx, I2C_STATUS_TX_FIFO_EMPTY));
 
     // send slave address first
     I2Cx->WFIFO = (slave_addr << 1) | I2C_READ | I2C_SEND_START | I2C_TB;
     while (i < rlen) {
-        while ( !i2c_get_flag_status(I2Cx, I2C_STATUS_TX_FIFO_EMPTY) );
+        while (!i2c_get_flag_status(I2Cx, I2C_STATUS_TX_FIFO_EMPTY));
         if ((rlen - 1) == i) {
             I2Cx->WFIFO = I2C_SEND_STOP | I2C_SEND_NACK | I2C_TB;
-            while ( !i2c_get_flag_status(I2Cx, I2C_STATUS_TX_FIFO_EMPTY) );
+            while (!i2c_get_flag_status(I2Cx, I2C_STATUS_TX_FIFO_EMPTY));
         } else {
             I2Cx->WFIFO = I2C_TB;
         }
@@ -538,7 +538,7 @@ int32_t duet_i2c_mem_write(duet_i2c_dev_t *i2c, uint16_t dev_addr, uint16_t mem_
     i2c_write_byte(I2Cx, ((uint8_t)dev_addr << 1) | I2C_WRITE | I2C_SEND_START | I2C_TB);
 
     // send memory address
-    for ( i = 0; i < mem_addr_size; i++) {
+    for (i = 0; i < mem_addr_size; i++) {
         i2c_write_byte(I2Cx, ((mem_addr >> (8 * i)) & 0xff) | I2C_WRITE | I2C_TB);
     }
 
@@ -550,7 +550,7 @@ int32_t duet_i2c_mem_write(duet_i2c_dev_t *i2c, uint16_t dev_addr, uint16_t mem_
             goto EXIT;
         }
         //wait till tx fifo is empty to avoid overflowing tx fifo
-        while ( !i2c_get_flag_status(I2Cx, I2C_STATUS_TX_FIFO_EMPTY) ) {
+        while (!i2c_get_flag_status(I2Cx, I2C_STATUS_TX_FIFO_EMPTY)) {
             if (g_duet_i2c_timeout) {
                 g_duet_i2c_timeout = 0;
                 ret = -ETIMEOUT;
@@ -567,7 +567,7 @@ int32_t duet_i2c_mem_write(duet_i2c_dev_t *i2c, uint16_t dev_addr, uint16_t mem_
                     goto EXIT;
                 }
 
-                if ( i2c_get_flag_status(I2Cx, I2C_STATUS_BUS_ERROR_DET) ) {
+                if (i2c_get_flag_status(I2Cx, I2C_STATUS_BUS_ERROR_DET)) {
                     ret = -EBUSERR; // bus error
                     goto EXIT;
                 } else {
@@ -584,7 +584,7 @@ int32_t duet_i2c_mem_write(duet_i2c_dev_t *i2c, uint16_t dev_addr, uint16_t mem_
                     goto EXIT;
                 }
 
-                if ( i2c_get_flag_status(I2Cx, I2C_STATUS_BUS_ERROR_DET) ) {
+                if (i2c_get_flag_status(I2Cx, I2C_STATUS_BUS_ERROR_DET)) {
                     ret = -EBUSERR; // bus error
                     goto EXIT;
                 } else {
@@ -647,7 +647,7 @@ int32_t duet_i2c_mem_read(duet_i2c_dev_t *i2c, uint16_t dev_addr, uint16_t mem_a
     i2c_write_byte(I2Cx, ((uint8_t)dev_addr << 1) | I2C_WRITE | I2C_SEND_START | I2C_TB);
 
     // send memory address
-    for ( i = 0; i < mem_addr_size; i++) {
+    for (i = 0; i < mem_addr_size; i++) {
         if (g_duet_i2c_timeout) {
             g_duet_i2c_timeout = 0;
             ret = -ETIMEOUT;
@@ -656,7 +656,7 @@ int32_t duet_i2c_mem_read(duet_i2c_dev_t *i2c, uint16_t dev_addr, uint16_t mem_a
         i2c_write_byte(I2Cx, ((mem_addr >> (8 * i)) & 0xff) | I2C_WRITE | I2C_TB);
     }
     /**** master read ****/
-    while ( !i2c_get_flag_status(I2Cx, I2C_STATUS_TX_FIFO_EMPTY) );
+    while (!i2c_get_flag_status(I2Cx, I2C_STATUS_TX_FIFO_EMPTY));
 
     // send slave address first
     i2c_write_byte(I2Cx, (dev_addr << 1) | I2C_READ | I2C_SEND_START | I2C_TB);
@@ -665,7 +665,7 @@ int32_t duet_i2c_mem_read(duet_i2c_dev_t *i2c, uint16_t dev_addr, uint16_t mem_a
     // send read cmd
     while (i < size) {
         //wait till tx fifo is empty to avoid overflowing tx fifo
-        while ( !i2c_get_flag_status(I2Cx, I2C_STATUS_TX_FIFO_EMPTY) );
+        while (!i2c_get_flag_status(I2Cx, I2C_STATUS_TX_FIFO_EMPTY));
 
         if (g_duet_i2c_timeout) {
             g_duet_i2c_timeout = 0;
@@ -673,13 +673,13 @@ int32_t duet_i2c_mem_read(duet_i2c_dev_t *i2c, uint16_t dev_addr, uint16_t mem_a
             goto EXIT;
         }
 
-        if ( i2c_get_flag_status(I2Cx, I2C_STATUS_BUS_ERROR_DET) ) {
+        if (i2c_get_flag_status(I2Cx, I2C_STATUS_BUS_ERROR_DET)) {
             ret = -EBUSERR; // bus error
             goto EXIT;
         } else {
             if (i == size - 1) {
                 i2c_write_byte(I2Cx, I2C_SEND_STOP | I2C_SEND_NACK | I2C_TB);
-                while ( !i2c_get_flag_status(I2Cx, I2C_STATUS_TX_FIFO_EMPTY) );
+                while (!i2c_get_flag_status(I2Cx, I2C_STATUS_TX_FIFO_EMPTY));
                 ret = I2C_SUCCESS;
                 while (!(I2Cx->RFIFO_STATUS & 0xF0)) {
                     if (g_duet_i2c_timeout) {
@@ -774,7 +774,7 @@ void duet_i2c_master_dma_send(uint8_t iic_idx, uint32_t *data, uint16_t len)
 {
     uint8_t dma_chan = 0;
     I2C_TypeDef *I2Cx = 0;
-    if ( iic_idx == 0) {
+    if (iic_idx == 0) {
         dma_chan = 12;
         I2Cx = I2C0;
     }

@@ -72,7 +72,7 @@ void udelay_pl(unsigned int us)
 #ifdef CFG_DUET_FREERTOS
 void lega_enter_critical_expble(void)
 {
-    portCLEAR_INTERRUPT_MASK_FROM_ISR( (configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY + 1) << (8 - configPRIO_BITS) );
+    portCLEAR_INTERRUPT_MASK_FROM_ISR((configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY + 1) << (8 - configPRIO_BITS));
 }
 
 void lega_exit_critical_expble(void)

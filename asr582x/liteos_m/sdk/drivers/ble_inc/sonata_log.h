@@ -65,63 +65,83 @@ typedef int (*vprintf_like_t)(const char *, va_list);
 #ifdef CFG_SONATA_LOG
 #define SONATA_LOGT_FORMAT_SIMPLE(format)  "%s: " format "\r\n"
 #define SONATA_LOGT_LEVEL_SIMPLE(level, tag, format, ...) do {                     \
-        if (level==SONATA_LOG_ERROR )           { sonata_logt_write(SONATA_LOG_ERROR,      tag, SONATA_LOGT_FORMAT_SIMPLE(format), tag, ##__VA_ARGS__); } \
-        else if (level==SONATA_LOG_WARN )       { sonata_logt_write(SONATA_LOG_WARN,       tag, SONATA_LOGT_FORMAT_SIMPLE(format), tag, ##__VA_ARGS__); } \
-        else if (level==SONATA_LOG_DEBUG )      { sonata_logt_write(SONATA_LOG_DEBUG,      tag, SONATA_LOGT_FORMAT_SIMPLE(format), tag, ##__VA_ARGS__); } \
-        else if (level==SONATA_LOG_VERBOSE )    { sonata_logt_write(SONATA_LOG_VERBOSE,    tag, SONATA_LOGT_FORMAT_SIMPLE(format), tag, ##__VA_ARGS__); } \
-        else                                    { sonata_logt_write(SONATA_LOG_INFO,       tag, SONATA_LOGT_FORMAT_SIMPLE(format), tag, ##__VA_ARGS__); } \
-    } while(0)
+        if (level==SONATA_LOG_ERROR)          { sonata_logt_write(SONATA_LOG_ERROR,      tag, \
+                                                                  SONATA_LOGT_FORMAT_SIMPLE(format), \
+                                                                  tag, ##__VA_ARGS__); } \
+        else if (level == SONATA_LOG_WARN)    { sonata_logt_write(SONATA_LOG_WARN,       tag, \
+                                                                  SONATA_LOGT_FORMAT_SIMPLE(format), tag, \
+                                                                  ##__VA_ARGS__); } \
+        else if (level == SONATA_LOG_DEBUG)   { sonata_logt_write(SONATA_LOG_DEBUG,      tag, \
+                                                                  SONATA_LOGT_FORMAT_SIMPLE(format), tag, \
+                                                                  ##__VA_ARGS__); } \
+        else if (level == SONATA_LOG_VERBOSE) { sonata_logt_write(SONATA_LOG_VERBOSE,    tag, \
+                                                                  SONATA_LOGT_FORMAT_SIMPLE(format), tag, \
+                                                                  ##__VA_ARGS__); } \
+        else                                  { sonata_logt_write(SONATA_LOG_INFO,       tag, \
+                                                                  SONATA_LOGT_FORMAT_SIMPLE(format), tag, \
+                                                                  ##__VA_ARGS__); } \
+    } while (0)
 #define SONATA_LOGT_LEVEL_LOCAL_SIMPLE(level, tag, format, ...) do {               \
-        if ( LOG_LOCAL_LEVEL >= level ) SONATA_LOGT_LEVEL_SIMPLE(level, tag, format, ##__VA_ARGS__); \
-    } while(0)
+        if (LOG_LOCAL_LEVEL >= level) SONATA_LOGT_LEVEL_SIMPLE(level, tag, format, ##__VA_ARGS__); \
+    } while (0)
 /*!
  * @brief  Log function With TAG
- * @example LOGTE("TagE","A Simple logE: %02X, %s", 0,__FUNCTION__ );
+ * @example LOGTE("TagE","A Simple logE: %02X, %s", 0,__FUNCTION__);
  * @note  LOGTX function will auto add linefeed for every log string.
  */
-#define LOGTE( tag, format, ... ) SONATA_LOGT_LEVEL_LOCAL_SIMPLE(SONATA_LOG_ERROR,   tag, format, ##__VA_ARGS__)
-#define LOGTW( tag, format, ... ) SONATA_LOGT_LEVEL_LOCAL_SIMPLE(SONATA_LOG_WARN,    tag, format, ##__VA_ARGS__)
-#define LOGTI( tag, format, ... ) SONATA_LOGT_LEVEL_LOCAL_SIMPLE(SONATA_LOG_INFO,    tag, format, ##__VA_ARGS__)
-#define LOGTD( tag, format, ... ) SONATA_LOGT_LEVEL_LOCAL_SIMPLE(SONATA_LOG_DEBUG,   tag, format, ##__VA_ARGS__)
-#define LOGTV( tag, format, ... ) SONATA_LOGT_LEVEL_LOCAL_SIMPLE(SONATA_LOG_VERBOSE, tag, format, ##__VA_ARGS__)
+#define LOGTE(tag, format, ...) SONATA_LOGT_LEVEL_LOCAL_SIMPLE(SONATA_LOG_ERROR,   tag, format, ##__VA_ARGS__)
+#define LOGTW(tag, format, ...) SONATA_LOGT_LEVEL_LOCAL_SIMPLE(SONATA_LOG_WARN,    tag, format, ##__VA_ARGS__)
+#define LOGTI(tag, format, ...) SONATA_LOGT_LEVEL_LOCAL_SIMPLE(SONATA_LOG_INFO,    tag, format, ##__VA_ARGS__)
+#define LOGTD(tag, format, ...) SONATA_LOGT_LEVEL_LOCAL_SIMPLE(SONATA_LOG_DEBUG,   tag, format, ##__VA_ARGS__)
+#define LOGTV(tag, format, ...) SONATA_LOGT_LEVEL_LOCAL_SIMPLE(SONATA_LOG_VERBOSE, tag, format, ##__VA_ARGS__)
 
 /********************************************* Log function for no TAG ***********************************************************/
 
 #define SONATA_LOG_FORMAT_SIMPLE(format)  "" format ""
 #define SONATA_LOG_LEVEL_SIMPLE(level, format, ...) do {                     \
-        if (level==SONATA_LOG_ERROR )           { sonata_logt_write(SONATA_LOG_ERROR,     NULL, SONATA_LOG_FORMAT_SIMPLE(format), ##__VA_ARGS__); } \
-        else if (level==SONATA_LOG_WARN )       { sonata_logt_write(SONATA_LOG_WARN,      NULL, SONATA_LOG_FORMAT_SIMPLE(format), ##__VA_ARGS__); } \
-        else if (level==SONATA_LOG_DEBUG )      { sonata_logt_write(SONATA_LOG_DEBUG,     NULL, SONATA_LOG_FORMAT_SIMPLE(format), ##__VA_ARGS__); } \
-        else if (level==SONATA_LOG_VERBOSE )    { sonata_logt_write(SONATA_LOG_VERBOSE,   NULL, SONATA_LOG_FORMAT_SIMPLE(format), ##__VA_ARGS__); } \
-        else                                    { sonata_logt_write(SONATA_LOG_INFO,      NULL, SONATA_LOG_FORMAT_SIMPLE(format), ##__VA_ARGS__); } \
-    } while(0)
+        if (level==SONATA_LOG_ERROR)           { sonata_logt_write(SONATA_LOG_ERROR,     NULL, \
+                                                                   SONATA_LOG_FORMAT_SIMPLE(format), \
+                                                                   ##__VA_ARGS__); } \
+        else if (level==SONATA_LOG_WARN)       { sonata_logt_write(SONATA_LOG_WARN,      NULL, \
+                                                                   SONATA_LOG_FORMAT_SIMPLE(format), \
+                                                                   ##__VA_ARGS__); } \
+        else if (level==SONATA_LOG_DEBUG)      { sonata_logt_write(SONATA_LOG_DEBUG,     NULL, \
+                                                                   SONATA_LOG_FORMAT_SIMPLE(format), \
+                                                                   ##__VA_ARGS__); } \
+        else if (level==SONATA_LOG_VERBOSE)    { sonata_logt_write(SONATA_LOG_VERBOSE,   NULL, \
+                                                                   SONATA_LOG_FORMAT_SIMPLE(format), \
+                                                                   ##__VA_ARGS__); } \
+        else                                    { sonata_logt_write(SONATA_LOG_INFO,      NULL, \
+                                                                    SONATA_LOG_FORMAT_SIMPLE(format), \
+                                                                    ##__VA_ARGS__); } \
+    } while (0)
 #define SONATA_LOG_LEVEL_LOCAL_SIMPLE(level, format, ...) do {               \
-        if ( LOG_LOCAL_LEVEL >= level ) SONATA_LOG_LEVEL_SIMPLE(level, format, ##__VA_ARGS__); \
-    } while(0)
+        if (LOG_LOCAL_LEVEL >= level) SONATA_LOG_LEVEL_SIMPLE(level, format, ##__VA_ARGS__); \
+    } while (0)
 
 /*!
  * @brief  Log function without TAG
- * @example "LOGE("A Simple logE: %02X, %s r n", 0,__FUNCTION__ );"
+ * @example "LOGE("A Simple logE: %02X, %s r n", 0,__FUNCTION__);"
  * @note  user should add linefeed for every log string if necessary
  */
-#define LOGE( format, ... ) SONATA_LOG_LEVEL_LOCAL_SIMPLE(SONATA_LOG_ERROR,   format, ##__VA_ARGS__)
-#define LOGW( format, ... ) SONATA_LOG_LEVEL_LOCAL_SIMPLE(SONATA_LOG_WARN,    format, ##__VA_ARGS__)
-#define LOGI( format, ... ) SONATA_LOG_LEVEL_LOCAL_SIMPLE(SONATA_LOG_INFO,    format, ##__VA_ARGS__)
-#define LOGD( format, ... ) SONATA_LOG_LEVEL_LOCAL_SIMPLE(SONATA_LOG_DEBUG,   format, ##__VA_ARGS__)
-#define LOGV( format, ... ) SONATA_LOG_LEVEL_LOCAL_SIMPLE(SONATA_LOG_VERBOSE, format, ##__VA_ARGS__)
+#define LOGE(format, ...) SONATA_LOG_LEVEL_LOCAL_SIMPLE(SONATA_LOG_ERROR,   format, ##__VA_ARGS__)
+#define LOGW(format, ...) SONATA_LOG_LEVEL_LOCAL_SIMPLE(SONATA_LOG_WARN,    format, ##__VA_ARGS__)
+#define LOGI(format, ...) SONATA_LOG_LEVEL_LOCAL_SIMPLE(SONATA_LOG_INFO,    format, ##__VA_ARGS__)
+#define LOGD(format, ...) SONATA_LOG_LEVEL_LOCAL_SIMPLE(SONATA_LOG_DEBUG,   format, ##__VA_ARGS__)
+#define LOGV(format, ...) SONATA_LOG_LEVEL_LOCAL_SIMPLE(SONATA_LOG_VERBOSE, format, ##__VA_ARGS__)
 
 #else // CFG_SONATA_LOG
 
-#define LOGTE( tag, format, ... )
-#define LOGTW( tag, format, ... )
-#define LOGTI( tag, format, ... )
-#define LOGTD( tag, format, ... )
-#define LOGTV( tag, format, ... )
-#define LOGE( format, ... )
-#define LOGW( format, ... )
-#define LOGI( format, ... )
-#define LOGD( format, ... )
-#define LOGV( format, ... )
+#define LOGTE(tag, format, ...)
+#define LOGTW(tag, format, ...)
+#define LOGTI(tag, format, ...)
+#define LOGTD(tag, format, ...)
+#define LOGTV(tag, format, ...)
+#define LOGE(format, ...)
+#define LOGW(format, ...)
+#define LOGI(format, ...)
+#define LOGD(format, ...)
+#define LOGV(format, ...)
 
 #endif // CFG_SONATA_LOG
 

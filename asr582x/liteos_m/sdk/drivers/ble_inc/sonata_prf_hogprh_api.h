@@ -222,7 +222,7 @@ typedef struct sonata_hogprh_write_req {
     ///  - info = HOGPRH_REPORT
     ///  - info = HOGPRH_REPORT_NTF_CFG
     uint8_t report_idx;
-    /// Write type ( Write without Response True or Write Request)
+    /// Write type (Write without Response True or Write Request)
     /// - only valid for HOGPRH_REPORT
     bool    wr_cmd;
     /// Information data

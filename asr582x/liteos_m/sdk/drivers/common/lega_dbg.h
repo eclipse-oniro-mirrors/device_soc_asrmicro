@@ -57,12 +57,12 @@ extern char *component_info(uint32_t module_t);
 
 #define component_t(module_t) component_info(module_t)
 
-#define dbg(Level, Comp, Fmt, ...)\
+#define dbg(Level, Comp, Fmt, ...) \
     do {\
         if(GlobalDebugEn && (Comp & GlobalDebugComponents) && (Level <= GlobalDebugLevel)) {\
             printf("[%u] ",(unsigned int)lega_rtos_get_time());\
             printf(Fmt "\r\n", ## __VA_ARGS__);\
         }\
-    }while(0)
+    } while (0)
 
 #endif // _LEGA_DBG_H_
