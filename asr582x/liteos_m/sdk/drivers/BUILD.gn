@@ -19,19 +19,20 @@ config("public") {
 
 kernel_module("asr_system") {
   sources = [
-#        "common/lega_mac_addr.c",
-        "at_cmd/atcmd_user.c",
-        "at_cmd/atcmdplus_ble.c",
-        "ble_src/app.c",
-        "ble_src/at_ble.c",
-        "ble_src/harmony_ble_adpter.c",
-        "rfota/rfota_wifi.c",
-        "rfota/rfota_ble.c",
-        "iperf/lwip_iperf.c",
-        "platform/system/printf-stdarg.c",
-        "platform/system/printf_uart.c",
-        "platform/system/sysCalls.c",
-#        "platform/system/system_cm4.c",
-#        "platform/system/panic_mpu.c",
+    #        "common/lega_mac_addr.c",
+    "at_cmd/atcmd_user.c",
+    "at_cmd/atcmdplus_ble.c",
+    "ble_src/app.c",
+    "ble_src/at_ble.c",
+    "ble_src/harmony_ble_adpter.c",
+    "iperf/lwip_iperf.c",
+    "platform/system/printf-stdarg.c",
+    "platform/system/printf_uart.c",
+    "platform/system/sysCalls.c",
+    "rfota/rfota_ble.c",
+    "rfota/rfota_wifi.c",
+
+    #        "platform/system/system_cm4.c",
+    #        "platform/system/panic_mpu.c",
   ]
 }

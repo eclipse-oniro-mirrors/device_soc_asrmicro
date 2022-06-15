@@ -15,7 +15,5 @@ import("//build/lite/config/component/lite_component.gni")
 
 static_library("hal_wifiaware") {
   sources = [ "source/hal_wifiaware.c" ]
-  include_dirs = [
-    "//foundation/communication/wifi_aware/interfaces/kits",
-  ]
+  include_dirs = [ "//foundation/communication/wifi_aware/interfaces/kits" ]
 }

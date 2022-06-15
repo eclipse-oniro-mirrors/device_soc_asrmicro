@@ -18,7 +18,5 @@ config("public") {
 }
 
 kernel_module("asr_hal") {
-  sources = [
-    "src/wifi_adapter.c",
-  ]
+  sources = [ "src/wifi_adapter.c" ]
 }

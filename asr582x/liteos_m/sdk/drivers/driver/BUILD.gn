@@ -18,21 +18,22 @@ config("public") {
 }
 
 kernel_module("asr_drivers") {
-    sources = [
-        "src/duet_flash_alg.c",
-        "src/duet_efuse.c",
-        "src/duet_board.c",
-        "src/duet_flash.c",
-        "src/duet_gpio.c",
-        "src/duet_uart.c",
-        "src/duet_wdg.c",
-#        "src/duet_rtc.c",
-        "src/duet_rf_spi.c",
-        "src/duet_pinmux.c",
-        "src/duet_timer.c",
-        "src/duet_dma.c",
-        "src/duet_boot.c",
-        "src/duet_i2c.c",
-        "src/duet_pwm.c",
-    ]
+  sources = [
+    "src/duet_board.c",
+    "src/duet_boot.c",
+    "src/duet_dma.c",
+    "src/duet_efuse.c",
+    "src/duet_flash.c",
+    "src/duet_flash_alg.c",
+    "src/duet_gpio.c",
+    "src/duet_i2c.c",
+    "src/duet_pinmux.c",
+    "src/duet_pwm.c",
+
+    #        "src/duet_rtc.c",
+    "src/duet_rf_spi.c",
+    "src/duet_timer.c",
+    "src/duet_uart.c",
+    "src/duet_wdg.c",
+  ]
 }
