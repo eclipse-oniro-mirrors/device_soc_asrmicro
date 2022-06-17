@@ -15,8 +15,6 @@ if (ohos_kernel_type == "liteos_m") {
   import("//kernel/liteos_m/liteos.gni")
   module_name = get_path_info(rebase_path("."), "name")
   module_group(module_name) {
-    modules = [
-      "asr582x",
-    ]
+    modules = [ "asr582x" ]
   }
 }

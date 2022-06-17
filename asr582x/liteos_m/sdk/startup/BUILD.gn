@@ -19,17 +19,17 @@ config("public") {
 
 kernel_module("asr_startup") {
   sources = [
-      "startup.c",
-      "board.c",
-      "startup_cm4.S",
+    "board.c",
+    "startup.c",
+    "startup_cm4.S",
   ]
 
   include_dirs = [
-    "//drivers/framework/include/platform",
-    "//drivers/framework/include/utils",
-    "//drivers/adapter/khdf/liteos_m/osal/include",
-    "//drivers/framework/include/osal",
-    "//drivers/framework/core/common/include/manager",
+    "//drivers/hdf_core/framework/include/platform",
+    "//drivers/hdf_core/framework/include/utils",
+    "//drivers/hdf_core/adapter/khdf/liteos_m/osal/include",
+    "//drivers/hdf_core/framework/include/osal",
+    "//drivers/hdf_core/framework/core/common/include/manager",
     "//utils/native/lite/include",
     "//utils/native/lite/memory/include",
   ]

@@ -19,7 +19,7 @@ config("public") {
 
 kernel_module("lega_rtos") {
   sources = [
-      "liteos_patch.c",
-      "lega_rtos.c",
+    "lega_rtos.c",
+    "liteos_patch.c",
   ]
 }
