@@ -140,9 +140,9 @@ int IsWifiActive(void)
     printf("%s\r\n", __func__);
 
     if (current_iftype == STA_MODE_E) {
-        return WIFI_STATE_AVALIABLE;
+        return WIFI_STATE_AVAILABLE;
     } else {
-        return WIFI_STATE_NOT_AVALIABLE;
+        return WIFI_STATE_NOT_AVAILABLE;
     }
 }
 
@@ -777,9 +777,9 @@ int IsHotspotActive(void)
     printf("%s\r\n", __func__);
 
     if (current_iftype == SAP_MODE_E) {
-        return WIFI_STATE_AVALIABLE;
+        return WIFI_STATE_AVAILABLE;
     } else {
-        return WIFI_STATE_NOT_AVALIABLE;
+        return WIFI_STATE_NOT_AVAILABLE;
     }
 }
 
@@ -800,7 +800,7 @@ WifiErrorCode GetStationList(StationInfo *result, unsigned int *size)
         result[i].disconnectedReason = 0;
     }
 
-    return WIFI_STATE_NOT_AVALIABLE;
+    return WIFI_STATE_NOT_AVAILABLE;
 }
 
 #define RSSI_LEVEL_4_2_G (-65)
