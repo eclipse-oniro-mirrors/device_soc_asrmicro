@@ -32,7 +32,7 @@
 static int g_wifiStaStatus = WIFI_STA_NOT_ACTIVE;
 static WifiDeviceConfig g_wifiConfigs[WIFI_MAX_CONFIG_SIZE] = {{{0}, {0}, {0}, 0, WIFI_CONFIG_INVALID, 0, 0}};
 static WifiEvent *g_wifiEvents[WIFI_MAX_EVENT_SIZE] = {0};
-static int g_connectState = WIFI_STATE_NOT_AVALIABLE;
+static int g_connectState = WIFI_STATE_NOT_AVAILABLE;
 
 static void DispatchScanStateChangeEvent(const hi_wifi_event *hisiEvent,
         const WifiEvent *hosEvent, WifiEventState event)
@@ -42,7 +42,7 @@ static void DispatchScanStateChangeEvent(const hi_wifi_event *hisiEvent,
     }
 
     int size = 0;
-    if (event == WIFI_STATE_NOT_AVALIABLE) {
+    if (event == WIFI_STATE_NOT_AVAILABLE) {
         hosEvent->OnWifiScanStateChanged(event, size);
         return;
     }
@@ -63,7 +63,7 @@ static void DispatchConnectEvent(const hi_wifi_event *hisiEvent, const WifiEvent
     WifiLinkedInfo info = {0};
 
     if (hisiEvent->event == HI_WIFI_EVT_CONNECTED) {
-        g_connectState = WIFI_STATE_AVALIABLE;
+        g_connectState = WIFI_STATE_AVAILABLE;
         cpyErr = memcpy_s(&info.ssid, WIFI_MAX_SSID_LEN,
                           hisiEvent->info.wifi_connected.ssid, HI_WIFI_MAX_SSID_LEN + 1);
         if (cpyErr != EOK) {
@@ -78,11 +78,11 @@ static void DispatchConnectEvent(const hi_wifi_event *hisiEvent, const WifiEvent
             return;
         }
 
-        hosEvent->OnWifiConnectionChanged(WIFI_STATE_AVALIABLE, &info);
+        hosEvent->OnWifiConnectionChanged(WIFI_STATE_AVAILABLE, &info);
         return;
     }
 
-    if (hisiEvent->event == HI_WIFI_EVT_STA_FCON_NO_NETWORK && g_connectState == WIFI_STATE_AVALIABLE) {
+    if (hisiEvent->event == HI_WIFI_EVT_STA_FCON_NO_NETWORK && g_connectState == WIFI_STATE_AVAILABLE) {
         return;
     }
 
@@ -98,7 +98,7 @@ static void DispatchConnectEvent(const hi_wifi_event *hisiEvent, const WifiEvent
         info.disconnectedReason = hisiEvent->info.wifi_disconnected.reason_code;
     }
 
-    hosEvent->OnWifiConnectionChanged(WIFI_STATE_NOT_AVALIABLE, &info);
+    hosEvent->OnWifiConnectionChanged(WIFI_STATE_NOT_AVAILABLE, &info);
 }
 
 static void DispatchStaConnectEvent(const hi_wifi_event *hisiEvent, const WifiEvent *hosEvent)
@@ -141,14 +141,14 @@ static void DispatchApStartEvent(const WifiEvent *hosEvent)
         return;
     }
 
-    hosEvent->OnHotspotStateChanged(WIFI_STATE_AVALIABLE);
+    hosEvent->OnHotspotStateChanged(WIFI_STATE_AVAILABLE);
 }
 
 static void DispatchEvent(const hi_wifi_event *hisiEvent, const WifiEvent *hosEvent)
 {
     switch (hisiEvent->event) {
         case HI_WIFI_EVT_SCAN_DONE:
-            DispatchScanStateChangeEvent(hisiEvent, hosEvent, WIFI_STATE_AVALIABLE);
+            DispatchScanStateChangeEvent(hisiEvent, hosEvent, WIFI_STATE_AVAILABLE);
             break;
         case HI_WIFI_EVT_CONNECTED:
         case HI_WIFI_EVT_DISCONNECTED:
@@ -310,7 +310,7 @@ WifiErrorCode Scan(void)
         if (g_wifiEvents[i] == NULL) {
             continue;
         }
-        DispatchScanStateChangeEvent(NULL, g_wifiEvents[i], WIFI_STATE_NOT_AVALIABLE);
+        DispatchScanStateChangeEvent(NULL, g_wifiEvents[i], WIFI_STATE_NOT_AVAILABLE);
     }
     if (UnlockWifiEventLock() != WIFI_SUCCESS) {
         return ERROR_WIFI_UNKNOWN;
@@ -375,7 +375,7 @@ WifiErrorCode AdvanceScan(WifiScanParams *params)
         if (g_wifiEvents[i] == NULL) {
             continue;
         }
-        DispatchScanStateChangeEvent(NULL, g_wifiEvents[i], WIFI_STATE_NOT_AVALIABLE);
+        DispatchScanStateChangeEvent(NULL, g_wifiEvents[i], WIFI_STATE_NOT_AVAILABLE);
     }
     if (UnlockWifiEventLock() != WIFI_SUCCESS) {
         return ERROR_WIFI_UNKNOWN;
@@ -552,7 +552,7 @@ static WifiErrorCode StaConnect(unsigned int chan, hi_wifi_assoc_request *assocR
     int hiRet = 0;
     int lastState = g_connectState;
 
-    g_connectState = WIFI_STATE_NOT_AVALIABLE;
+    g_connectState = WIFI_STATE_NOT_AVAILABLE;
     if (chan == 0) {
         hiRet = hi_wifi_sta_connect(assocReq);
     } else {
