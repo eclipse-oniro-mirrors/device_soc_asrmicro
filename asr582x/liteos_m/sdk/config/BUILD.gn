@@ -45,7 +45,7 @@ config("public") {
     "../drivers/ble_inc",
     "../drivers/ota",
     "//foundation/communication/wifi_lite/interfaces/wifiservice/",
-    "//base/iot_hardware/peripheral/interfaces/kits",
+    "//base/iothardware/peripheral/interfaces/inner_api",
 
     #        "security/mbedtls/include/",
     "//third_party/mbedtls/include/mbedtls",

@@ -24,6 +24,6 @@ static_library("hal_iothardware") {
   ]
   include_dirs = [
     "//utils/native/lite/include",
-    "//base/iot_hardware/peripheral/interfaces/kits",
+    "//base/iothardware/peripheral/interfaces/inner_api",
   ]
 }
