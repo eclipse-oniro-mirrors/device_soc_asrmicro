@@ -15,5 +15,5 @@ import("//build/lite/config/component/lite_component.gni")
 
 static_library("hal_file_static") {
   sources = [ "src/hal_file.c" ]
-  include_dirs = [ "//utils/native/lite/hals/file" ]
+  include_dirs = [ "//commonlibrary/utils_lite/hals/file" ]
 }
