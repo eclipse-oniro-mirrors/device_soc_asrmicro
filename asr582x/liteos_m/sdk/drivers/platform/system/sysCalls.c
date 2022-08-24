@@ -41,11 +41,6 @@ const char *__locale_ctype_ptr (void)
     return "1.0.0-LiteOS_M";
 }
 
-int access(const char *filename, int amode)
-{
-    return 0;
-}
-
 int sscanf(const char *__restrict __s, const char *__restrict __format, ...)
 {
     va_list args;
