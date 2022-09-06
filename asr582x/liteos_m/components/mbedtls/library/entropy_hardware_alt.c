@@ -27,7 +27,7 @@ int mbedtls_hardware_poll(void *data,
     lega_rnd_init();
     ret = lega_RND_AddAdditionalInput(rndContext_ptr, "0123", 4);
     if (ret != LEGA_HW_OK) {
-        printf("\n CRYS_RND_AddAdditionalInput failed with 0x%x \n", ret);
+        printf("\n lega_RND_AddAdditionalInput failed with 0x%x \n", ret);
         goto rnd_err;
     }
     ret = lega_RND_Reseeding (rndContext_ptr, rndWorkBuff_ptr);
