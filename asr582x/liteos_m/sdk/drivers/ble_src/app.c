@@ -735,7 +735,7 @@ void app_ble_start_initiating(uint8_t *target)
  * @brief
  * @return
  */
-uint16_t app_ble_stop_initiating(void)
+void app_ble_stop_initiating(void)
 {
     sonata_ble_stop_initiating();
 }
